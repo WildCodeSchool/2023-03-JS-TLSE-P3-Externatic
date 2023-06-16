@@ -11,10 +11,10 @@ import MyPublishedOffers from "./companies/MyPublishedOffers";
 import MyReceivedApplications from "./companies/MyReceivedApplications";
 import MyProfile from "./MyProfile";
 
-function MySpace() {
+function Dashboard() {
   return (
     <>
-      <p>MySpace</p>
+      <p>Dashboard</p>
       <Routes>
         <Route path="fields-management" element={<FieldsManagement />} />
         <Route path="offers-management" element={<OffersManagement />} />
@@ -34,4 +34,4 @@ function MySpace() {
   );
 }
 
-export default MySpace;
+export default Dashboard;

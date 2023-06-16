@@ -1,5 +1,5 @@
-function OfferCardSmall() {
-  return <p>OfferCardSmall</p>;
+function OfferCardList() {
+  return <p>OfferCardList</p>;
 }
 
-export default OfferCardSmall;
+export default OfferCardList;
