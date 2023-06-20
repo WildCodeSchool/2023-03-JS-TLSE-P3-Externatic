@@ -17,10 +17,9 @@ function Connexion() {
         <p>Je suis un candidat</p>
         <img src="./images/candidat.jpg" alt="applicant" />
       </div>
-
       <div>
         <p>Je suis un employeur</p>
-        <img src="./images/company.jpg" alt="company" />
+        <img src="../assets/images/card_company.png" alt="company" />
       </div>
       <form
         className="signin-form"
