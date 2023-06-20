@@ -1,5 +1,8 @@
 function Connexion() {
-  return <p>Connexion</p>;
+  return (
+    <div>
+      <h1>Connexion</h1>
+    </div>
+  );
 }
-
 export default Connexion;
