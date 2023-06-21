@@ -1,5 +1,6 @@
 // Import des packages
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { useEffect, useContext } from "react";
 
 // Import des pages
 import Home from "./pages/Home";
@@ -16,11 +17,20 @@ import MainNavBar from "./components/MainNavBar";
 import "./reset.css";
 import "./App.css";
 
+// Import des contexts
+import MenuContext from "./contexts/MenuContext";
+
 function App() {
+  const { setIsMenuShow } = useContext(MenuContext);
+
+  useEffect(() => {
+    setIsMenuShow(false);
+  }, []);
+
   return (
     <div className="App">
-      <MainNavBar />
       <Router>
+        <MainNavBar />
         <Routes>
           <Route path="" element={<Home />} />
           <Route path="connexion" element={<Connexion />} />

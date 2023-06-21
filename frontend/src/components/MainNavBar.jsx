@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useContext } from "react";
 
 // Import du style
 import "../css/components/MainNavBar.css";
+
+// Import des contexts
+import MenuContext from "../contexts/MenuContext";
 
 // Import des images
 import logo from "../assets/logos/logo3.png";
@@ -9,7 +13,7 @@ import exit from "../assets/icons/black_exit.svg";
 import cross from "../assets/icons/cross.svg";
 
 function MainNavBar() {
-  const [isMenuShow, setIsMenuShow] = useState(false);
+  const { isMenuShow, setIsMenuShow } = useContext(MenuContext);
 
   return (
     <nav className="mainNav">
@@ -33,22 +37,22 @@ function MainNavBar() {
             </button>
           </li>
           <li className="myAccountLink">
-            <a href="../dashboard/my-profile">Mon compte</a>
+            <Link to="/dashboard/my-profile">Mon compte</Link>
           </li>
           <li className="subscribeLink">
-            <a href="../subscribe">S'inscrire</a>
+            <Link to="/subscribe">S'inscrire</Link>
           </li>
           <li className="homeLink">
-            <a href="../">Accueil</a>
+            <Link to="/">Accueil</Link>
           </li>
           <li className="offersLink">
-            <a href="../offers">Offres d'emploi</a>
+            <Link to="/offers">Offres d'emploi</Link>
           </li>
           <li className="disconnectLink">
-            <a href="../">
+            <Link to="/">
               <img src={exit} alt="Icone de déconnection" />
               &nbsp;Se déconnecter
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
