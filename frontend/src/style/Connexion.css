@@ -1,0 +1,110 @@
+@import "../App.css";
+
+.nav-bar-connexion {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20vh;
+}
+
+li {
+  display: inline-block;
+}
+
+li > a {
+  text-decoration: none;
+  color: black;
+  margin: 20px;
+  &:focus {
+    font-weight: bold;
+    border-bottom: black solid 2px;
+  }
+}
+
+.connexion-cards {
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+  margin: 64px 24px;
+}
+
+.applicant-card,
+.company-card {
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  height: 80px;
+  width: 208px;
+  border: var(--border_card);
+  box-shadow: var(--shadow_initial);
+  border-radius: 16px;
+  background-color: #fff;
+  &:focus {
+    border-color: var(--main-color);
+  }
+}
+
+img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: cover;
+}
+
+.signin-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40vh;
+  height: 35vh;
+  margin: auto;
+  border: var(--border_card);
+  box-shadow: var(--shadow_initial);
+  border-radius: 16px;
+  padding: 16px 24px;
+}
+
+.mail,
+.password {
+  display: flex;
+  align-items: center;
+}
+
+svg {
+  position: absolute;
+  top: auto;
+}
+
+input {
+  margin: 24px 0;
+  padding: 8px 16px 8px 24px;
+  width: 284px;
+  border: none;
+  border-bottom: solid 1px var(--basic-grey);
+  outline: none;
+  background: transparent;
+}
+
+.signin-form > a {
+  /* display: block; */
+  margin: 0 0 32px auto;
+  text-decoration: none;
+  color: var(--basic-grey);
+  font-size: 12px;
+}
+
+.btn-connexion {
+  position: relative;
+  width: 120px;
+  height: 32px;
+  border-radius: 20px;
+  box-shadow: var(--shadow_initial);
+  text-align: center;
+  background-color: black;
+  color: #fff;
+  font-weight: bolder;
+  &:focus {
+    background-color: var(--main-color);
+    border: solid 1px var(--main-color);
+  }
+}
