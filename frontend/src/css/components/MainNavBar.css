@@ -1,0 +1,123 @@
+.mainNav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  background-color: #fff;
+  position: sticky;
+  top: 0;
+  height: 7vh;
+}
+
+.logo {
+  width: 40%;
+  max-width: 18rem;
+}
+
+.logoImg {
+  width: 100%;
+}
+
+.burger {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.burger span {
+  width: 100%;
+  height: 3px;
+  background-color: var(--main-color);
+}
+
+.burger span:first-child {
+  transform: translateY(-0.3rem);
+}
+
+.burger span:last-child {
+  transform: translateY(0.3rem);
+}
+
+.menu {
+  position: fixed;
+  top: 0;
+  left: 100%;
+  width: 100%;
+  padding: 1rem;
+  padding-bottom: 2rem;
+  background-color: var(--white-80);
+  transition: all 0.5s ease-in-out;
+  font-weight: bold;
+}
+
+.showMenu {
+  left: 0;
+}
+
+.menu ul {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.menu ul li {
+  display: flex;
+  justify-content: center;
+}
+
+.menu ul li:first-child {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.menu ul li:first-child img {
+  width: 2rem;
+  height: 1.7rem;
+}
+
+li a {
+  color: black;
+  display: flex;
+  padding: 0.5rem;
+}
+
+.myAccountLink a {
+  background-color: black;
+  color: #fff;
+  border-radius: 1rem;
+}
+
+@media screen and (min-width: 768px) {
+  .menu {
+    position: static;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    padding: 0;
+  }
+
+  .burger {
+    display: none;
+  }
+
+  .menu ul {
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 2%;
+  }
+
+  .menu ul li:first-child {
+    display: none;
+  }
+
+  li a:hover {
+    color: var(--main-color);
+  }
+
+  .myAccountLink a:hover {
+    background-color: var(--main-color);
+    color: white;
+  }
+}

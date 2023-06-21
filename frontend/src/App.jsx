@@ -10,6 +10,7 @@ import AdminConnexion from "./pages/AdminConnexion";
 import Dashboard from "./pages/Dashboard";
 
 // Import des composants
+import MainNavBar from "./components/MainNavBar";
 
 // Import du style
 import "./reset.css";
@@ -18,6 +19,7 @@ import "./App.css";
 function App() {
   return (
     <div className="App">
+      <MainNavBar />
       <Router>
         <Routes>
           <Route path="" element={<Home />} />
