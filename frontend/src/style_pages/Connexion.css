@@ -1,6 +1,5 @@
 @import "../App.css";
 
-
 .nav-bar-connexion {
   display: flex;
   align-items: center;
@@ -14,6 +13,7 @@ li {
 
 .login-selected > a {
   font-weight: bolder;
+  text-decoration: underline 2px;
   text-underline-offset: 8px;
   color: black;
 }
@@ -21,7 +21,7 @@ li {
 .signin-selected > a {
   color: var(--basic-grey);
   text-decoration: none;
-  margin: auto 40px auto 20px;
+   margin: auto 40px auto 20px;
 }
 
 .container-login {
@@ -42,7 +42,7 @@ li {
   align-items: center;
   justify-content: space-between;
   height: 112px;
-  width: 176px;
+  width: 160px;
   border: var(--border_card);
   box-shadow: var(--shadow_initial);
   border-radius: 16px;
@@ -128,8 +128,8 @@ input {
   text-align: center;
   background-color: black;
   color: #fff;
-  font-weight: bolder;
-  &:focus {
+  cursor: pointer;
+  &:hover {
     background-color: var(--main-color);
     border: solid 1px var(--main-color);
   }
@@ -144,9 +144,8 @@ input {
   .container-login {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    gap: 3rem;
-    margin: 32px auto;
+    justify-content: center;
+    margin: 4rem auto;
   }
 
   .connexion-cards {
@@ -162,7 +161,7 @@ input {
   }
 
   .signin-form {
-    height: 60vh;
+    height: 50vh;
     justify-content: center;
     width: fit-content;
   }

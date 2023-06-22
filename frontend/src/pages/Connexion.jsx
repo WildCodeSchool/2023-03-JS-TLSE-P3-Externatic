@@ -5,7 +5,7 @@ import { useState } from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import axios from "axios";
 
-import "../style/Connexion.css";
+import "../style_pages/Connexion.css";
 import cardApplicant from "../assets/images/card_applicant.png";
 import cardCompany from "../assets/images/card_company.png";
 import ValidationConnexion from "./utils/ValidationConnexion";
@@ -25,13 +25,13 @@ function Connexion() {
     setErrors(ValidationConnexion(values));
 
     axios
-      .post(`http://localhost:6000/dashboard`, values)
+      .post(`http://localhost:6000/login`, values)
       .then((res) => {
         if (res.status === 200) {
-          navigate("/dashboard");
+          navigate("/dashboard/my-profile");
         } else {
           alert("Erreur d'authentification");
-          navigate("/subscribe");
+          navigate("/");
         }
       })
       .catch((err) => {
