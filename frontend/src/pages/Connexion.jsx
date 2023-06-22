@@ -2,7 +2,6 @@
 /* eslint-disable no-restricted-syntax */
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import PropTypes from "prop-types";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import axios from "axios";
 
@@ -24,20 +23,20 @@ function Connexion() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors(ValidationConnexion(values));
-    if (errors.email === "" && errors.password === "") {
-      axios
-        .post(`http://localhost:6000/dashboard`, values)
-        .then((res) => {
-          if (res.status === 200) {
-            navigate("/dashboard");
-          } else {
-            alert("Erreur d'authentification");
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+
+    axios
+      .post(`http://localhost:6000/dashboard`, values)
+      .then((res) => {
+        if (res.status === 200) {
+          navigate("/dashboard");
+        } else {
+          alert("Erreur d'authentification");
+          navigate("/subscribe");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <>
@@ -129,9 +128,3 @@ function Connexion() {
   );
 }
 export default Connexion;
-Connexion.propTypes = {
-  user: PropTypes.shape({
-    mail: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired,
-  }).isRequired,
-};

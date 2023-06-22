@@ -1,5 +1,6 @@
 @import "../App.css";
 
+
 .nav-bar-connexion {
   display: flex;
   align-items: center;
@@ -15,7 +16,6 @@ li {
   font-weight: bolder;
   text-underline-offset: 8px;
   color: black;
-
 }
 
 .signin-selected > a {
@@ -48,13 +48,14 @@ li {
   border-radius: 16px;
   background-color: #fff;
   &:focus {
-    border:solid var(--main-color);
+    border: solid var(--main-color);
   }
 }
 
 .applicant-card > div,
 .company-card > div {
   padding-left: 8px;
+  font-weight: bolder;
 }
 
 img {
