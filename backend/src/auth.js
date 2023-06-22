@@ -11,16 +11,28 @@ const hashingOptions = {
 };
 
 // ------------vérification de l'email avant l'inscription------------
-const verifyEmail = (req, res, next) => {
+const verifyEmailForSubscription = (req, res, next) => {
   const { email } = req.body;
 
   models.admin
     .findUserByEmail(email)
-    .then(([users]) => {
-      if (users.length) {
+    .then(([admins]) => {
+      if (admins.length) {
         res.sendStatus(403);
       } else {
-        next();
+        models.applicant.findUserByEmail(email).then(([applicants]) => {
+          if (applicants.length) {
+            res.sendStatus(403);
+          } else {
+            models.company.findUserByEmail(email).then(([companies]) => {
+              if (companies.length) {
+                res.sendStatus(403);
+              } else {
+                next();
+              }
+            });
+          }
+        });
       }
     })
     .catch((err) => {
@@ -46,7 +58,7 @@ const hashPassword = (req, res, next) => {
 
 // ------------vérification du mot de passe à la connexion------------
 const verifyPassword = (req, res) => {
-  argon2.verify(req.admin.hashedPassword, req.body.password).then((valid) => {
+  argon2.verify(req.admin.hashed_password, req.body.password).then((valid) => {
     if (valid) {
       const payload = {
         sub: req.admin.id,
@@ -54,8 +66,8 @@ const verifyPassword = (req, res) => {
       const token = jwt.sign(payload, process.env.JWT_SECRET, {
         expiresIn: "1h",
       });
-      delete req.admin.hashedPassword;
-      res.send({ token, admin: req.admin });
+      delete req.admin.hashed_password;
+      res.send({ token, admin: req.admin }).status(200);
     } else {
       res.sendStatus(401);
     }
@@ -81,7 +93,7 @@ const verifyToken = (req, res, next) => {
 };
 
 module.exports = {
-  verifyEmail,
+  verifyEmailForSubscription,
   hashPassword,
   verifyPassword,
   verifyToken,

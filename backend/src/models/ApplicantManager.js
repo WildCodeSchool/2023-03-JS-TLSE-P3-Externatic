@@ -1,6 +1,6 @@
 const AbstractManager = require("./AbstractManager");
 
-class Applicantmanager extends AbstractManager {
+class ApplicantManager extends AbstractManager {
   constructor() {
     super({ table: "applicant" });
   }
@@ -45,4 +45,4 @@ class Applicantmanager extends AbstractManager {
   }
 }
 
-module.exports = Applicantmanager;
+module.exports = ApplicantManager;

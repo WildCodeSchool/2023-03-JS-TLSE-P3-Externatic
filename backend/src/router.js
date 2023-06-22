@@ -5,7 +5,7 @@ const router = express.Router();
 const itemControllers = require("./controllers/itemControllers");
 
 const {
-  verifyEmail,
+  verifyEmailForSubscription,
   hashPassword,
   verifyPassword,
   // verifyToken,
@@ -26,7 +26,12 @@ router.delete("/items/:id", itemControllers.destroy);
 // router.get("/signup/admin", getAllAdmins);
 
 // ------------inscription de l'admin------------
-router.post("/signup/admin", verifyEmail, hashPassword, postAdmin);
+router.post(
+  "/signup/admin",
+  verifyEmailForSubscription,
+  hashPassword,
+  postAdmin
+);
 
 // ------------connexion de l'admin------------
 // router.get("/admin", verifyToken, getAdminById);
