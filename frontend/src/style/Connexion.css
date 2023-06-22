@@ -21,20 +21,25 @@ li > a {
   }
 }
 
-.connexion-cards {
+.container-login {
   display: flex;
-  gap: 1em;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.connexion-cards {
   margin: 64px 24px;
+  display: flex;
+  gap: 1rem;
 }
 
 .applicant-card,
 .company-card {
   display: flex;
   align-items: center;
-  padding: 0 8px;
-  height: 80px;
-  width: 208px;
+  justify-content: space-between;
+  height: 112px;
+  width: 176px;
   border: var(--border_card);
   box-shadow: var(--shadow_initial);
   border-radius: 16px;
@@ -44,24 +49,29 @@ li > a {
   }
 }
 
+.applicant-card > div,
+.company-card > div {
+  padding-left: 8px;
+}
+
 img {
-  max-height: 100%;
-  max-width: 100%;
-  object-fit: cover;
+  max-height: 80%;
+  max-width: 80%;
+  object-fit: fill;
 }
 
 .signin-form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
-  width: 40vh;
-  height: 35vh;
+  width: 50vh;
+  height: 45vh;
   margin: auto;
+  padding: 0 24px;
   border: var(--border_card);
   box-shadow: var(--shadow_initial);
   border-radius: 16px;
-  padding: 16px 24px;
 }
 
 .mail,
@@ -81,12 +91,23 @@ input {
   width: 284px;
   border: none;
   border-bottom: solid 1px var(--basic-grey);
-  outline: none;
   background: transparent;
+  &:focus {
+    outline: none;
+  }
+}
+
+.error-email,
+.error-password {
+  color: var(--main-color);
+  font-style: italic;
+  font-size: smaller;
+  position: absolute;
+  width: max-content;
+  margin-top: 48px;
 }
 
 .signin-form > a {
-  /* display: block; */
   margin: 0 0 32px auto;
   text-decoration: none;
   color: var(--basic-grey);
@@ -95,6 +116,7 @@ input {
 
 .btn-connexion {
   position: relative;
+  margin-bottom: 16px;
   width: 120px;
   height: 32px;
   border-radius: 20px;
@@ -106,5 +128,38 @@ input {
   &:focus {
     background-color: var(--main-color);
     border: solid 1px var(--main-color);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  img {
+    max-height: 100%;
+    max-width: 100%;
+  }
+
+  .container-login {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 3rem;
+    margin: 32px auto;
+  }
+
+  .connexion-cards {
+    flex-direction: column;
+    margin: auto;
+  }
+
+  .applicant-card,
+  .company-card {
+    margin: 24px 0;
+    width: 316px;
+    height: 138px;
+  }
+
+  .signin-form {
+    height: 60vh;
+    justify-content: center;
+    width: fit-content;
   }
 }
