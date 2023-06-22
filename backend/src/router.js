@@ -8,22 +8,16 @@ const {
   verifyEmailForSubscription,
   hashPassword,
   verifyPassword,
-  // verifyToken,
 } = require("./auth");
 
-const {
-  // getAdminById,
-  getAdminByEmail,
-  postAdmin,
-} = require("./controllers/AdminController");
+const { getAdminByEmail, postAdmin } = require("./controllers/AdminController");
+const { postApplicant } = require("./controllers/ApplicantController");
 
 router.get("/items", itemControllers.browse);
 router.get("/items/:id", itemControllers.read);
 router.put("/items/:id", itemControllers.edit);
 router.post("/items", itemControllers.add);
 router.delete("/items/:id", itemControllers.destroy);
-
-// router.get("/signup/admin", getAllAdmins);
 
 // ------------inscription de l'admin------------
 router.post(
@@ -33,8 +27,15 @@ router.post(
   postAdmin
 );
 
+// ------------inscription du candidat------------
+router.post(
+  "/signup/applicant",
+  verifyEmailForSubscription,
+  hashPassword,
+  postApplicant
+);
+
 // ------------connexion de l'admin------------
-// router.get("/admin", verifyToken, getAdminById);
 router.post("/login/admin", getAdminByEmail, verifyPassword);
 
 module.exports = router;
