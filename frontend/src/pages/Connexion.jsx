@@ -43,10 +43,10 @@ function Connexion() {
     <>
       <nav className="nav-bar-connexion">
         <ul>
-          <li>
+          <li className="signin-selected">
             <Link to="/subscribe">S'inscrire</Link>
           </li>
-          <li>
+          <li className="login-selected">
             <Link to="/connexion">Se connecter</Link>
           </li>
         </ul>

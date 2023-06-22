@@ -3,7 +3,7 @@ function ValidationConnexion(values) {
   const emailRegex =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,3}$/;
   const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
-  if (values.email === " ") {
+  if (values.email === "") {
     error.email = "Le mail est requis";
   } else if (!emailRegex.test(values.email)) {
     error.email = "Le mail n'est pas valide";
@@ -11,7 +11,7 @@ function ValidationConnexion(values) {
     error.email = "";
   }
 
-  if (values.password === " ") {
+  if (values.password === "") {
     error.password = "Le mot de passe est requis";
   } else if (!passwordRegex.test(values.password)) {
     error.password = "Le mot de passe ne correspond pas";
