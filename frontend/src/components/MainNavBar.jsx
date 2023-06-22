@@ -18,7 +18,7 @@ function MainNavBar() {
   return (
     <nav className="mainNav">
       <div className="logo">
-        <img src={logo} alt="" className="logoImg" />
+        <img src={logo} alt="Logo d'Externatic" className="logoImg" />
       </div>
       <button
         type="button"
@@ -31,7 +31,7 @@ function MainNavBar() {
       </button>
       <div className={`menu ${isMenuShow ? "showMenu" : null}`}>
         <button type="button" onClick={() => setIsMenuShow(false)}>
-          <img src={cross} alt="" />
+          <img src={cross} alt="Croix de fermeture du menu" />
         </button>
         <button
           type="button"
