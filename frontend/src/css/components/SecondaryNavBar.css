@@ -1,0 +1,36 @@
+.secNav {
+  display: flex;
+  overflow: auto;
+  white-space: nowrap;
+  background-color: #fff;
+  position: sticky;
+  top: 7.5vh;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.secNav a {
+  padding: 1rem;
+  display: inline-block;
+  color: black;
+}
+
+.secNav a:hover {
+  text-decoration: underline;
+  color: var(--main-color);
+}
+
+.linkSelected {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+@media screen and (min-width: 480px) {
+  .secNav {
+    justify-content: center;
+  }
+
+  .secNav a {
+    padding: 1rem 3rem;
+  }
+}
