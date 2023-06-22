@@ -1,8 +1,9 @@
 /* eslint-disable no-alert */
 /* eslint-disable no-restricted-syntax */
-import { Link } from "react-router-dom";
-import { useState, useNavigate } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import PropTypes from "prop-types";
+// eslint-disable-next-line import/no-extraneous-dependencies
 import axios from "axios";
 
 import "../style/Connexion.css";
