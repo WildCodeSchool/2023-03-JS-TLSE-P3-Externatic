@@ -51,36 +51,27 @@
   background-color: var(--white-80);
   transition: all 0.5s ease-in-out;
   font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .showMenu {
   left: 0;
 }
 
-.menu ul {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.menu ul li {
-  display: flex;
-  justify-content: center;
-}
-
-.menu ul li:first-child {
+.menu button:first-child {
   display: flex;
   justify-content: flex-end;
 }
 
-.menu ul li:first-child img {
+.menu button:first-child img {
   width: 2rem;
   height: 1.7rem;
 }
 
-li a {
+button a {
   color: black;
-  display: flex;
   padding: 0.5rem;
 }
 
@@ -103,17 +94,17 @@ li a {
     display: none;
   }
 
-  .menu ul {
+  .menu {
     flex-direction: row;
     justify-content: flex-end;
     gap: 2%;
   }
 
-  .menu ul li:first-child {
+  .menu button:first-child {
     display: none;
   }
 
-  li a:hover {
+  button a:hover {
     color: var(--main-color);
   }
 

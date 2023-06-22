@@ -30,31 +30,47 @@ function MainNavBar() {
         <span />
       </button>
       <div className={`menu ${isMenuShow ? "showMenu" : null}`}>
-        <ul>
-          <li>
-            <button type="button" onClick={() => setIsMenuShow(false)}>
-              <img src={cross} alt="" />
-            </button>
-          </li>
-          <li className="myAccountLink">
-            <Link to="/dashboard/my-profile">Mon compte</Link>
-          </li>
-          <li className="subscribeLink">
-            <Link to="/subscribe">S'inscrire</Link>
-          </li>
-          <li className="homeLink">
-            <Link to="/">Accueil</Link>
-          </li>
-          <li className="offersLink">
-            <Link to="/offers">Offres d'emploi</Link>
-          </li>
-          <li className="disconnectLink">
-            <Link to="/">
-              <img src={exit} alt="Icone de déconnection" />
-              &nbsp;Se déconnecter
-            </Link>
-          </li>
-        </ul>
+        <button type="button" onClick={() => setIsMenuShow(false)}>
+          <img src={cross} alt="" />
+        </button>
+        <button
+          type="button"
+          className="myAccountLink"
+          onClick={() => setIsMenuShow(false)}
+        >
+          <Link to="/dashboard/my-profile">Mon compte</Link>
+        </button>
+        <button
+          type="button"
+          className="subscribeLink"
+          onClick={() => setIsMenuShow(false)}
+        >
+          <Link to="/subscribe">S'inscrire</Link>
+        </button>
+        <button
+          type="button"
+          className="homeLink"
+          onClick={() => setIsMenuShow(false)}
+        >
+          <Link to="/">Accueil</Link>
+        </button>
+        <button
+          type="button"
+          className="offersLink"
+          onClick={() => setIsMenuShow(false)}
+        >
+          <Link to="/offers">Offres d'emploi</Link>
+        </button>
+        <button
+          type="button"
+          className="disconnectLink"
+          onClick={() => setIsMenuShow(false)}
+        >
+          <Link to="/">
+            <img src={exit} alt="Icone de déconnection" />
+            &nbsp;Se déconnecter
+          </Link>
+        </button>
       </div>
     </nav>
   );
