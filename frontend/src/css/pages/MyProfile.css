@@ -13,7 +13,6 @@ form {
   border: 2px solid#555555;
   box-shadow: var(--shadow_initial);
   width: 80%;
-  /* height: 160vh; */
   border-radius: 16px;
 }
 
@@ -118,7 +117,6 @@ form {
     border: 2px solid#555555;
     box-shadow: var(--shadow_initial);
     width: 50%;
-    /* height: 160vh; */
     border-radius: 16px;
   }
 }
