@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import "../css/pages/MyProfile.css";
 import identificationBlack from "../assets/icons/identification_black.svg";
 import mailBlack from "../assets/icons/mail_black.svg";
@@ -8,8 +7,6 @@ import whiteTrash from "../assets/icons/white_trash.svg";
 import lockBlack from "../assets/icons/lock_black.svg";
 
 function MyProfile() {
-  const [genre, setGenre] = useState("");
-
   return (
     <div>
       <div className="containerForm">
@@ -24,8 +21,7 @@ function MyProfile() {
                   type="radio"
                   value="option1"
                   name="genre"
-                  checked={genre === "option1"}
-                  onChange={() => setGenre("option1")}
+                  checked
                 />
                 <label htmlFor="hommeInput">Homme</label>
                 <input
@@ -33,8 +29,6 @@ function MyProfile() {
                   type="radio"
                   value="option2"
                   name="genre"
-                  checked={genre === "option2"}
-                  onChange={() => setGenre("option2")}
                 />
                 <label htmlFor="autreInput">Autre</label>
                 <input
@@ -42,8 +36,6 @@ function MyProfile() {
                   type="radio"
                   value="option3"
                   name="genre"
-                  checked={genre === "option3"}
-                  onChange={() => setGenre("option3")}
                 />
               </div>
             </div>
