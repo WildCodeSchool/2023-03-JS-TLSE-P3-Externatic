@@ -132,3 +132,8 @@ table {
 *::after {
   box-sizing: border-box;
 }
+button {
+  border: none;
+  background-color: #ffffff00;
+  padding: 0;
+}

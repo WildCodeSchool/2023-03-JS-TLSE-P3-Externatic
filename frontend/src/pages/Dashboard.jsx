@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 
+// Import des pages
 import FieldsManagement from "./admins/FieldsManagement";
 import OffersManagement from "./admins/OffersManagement";
 import ReportsManagement from "./admins/ReportsManagement";
@@ -11,10 +12,13 @@ import MyPublishedOffers from "./companies/MyPublishedOffers";
 import MyReceivedApplications from "./companies/MyReceivedApplications";
 import MyProfile from "./MyProfile";
 
+// Import des composants
+import SecondaryNavBar from "../components/SecondaryNavBar";
+
 function Dashboard() {
   return (
     <>
-      <p>Dashboard</p>
+      <SecondaryNavBar />
       <Routes>
         <Route path="fields-management" element={<FieldsManagement />} />
         <Route path="offers-management" element={<OffersManagement />} />
