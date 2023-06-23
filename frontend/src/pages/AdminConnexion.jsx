@@ -1,5 +1,3 @@
-/* eslint-disable no-alert */
-/* eslint-disable no-restricted-syntax */
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -23,17 +21,16 @@ function AdminConnexion() {
     setErrors(ValidationConnexion(values));
 
     axios
-      .post(`http://localhost:6000/login`, values)
+      .post(`${import.meta.env.VITE_BACKEND_URL}/login`, values)
       .then((res) => {
         if (res.status === 200) {
           navigate("/dashboard/my-profile");
         } else {
-          alert("Erreur d'authentification");
           navigate("/");
         }
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   };
   return (
