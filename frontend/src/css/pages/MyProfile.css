@@ -13,7 +13,6 @@ form {
   border: 2px solid#555555;
   box-shadow: var(--shadow_initial);
   width: 80%;
-  /* height: 160vh; */
   border-radius: 16px;
 }
 
@@ -111,14 +110,4 @@ form {
 }
 .iconForm2 {
   margin-right: 8px;
-}
-@media screen and (min-width: 768px) {
-  .containerForm {
-    margin: auto;
-    border: 2px solid#555555;
-    box-shadow: var(--shadow_initial);
-    width: 50%;
-    /* height: 160vh; */
-    border-radius: 16px;
-  }
 }
