@@ -5,7 +5,7 @@ import { useState } from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import axios from "axios";
 
-import "../style_pages/Connexion.css";
+import "../css/pages/Connexion.css";
 import cardApplicant from "../assets/images/card_applicant.png";
 import cardCompany from "../assets/images/card_company.png";
 import ValidationConnexion from "../utils/ValidationConnexion";

@@ -5,7 +5,7 @@ import { useState } from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import axios from "axios";
 
-import "../style_pages/AdminConnexion.css";
+import "../css/pages/AdminConnexion.css";
 import ValidationConnexion from "../utils/ValidationConnexion";
 
 function AdminConnexion() {
