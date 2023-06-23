@@ -1,10 +1,8 @@
-@import "../App.css";
-
 .nav-bar-connexion {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 20vh;
+  margin: 10vh auto;
 }
 
 li {
@@ -21,7 +19,7 @@ li {
 .signin-selected > a {
   color: var(--basic-grey);
   text-decoration: none;
-   margin: auto 40px auto 20px;
+  margin: auto 40px auto 20px;
 }
 
 .container-login {
@@ -164,5 +162,8 @@ input {
     height: 50vh;
     justify-content: center;
     width: fit-content;
+  }
+  .btn-connexion{
+    margin-top: 4rem;
   }
 }

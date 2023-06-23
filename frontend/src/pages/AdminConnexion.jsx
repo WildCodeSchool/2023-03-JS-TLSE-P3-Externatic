@@ -6,7 +6,7 @@ import { useState } from "react";
 import axios from "axios";
 
 import "../style_pages/AdminConnexion.css";
-import ValidationConnexion from "./utils/ValidationConnexion";
+import ValidationConnexion from "../utils/ValidationConnexion";
 
 function AdminConnexion() {
   const [values, setValues] = useState({
