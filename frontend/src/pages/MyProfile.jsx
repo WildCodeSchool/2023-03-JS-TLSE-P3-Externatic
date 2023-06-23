@@ -18,36 +18,33 @@ function MyProfile() {
           <form action=" " method="POST" className="allForm">
             <div className="button-ratio">
               <div className="groupRadio">
-                <label>
-                  <input
-                    type="radio"
-                    value="option1"
-                    name="genre"
-                    checked={genre === "option1"}
-                    onChange={() => setGenre("option1")}
-                  />
-                  Femme
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    value="option2"
-                    name="genre"
-                    checked={genre === "option2"}
-                    onChange={() => setGenre("option2")}
-                  />
-                  Homme
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    value="option3"
-                    name="genre"
-                    checked={genre === "option3"}
-                    onChange={() => setGenre("option3")}
-                  />
-                  Autre
-                </label>
+                <label htmlFor="femmeInput">Femme</label>
+                <input
+                  id="femmeInput"
+                  type="radio"
+                  value="option1"
+                  name="genre"
+                  checked={genre === "option1"}
+                  onChange={() => setGenre("option1")}
+                />
+                <label htmlFor="hommeInput">Homme</label>
+                <input
+                  id="hommeInput"
+                  type="radio"
+                  value="option2"
+                  name="genre"
+                  checked={genre === "option2"}
+                  onChange={() => setGenre("option2")}
+                />
+                <label htmlFor="autreInput">Autre</label>
+                <input
+                  id="autreInput"
+                  type="radio"
+                  value="option3"
+                  name="genre"
+                  checked={genre === "option3"}
+                  onChange={() => setGenre("option3")}
+                />
               </div>
             </div>
 
