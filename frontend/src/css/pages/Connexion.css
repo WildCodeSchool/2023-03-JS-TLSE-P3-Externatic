@@ -87,7 +87,7 @@ svg {
   top: auto;
 }
 
-input {
+.signin-form input {
   margin: 24px 0;
   padding: 8px 16px 8px 24px;
   width: 284px;
