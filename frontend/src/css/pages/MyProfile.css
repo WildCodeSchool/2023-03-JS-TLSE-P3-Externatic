@@ -12,17 +12,17 @@ form {
   margin: auto;
   border: 2px solid#555555;
   box-shadow: var(--shadow_initial);
-  width: 90vw;
-  height: 160vw;
+  width: 80%;
+  /* height: 160vh; */
   border-radius: 16px;
 }
 
 .input {
-  padding: 4px 0;
+  padding: 6px 0 6px 2px;
   border-bottom: 2px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
-  width: 280px;
+  width: 260px;
   margin-top: 25px;
   display: flex;
   gap: 8px;
@@ -79,7 +79,7 @@ form {
   margin: auto;
   border: 2px solid#555555;
   box-shadow: var(--shadow_initial);
-  width: 90vw;
+  width: 80%;
   height: 95vw;
   padding-bottom: 6vh;
   border-radius: 16px;
@@ -107,8 +107,18 @@ form {
   align-items: center;
   justify-content: center;
   border-radius: 20px;
-  padding: 6px;
+  padding: 6px 4px;
 }
 .iconForm2 {
-  color: white;
+  margin-right: 8px;
+}
+@media screen and (min-width: 768px) {
+  .containerForm {
+    margin: auto;
+    border: 2px solid#555555;
+    box-shadow: var(--shadow_initial);
+    width: 50%;
+    /* height: 160vh; */
+    border-radius: 16px;
+  }
 }
