@@ -14,7 +14,7 @@ function ValidationConnexion(values) {
   if (values.password === "") {
     error.password = "Le mot de passe est requis";
   } else if (!passwordRegex.test(values.password)) {
-    error.password = "Le mot de passe ne correspond pas";
+    error.password = "Le mot de passe ou le mail ne correspond pas";
   } else {
     error.email = "";
   }
