@@ -15,6 +15,7 @@ function MyProfile() {
           <form action=" " method="POST" className="allForm">
             <div className="button-ratio">
               <div className="groupRadio">
+                <label htmlFor="genreInput">Genre:</label>
                 <label htmlFor="femmeInput">Femme</label>
                 <input
                   id="femmeInput"
