@@ -84,7 +84,7 @@
   align-items: center;
   background-color: #fff;
   width: 80vw;
-  height: fit-content;
+  height: 55vw;
   margin: 2rem auto;
   padding: 0 1rem;
   border: var(--border_card);
@@ -110,6 +110,7 @@
   border: none;
   border-bottom: solid 1px var(--basic-grey);
   background: transparent;
+  width: 65vw;
   &:focus {
     outline: none;
   }
@@ -196,11 +197,18 @@
   .signin-form {
     margin: auto 3rem;
     justify-content: center;
-    height: 60vh;
     width: 50vw;
+    height: 60vh;
+
+  }
+
+  .signin-form input{
+    width: fit-content;
   }
   .signin-form a {
-    padding-right: 2.5rem;
+    padding-right: 2rem;
+
+
   }
   .btn-connexion {
     margin-top: 2rem;
