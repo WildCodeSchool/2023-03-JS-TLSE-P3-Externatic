@@ -42,7 +42,7 @@
 .connexion-cards {
   flex-direction: column;
   display: flex;
-  gap: 2rem;
+  gap: 1.8rem;
 }
 
 .applicant-card,
@@ -82,8 +82,9 @@
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  width: 45vh;
-  height: 45vh;
+  background-color: #fff;
+  width: 80vw;
+  height: fit-content;
   margin: 2rem auto;
   padding: 0 1rem;
   border: var(--border_card);
@@ -125,7 +126,7 @@
 }
 
 .signin-form a {
-  margin: 0 0 2rem auto;
+  margin: 0 1.2rem 2rem auto;
   text-decoration: none;
   color: var(--basic-grey);
   font-size: 0.8rem;
@@ -149,10 +150,22 @@
   background-color: var(--main-color);
   border: solid 1px var(--main-color);
 }
+
 @media screen and (min-width: 768px) {
   .container-login {
-    width: 90%;
+    background-image: url("../../assets/images/login-page.png");
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: solid 1px var(--main-color);
+    box-shadow: var(--shadow_initial);
+    border-radius: 16px;
+    width: 80%;
+    height: 80%;
     margin: auto;
+    flex-direction: row;
+    gap: 3rem;
+    margin: 5rem auto;
   }
 
   .login-option {
@@ -176,17 +189,22 @@
   }
   .applicant-card img,
   .company-card img {
-    max-height: 100%;
-    max-width: 100%;
+    height: fit-content;
+    width: fit-content;
   }
 
   .signin-form {
-    height: 50vh;
+    margin: auto 3rem;
     justify-content: center;
-    width: 50%;
+    height: 60vh;
+    width: 50vw;
+  }
+  .signin-form a {
+    padding-right: 2.5rem;
   }
   .btn-connexion {
-    margin-top: 4rem;
-    width: 70%;
+    margin-top: 2rem;
+    width: 15rem;
+    height: 2rem;
   }
 }

@@ -7,7 +7,6 @@ import "../css/pages/Connexion.css";
 import cardApplicant from "../assets/images/card_applicant.png";
 import cardCompany from "../assets/images/card_company.png";
 import ValidationConnexion from "../utils/ValidationConnexion";
-import loginImage from "../assets/images/login-page.png";
 
 function Connexion() {
   const [showForm, setShowForm] = useState(false);
@@ -73,7 +72,6 @@ function Connexion() {
       </nav>
       <div className="container-login">
         <div className="login-option">
-          <img src={loginImage} alt="page connexion" className="login-image" />
           <section className="connexion-cards">
             <button
               type="button"
@@ -92,6 +90,7 @@ function Connexion() {
               <img src={cardCompany} alt="company" />
             </button>
           </section>
+          {/* <img src={loginImage} alt="page connexion" className="login-image" /> */}
         </div>
         {showForm && (
           <form className="signin-form" onSubmit={handleSubmit}>
