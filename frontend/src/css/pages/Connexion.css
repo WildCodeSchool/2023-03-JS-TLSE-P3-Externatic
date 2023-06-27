@@ -203,10 +203,10 @@
   }
 
   .signin-form {
-    margin: auto 3rem;
+    margin: auto 3.5rem;
     justify-content: center;
     width: 50vw;
-    height: 60vh;
+    height: 370px;
   }
 
   .signin-form input {
