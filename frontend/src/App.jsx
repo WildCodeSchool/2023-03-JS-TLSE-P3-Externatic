@@ -10,24 +10,31 @@ import AdminConnexion from "./pages/AdminConnexion";
 import Dashboard from "./pages/Dashboard";
 
 // Import des composants
+import MainNavBar from "./components/MainNavBar";
 
 // Import du style
 import "./reset.css";
 import "./App.css";
 
+// Import des contexts
+import { MenuContextProvider } from "./contexts/MenuContext";
+
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Routes>
-          <Route path="" element={<Home />} />
-          <Route path="connexion" element={<Connexion />} />
-          <Route path="subscribe" element={<Subscribe />} />
-          <Route path="offers" element={<Offers />} />
-          <Route path="admin-connexion" element={<AdminConnexion />} />
-          <Route path="dashboard/*" element={<Dashboard />} />
-        </Routes>
-      </Router>
+      <MenuContextProvider>
+        <Router>
+          <MainNavBar />
+          <Routes>
+            <Route path="" element={<Home />} />
+            <Route path="connexion" element={<Connexion />} />
+            <Route path="subscribe" element={<Subscribe />} />
+            <Route path="offers" element={<Offers />} />
+            <Route path="admin-connexion" element={<AdminConnexion />} />
+            <Route path="dashboard/*" element={<Dashboard />} />
+          </Routes>
+        </Router>
+      </MenuContextProvider>
     </div>
   );
 }
