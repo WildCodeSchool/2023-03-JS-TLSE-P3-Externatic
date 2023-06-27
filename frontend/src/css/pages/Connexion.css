@@ -59,8 +59,8 @@
   cursor: pointer;
 }
 
-.applicant-card:focus,
-.company-card:focus {
+.applicant-card.focused,
+.company-card.focused {
   border: solid var(--main-color);
 }
 

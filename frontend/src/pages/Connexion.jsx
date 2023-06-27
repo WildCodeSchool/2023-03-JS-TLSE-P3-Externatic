@@ -10,7 +10,8 @@ import ValidationConnexion from "../utils/ValidationConnexion";
 
 function Connexion() {
   const [showForm, setShowForm] = useState(false);
-
+  const [isApplicantCardFocused, setIsApplicantCardFocused] = useState(false);
+  const [isCompanyCardFocused, setIsCompanyCardFocused] = useState(false);
   const [values, setValues] = useState({
     email: "",
     password: "",
@@ -37,13 +38,7 @@ function Connexion() {
         console.error(err);
       });
   };
-  const handleApplicantClick = () => {
-    setShowForm(true);
-  };
 
-  const handleCompanyClick = () => {
-    setShowForm(true);
-  };
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (
@@ -52,6 +47,8 @@ function Connexion() {
         !e.target.closest(".signin-form")
       ) {
         setShowForm(false);
+        setIsApplicantCardFocused(false);
+        setIsCompanyCardFocused(false);
       }
     };
     document.addEventListener("click", handleClickOutside);
@@ -59,6 +56,17 @@ function Connexion() {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
+  const handleApplicantCardClick = () => {
+    setShowForm(true);
+    setIsApplicantCardFocused(true);
+    setIsCompanyCardFocused(false);
+  };
+  const handleCompanyCardClick = () => {
+    setShowForm(true);
+    setIsApplicantCardFocused(false);
+    setIsCompanyCardFocused(true);
+  };
+
   return (
     <>
       <nav className="nav-bar-connexion">
@@ -76,16 +84,20 @@ function Connexion() {
           <section className="connexion-cards">
             <button
               type="button"
-              className="applicant-card"
-              onClick={handleApplicantClick}
+              className={`applicant-card ${
+                isApplicantCardFocused ? "focused" : ""
+              }`}
+              onClick={handleApplicantCardClick}
             >
               <h2>Je suis un candidat</h2>
               <img src={cardApplicant} alt="applicant" />
             </button>
             <button
               type="button"
-              className="company-card"
-              onClick={handleCompanyClick}
+              className={`company-card ${
+                isCompanyCardFocused ? "focused" : ""
+              }`}
+              onClick={handleCompanyCardClick}
             >
               <img src={cardCompany} alt="company" />
               <h2>Je suis un employeur</h2>
