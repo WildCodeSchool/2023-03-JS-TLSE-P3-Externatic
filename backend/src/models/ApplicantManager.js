@@ -28,20 +28,17 @@ class ApplicantManager extends AbstractManager {
     return this.database.query(
       `update ${this.table} set title_name = ?, firstname = ?, lastname = ?, email = ?, hashed_password = ?, message = ?, city = ?, phone = ? where id = ?`,
       [
+        applicant.titleName,
         applicant.firstname,
         applicant.lastname,
-        applicant.hashedPassword,
         applicant.email,
+        applicant.hashedPassword,
+        applicant.message,
+        applicant.city,
+        applicant.phone,
         applicant.id,
       ]
     );
-  }
-
-  // ------------récupérer l'email du candidat------------
-  findApplicantByEmail(email) {
-    return this.database.query(`select * from ${this.table} WHERE email = ?`, [
-      email,
-    ]);
   }
 }
 

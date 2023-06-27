@@ -8,20 +8,20 @@ class AdminManager extends AbstractManager {
   // ------------Création de l'admin - Route POST------------
   createAdmin(admin) {
     return this.database.query(
-      `insert into ${this.table} set firstname = ?, lastname = ?, hashed_password = ?, email = ?`,
-      [admin.firstname, admin.lastname, admin.hashedPassword, admin.email]
+      `insert into ${this.table} set firstname = ?, lastname = ?, email = ?, hashed_password = ?`,
+      [admin.firstname, admin.lastname, admin.email, admin.hashedPassword]
     );
   }
 
   // ------------modification de l'admin - Route PUT------------
   updateAdmin(admin) {
     return this.database.query(
-      `update ${this.table} set firstname = ?, lastname = ?, hashed_password = ?, email = ? where id = ?`,
+      `update ${this.table} set firstname = ?, lastname = ?, email = ?, hashed_password = ? where id = ?`,
       [
         admin.firstname,
         admin.lastname,
-        admin.hashedPassword,
         admin.email,
+        admin.hashedPassword,
         admin.id,
       ]
     );

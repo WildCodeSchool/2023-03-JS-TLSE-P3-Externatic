@@ -7,11 +7,15 @@ const itemControllers = require("./controllers/itemControllers");
 const {
   verifyEmailForSubscription,
   hashPassword,
-  verifyPassword,
+  verifyPasswordForAdmin,
+  verifyPasswordForApplicant,
 } = require("./auth");
 
 const { getAdminByEmail, postAdmin } = require("./controllers/AdminController");
-const { postApplicant } = require("./controllers/ApplicantController");
+const {
+  getApplicantByEmail,
+  postApplicant,
+} = require("./controllers/ApplicantController");
 
 router.get("/items", itemControllers.browse);
 router.get("/items/:id", itemControllers.read);
@@ -36,6 +40,13 @@ router.post(
 );
 
 // ------------connexion de l'admin------------
-router.post("/login/admin", getAdminByEmail, verifyPassword);
+router.post("/login/admin", getAdminByEmail, verifyPasswordForAdmin);
+
+// ------------connexion du candidat------------
+router.post(
+  "/login/applicant",
+  getApplicantByEmail,
+  verifyPasswordForApplicant
+);
 
 module.exports = router;

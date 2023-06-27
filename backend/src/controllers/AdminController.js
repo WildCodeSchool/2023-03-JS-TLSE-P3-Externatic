@@ -16,13 +16,13 @@ const getAllAdmins = (req, res) => {
 // ------------Création de l'admin------------
 
 const postAdmin = (req, res) => {
-  const { firstname, lastname, hashedPassword, email } = req.body;
+  const { firstname, lastname, email, hashedPassword } = req.body;
   models.admin
     .createAdmin({
       firstname,
       lastname,
-      hashedPassword,
       email,
+      hashedPassword,
     })
     .then(([admin]) => {
       res.location(`/signup/admin/${admin.insertId}`).sendStatus(201);

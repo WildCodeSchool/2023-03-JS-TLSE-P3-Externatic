@@ -56,8 +56,8 @@ const hashPassword = (req, res, next) => {
     });
 };
 
-// ------------vérification du mot de passe à la connexion------------
-const verifyPassword = (req, res) => {
+// ------------vérification du mot de passe de l'admin à la connexion------------
+const verifyPasswordForAdmin = (req, res) => {
   argon2.verify(req.admin.hashed_password, req.body.password).then((valid) => {
     if (valid) {
       const payload = {
@@ -72,6 +72,25 @@ const verifyPassword = (req, res) => {
       res.sendStatus(401);
     }
   });
+};
+// ------------vérification du mot de passe du candidat à la connexion------------
+const verifyPasswordForApplicant = (req, res) => {
+  argon2
+    .verify(req.applicant.hashed_password, req.body.password)
+    .then((valid) => {
+      if (valid) {
+        const payload = {
+          sub: req.applicant.id,
+        };
+        const token = jwt.sign(payload, process.env.JWT_SECRET, {
+          expiresIn: "1h",
+        });
+        delete req.applicant.hashed_password;
+        res.send({ token, applicant: req.applicant }).status(200);
+      } else {
+        res.sendStatus(401);
+      }
+    });
 };
 
 const verifyToken = (req, res, next) => {
@@ -95,6 +114,7 @@ const verifyToken = (req, res, next) => {
 module.exports = {
   verifyEmailForSubscription,
   hashPassword,
-  verifyPassword,
+  verifyPasswordForAdmin,
+  verifyPasswordForApplicant,
   verifyToken,
 };
