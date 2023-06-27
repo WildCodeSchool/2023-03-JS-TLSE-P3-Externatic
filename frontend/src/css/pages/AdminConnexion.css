@@ -1,7 +1,21 @@
-.titleEspaceAdmin {
+#titleEspaceAdmin {
   font-weight: bolder;
-  text-underline-offset: 8px;
+  font-size: 28px;
   text-decoration: underline 2px;
+  text-underline-offset: 8px;
+  color: black;
   margin: 4rem auto;
   text-align: center;
+}
+.container-login-admin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 100%;
+  border: 1px solid var(--main-color);
+  box-shadow: var(--shadow_initial);
+  border-radius: 16px;
+  margin: auto;
+
 }

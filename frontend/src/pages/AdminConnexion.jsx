@@ -35,9 +35,9 @@ function AdminConnexion() {
   };
   return (
     <>
-      <h1 className="titleEspaceAdmin">Espace Administrateur</h1>
-      <div className="container-login">
-        <form className="signin-form" onSubmit={handleSubmit}>
+      <h1 id="titleEspaceAdmin">Espace Administrateur</h1>
+      <div className="container-login-admin">
+        <form className="signin-form-admin" onSubmit={handleSubmit}>
           <div className="mail">
             <svg
               width="16"

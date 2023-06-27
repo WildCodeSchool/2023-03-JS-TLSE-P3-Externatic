@@ -10,6 +10,7 @@ import ValidationConnexion from "../utils/ValidationConnexion";
 
 function Connexion() {
   const [showForm, setShowForm] = useState(false);
+
   const [values, setValues] = useState({
     email: "",
     password: "",
@@ -86,11 +87,10 @@ function Connexion() {
               className="company-card"
               onClick={handleCompanyClick}
             >
-              <h2>Je suis un employeur</h2>
               <img src={cardCompany} alt="company" />
+              <h2>Je suis un employeur</h2>
             </button>
           </section>
-          {/* <img src={loginImage} alt="page connexion" className="login-image" /> */}
         </div>
         {showForm && (
           <form className="signin-form" onSubmit={handleSubmit}>

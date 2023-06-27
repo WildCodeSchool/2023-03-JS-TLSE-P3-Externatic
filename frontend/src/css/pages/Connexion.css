@@ -10,10 +10,10 @@
 
 .login-selected a {
   font-weight: bolder;
+  font-size: larger;
   text-decoration: underline 2px;
   text-underline-offset: 8px;
   color: black;
-  font-size: larger;
 }
 
 .signin-selected a {
@@ -32,23 +32,24 @@
 .login-option {
   display: flex;
   align-items: center;
-  justify-content: center;
   margin: 2rem auto;
 }
 
 .login-image {
   display: none;
 }
+
 .connexion-cards {
   flex-direction: column;
   display: flex;
-  gap: 1.8rem;
+  margin: auto;
 }
 
 .applicant-card,
 .company-card {
   display: flex;
   align-items: center;
+  margin: 1.8rem auto;
   height: 50vw;
   width: 80vw;
   border: var(--border_card);
@@ -72,21 +73,21 @@
 
 .applicant-card img,
 .company-card img {
-  max-height: 100%;
-  max-width: 100%;
+  max-height: 90%;
+  max-width: 90%;
   object-fit: fill;
 }
 
 .signin-form {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   background-color: #fff;
   width: 80vw;
-  height: 55vw;
+  height: auto;
   margin: 2rem auto;
-  padding: 0 1rem;
+  padding: 1rem;
   border: var(--border_card);
   box-shadow: var(--shadow_initial);
   border-radius: 16px;
@@ -132,12 +133,17 @@
   color: var(--basic-grey);
   font-size: 0.8rem;
 }
+.signin-form a:hover {
+  text-decoration: underline 1px;
+  text-underline-offset: 8px;
+  color: var(--basic-grey);
+}
 
 .btn-connexion {
   position: relative;
   width: 14rem;
   height: 32px;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   border-radius: 20px;
   box-shadow: var(--shadow_initial);
   text-align: center;
@@ -157,11 +163,12 @@
     background-image: url("../../assets/images/login-page.png");
     background-size: 60%;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: right;
+    background-color: var(--white-80);
     border: solid 1px var(--main-color);
     box-shadow: var(--shadow_initial);
     border-radius: 16px;
-    width: 80%;
+    width: 70%;
     height: 80%;
     margin: auto;
     flex-direction: row;
@@ -172,21 +179,22 @@
   .login-option {
     width: 100%;
     height: 90%;
-    justify-content: space-around;
+    margin: 2rem;
   }
+
   .login-image {
     display: inherit;
     width: 50%;
   }
   .connexion-cards {
-    flex-direction: column;
+    margin: inherit;
   }
 
   .applicant-card,
   .company-card {
     margin: 24px 0;
     width: 316px;
-    height: 138px;
+    height: 162px;
   }
   .applicant-card img,
   .company-card img {
@@ -199,19 +207,16 @@
     justify-content: center;
     width: 50vw;
     height: 60vh;
-
   }
 
-  .signin-form input{
+  .signin-form input {
     width: fit-content;
   }
   .signin-form a {
-    padding-right: 2rem;
-
-
+    padding: 0.7rem 1.3rem 0 0;
   }
   .btn-connexion {
-    margin-top: 2rem;
+    margin: 2rem auto 0 auto;
     width: 15rem;
     height: 2rem;
   }
