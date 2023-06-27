@@ -53,7 +53,7 @@
   font-weight: bold;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2.6rem;
 }
 
 .showMenu {
@@ -70,15 +70,18 @@
   height: 1.7rem;
 }
 
-button a {
+.mainNav button a {
   color: black;
-  padding: 0.5rem;
+  padding: 0.8rem;
+  font-size: 1rem;
+  font-weight: bold;
 }
 
-.myAccountLink a {
+.mainNav .myAccountLink a {
   background-color: black;
   color: #fff;
-  border-radius: 1rem;
+  border-radius: 2rem;
+  padding-inline: 1.5rem;
 }
 
 @media screen and (min-width: 768px) {
@@ -104,11 +107,11 @@ button a {
     display: none;
   }
 
-  button a:hover {
+  .mainNav button a:hover {
     color: var(--main-color);
   }
 
-  .myAccountLink a:hover {
+  .mainNav .myAccountLink a:hover {
     background-color: var(--main-color);
     color: white;
   }
