@@ -1,0 +1,99 @@
+.signin-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  width: 80vw;
+  height: auto;
+  margin: 2rem auto;
+  padding: 1rem;
+  border: var(--border_card);
+  box-shadow: var(--shadow_initial);
+  border-radius: 16px;
+}
+
+.mail,
+.password {
+  display: flex;
+  align-items: center;
+}
+
+.mail-icon,
+.password-icon {
+  position: absolute;
+  top: auto;
+}
+
+.signin-form input {
+  margin: 24px 0;
+  padding: 0.5rem 2rem;
+  border: none;
+  border-bottom: solid 1px var(--basic-grey);
+  background: transparent;
+  width: 65vw;
+  &:focus {
+    outline: none;
+  }
+}
+
+.error-email,
+.error-password {
+  color: var(--main-color);
+  font-style: italic;
+  font-size: smaller;
+  position: absolute;
+  width: max-content;
+  margin-top: 4rem;
+}
+
+.signin-form a {
+  margin: 0 1.2rem 2rem auto;
+  text-decoration: none;
+  color: var(--basic-grey);
+  font-size: 0.8rem;
+}
+.signin-form a:hover {
+  text-decoration: underline 1px;
+  text-underline-offset: 8px;
+  color: var(--basic-grey);
+}
+
+.btn-connexion {
+  position: relative;
+  width: 14rem;
+  height: 32px;
+  margin-bottom: 1.5rem;
+  border-radius: 20px;
+  box-shadow: var(--shadow_initial);
+  text-align: center;
+  background-color: black;
+  font-size: large;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn-connexion:hover {
+  background-color: var(--main-color);
+  border: solid 1px var(--main-color);
+}
+
+@media screen and (min-width: 768px) {
+  .signin-form {
+    justify-content: center;
+    width: 30vw;
+    height: 370px;
+  }
+
+  .signin-form input {
+    width: fit-content;
+  }
+  .signin-form a {
+    padding: 0.7rem 1.3rem 0 0;
+  }
+  .btn-connexion {
+    margin: 2rem auto 0 auto;
+    width: 15rem;
+    height: 2rem;
+  }
+}
