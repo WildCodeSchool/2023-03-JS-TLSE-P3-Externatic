@@ -8,7 +8,7 @@ class CompanyManager extends AbstractManager {
   // ------------Création de l'entreprise - Route POST------------
   createCompany(company) {
     return this.database.query(
-      `insert into ${this.table} set name = ?, email = ?, hashed_password = ?, city = ?, phone = ?, siret = ?`,
+      `insert into ${this.table} (name, email, hashed_password, city, phone, siret) values (?, ?, ?, ?, ?, ?)`,
       [
         company.name,
         company.email,

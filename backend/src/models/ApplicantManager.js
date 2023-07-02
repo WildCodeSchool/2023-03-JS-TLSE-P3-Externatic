@@ -8,7 +8,7 @@ class ApplicantManager extends AbstractManager {
   // ------------Création du candidat - Route POST------------
   createApplicant(applicant) {
     return this.database.query(
-      `insert into ${this.table} set title_name = ?, firstname = ?, lastname = ?, email = ?, hashed_password = ?, message = ?, city = ?, phone = ?`,
+      `insert into ${this.table} (title_name, firstname, lastname, email, hashed_password, message, city, phone) values (?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         applicant.titleName,
         applicant.firstname,

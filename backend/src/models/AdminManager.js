@@ -8,7 +8,7 @@ class AdminManager extends AbstractManager {
   // ------------Création de l'admin - Route POST------------
   createAdmin(admin) {
     return this.database.query(
-      `insert into ${this.table} set firstname = ?, lastname = ?, email = ?, hashed_password = ?`,
+      `insert into ${this.table} (firstname, lastname, email, hashed_password) values (?, ?, ?, ?)`,
       [admin.firstname, admin.lastname, admin.email, admin.hashedPassword]
     );
   }
