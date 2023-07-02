@@ -33,6 +33,7 @@ const postApplicant = (req, res) => {
     });
 };
 
+// ------------Connection du candidat------------
 const getApplicantByEmail = (req, res, next) => {
   const { email } = req.body;
 

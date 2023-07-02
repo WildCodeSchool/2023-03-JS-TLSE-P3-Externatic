@@ -61,9 +61,8 @@ const getAdminByEmail = (req, res, next) => {
   models.admin
     .findUserByEmail(email)
     .then(([admins]) => {
-      if (admins.length) {
-        // eslint-disable-next-line prefer-destructuring
-        req.admin = admins[0];
+      if (admins[0] != null) {
+        [req.admin] = admins;
         next();
       } else {
         res.sendStatus(401);

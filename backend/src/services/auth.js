@@ -1,7 +1,7 @@
 const argon2 = require("argon2");
 const jwt = require("jsonwebtoken");
 
-const models = require("./models");
+const models = require("../models");
 
 const hashingOptions = {
   type: argon2.argon2id,
@@ -92,6 +92,25 @@ const verifyPasswordForApplicant = (req, res) => {
       }
     });
 };
+// ------------vérification du mot de passe de l'entreprise à la connexion------------
+const verifyPasswordForCompany = (req, res) => {
+  argon2
+    .verify(req.company.hashed_password, req.body.password)
+    .then((valid) => {
+      if (valid) {
+        const payload = {
+          sub: req.company.id,
+        };
+        const token = jwt.sign(payload, process.env.JWT_SECRET, {
+          expiresIn: "1h",
+        });
+        delete req.company.hashed_password;
+        res.send({ token, company: req.company }).status(200);
+      } else {
+        res.sendStatus(401);
+      }
+    });
+};
 
 const verifyToken = (req, res, next) => {
   try {
@@ -116,5 +135,6 @@ module.exports = {
   hashPassword,
   verifyPasswordForAdmin,
   verifyPasswordForApplicant,
+  verifyPasswordForCompany,
   verifyToken,
 };
