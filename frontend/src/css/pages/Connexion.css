@@ -1,28 +1,3 @@
-.nav-bar-connexion {
-  display: flex;
-  justify-content: center;
-  margin: 10vh auto 10vh auto;
-}
-
-.nav-bar-connexion li {
-  display: inline-block;
-}
-
-.login-selected a {
-  font-weight: bolder;
-  font-size: larger;
-  text-decoration: underline 2px;
-  text-underline-offset: 8px;
-  color: black;
-}
-
-.signin-selected a {
-  color: var(--basic-grey);
-  text-decoration: none;
-  margin: auto 40px auto 20px;
-  font-size: larger;
-}
-
 .container-login {
   display: flex;
   margin: 2rem;
@@ -117,7 +92,5 @@
   .company-card img {
     height: fit-content;
     width: fit-content;
-  }
-  .form-container {
   }
 }

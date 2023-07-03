@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 
 // Import du context
@@ -11,6 +10,7 @@ import cardCompany from "../assets/images/card_company.png";
 
 // Import composant
 import FormularConnexion from "../components/FormularConnexion";
+import ConnexionLinks from "../components/ConnexionLinks";
 
 function Connexion() {
   const { showForm, setShowForm } = useContext(ConnexionContext);
@@ -46,17 +46,8 @@ function Connexion() {
   };
 
   return (
-    <>
-      <nav className="nav-bar-connexion">
-        <ul>
-          <li className="signin-selected">
-            <Link to="/subscribe">S'inscrire</Link>
-          </li>
-          <li className="login-selected">
-            <Link to="/connexion">Se connecter</Link>
-          </li>
-        </ul>
-      </nav>
+    <div>
+      <ConnexionLinks />
       <div className="container-login">
         <div className="login-option">
           <section className="connexion-cards">
@@ -89,7 +80,7 @@ function Connexion() {
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 }
 export default Connexion;

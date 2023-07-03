@@ -6,7 +6,7 @@ import axios from "axios";
 import ValidationConnexion from "../utils/ValidationConnexion";
 
 // Import style
-import "../css/pages/FormularConnexion.css";
+import "../css/components/FormularConnexion.css";
 
 function FormularConnexion() {
   const [values, setValues] = useState({
