@@ -19,23 +19,26 @@ import "./App.css";
 // Import des contexts
 import { MenuContextProvider } from "./contexts/MenuContext";
 import { ConnexionContextProvider } from "./contexts/ConnexionContext";
+import { TokenContextProvider } from "./contexts/TokenContext";
 
 function App() {
   return (
     <div className="App">
       <MenuContextProvider>
         <ConnexionContextProvider>
-          <Router>
-            <MainNavBar />
-            <Routes>
-              <Route path="" element={<Home />} />
-              <Route path="connexion" element={<Connexion />} />
-              <Route path="subscribe" element={<Subscribe />} />
-              <Route path="offers" element={<Offers />} />
-              <Route path="admin-connexion" element={<AdminConnexion />} />
-              <Route path="dashboard/*" element={<Dashboard />} />
-            </Routes>
-          </Router>
+          <TokenContextProvider>
+            <Router>
+              <MainNavBar />
+              <Routes>
+                <Route path="" element={<Home />} />
+                <Route path="connexion" element={<Connexion />} />
+                <Route path="subscribe" element={<Subscribe />} />
+                <Route path="offers" element={<Offers />} />
+                <Route path="admin-connexion" element={<AdminConnexion />} />
+                <Route path="dashboard/*" element={<Dashboard />} />
+              </Routes>
+            </Router>
+          </TokenContextProvider>
         </ConnexionContextProvider>
       </MenuContextProvider>
     </div>

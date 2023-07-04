@@ -1,6 +1,10 @@
+// Import packages
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
+
+// Import du context
+import TokenContext from "../contexts/TokenContext";
 
 // Import de la fonction qui gère les erreurs du formulaire
 import ValidationConnexion from "../utils/ValidationConnexion";
@@ -9,6 +13,7 @@ import ValidationConnexion from "../utils/ValidationConnexion";
 import "../css/components/FormularConnexion.css";
 
 function FormularConnexion() {
+  const { setUser } = useContext(TokenContext);
   const [values, setValues] = useState({
     email: "",
     password: "",
@@ -26,10 +31,12 @@ function FormularConnexion() {
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/login`, values)
       .then((res) => {
-        if (res.status === 200) {
+        if (res.data.token) {
+          console.info(res.data.token);
+          setUser(res.data.token);
           navigate("/dashboard/my-profile");
         } else {
-          navigate("/");
+          navigate("/subscribe");
         }
       })
       .catch((err) => {

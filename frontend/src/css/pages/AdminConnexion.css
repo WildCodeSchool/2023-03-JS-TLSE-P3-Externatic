@@ -1,21 +1,16 @@
-#titleEspaceAdmin {
-  font-weight: bolder;
-  font-size: 28px;
-  text-decoration: underline 2px;
-  text-underline-offset: 8px;
-  color: black;
-  margin: 4rem auto;
-  text-align: center;
-}
-.container-login-admin {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 80%;
-  height: 100%;
-  border: 1px solid var(--main-color);
+.container-admin-connexion {
+  background-image: url("../../assets/images/admin-connexion.png");
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: right;
+  background-color: var(--white-80);
+  border: solid 1px var(--main-color);
   box-shadow: var(--shadow_initial);
   border-radius: 16px;
-  margin: auto;
-
+  width: 60vw;
+  height: 60vh;
+  margin: 5rem auto;
+  display: flex;
+  padding-left: 4rem;
+  padding-top: 4rem;
 }

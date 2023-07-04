@@ -9,7 +9,9 @@ function AdminConnexion() {
   return (
     <div>
       <ConnexionLinks />
-      <FormularConnexion />
+      <div className="container-admin-connexion">
+        <FormularConnexion />
+      </div>
     </div>
   );
 }

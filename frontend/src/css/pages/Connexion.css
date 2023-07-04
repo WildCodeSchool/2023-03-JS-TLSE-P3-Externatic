@@ -42,7 +42,7 @@
 .applicant-card h2,
 .company-card h2 {
   padding: 1rem;
-  font-size: larger;
+  font-size: 1rem;
   font-weight: bolder;
 }
 
@@ -63,15 +63,18 @@
     border: solid 1px var(--main-color);
     box-shadow: var(--shadow_initial);
     border-radius: 16px;
-    width: 75%;
+    width: 60vw;
     height: 80%;
     flex-direction: row;
     margin: 5rem auto;
     align-items: center;
   }
-
+  .form-container {
+    margin: auto;
+  }
   .login-option {
-    margin: 2rem;
+    /* margin: 2rem; */
+    margin: 2rem auto 2rem 2rem;
   }
 
   .login-image {
@@ -92,5 +95,10 @@
   .company-card img {
     height: fit-content;
     width: fit-content;
+  }
+
+  .applicant-card h2,
+  .company-card h2 {
+    font-size: 1.2rem;
   }
 }

@@ -8,7 +8,7 @@ import "../css/pages/Connexion.css";
 import cardApplicant from "../assets/images/card_applicant.png";
 import cardCompany from "../assets/images/card_company.png";
 
-// Import composant
+// Import composants
 import FormularConnexion from "../components/FormularConnexion";
 import ConnexionLinks from "../components/ConnexionLinks";
 
