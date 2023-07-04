@@ -35,7 +35,7 @@ function MainNavBar() {
         </button>
         <button
           type="button"
-          className="myAccountLink"
+          className="button myAccountLink"
           onClick={() => setIsMenuShow(false)}
         >
           <Link to="/dashboard/my-profile">Mon compte</Link>
@@ -68,7 +68,7 @@ function MainNavBar() {
         >
           <Link to="/">
             <img src={exit} alt="Icone de déconnection" />
-            &nbsp;Se déconnecter
+            <p>&nbsp;Se déconnecter</p>
           </Link>
         </button>
       </div>

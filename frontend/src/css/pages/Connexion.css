@@ -80,14 +80,16 @@ img {
 .password {
   display: flex;
   align-items: center;
+  gap: 0.3rem;
+  border-bottom: solid 1px var(--basic-grey);
 }
 
-svg {
+/* svg {
   position: absolute;
   top: auto;
-}
+} */
 
-input {
+/* input {
   margin: 24px 0;
   padding: 8px 16px 8px 24px;
   width: 284px;
@@ -97,7 +99,7 @@ input {
   &:focus {
     outline: none;
   }
-}
+} */
 
 .error-email,
 .error-password {
@@ -114,23 +116,6 @@ input {
   text-decoration: none;
   color: var(--basic-grey);
   font-size: 12px;
-}
-
-.btn-connexion {
-  position: relative;
-  margin-bottom: 16px;
-  width: 120px;
-  height: 32px;
-  border-radius: 20px;
-  box-shadow: var(--shadow_initial);
-  text-align: center;
-  background-color: black;
-  color: #fff;
-  cursor: pointer;
-  &:hover {
-    background-color: var(--main-color);
-    border: solid 1px var(--main-color);
-  }
 }
 
 @media screen and (min-width: 768px) {
@@ -162,8 +147,5 @@ input {
     height: 50vh;
     justify-content: center;
     width: fit-content;
-  }
-  .btn-connexion {
-    margin-top: 4rem;
   }
 }

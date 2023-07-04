@@ -58,8 +58,8 @@ function Connexion() {
             <img src={cardCompany} alt="company" />
           </button>
         </section>
-        <form className="signin-form" onSubmit={handleSubmit}>
-          <div className="mail">
+        <form className="form" onSubmit={handleSubmit}>
+          <div className="containerTextInput">
             <svg
               width="16"
               height="13"
@@ -78,6 +78,7 @@ function Connexion() {
               placeholder="Email"
               required=""
               name="email"
+              className="textInput"
               onChange={handleInput}
             />
             {errors.email && (
@@ -85,7 +86,7 @@ function Connexion() {
             )}
           </div>
 
-          <div className="password">
+          <div className="containerTextInput">
             <svg
               width="16"
               height="20"
@@ -108,6 +109,7 @@ function Connexion() {
               placeholder="Mot de passe"
               required=""
               name="password"
+              className="textInput"
               onChange={handleInput}
             />
             {errors.password && (
@@ -116,7 +118,7 @@ function Connexion() {
           </div>
           <Link to="/password-forgotten">Mot de passe oublié?</Link>
 
-          <button type="submit" className="btn-connexion">
+          <button type="submit" className="button">
             Je me connecte
           </button>
         </form>
