@@ -8,7 +8,6 @@ const {
   verifyPasswordForAdmin,
   verifyPasswordForApplicant,
   verifyPasswordForCompany,
-  // verifyPassword,
 } = require("./services/auth");
 
 const { getAdminByEmail, postAdmin } = require("./controllers/AdminController");
