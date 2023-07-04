@@ -84,23 +84,6 @@ img {
   border-bottom: solid 1px var(--basic-grey);
 }
 
-/* svg {
-  position: absolute;
-  top: auto;
-} */
-
-/* input {
-  margin: 24px 0;
-  padding: 8px 16px 8px 24px;
-  width: 284px;
-  border: none;
-  border-bottom: solid 1px var(--basic-grey);
-  background: transparent;
-  &:focus {
-    outline: none;
-  }
-} */
-
 .error-email,
 .error-password {
   color: var(--main-color);

@@ -8,46 +8,84 @@ import whiteTrash from "../assets/icons/white_trash.svg";
 import lockBlack from "../assets/icons/lock_black.svg";
 
 function MyProfile() {
-  const [genre, setGenre] = useState("");
+  const [errors, setErrors] = useState({});
+  const [telephoneError, setTelephoneError] = useState("");
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    // Vérification des champs
+    const { nom, prenom, email, password, localisation } =
+      event.target.elements;
+    const newErrors = {};
+
+    if (!nom.value.trim()) {
+      newErrors.nom = "Veuillez saisir votre nom.";
+    }
+    if (!prenom.value.trim()) {
+      newErrors.prenom = "Veuillez saisir votre prenom.";
+    }
+
+    if (!email.value.trim()) {
+      newErrors.email = "Veuillez saisir votre adresse e-mail.";
+    }
+
+    if (!password.value.trim()) {
+      newErrors.password = "Veuillez saisir votre mot de passe.";
+    }
+    if (!localisation.value.trim()) {
+      newErrors.localisation = "Veuillez saisir votre ville.";
+    }
+
+    setErrors(newErrors);
+
+    // Soumettre le formulaire si aucune erreur
+    if (Object.keys(newErrors).length === 0) {
+      // Effectuer l'action de soumission du formulaire ici
+    }
+  };
+  const validateTelephone = (value) => {
+    const regex = /^\d{10}$/; // Expression régulière pour vérifier si la valeur contient exactement 10 chiffres
+    if (!regex.test(value)) {
+      setTelephoneError(
+        "Veuillez saisir un numéro de téléphone valide (10 chiffres)."
+      );
+    } else {
+      setTelephoneError("");
+    }
+  };
 
   return (
     <div>
       <div className="containerForm">
         <h4 className="myProfil">Modifier mon profil</h4>
         <div className="containerForm_2">
-          <form action=" " method="POST" className="allForm">
+          <form onSubmit={handleSubmit} className="allForm">
             <div className="button-ratio">
               <div className="groupRadio">
-                <label>
-                  <input
-                    type="radio"
-                    value="option1"
-                    name="genre"
-                    checked={genre === "option1"}
-                    onChange={() => setGenre("option1")}
-                  />
-                  Femme
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    value="option2"
-                    name="genre"
-                    checked={genre === "option2"}
-                    onChange={() => setGenre("option2")}
-                  />
-                  Homme
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    value="option3"
-                    name="genre"
-                    checked={genre === "option3"}
-                    onChange={() => setGenre("option3")}
-                  />
-                  Autre
-                </label>
+                <label htmlFor="genreInput">Genre:</label>
+                <label htmlFor="femmeInput">Femme</label>
+                <input
+                  id="femmeInput"
+                  type="radio"
+                  value="option1"
+                  name="genre"
+                  defaultChecked
+                />
+                <label htmlFor="hommeInput">Homme</label>
+                <input
+                  id="hommeInput"
+                  type="radio"
+                  value="option2"
+                  name="genre"
+                />
+                <label htmlFor="autreInput">Autre</label>
+                <input
+                  id="autreInput"
+                  type="radio"
+                  value="option3"
+                  name="genre"
+                />
               </div>
             </div>
 
@@ -63,6 +101,7 @@ function MyProfile() {
                 name="nom"
                 className="inputForm"
               />
+              {errors.nom && <small className="error">{errors.nom}</small>}
             </div>
 
             <div className="input">
@@ -77,6 +116,9 @@ function MyProfile() {
                 name="prenom"
                 className="inputForm"
               />
+              {errors.prenom && (
+                <small className="error">{errors.prenom}</small>
+              )}
             </div>
 
             <div className="input">
@@ -87,16 +129,20 @@ function MyProfile() {
                 name="email"
                 className="inputForm"
               />
+              {errors.email && <small className="error">{errors.email}</small>}
             </div>
 
             <div className="input">
-              <img className="iconForm" src={lockBlack} alt="lock" />
+              <img className="iconForm" src={lockBlack} alt=" lock" />
               <input
                 type="password"
                 placeholder="Password"
                 name="password"
                 className="inputForm"
               />
+              {errors.password && (
+                <small className="error">{errors.password}</small>
+              )}
             </div>
 
             <div className="input">
@@ -106,7 +152,9 @@ function MyProfile() {
                 placeholder="Téléphone"
                 name="telephone"
                 className="inputForm"
+                onChange={(e) => validateTelephone(e.target.value)}
               />
+              {telephoneError && <div className="error">{telephoneError}</div>}
             </div>
 
             <div className="input">
@@ -117,7 +165,9 @@ function MyProfile() {
                 name="localisation"
                 className="inputForm"
               />
-              <small />
+              {errors.localisation && (
+                <small className="error">{errors.localisation}</small>
+              )}
             </div>
 
             <button className="registerButton" type="submit">
@@ -139,6 +189,7 @@ function MyProfile() {
               name="ancienMdp"
               className="inputForm"
             />
+            <small className="error">{errors.password}</small>
           </div>
           <div className="input">
             <img className="iconForm" src={lockBlack} alt="lock" />
@@ -148,6 +199,7 @@ function MyProfile() {
               name="nouveauMdp"
               className="inputForm"
             />
+            <small className="error">{errors.password}</small>
           </div>
           <div className="input">
             <img className="iconForm" src={lockBlack} alt="lock" />
@@ -157,6 +209,7 @@ function MyProfile() {
               name="newMdp"
               className="inputForm"
             />
+            <small className="error">{errors.password}</small>
           </div>
           <button type="submit" className="registerButton">
             J'enregistre

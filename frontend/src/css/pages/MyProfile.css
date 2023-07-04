@@ -17,12 +17,13 @@ form {
 }
 
 .input {
-  padding: 6px 0 6px 2px;
-  border-bottom: 2px solid #ccc;
+  position: relative;
+  padding: 8px 0 6px 2px;
+  border-bottom: 2px solid #d1cdcdcc;
   border-radius: 4px;
   font-size: 16px;
   width: 260px;
-  margin-top: 25px;
+  margin-top: 15px;
   display: flex;
   gap: 8px;
 }
@@ -35,15 +36,16 @@ form {
 
 .input input {
   border: none;
-  height: 25px;
+  height: 15px;
   width: 100%;
+ background-color:inherit;
 }
 .groupRadio {
   display: flex;
   justify-content: space-between;
   width: 100%;
   margin-bottom: 20px;
-  font-size: 20px;
+  font-size: 18px;
 }
 .myProfil {
   font-size: 20px;
@@ -53,15 +55,14 @@ form {
 }
 .inputForm {
   font-size: 16px;
-  margin-left: 30px;
+  margin-left: 25px;
 }
-
 .registerButton {
   font-size: 18px;
   background-color: black;
   color: #ffff;
   border-radius: 20px;
-  margin: 18px;
+  margin: 24px;
   width: 55%;
   height: 35px;
   cursor: pointer;
@@ -94,29 +95,96 @@ form {
 .input2 {
   display: flex;
   justify-content: center;
+  background-color:inherit;
 }
 .deleteButton {
   font-size: 12px;
   background-color: black;
   cursor: pointer;
-  margin: 20px;
+  margin: 0px;
   color: #ffffff;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 20px;
-  padding: 6px 4px;
+  padding: 6px 6px;
 }
 .iconForm2 {
   margin-right: 8px;
 }
+.error{
+  position: absolute;;
+  color: #ca2061;
+  font-size: 14px;
+  top: 100%;
+  left: 0;
+  margin-top: 4px;
+}
+.inputForm:focus {
+  outline: none;
+  border-color: transparent;
+}
+
+
+.errorInput {
+  border: 2px solid #ca2061;
+}
+
+
 @media screen and (min-width: 768px) {
   .containerForm {
-    margin: auto;
-    border: 2px solid#555555;
-    box-shadow: var(--shadow_initial);
-    width: 50%;
-    border-radius: 16px;
+    width: 40%;
+  }
+  .input {
+    padding: 10px 0 10px 4px;
+    font-size: 20px;
+    width: 480px;
+    margin-top: 25px;
+  }
+  .input img {
+    width: 23px;
+    height: 23px;
+  }
+  .input input {
+    height: 28px;
+  }
+  .groupRadio {
+    margin-bottom: 25px;
+    font-size: 25px;
+    gap: 12px;
+  }
+  .myProfil {
+    font-size: 25px;
+    font-weight: 900;
+    padding: 20px;
+  }
+  .inputForm {
+    font-size: 18px;
+  }
+
+  .registerButton {
+    font-size: 20px;
+    margin: 28px;
+    height: 38px;
+  }
+  .containerModif {
+    width: 40%;
+    height: 30vw;
+    margin-top: 38px;
+  }
+  .myProfil2 {
+    font-size: 25px;
+    font-weight: 900;
+    padding: 20px;
+    margin-top: 52px;
+  }
+  .deleteButton {
+    font-size: 16px;
+    padding: 8px 8px;
+  }
+  .error {
+    color:#ca2061;
+    font-size: 20px;
   }
 }
