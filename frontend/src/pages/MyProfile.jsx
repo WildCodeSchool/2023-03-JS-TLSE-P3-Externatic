@@ -15,7 +15,8 @@ function MyProfile() {
     event.preventDefault();
 
     // Vérification des champs
-    const { nom, prenom, email, password } = event.target.elements;
+    const { nom, prenom, email, password, localisation } =
+      event.target.elements;
     const newErrors = {};
 
     if (!nom.value.trim()) {
@@ -32,8 +33,8 @@ function MyProfile() {
     if (!password.value.trim()) {
       newErrors.password = "Veuillez saisir votre mot de passe.";
     }
-    if (!prenom.value.trim()) {
-      newErrors.prenom = "Veuillez saisir votre ville.";
+    if (!localisation.value.trim()) {
+      newErrors.localisation = "Veuillez saisir votre ville.";
     }
 
     setErrors(newErrors);
@@ -164,6 +165,9 @@ function MyProfile() {
                 name="localisation"
                 className="inputForm"
               />
+              {errors.localisation && (
+                <small className="error">{errors.localisation}</small>
+              )}
             </div>
 
             <button className="registerButton" type="submit">
