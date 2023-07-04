@@ -38,7 +38,7 @@ form {
   border: none;
   height: 15px;
   width: 100%;
- background-color:inherit;
+  background-color: inherit;
 }
 .groupRadio {
   display: flex;
@@ -95,7 +95,7 @@ form {
 .input2 {
   display: flex;
   justify-content: center;
-  background-color:inherit;
+  background-color: inherit;
 }
 .deleteButton {
   font-size: 12px;
@@ -113,8 +113,8 @@ form {
 .iconForm2 {
   margin-right: 8px;
 }
-.error{
-  position: absolute;;
+.error {
+  position: absolute;
   color: #ca2061;
   font-size: 14px;
   top: 100%;
@@ -126,11 +126,9 @@ form {
   border-color: transparent;
 }
 
-
 .errorInput {
   border: 2px solid #ca2061;
 }
-
 
 @media screen and (min-width: 768px) {
   .containerForm {
@@ -184,7 +182,7 @@ form {
     padding: 8px 8px;
   }
   .error {
-    color:#ca2061;
+    color: #ca2061;
     font-size: 20px;
   }
 }
