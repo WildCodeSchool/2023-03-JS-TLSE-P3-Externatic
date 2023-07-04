@@ -112,6 +112,55 @@ const verifyPasswordForCompany = (req, res) => {
     });
 };
 
+// const verifyPassword = (req, res) => {
+//   argon2
+//     .verify(req.admin.hashed_password, req.body.password)
+//     .then((adminPasswordIsValid) => {
+//       if (adminPasswordIsValid) {
+//         const payload = {
+//           sub: req.admin.id,
+//         };
+//         const token = jwt.sign(payload, process.env.JWT_SECRET, {
+//           expiresIn: "1h",
+//         });
+//         delete req.admin.hashed_password;
+//         res.send({ token, admin: req.admin }).status(200);
+//       } else {
+//         argon2
+//           .verify(req.applicant.hashed_password, req.body.password)
+//           .then((applicantPasswordIsValid) => {
+//             if (applicantPasswordIsValid) {
+//               const payload = {
+//                 sub: req.applicant.id,
+//               };
+//               const token = jwt.sign(payload, process.env.JWT_SECRET, {
+//                 expiresIn: "1h",
+//               });
+//               delete req.applicant.hashed_password;
+//               res.send({ token, applicant: req.applicant }).status(200);
+//             } else {
+//               argon2
+//                 .verify(req.company.hashed_password, req.body.password)
+//                 .then((companyPasswordIsValid) => {
+//                   if (companyPasswordIsValid) {
+//                     const payload = {
+//                       sub: req.company.id,
+//                     };
+//                     const token = jwt.sign(payload, process.env.JWT_SECRET, {
+//                       expiresIn: "1h",
+//                     });
+//                     delete req.company.hashed_password;
+//                     res.send({ token, company: req.company }).status(200);
+//                   } else {
+//                     res.sendStatus(401);
+//                   }
+//                 });
+//             }
+//           });
+//       }
+//     });
+// };
+
 const verifyToken = (req, res, next) => {
   try {
     const authorizationHeader = req.get("Authorization");
@@ -136,5 +185,6 @@ module.exports = {
   verifyPasswordForAdmin,
   verifyPasswordForApplicant,
   verifyPasswordForCompany,
+  // verifyPassword,
   verifyToken,
 };
