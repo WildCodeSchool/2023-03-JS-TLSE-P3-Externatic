@@ -1,3 +1,5 @@
+import OfferModal from "../components/OfferModal";
+
 function Home() {
   return (
     <header className="App-header">

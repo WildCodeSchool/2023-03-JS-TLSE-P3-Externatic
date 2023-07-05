@@ -90,7 +90,7 @@ function MyProfile() {
               </div>
             </div>
 
-            <div className="containerTextInput">
+            <div className="input">
               <img
                 className="iconForm"
                 src={identificationBlack}
@@ -100,7 +100,7 @@ function MyProfile() {
                 type="text"
                 placeholder="Nom"
                 name="nom"
-                className="textInput"
+                className="inputForm"
               />
               {errors.nom && <small className="error">{errors.nom}</small>}
             </div>
