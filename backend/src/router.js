@@ -2,12 +2,40 @@ const express = require("express");
 
 const router = express.Router();
 
-const itemControllers = require("./controllers/itemControllers");
+const {
+  verifyEmailForSubscription,
+  hashPassword,
+  verifyPassword,
+} = require("./services/auth");
 
-router.get("/items", itemControllers.browse);
-router.get("/items/:id", itemControllers.read);
-router.put("/items/:id", itemControllers.edit);
-router.post("/items", itemControllers.add);
-router.delete("/items/:id", itemControllers.destroy);
+const { getUserByEmail } = require("./controllers/UserController");
+const { postAdmin } = require("./controllers/AdminController");
+const { postApplicant } = require("./controllers/ApplicantController");
+const { postCompany } = require("./controllers/CompanyController");
+
+// ------------inscription de l'admin------------
+router.post(
+  "/signup/admin",
+  verifyEmailForSubscription,
+  hashPassword,
+  postAdmin
+);
+// ------------inscription du candidat------------
+router.post(
+  "/signup/applicant",
+  verifyEmailForSubscription,
+  hashPassword,
+  postApplicant
+);
+// ------------inscription de l'entreprise------------
+router.post(
+  "/signup/company",
+  verifyEmailForSubscription,
+  hashPassword,
+  postCompany
+);
+
+// ------------connexion d'un utilisateur------------
+router.post("/login", getUserByEmail, verifyPassword);
 
 module.exports = router;
