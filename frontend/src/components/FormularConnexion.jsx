@@ -45,8 +45,8 @@ function FormularConnexion() {
   };
   return (
     <div>
-      <form className="signin-form" onSubmit={handleSubmit}>
-        <div className="mail">
+      <form className="form" onSubmit={handleSubmit}>
+        <div className="containerTextInput">
           <svg
             width="16"
             height="13"
@@ -61,6 +61,7 @@ function FormularConnexion() {
             />
           </svg>
           <input
+            className="textInput"
             type="email"
             placeholder="Email"
             required=""
@@ -71,7 +72,7 @@ function FormularConnexion() {
           {errors.email && <span className="error-email">{errors.email}</span>}
         </div>
 
-        <div className="password">
+        <div className="containerTextInput">
           <svg
             width="16"
             height="20"
@@ -90,6 +91,7 @@ function FormularConnexion() {
             />
           </svg>
           <input
+            className="textInput"
             type="password"
             placeholder="Mot de passe"
             required=""
@@ -102,7 +104,7 @@ function FormularConnexion() {
         </div>
         <Link to="/password-forgotten">Mot de passe oublié?</Link>
 
-        <button type="submit" className="btn-connexion">
+        <button type="submit" className="button">
           Je me connecte
         </button>
       </form>
