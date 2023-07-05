@@ -7,17 +7,27 @@ class ApplicantManager extends AbstractManager {
 
   // ------------Création du candidat - Route POST------------
   createApplicant(applicant) {
+    const {
+      titleName,
+      firstname,
+      lastname,
+      email,
+      hashedPassword,
+      message,
+      city,
+      phone,
+    } = applicant;
     return this.database.query(
       `insert into ${this.table} (title_name, firstname, lastname, email, hashed_password, message, city, phone) values (?, ?, ?, ?, ?, ?, ?, ?)`,
       [
-        applicant.titleName,
-        applicant.firstname,
-        applicant.lastname,
-        applicant.email,
-        applicant.hashedPassword,
-        applicant.message,
-        applicant.city,
-        applicant.phone,
+        titleName,
+        firstname,
+        lastname,
+        email,
+        hashedPassword,
+        message,
+        city,
+        phone,
       ]
     );
   }
@@ -25,18 +35,29 @@ class ApplicantManager extends AbstractManager {
   // ------------modification du candidat - Route PUT------------
 
   updateApplicant(applicant) {
+    const {
+      titleName,
+      firstname,
+      lastname,
+      email,
+      hashedPassword,
+      message,
+      city,
+      phone,
+      id,
+    } = applicant;
     return this.database.query(
       `update ${this.table} set title_name = ?, firstname = ?, lastname = ?, email = ?, hashed_password = ?, message = ?, city = ?, phone = ? where id = ?`,
       [
-        applicant.titleName,
-        applicant.firstname,
-        applicant.lastname,
-        applicant.email,
-        applicant.hashedPassword,
-        applicant.message,
-        applicant.city,
-        applicant.phone,
-        applicant.id,
+        titleName,
+        firstname,
+        lastname,
+        email,
+        hashedPassword,
+        message,
+        city,
+        phone,
+        id,
       ]
     );
   }

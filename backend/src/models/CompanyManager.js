@@ -7,33 +7,20 @@ class CompanyManager extends AbstractManager {
 
   // ------------Création de l'entreprise - Route POST------------
   createCompany(company) {
+    const { name, email, hashedPassword, city, phone, siret } = company;
     return this.database.query(
       `insert into ${this.table} (name, email, hashed_password, city, phone, siret) values (?, ?, ?, ?, ?, ?)`,
-      [
-        company.name,
-        company.email,
-        company.hashedPassword,
-        company.city,
-        company.phone,
-        company.siret,
-      ]
+      [name, email, hashedPassword, city, phone, siret]
     );
   }
 
   // ------------modification de l'entreprise - Route PUT------------
 
   updateCompany(company) {
+    const { name, email, hashedPassword, city, phone, siret, id } = company;
     return this.database.query(
       `update ${this.table} set name = ?, email = ?, hashed_password = ?, city = ?, phone = ?, siret = ? where id = ?`,
-      [
-        company.name,
-        company.email,
-        company.hashedPassword,
-        company.city,
-        company.phone,
-        company.siret,
-        company.id,
-      ]
+      [name, email, hashedPassword, city, phone, siret, id]
     );
   }
 }

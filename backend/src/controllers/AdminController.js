@@ -41,7 +41,6 @@ const getAdminById = (req, res) => {
     .findId(sub)
     .then(([admins]) => {
       if (admins[0] != null) {
-        console.info(admins[0]);
         res.status(200).json(admins[0]);
       } else {
         res.sendStatus(401);
