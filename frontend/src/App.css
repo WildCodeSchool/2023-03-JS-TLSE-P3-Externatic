@@ -12,7 +12,7 @@
   --basic-grey: #555555;
   --shadow_initial: 2px 4px 8px -2px grey;
   --shadow_hover: 4px 8px 16px -4px grey;
-  --border_card: 0px solid lightgrey;
+  --border_card: 1px solid lightgrey;
 
   /* Global style */
   font-family: "Jost", sans-serif;
