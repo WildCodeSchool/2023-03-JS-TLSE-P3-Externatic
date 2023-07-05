@@ -8,16 +8,19 @@ const getUserByEmail = (req, res, next) => {
     .then(([admins]) => {
       if (admins[0] != null) {
         [req.user] = admins;
+        req.role = "admin";
         next();
       } else {
         models.applicant.findUserByEmail(email).then(([applicants]) => {
           if (applicants[0] != null) {
             [req.user] = applicants;
+            req.role = "applicant";
             next();
           } else {
             models.company.findUserByEmail(email).then(([companies]) => {
               if (companies[0] != null) {
                 [req.user] = companies;
+                req.role = "company";
                 next();
               } else {
                 res.sendStatus(401);
