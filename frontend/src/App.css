@@ -129,6 +129,19 @@ a:hover {
 }
 
 /* Global radio input */
+.containerRadioInput {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.labelRadioInput {
+  font-size: 1.2rem;
+}
+
+.radioInput {
+  margin: 0;
+}
 
 /* Hide class */
 .hide {

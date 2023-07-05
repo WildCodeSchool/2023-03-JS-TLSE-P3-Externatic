@@ -7,25 +7,12 @@
 
 .groupRadio {
   display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-bottom: 20px;
-  font-size: 18px;
-}
-.myProfil {
-  font-size: 20px;
-  font-weight: 700;
-  padding: 16px;
-  text-align: center;
+  gap: 1rem;
 }
 
-.iconForm2 {
-  margin-right: 8px;
-}
 .error {
   position: absolute;
   color: #ca2061;
-  font-size: 14px;
   top: 100%;
   left: 0;
   margin-top: 4px;
@@ -36,20 +23,4 @@
 }
 
 @media screen and (min-width: 768px) {
-  .groupRadio {
-    margin-bottom: 25px;
-    font-size: 25px;
-    gap: 12px;
-  }
-  .myProfil {
-    font-size: 25px;
-    font-weight: 900;
-    padding: 20px;
-  }
-  .myProfil2 {
-    font-size: 25px;
-    font-weight: 900;
-    padding: 20px;
-    margin-top: 52px;
-  }
 }

@@ -60,21 +60,43 @@ function MyProfile() {
       {/* My_Profile Candidat */}
       <form onSubmit={handleSubmit} className="form">
         <h2>Modifier mon profil</h2>
-        <div className="button-ratio">
-          <div className="groupRadio">
-            <label htmlFor="genreInput">Genre:</label>
-            <label htmlFor="femmeInput">Femme</label>
+        <div className="groupRadio">
+          <div className="containerRadioInput">
+            <label htmlFor="femmeInput" className="labelRadioInput">
+              Femme
+            </label>
             <input
               id="femmeInput"
+              className="radioInput"
               type="radio"
               value="option1"
               name="genre"
               defaultChecked
             />
-            <label htmlFor="hommeInput">Homme</label>
-            <input id="hommeInput" type="radio" value="option2" name="genre" />
-            <label htmlFor="autreInput">Autre</label>
-            <input id="autreInput" type="radio" value="option3" name="genre" />
+          </div>
+          <div className="containerRadioInput">
+            <label htmlFor="hommeInput" className="labelRadioInput">
+              Homme
+            </label>
+            <input
+              id="hommeInput"
+              className="radioInput"
+              type="radio"
+              value="option2"
+              name="genre"
+            />
+          </div>
+          <div className="containerRadioInput">
+            <label htmlFor="autreInput" className="labelRadioInput">
+              Autre
+            </label>
+            <input
+              id="autreInput"
+              className="radioInput"
+              type="radio"
+              value="option3"
+              name="genre"
+            />
           </div>
         </div>
 
@@ -93,7 +115,7 @@ function MyProfile() {
           <img className="iconForm" src={identificationBlack} alt="person" />
           <input
             type="text"
-            placeholder="Prenom"
+            placeholder="Prénom"
             name="prenom"
             className="textInput"
           />
@@ -110,19 +132,6 @@ function MyProfile() {
           {errors.email && <small className="error">{errors.email}</small>}
         </div>
         <div className="containerTextInput">
-          <img className="iconForm" src={lockBlack} alt=" lock" />
-          <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            className="textInput"
-          />
-          {errors.password && (
-            <small className="error">{errors.password}</small>
-          )}
-        </div>
-
-        <div className="containerTextInput">
           <img className="iconForm" src={mobileBlack} alt="mobile" />
           <input
             type="tel"
@@ -133,12 +142,11 @@ function MyProfile() {
           />
           {telephoneError && <div className="error">{telephoneError}</div>}
         </div>
-
         <div className="containerTextInput">
           <img className="iconForm" src={cityBlack} alt="city" />
           <input
             type="text"
-            placeholder="ville de residence"
+            placeholder="Ville"
             name="localisation"
             className="textInput"
           />
