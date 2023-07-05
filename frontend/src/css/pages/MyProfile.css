@@ -132,7 +132,8 @@ form {
 
 @media screen and (min-width: 768px) {
   .containerForm {
-    width: 40%;
+    width: 43%;
+    margin-top: 40px;
   }
   .input {
     padding: 10px 0 10px 4px;
@@ -167,8 +168,8 @@ form {
     height: 38px;
   }
   .containerModif {
-    width: 40%;
-    height: 30vw;
+    width: 43%;
+    height: 40vw;
     margin-top: 38px;
   }
   .myProfil2 {
