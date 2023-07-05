@@ -73,12 +73,7 @@ function Connexion() {
             </button>
           </section>
         </div>
-        {showForm && (
-          <div className="form-container">
-            {" "}
-            <FormularConnexion />
-          </div>
-        )}
+        {showForm && <FormularConnexion />}
       </div>
     </div>
   );
