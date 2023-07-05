@@ -35,7 +35,7 @@ function MainNavBar() {
         </button>
         <button
           type="button"
-          className="button myAccountLink"
+          className="button"
           onClick={() => setIsMenuShow(false)}
         >
           <Link to="/dashboard/my-profile">Mon compte</Link>
