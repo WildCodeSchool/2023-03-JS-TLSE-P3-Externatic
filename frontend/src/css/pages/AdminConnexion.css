@@ -1,7 +1,16 @@
-.titleEspaceAdmin {
-  font-weight: bolder;
-  text-underline-offset: 8px;
-  text-decoration: underline 2px;
-  margin: 4rem auto;
-  text-align: center;
+.container-admin-connexion {
+  background-image: url("../../assets/images/admin-connexion.png");
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: right;
+  background-color: var(--white-80);
+  border: solid 1px var(--main-color);
+  box-shadow: var(--shadow_initial);
+  border-radius: 16px;
+  width: 60vw;
+  height: 60vh;
+  margin: 5rem auto;
+  display: flex;
+  justify-content: center;
+  padding-top: 4rem;
 }

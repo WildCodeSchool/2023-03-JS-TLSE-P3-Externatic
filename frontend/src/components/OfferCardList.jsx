@@ -1,5 +1,11 @@
+import "../css/components/OfferCardList.css";
+
 function OfferCardList() {
-  return <p>OfferCardList</p>;
+  return (
+    <div className="offerCardList">
+      <p>OfferCardList</p>
+    </div>
+  );
 }
 
 export default OfferCardList;

@@ -41,7 +41,6 @@ const getAdminById = (req, res) => {
     .findId(sub)
     .then(([admins]) => {
       if (admins[0] != null) {
-        console.info(admins[0]);
         res.status(200).json(admins[0]);
       } else {
         res.sendStatus(401);
@@ -53,30 +52,8 @@ const getAdminById = (req, res) => {
     });
 };
 
-// ------------Connection de l'admin------------
-
-const getAdminByEmail = (req, res, next) => {
-  const { email } = req.body;
-
-  models.admin
-    .findUserByEmail(email)
-    .then(([admins]) => {
-      if (admins[0] != null) {
-        [req.admin] = admins;
-        next();
-      } else {
-        res.sendStatus(401);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Error retrieving data from database");
-    });
-};
-
 module.exports = {
   getAllAdmins,
   postAdmin,
-  getAdminByEmail,
   getAdminById,
 };

@@ -5,22 +5,13 @@ const router = express.Router();
 const {
   verifyEmailForSubscription,
   hashPassword,
-  verifyPasswordForAdmin,
-  verifyPasswordForApplicant,
-  verifyPasswordForCompany,
+  verifyPassword,
 } = require("./services/auth");
 
-const { getAdminByEmail, postAdmin } = require("./controllers/AdminController");
-
-const {
-  getApplicantByEmail,
-  postApplicant,
-} = require("./controllers/ApplicantController");
-
-const {
-  getCompanyByEmail,
-  postCompany,
-} = require("./controllers/CompanyController");
+const { getUserByEmail } = require("./controllers/UserController");
+const { postAdmin } = require("./controllers/AdminController");
+const { postApplicant } = require("./controllers/ApplicantController");
+const { postCompany } = require("./controllers/CompanyController");
 
 // ------------inscription de l'admin------------
 router.post(
@@ -29,7 +20,6 @@ router.post(
   hashPassword,
   postAdmin
 );
-
 // ------------inscription du candidat------------
 router.post(
   "/signup/applicant",
@@ -45,16 +35,7 @@ router.post(
   postCompany
 );
 
-// ------------connexion de l'admin------------
-router.post("/login/admin", getAdminByEmail, verifyPasswordForAdmin);
-
-// ------------connexion du candidat------------
-router.post(
-  "/login/applicant",
-  getApplicantByEmail,
-  verifyPasswordForApplicant
-);
-// ------------connexion de l'entreprise------------
-router.post("/login/company", getCompanyByEmail, verifyPasswordForCompany);
+// ------------connexion d'un utilisateur------------
+router.post("/login", getUserByEmail, verifyPassword);
 
 module.exports = router;

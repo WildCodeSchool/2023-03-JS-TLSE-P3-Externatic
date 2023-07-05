@@ -1,0 +1,6 @@
+.offerCardList {
+  border: var(--border_card);
+  box-shadow: var(--shadow_initial);
+  width: 95%;
+  border-radius: 1rem;
+}
