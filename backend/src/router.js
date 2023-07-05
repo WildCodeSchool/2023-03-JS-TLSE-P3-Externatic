@@ -12,6 +12,7 @@ const { getUserByEmail } = require("./controllers/UserController");
 const { postAdmin } = require("./controllers/AdminController");
 const { postApplicant } = require("./controllers/ApplicantController");
 const { postCompany } = require("./controllers/CompanyController");
+const { getAllOffers } = require("./controllers/OfferController");
 
 // ------------inscription de l'admin------------
 router.post(
@@ -37,5 +38,8 @@ router.post(
 
 // ------------connexion d'un utilisateur------------
 router.post("/login", getUserByEmail, verifyPassword);
+
+// ------------offres------------
+router.post("/offers", getAllOffers);
 
 module.exports = router;

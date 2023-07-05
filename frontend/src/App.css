@@ -113,6 +113,10 @@ a:hover {
   position: relative;
 }
 
+.containerTextInput:hover {
+  border-bottom: solid 1px var(--main-color);
+}
+
 .textInput {
   font-size: 1rem;
   margin: 1rem 0;
@@ -138,7 +142,25 @@ a:hover {
   margin: 0;
 }
 
+/* Global select and option input */
+.select,
+.option {
+  width: 95%;
+  max-width: 20rem;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.select:hover {
+  cursor: pointer;
+  border: 1px solid var(--main-color);
+}
+
 /* Hide class */
 .hide {
   display: none;
+}
+
+.blur {
+  filter: blur(0.5rem);
 }

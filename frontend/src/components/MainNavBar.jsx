@@ -30,9 +30,11 @@ function MainNavBar() {
         <span />
       </button>
       <div className={`menu ${isMenuShow ? "showMenu" : null}`}>
-        <button type="button" onClick={() => setIsMenuShow(false)}>
-          <img src={cross} alt="Croix de fermeture du menu" />
-        </button>
+        <div className="crossSection">
+          <button type="button" onClick={() => setIsMenuShow(false)}>
+            <img src={cross} alt="Croix de fermeture du menu" />
+          </button>
+        </div>
         <button
           type="button"
           className="button"

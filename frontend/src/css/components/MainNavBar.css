@@ -6,7 +6,7 @@
   background-color: #fff;
   position: sticky;
   top: 0;
-  height: 14vh;
+  height: 7vh;
   z-index: 10;
 }
 
@@ -41,26 +41,34 @@
   transform: translateY(0.3rem);
 }
 
+.blurScreen {
+  filter: blur(1.5rem);
+}
+
 .menu {
   position: fixed;
   top: 0;
   left: 100%;
   width: 100%;
+  height: 100vh;
   padding: 1rem;
   padding-bottom: 2rem;
-  background-color: var(--white-80);
+  background-color: #ffffffee;
   transition: all 0.5s ease-in-out;
   font-weight: bold;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 1.5rem;
+  z-index: 10;
 }
 
 .showMenu {
   left: 0;
 }
 
-.menu button:first-child {
+.crossSection {
+  width: 100%;
   display: flex;
   justify-content: flex-end;
 }
@@ -73,23 +81,21 @@
 @media screen and (min-width: 768px) {
   .menu {
     position: static;
+    flex-direction: row;
+    justify-content: flex-end;
     top: 0;
     left: 100%;
     width: 100%;
+    height: auto;
     padding: 0;
+    background-color: #fff;
   }
 
   .burger {
     display: none;
   }
 
-  .menu {
-    flex-direction: row;
-    justify-content: flex-end;
-    gap: 2%;
-  }
-
-  .menu button:first-child {
+  .crossSection {
     display: none;
   }
 }
