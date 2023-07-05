@@ -22,24 +22,4 @@ const postCompany = (req, res) => {
     });
 };
 
-// ------------Connection de l'entreprise------------
-const getCompanyByEmail = (req, res, next) => {
-  const { email } = req.body;
-
-  models.company
-    .findUserByEmail(email)
-    .then(([companies]) => {
-      if (companies.length) {
-        // eslint-disable-next-line prefer-destructuring
-        req.company = companies[0];
-        next();
-      } else {
-        res.sendStatus(401);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Error retrieving data from database");
-    });
-};
-module.exports = { postCompany, getCompanyByEmail };
+module.exports = { postCompany };
