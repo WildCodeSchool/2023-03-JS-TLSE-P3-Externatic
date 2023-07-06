@@ -1,104 +1,67 @@
-.container-login {
+.navBarConnexion {
   display: flex;
-  margin: 2rem;
-  flex-direction: column;
+  justify-content: center;
+  margin: 3rem;
 }
 
-.login-option {
-  display: flex;
-  align-items: center;
-  margin: 2rem auto;
+.navBarConnexion li {
+  display: inline-block;
 }
 
-.login-image {
-  display: none;
+.loginSelected a {
+  font-weight: bold;
+  font-size: larger;
+  text-decoration: underline 0.15rem;
+  text-underline-offset: 0.5rem;
+  color: black;
 }
 
-.connexion-cards {
-  flex-direction: column;
-  display: flex;
-  margin: auto;
+.signinSelected a {
+  color: var(--basic-grey);
+  text-decoration: none;
+  margin: auto 3rem auto 1.5rem;
+  font-size: larger;
 }
 
-.applicant-card,
-.company-card {
-  display: flex;
-  align-items: center;
-  margin: 1.8rem auto;
-  height: 50vw;
-  width: 80vw;
-  border: var(--border_card);
-  box-shadow: var(--shadow_initial);
-  border-radius: 16px;
-  background-color: #fff;
-  cursor: pointer;
+.errorEmail,
+.errorPassword {
+  color: var(--main-color);
+  font-style: italic;
+  font-size: smaller;
+  position: absolute;
+  width: max-content;
+  margin-top: 5rem;
+}
+.forgottenPassword {
+  font-size: smaller;
+  color: var(--basic-grey);
+  padding-left: 5rem;
 }
 
-.applicant-card.focused,
-.company-card.focused {
-  border: solid var(--main-color);
-}
-
-.applicant-card h2,
-.company-card h2 {
-  padding: 1rem;
-  font-size: 1rem;
-  font-weight: bolder;
-}
-
-.applicant-card img,
-.company-card img {
-  max-height: 90%;
-  max-width: 90%;
-  object-fit: fill;
-}
 
 @media screen and (min-width: 768px) {
-  .container-login {
-    background-image: url("../../assets/images/login-page.png");
-    background-size: 60%;
+  .loginSelected a,
+  .signinSelected a {
+    font-size: 1.7rem;
+    margin: 2rem;
+  }
+  .containerLogin {
+    background-image: url("../../assets/images/admin-connexion.png");
+    background-size: 50%;
     background-repeat: no-repeat;
     background-position: right;
     background-color: var(--white-80);
-    border: solid 1px var(--main-color);
+    border: solid 0.1rem var(--main-color);
     box-shadow: var(--shadow_initial);
-    border-radius: 16px;
-    width: 60vw;
-    height: 80%;
-    flex-direction: row;
-    margin: 5rem auto;
-    align-items: center;
-  }
-  .form-container {
-    margin: auto;
-  }
-  .login-option {
-    /* margin: 2rem; */
-    margin: 2rem auto 2rem 2rem;
-  }
-
-  .login-image {
-    display: inherit;
-    width: 50%;
-  }
-  .connexion-cards {
-    margin: inherit;
-  }
-
-  .applicant-card,
-  .company-card {
-    margin: 24px 0;
-    width: 316px;
-    height: 162px;
-  }
-  .applicant-card img,
-  .company-card img {
+    border-radius: 1rem;
+    width: 60%;
     height: fit-content;
-    width: fit-content;
+    margin: auto;
+    display: flex;
   }
 
-  .applicant-card h2,
-  .company-card h2 {
-    font-size: 1.2rem;
+  .form.connexion {
+    margin: 6rem 5rem;
+    width: 35%;
   }
 }
