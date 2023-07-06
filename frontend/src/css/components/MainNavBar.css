@@ -41,10 +41,6 @@
   transform: translateY(0.3rem);
 }
 
-.blurScreen {
-  filter: blur(1.5rem);
-}
-
 .menu {
   position: fixed;
   top: 0;
