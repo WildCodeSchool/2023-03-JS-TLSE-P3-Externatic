@@ -110,6 +110,7 @@ a:hover {
   border-bottom: solid 1px var(--basic-grey);
   width: 95%;
   max-width: 20rem;
+  position: relative;
 }
 
 .textInput {
