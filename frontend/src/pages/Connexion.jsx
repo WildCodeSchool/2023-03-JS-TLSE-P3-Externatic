@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-syntax */
 // Import packages
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
@@ -23,7 +22,6 @@ function Connexion() {
   const [errors, setErrors] = useState({});
 
   const handleInput = (e) => {
-    console.log(values);
     setValues({ ...values, [e.target.name]: e.target.value });
   };
   const handleSubmit = (e) => {
@@ -34,7 +32,6 @@ function Connexion() {
       .post(`${import.meta.env.VITE_BACKEND_URL}/login`, values)
       .then((response) => {
         if (response.data.token) {
-          console.log(response.data.token);
           setUserCookie(response.data.token);
           navigate("/dashboard/my-profile");
         } else {
