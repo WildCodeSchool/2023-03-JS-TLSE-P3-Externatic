@@ -33,5 +33,6 @@
   "dependencies": {
     "argon2": "^0.30.3",
     "jsonwebtoken": "^9.0.0"
-  }
+  },
+  "main": "index.js"
 }

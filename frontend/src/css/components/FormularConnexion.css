@@ -1,9 +1,0 @@
-.error-email,
-.error-password {
-  color: var(--main-color);
-  font-style: italic;
-  font-size: smaller;
-  position: absolute;
-  width: max-content;
-  margin-top: 4rem;
-}
