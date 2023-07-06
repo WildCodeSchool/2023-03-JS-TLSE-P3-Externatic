@@ -1,6 +1,101 @@
-.offerCardList {
+/* Style card commun */
+.offerCard {
   border: var(--border_card);
   box-shadow: var(--shadow_initial);
+  height: auto;
+  border-radius: 0.6rem;
+  margin: auto;
+  padding: 0.4rem 0.4rem 0.8rem 0.4rem;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  color: #fff;
+}
+
+/* .offerCardList:hover {
+  box-shadow: var(--shadow_hover);
+  transform: scale(1.05);
+} */
+
+.offerCardColor {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--secondary-color);
+  gap: 0.8rem;
+  width: auto;
+  border-radius: 0.6rem;
+  padding: 1rem;
+}
+.titleOfferCard {
+  text-align: start;
+}
+.offerTitleAndIcon,
+.offerTextAndIcon {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.offerTitleAndIcon {
+  justify-content: space-between;
+}
+.offerTextAndIcon {
+  gap: 0.4rem;
+}
+
+.buttonCard {
+  margin-top: 0.6rem;
+  margin-inline: auto;
+  background-color: black;
+  border-radius: 5rem;
+  padding: 0.5rem 1rem;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  box-shadow: var(--shadow_initial);
+  width: auto;
+  min-width: 8rem;
+}
+.buttonCard:hover {
+  box-shadow: var(--shadow_hover);
+  transform: scale(1.05);
+  transition: all 200ms ease;
+}
+/* Style card list */
+.offerCardList {
   width: 95%;
-  border-radius: 1rem;
+  max-width: 480px;
+}
+/* Style card large */
+.offerCardLarge {
+  width: 70%;
+  max-width: 300px;
+}
+.offerTextAndIconCardLarge {
+  margin: auto;
+}
+.heartCardLarge {
+  display: flex;
+  justify-content: end;
+}
+.offerCardLarge > .offerCardColor {
+  gap: 1.2rem;
+}
+.jobCardImage {
+  width: 50%;
+  margin: auto;
+}
+@media screen and (min-width: 768px) {
+  .titleOfferCard {
+    font-size: 1.5srem;
+  }
+  .offerTextAndIcon {
+    font-size: 1.2rem;
+  }
+  /* Style card list */
+  .offerCardColor {
+  }
+  /* Style card large */
+  .offerCardLarge {
+  }
 }

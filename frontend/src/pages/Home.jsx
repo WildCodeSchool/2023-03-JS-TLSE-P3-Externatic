@@ -1,3 +1,4 @@
+import OfferCardLarge from "../components/OfferCardLarge";
 import OfferCardList from "../components/OfferCardList";
 
 function Home() {
@@ -7,6 +8,7 @@ function Home() {
         <p>Home</p>
       </header>
       <OfferCardList />
+      <OfferCardLarge />
     </>
   );
 }
