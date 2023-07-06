@@ -143,24 +143,63 @@ a:hover {
 }
 
 /* Global select and option input */
-.select,
-.option {
+.selectContainer {
   width: 95%;
   max-width: 20rem;
-  padding: 1rem;
   border-radius: 1rem;
+  box-shadow: var(--shadow_initial);
+  border: 1px solid #ffffff00;
 }
 
-.select:hover {
-  cursor: pointer;
+.selectContainer:hover {
   border: 1px solid var(--main-color);
 }
 
-/* Hide class */
+.selectTitle {
+  padding: 1rem;
+  width: 100%;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.selectOptionsContainer {
+  display: flex;
+  padding: 1rem;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.selectOption {
+  text-align: center;
+}
+
+.optionCheckbox:checked + .optionLabel {
+  border: 1px solid var(--main-color);
+}
+
+.optionCheckbox {
+  display: none;
+}
+
+.optionLabel {
+  border-radius: 0.6rem;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  border: 1px solid var(--light-grey);
+  display: flex;
+}
+
+/* Other */
 .hide {
   display: none;
 }
 
 .blur {
   filter: blur(0.5rem);
+}
+
+.divider {
+  width: 90%;
+  border-top: 1px solid var(--light-grey);
 }
