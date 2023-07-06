@@ -6,9 +6,10 @@ const {
   verifyEmailForSubscription,
   hashPassword,
   verifyPassword,
+  verifyToken,
 } = require("./services/auth");
 
-const { getUserByEmail } = require("./controllers/UserController");
+const { getUserByEmail, sendRole } = require("./controllers/UserController");
 const { postAdmin } = require("./controllers/AdminController");
 const { postApplicant } = require("./controllers/ApplicantController");
 const { postCompany } = require("./controllers/CompanyController");
@@ -49,5 +50,8 @@ router.get("/categories", getAllCategories);
 
 // ------------contrats------------
 router.get("/contracts-type", getAllContracts);
+
+// ------------verifytoken------------
+router.get("/verify", verifyToken, sendRole);
 
 module.exports = router;

@@ -36,6 +36,13 @@ const getUserByEmail = (req, res, next) => {
     });
 };
 
+const sendRole = (req, res) => {
+  if (req.payload.role) {
+    res.status(200).send(req.payload.role);
+  }
+};
+
 module.exports = {
   getUserByEmail,
+  sendRole,
 };

@@ -1,5 +1,6 @@
 // Import des packages
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+// import axios from "axios";
 
 // Import des pages
 import Home from "./pages/Home";
