@@ -1,169 +1,66 @@
-.nav-bar-connexion {
+.navBarConnexion {
   display: flex;
-  align-items: center;
   justify-content: center;
-  margin: 10vh auto;
+  margin: 3rem;
 }
 
-li {
+.navBarConnexion li {
   display: inline-block;
 }
 
-.login-selected > a {
-  font-weight: bolder;
-  text-decoration: underline 2px;
-  text-underline-offset: 8px;
+.loginSelected a {
+  font-weight: bold;
+  font-size: larger;
+  text-decoration: underline 0.15rem;
+  text-underline-offset: 0.5rem;
   color: black;
 }
 
-.signin-selected > a {
+.signinSelected a {
   color: var(--basic-grey);
   text-decoration: none;
-  margin: auto 40px auto 20px;
+  margin: auto 3rem auto 1.5rem;
+  font-size: larger;
 }
 
-.container-login {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.connexion-cards {
-  margin: 64px 24px;
-  display: flex;
-  gap: 1rem;
-}
-
-.applicant-card,
-.company-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 112px;
-  width: 160px;
-  border: var(--border_card);
-  box-shadow: var(--shadow_initial);
-  border-radius: 16px;
-  background-color: #fff;
-  &:focus {
-    border: solid var(--main-color);
-  }
-}
-
-.applicant-card > div,
-.company-card > div {
-  padding-left: 8px;
-  font-weight: bolder;
-}
-
-img {
-  max-height: 80%;
-  max-width: 80%;
-  object-fit: fill;
-}
-
-.signin-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-  width: 50vh;
-  height: 45vh;
-  margin: auto;
-  padding: 0 24px;
-  border: var(--border_card);
-  box-shadow: var(--shadow_initial);
-  border-radius: 16px;
-}
-
-.mail,
-.password {
-  display: flex;
-  align-items: center;
-}
-
-svg {
-  position: absolute;
-  top: auto;
-}
-
-input {
-  margin: 24px 0;
-  padding: 8px 16px 8px 24px;
-  width: 284px;
-  border: none;
-  border-bottom: solid 1px var(--basic-grey);
-  background: transparent;
-  &:focus {
-    outline: none;
-  }
-}
-
-.error-email,
-.error-password {
+.errorEmail,
+.errorPassword {
   color: var(--main-color);
   font-style: italic;
   font-size: smaller;
   position: absolute;
   width: max-content;
-  margin-top: 48px;
+  margin-top: 5rem;
 }
-
-.signin-form > a {
-  margin: 0 0 32px auto;
-  text-decoration: none;
+.forgottenPassword {
+  font-size: smaller;
   color: var(--basic-grey);
-  font-size: 12px;
-}
-
-.btn-connexion {
-  position: relative;
-  margin-bottom: 16px;
-  width: 120px;
-  height: 32px;
-  border-radius: 20px;
-  box-shadow: var(--shadow_initial);
-  text-align: center;
-  background-color: black;
-  color: #fff;
-  cursor: pointer;
-  &:hover {
-    background-color: var(--main-color);
-    border: solid 1px var(--main-color);
-  }
+  padding-left: 5rem;
 }
 
 @media screen and (min-width: 768px) {
-  img {
-    max-height: 100%;
-    max-width: 100%;
+  .loginSelected a,
+  .signinSelected a {
+    font-size: 1.7rem;
+    margin: 2rem;
   }
-
-  .container-login {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    margin: 4rem auto;
-  }
-
-  .connexion-cards {
-    flex-direction: column;
+  .containerLogin {
+    background-image: url("../../assets/images/admin-connexion.png");
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: var(--white-80);
+    border: solid 0.1rem var(--main-color);
+    box-shadow: var(--shadow_initial);
+    border-radius: 1rem;
+    width: 60%;
+    height: fit-content;
     margin: auto;
+    display: flex;
   }
 
-  .applicant-card,
-  .company-card {
-    margin: 24px 0;
-    width: 316px;
-    height: 138px;
-  }
-
-  .signin-form {
-    height: 50vh;
-    justify-content: center;
-    width: fit-content;
-  }
-  .btn-connexion{
-    margin-top: 4rem;
+  .form.connexion {
+    margin: 6rem 5rem;
+    width: 35%;
   }
 }

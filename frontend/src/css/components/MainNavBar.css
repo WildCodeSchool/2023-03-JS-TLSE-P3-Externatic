@@ -46,21 +46,25 @@
   top: 0;
   left: 100%;
   width: 100%;
+  height: 100vh;
   padding: 1rem;
   padding-bottom: 2rem;
-  background-color: var(--white-80);
+  background-color: #ffffffee;
   transition: all 0.5s ease-in-out;
   font-weight: bold;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 1.5rem;
+  z-index: 10;
 }
 
 .showMenu {
   left: 0;
 }
 
-.menu button:first-child {
+.crossSection {
+  width: 100%;
   display: flex;
   justify-content: flex-end;
 }
@@ -70,46 +74,24 @@
   height: 1.7rem;
 }
 
-button a {
-  color: black;
-  padding: 0.5rem;
-}
-
-.myAccountLink a {
-  background-color: black;
-  color: #fff;
-  border-radius: 1rem;
-}
-
 @media screen and (min-width: 768px) {
   .menu {
     position: static;
+    flex-direction: row;
+    justify-content: flex-end;
     top: 0;
     left: 100%;
     width: 100%;
+    height: auto;
     padding: 0;
+    background-color: #fff;
   }
 
   .burger {
     display: none;
   }
 
-  .menu {
-    flex-direction: row;
-    justify-content: flex-end;
-    gap: 2%;
-  }
-
-  .menu button:first-child {
+  .crossSection {
     display: none;
-  }
-
-  button a:hover {
-    color: var(--main-color);
-  }
-
-  .myAccountLink a:hover {
-    background-color: var(--main-color);
-    color: white;
   }
 }

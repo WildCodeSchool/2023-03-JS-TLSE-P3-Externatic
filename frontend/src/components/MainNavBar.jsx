@@ -30,12 +30,14 @@ function MainNavBar() {
         <span />
       </button>
       <div className={`menu ${isMenuShow ? "showMenu" : null}`}>
-        <button type="button" onClick={() => setIsMenuShow(false)}>
-          <img src={cross} alt="Croix de fermeture du menu" />
-        </button>
+        <div className="crossSection">
+          <button type="button" onClick={() => setIsMenuShow(false)}>
+            <img src={cross} alt="Croix de fermeture du menu" />
+          </button>
+        </div>
         <button
           type="button"
-          className="myAccountLink"
+          className="button"
           onClick={() => setIsMenuShow(false)}
         >
           <Link to="/dashboard/my-profile">Mon compte</Link>
@@ -68,7 +70,7 @@ function MainNavBar() {
         >
           <Link to="/">
             <img src={exit} alt="Icone de déconnection" />
-            &nbsp;Se déconnecter
+            <p>&nbsp;Se déconnecter</p>
           </Link>
         </button>
       </div>
