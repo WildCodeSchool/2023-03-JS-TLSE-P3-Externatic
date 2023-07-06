@@ -4,9 +4,11 @@
   white-space: nowrap;
   background-color: #fff;
   position: sticky;
-  top: 7.5vh;
+  top: 7vh;
   width: 100%;
   margin-bottom: 1rem;
+  z-index: 1;
+  border-top: 1px solid var(--light-grey);
 }
 
 .secNav a {

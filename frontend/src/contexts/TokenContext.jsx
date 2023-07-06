@@ -11,7 +11,7 @@ export default TokenContext;
 
 export function TokenContextProvider({ children }) {
   const [userToken, setUserToken] = useState(Cookies.get("userToken") || null);
-  const setUser = (token) => {
+  const setUserCookie = (token) => {
     if (token) {
       Cookies.set("userToken", token, {
         expires: 1 / 24,
@@ -23,7 +23,7 @@ export function TokenContextProvider({ children }) {
     }
   };
   const TokenContextValue = useMemo(() => {
-    return { userToken, setUserToken, setUser };
+    return { userToken, setUserCookie };
   });
 
   return (
