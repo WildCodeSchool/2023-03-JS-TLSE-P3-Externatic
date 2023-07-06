@@ -12,6 +12,9 @@ const { getUserByEmail } = require("./controllers/UserController");
 const { postAdmin } = require("./controllers/AdminController");
 const { postApplicant } = require("./controllers/ApplicantController");
 const { postCompany } = require("./controllers/CompanyController");
+const { getAllOffers } = require("./controllers/OfferController");
+const { getAllCategories } = require("./controllers/CategoryController");
+const { getAllContracts } = require("./controllers/ContractController");
 
 // ------------inscription de l'admin------------
 router.post(
@@ -37,5 +40,14 @@ router.post(
 
 // ------------connexion d'un utilisateur------------
 router.post("/login", getUserByEmail, verifyPassword);
+
+// ------------offres------------
+router.get("/offers", getAllOffers);
+
+// ------------catégories------------
+router.get("/categories", getAllCategories);
+
+// ------------contrats------------
+router.get("/contracts-type", getAllContracts);
 
 module.exports = router;
