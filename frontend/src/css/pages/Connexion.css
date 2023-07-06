@@ -1,0 +1,66 @@
+.navBarConnexion {
+  display: flex;
+  justify-content: center;
+  margin: 3rem;
+}
+
+.navBarConnexion li {
+  display: inline-block;
+}
+
+.loginSelected a {
+  font-weight: bold;
+  font-size: larger;
+  text-decoration: underline 0.15rem;
+  text-underline-offset: 0.5rem;
+  color: black;
+}
+
+.signinSelected a {
+  color: var(--basic-grey);
+  text-decoration: none;
+  margin: auto 3rem auto 1.5rem;
+  font-size: larger;
+}
+
+.errorEmail,
+.errorPassword {
+  color: var(--main-color);
+  font-style: italic;
+  font-size: smaller;
+  position: absolute;
+  width: max-content;
+  margin-top: 5rem;
+}
+.forgottenPassword {
+  font-size: smaller;
+  color: var(--basic-grey);
+  padding-left: 5rem;
+}
+
+@media screen and (min-width: 768px) {
+  .loginSelected a,
+  .signinSelected a {
+    font-size: 1.7rem;
+    margin: 2rem;
+  }
+  .containerLogin {
+    background-image: url("../../assets/images/admin-connexion.png");
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: var(--white-80);
+    border: solid 0.1rem var(--main-color);
+    box-shadow: var(--shadow_initial);
+    border-radius: 1rem;
+    width: 60%;
+    height: fit-content;
+    margin: auto;
+    display: flex;
+  }
+
+  .form.connexion {
+    margin: 6rem 5rem;
+    width: 35%;
+  }
+}

@@ -9,6 +9,12 @@ class AbstractManager {
     ]);
   }
 
+  findUserByEmail(email) {
+    return this.database.query(`select * from ${this.table} WHERE email = ?`, [
+      email,
+    ]);
+  }
+
   findAll() {
     return this.database.query(`select * from  ${this.table}`);
   }
