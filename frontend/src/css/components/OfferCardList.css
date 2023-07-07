@@ -5,18 +5,13 @@
   height: auto;
   border-radius: 0.6rem;
   margin: auto;
-  margin-bottom: 1rem;
+  margin-top: 1rem;
   padding: 0.4rem 0.4rem 0.8rem 0.4rem;
   display: flex;
   flex-direction: column;
   align-content: center;
   color: #fff;
 }
-
-/* .offerCardList:hover {
-  box-shadow: var(--shadow_hover);
-  transform: scale(1.05);
-} */
 
 .offerCardColor {
   display: flex;

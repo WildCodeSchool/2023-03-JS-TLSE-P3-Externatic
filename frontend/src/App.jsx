@@ -10,7 +10,6 @@ import Dashboard from "./pages/Dashboard";
 
 // Import des composants
 import MainNavBar from "./components/MainNavBar";
-import Footer from "./components/Footer";
 
 // Import du style
 import "./reset.css";
@@ -34,7 +33,6 @@ function App() {
               <Route path="offers" element={<Offers />} />
               <Route path="dashboard/*" element={<Dashboard />} />
             </Routes>
-            <Footer />
           </Router>
         </TokenContextProvider>
       </MenuContextProvider>

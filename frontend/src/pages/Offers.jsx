@@ -106,7 +106,7 @@ function Offers() {
         </button>
       </form>
       {offersList.length
-        ? offersList.map((el) => <OfferCardList key={el.id} el={el} />)
+        ? offersList.map((el) => <OfferCardList key={el.id} offer={el} />)
         : "Chargement..."}
     </div>
   );
