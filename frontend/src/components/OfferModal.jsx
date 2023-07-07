@@ -1,5 +1,4 @@
 function OfferModal() {
-  return <p>OfferModal</p>;
+  <p>OfferModal</p>;
 }
-
 export default OfferModal;
