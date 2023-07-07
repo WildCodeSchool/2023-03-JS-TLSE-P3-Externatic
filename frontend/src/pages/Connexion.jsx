@@ -34,8 +34,6 @@ function Connexion() {
         if (response.data.token) {
           setUserCookie(response.data.token);
           navigate("/dashboard/my-profile");
-        } else {
-          navigate("/subscribe");
         }
       })
       .catch((err) => {
@@ -111,7 +109,7 @@ function Connexion() {
               <span className="errorPassword">{errors.password}</span>
             )}
           </div>
-          <Link to="/password-forgotten" className="forgottenPassword">
+          <Link to="/" className="forgottenPassword">
             Mot de passe oublié?
           </Link>
 
