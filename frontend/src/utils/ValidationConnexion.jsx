@@ -13,7 +13,7 @@ function ValidationConnexion(values) {
   if (values.password === "") {
     error.password = "Le mot de passe est requis";
   } else {
-    error.email = "";
+    error.password = "";
   }
   return error;
 }
