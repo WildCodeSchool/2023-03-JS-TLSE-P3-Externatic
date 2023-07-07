@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+// import des composants
+import OfferCardList from "../components/OfferCardList";
 
 function Offers() {
   const [offersList, setOffersList] = useState([]);
@@ -104,7 +106,7 @@ function Offers() {
         </button>
       </form>
       {offersList.length
-        ? offersList.map((el) => <p key={el.id}>{el.title}</p>)
+        ? offersList.map((el) => <OfferCardList key={el.id} el={el} />)
         : "Chargement..."}
     </div>
   );
