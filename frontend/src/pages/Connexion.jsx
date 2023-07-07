@@ -32,7 +32,7 @@ function Connexion() {
       .post(`${import.meta.env.VITE_BACKEND_URL}/login`, values)
       .then((response) => {
         if (response.data.token) {
-          setUserCookie(response.data.token);
+          setUserCookie(response.data.token, response.data.user.role);
           navigate("/dashboard/my-profile");
         }
       })
