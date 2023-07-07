@@ -11,19 +11,21 @@ export default TokenContext;
 
 export function TokenContextProvider({ children }) {
   const [userToken, setUserToken] = useState(Cookies.get("userToken") || null);
-  const setUserCookie = (token) => {
+  const [userRole, setUserRole] = useState(Cookies.get("userRole") || null);
+  const setUserCookie = (token, role) => {
     if (token) {
       Cookies.set("userToken", token, {
         expires: 1 / 24,
       });
       setUserToken(token);
+      setUserRole(role);
     } else {
       Cookies.remove("userToken");
       setUserToken(null);
     }
   };
   const TokenContextValue = useMemo(() => {
-    return { userToken, setUserCookie };
+    return { userToken, userRole, setUserCookie };
   });
 
   return (
