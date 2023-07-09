@@ -6,6 +6,9 @@ import axios from "axios";
 // Import fichier depuis utils
 import ValidationConnexion from "../utils/ValidationConnexion";
 
+// Import components
+import LinkLogInSubscribe from "../components/LinkLogInSubscribe";
+
 // Import context
 import TokenContext from "../contexts/TokenContext";
 
@@ -44,16 +47,7 @@ function Connexion() {
 
   return (
     <div>
-      <nav className="navBarConnexion">
-        <ul>
-          <li className="signinSelected">
-            <Link to="/subscribe">S'inscrire</Link>
-          </li>
-          <li className="loginSelected">
-            <Link to="/connexion">Se connecter</Link>
-          </li>
-        </ul>
-      </nav>
+      <LinkLogInSubscribe />
       <div className="containerLogin">
         <form className="form connexion" onSubmit={handleSubmit}>
           <div className="containerTextInput">

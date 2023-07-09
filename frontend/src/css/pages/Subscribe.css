@@ -1,0 +1,99 @@
+.loginOption {
+  display: flex;
+  align-items: center;
+  margin: 2rem auto;
+}
+
+.loginImage {
+  display: none;
+}
+
+.connexionCards {
+  flex-direction: column;
+  display: flex;
+  margin: auto;
+}
+
+.applicantCard,
+.companyCard {
+  display: flex;
+  align-items: center;
+  margin: 1.8rem auto;
+  height: 50vw;
+  width: 80vw;
+  border: var(--border_card);
+  box-shadow: var(--shadow_initial);
+  border-radius: 16px;
+  background-color: #fff;
+  cursor: pointer;
+  &:hover {
+    border: solid var(--main-color);
+  }
+  &:focused {
+    border: solid var(--main-color);
+  }
+}
+
+.applicantCard h2,
+.companyCard h2 {
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: bolder;
+}
+
+.applicantCard img,
+.companyCard img {
+  max-height: 90%;
+  max-width: 90%;
+  object-fit: fill;
+}
+
+@media screen and (min-width: 768px) {
+  .containerLogin {
+    background-image: url("../../assets/images/login-page.png");
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: var(--white-80);
+    border: solid 1px var(--main-color);
+    box-shadow: var(--shadow_initial);
+    border-radius: 16px;
+    width: 60vw;
+    height: 80%;
+    flex-direction: row;
+    margin: 5rem auto;
+    align-items: center;
+  }
+  .formContainer {
+    margin: auto;
+  }
+  .loginOption {
+    /* margin: 2rem; */
+    margin: 2rem auto 2rem 2rem;
+  }
+
+  .loginImage {
+    display: inherit;
+    width: 50%;
+  }
+  .connexionCards {
+    margin: inherit;
+  }
+
+  .applicantCard,
+  .companyCard {
+    margin: 24px 0;
+    width: 316px;
+    height: 162px;
+  }
+  .applicantCard img,
+  .companyCard img {
+    height: fit-content;
+    width: fit-content;
+  }
+
+  .applicantCard h2,
+  .companyCard h2 {
+    font-size: 1.2rem;
+  }
+}
