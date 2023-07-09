@@ -46,8 +46,8 @@ function Subscribe() {
   return (
     <>
       <LinkLogInSubscribe />
-      <div className="loginOption">
-        <section className="connexionCards">
+      <div className="subscribeOption">
+        <section className="subscribeCards">
           <button
             type="button"
             className={`applicantCard ${

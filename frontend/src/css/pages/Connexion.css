@@ -1,4 +1,3 @@
-
 .errorEmail,
 .errorPassword {
   color: var(--main-color);
@@ -20,11 +19,6 @@
 }
 
 @media screen and (min-width: 768px) {
-  .loginSelected a,
-  .signinSelected a {
-    font-size: 1.7rem;
-    margin: 2rem;
-  }
   .containerLogin {
     background-image: url("../../assets/images/admin-connexion.png");
     background-size: 50%;
@@ -43,5 +37,8 @@
   .form.connexion {
     margin: 6rem 5rem;
     width: fit-content;
+    height: 25rem;
+    justify-content: space-around;
   }
+
 }

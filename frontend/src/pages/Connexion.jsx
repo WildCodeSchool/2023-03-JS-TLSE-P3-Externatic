@@ -31,6 +31,14 @@ function Connexion() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors(ValidationConnexion(values));
+    if (
+      (values.email === "" && values.password === "") ||
+      (values.email !== "" && values.password === "") ||
+      (values.email === "" && values.password !== "")
+    ) {
+      setLoginError(false);
+      return;
+    }
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/login`, values)
       .then((response) => {
@@ -108,9 +116,11 @@ function Connexion() {
             Mot de passe oublié?
           </Link>
           {loginError && (
-            <span className="errorLogin">Les identifiants sont incorrects</span>
+            <span className="errorLogin">
+              Nous n'avons pas trouvé votre compte
+            </span>
           )}
-          <button type="submit" className="button">
+          <button type="submit" className="button connection">
             Je me connecte
           </button>
         </form>
