@@ -13,15 +13,15 @@ import "../css/pages/Subscribe.css";
 
 function Subscribe() {
   // const [showForm, setShowForm] = useState(false);
-  const [isApplicantCardFocused, setIsApplicantCardFocused] = useState(false);
+  const [isApplicantCardFocused, setIsApplicantCardFocused] = useState(true);
   const [isCompanyCardFocused, setIsCompanyCardFocused] = useState(false);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (
-        !e.target.closest(".applicant-card") &&
-        !e.target.closest(".company-card") &&
-        !e.target.closest(".signin-form")
+        !e.target.closest(".applicantCard") &&
+        !e.target.closest(".companyCard") &&
+        !e.target.closest(".signinForm")
       ) {
         // setShowForm(false);
         setIsApplicantCardFocused(false);

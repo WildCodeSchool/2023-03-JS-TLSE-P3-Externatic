@@ -26,10 +26,8 @@
   border-radius: 16px;
   background-color: #fff;
   cursor: pointer;
-  &:hover {
-    border: solid var(--main-color);
-  }
-  &:focused {
+
+  &:focus {
     border: solid var(--main-color);
   }
 }
@@ -49,7 +47,7 @@
 }
 
 @media screen and (min-width: 768px) {
-  .containerLogin {
+  .loginOption {
     background-image: url("../../assets/images/login-page.png");
     background-size: 60%;
     background-repeat: no-repeat;
@@ -67,15 +65,15 @@
   .formContainer {
     margin: auto;
   }
-  .loginOption {
-    /* margin: 2rem; */
-    margin: 2rem auto 2rem 2rem;
-  }
+  /* .loginOption {
 
-  .loginImage {
+    margin: 2rem auto 2rem 2rem;
+  } */
+
+  /* .loginImage {
     display: inherit;
     width: 50%;
-  }
+  } */
   .connexionCards {
     margin: inherit;
   }
