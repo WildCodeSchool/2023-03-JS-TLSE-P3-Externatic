@@ -9,11 +9,11 @@ export function ValidationFormContextProvider({ children }) {
   const [values, setValues] = useState({
     firstname: "",
     lastname: "",
-    company_name: "",
+    companyName: "",
     siret: "",
     email: "",
     password: "",
-    confirmed_password: "",
+    confirmedPassword: "",
   });
   const [errors, setErrors] = useState({});
   const ValidationFormContextValue = useMemo(() => {
