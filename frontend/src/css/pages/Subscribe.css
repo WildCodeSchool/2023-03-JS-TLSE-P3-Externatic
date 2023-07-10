@@ -58,19 +58,19 @@
     box-shadow: var(--shadow_initial);
     border-radius: 1rem;
     width: 60rem;
-    height: 40rem;
+    height: 35rem;
     margin: auto;
     flex-direction: row;
   }
 
   .form.subscription {
     max-width: 22rem;
+    gap: 1.2rem;
     margin: auto 4rem;
   }
   .subscribeCards {
     gap: 3rem;
     margin: auto 4rem;
-
   }
 
   .applicantCard,

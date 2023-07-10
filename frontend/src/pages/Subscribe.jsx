@@ -1,10 +1,13 @@
 // Import packages
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 // Import components
 import LinkLogInSubscribe from "../components/LinkLogInSubscribe";
+
+// Import context
+import ValidationFormContext from "../contexts/ValidationFormContext";
 
 // Import images
 import cardApplicant from "../assets/images/card_applicant.png";
@@ -17,15 +20,7 @@ function Subscribe() {
   const [showForm, setShowForm] = useState(false);
   const [isApplicantCardFocused, setIsApplicantCardFocused] = useState(false);
   const [isCompanyCardFocused, setIsCompanyCardFocused] = useState(false);
-  const [values, setValues] = useState({
-    firstname: "",
-    lastname: "",
-    siret_number: "",
-    email: "",
-    password: "",
-    confirmed_password: "",
-  });
-
+  const { values, setValues } = useContext(ValidationFormContext);
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (
@@ -43,6 +38,7 @@ function Subscribe() {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
+
   const handleApplicantCardClick = () => {
     setShowForm(true);
     setIsApplicantCardFocused(true);

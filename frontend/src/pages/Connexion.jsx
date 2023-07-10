@@ -11,19 +11,17 @@ import LinkLogInSubscribe from "../components/LinkLogInSubscribe";
 
 // Import context
 import TokenContext from "../contexts/TokenContext";
+import ValidationFormContext from "../contexts/ValidationFormContext";
 
 // Import style
 import "../css/pages/Connexion.css";
 
 function Connexion() {
   const { setUserCookie } = useContext(TokenContext);
-  const [values, setValues] = useState({
-    email: "",
-    password: "",
-  });
-  const navigate = useNavigate();
-  const [errors, setErrors] = useState({});
+  const { values, setValues } = useContext(ValidationFormContext);
+  const { errors, setErrors } = useContext(ValidationFormContext);
   const [loginError, setLoginError] = useState(false);
+  const navigate = useNavigate();
 
   const handleInput = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
