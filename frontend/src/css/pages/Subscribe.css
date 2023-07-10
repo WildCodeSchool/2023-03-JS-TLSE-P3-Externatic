@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   margin: 2rem auto;
+  flex-direction: column;
 }
 
 .subscribeCards {
@@ -41,6 +42,10 @@
   max-width: 90%;
   object-fit: fill;
 }
+.formContainer {
+  margin: auto;
+  width: 90%;
+}
 
 @media screen and (min-width: 768px) {
   .subscribeOption {
@@ -53,31 +58,25 @@
     box-shadow: var(--shadow_initial);
     border-radius: 1rem;
     width: 60rem;
-    height: 35rem;
+    height: 40rem;
     margin: auto;
-    display: flex;
+    flex-direction: row;
   }
-  .formContainer {
-    margin: auto;
+
+  .form.subscription {
+    max-width: 22rem;
+    margin: auto 4rem;
   }
-  /* .loginOption {
-
-    margin: 2rem auto 2rem 2rem;
-  } */
-
-  /* .loginImage {
-    display: inherit;
-    width: 50%;
-  } */
   .subscribeCards {
-    margin: inherit;
+    gap: 3rem;
+    margin: auto 4rem;
+
   }
 
   .applicantCard,
   .companyCard {
-    margin: 24px 0;
-    width: 316px;
-    height: 162px;
+    width: 20rem;
+    height: 10.5rem;
   }
   .applicantCard img,
   .companyCard img {
