@@ -1,0 +1,42 @@
+.userManagement {
+  width: 95%;
+  max-width: 60rem;
+  margin: 1.5rem;
+}
+
+.userManagementCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.5rem;
+}
+
+.userManagementCardRightPart {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.userManagement p {
+  font-size: 1.2rem;
+}
+
+.deleteUserButton img {
+  width: 1.5rem;
+}
+
+.userManagementSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  padding: 0.5rem;
+  border: var(--border_card);
+  box-shadow: var(--shadow_initial);
+  border-radius: 1rem;
+  gap: 2rem;
+  width: 95%;
+  max-width: 60rem;
+  background-color: white;
+}

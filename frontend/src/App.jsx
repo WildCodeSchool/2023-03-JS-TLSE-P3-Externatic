@@ -15,6 +15,7 @@ import Footer from "./components/Footer";
 // Import du style
 import "./reset.css";
 import "./App.css";
+import "./css/pages/UsersManagement.css";
 
 // Import des contexts
 import { MenuContextProvider } from "./contexts/MenuContext";

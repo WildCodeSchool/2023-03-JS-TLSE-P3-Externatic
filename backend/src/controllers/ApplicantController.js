@@ -1,5 +1,17 @@
 const models = require("../models");
 
+// ------------Récupérer tous les applicants------------
+const getAllApplicants = (req, res) => {
+  models.applicant
+    .findAll()
+    .then(([applicants]) => {
+      res.send(applicants).status(200);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
 // ------------Création du candidat------------
 
 const postApplicant = (req, res) => {
@@ -32,4 +44,4 @@ const postApplicant = (req, res) => {
       res.sendStatus(500);
     });
 };
-module.exports = { postApplicant };
+module.exports = { getAllApplicants, postApplicant };
