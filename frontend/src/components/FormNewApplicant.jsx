@@ -1,7 +1,15 @@
 // Import packages
+import { useContext } from "react";
 import PropTypes from "prop-types";
 
+// Import context
+import ValidationFormContext from "../contexts/ValidationFormContext";
+
+// Import du style
+import "../css/components/FormNewUser.css";
+
 function FormNewApplicant({ handleInput }) {
+  const { errors } = useContext(ValidationFormContext);
   return (
     <>
       {/* fisrtname */}
@@ -43,10 +51,12 @@ function FormNewApplicant({ handleInput }) {
           autoComplete="off"
           onChange={handleInput}
         />
+        {errors.firstname && (
+          <span className="errorMessage">{errors.firstname}</span>
+        )}
       </div>
 
       {/* lastname */}
-
       <div className="containerTextInput">
         <svg
           width="16"
@@ -85,6 +95,9 @@ function FormNewApplicant({ handleInput }) {
           autoComplete="off"
           onChange={handleInput}
         />
+        {errors.lastname && (
+          <span className="errorMessage">{errors.lastname}</span>
+        )}
       </div>
 
       {/* email */}
@@ -110,7 +123,7 @@ function FormNewApplicant({ handleInput }) {
           autoComplete="off"
           onChange={handleInput}
         />
-        {/* {errors.email && <span className="errorEmail">{errors.email}</span>} */}
+        {errors.email && <span className="errorMessage">{errors.email}</span>}
       </div>
       {/* password */}
       <div className="containerTextInput">
@@ -138,9 +151,9 @@ function FormNewApplicant({ handleInput }) {
           name="password"
           onChange={handleInput}
         />
-        {/* {errors.password && (
-    <span className="errorPassword">{errors.password}</span>
-  )} */}
+        {errors.password && (
+          <span className="errorMessage">{errors.password}</span>
+        )}
       </div>
       {/* password confirmation */}
       <div className="containerTextInput">
@@ -165,15 +178,15 @@ function FormNewApplicant({ handleInput }) {
           type="password"
           placeholder="Confirmation mot de passe"
           required=""
-          name="password"
+          name="confirmedPassword"
           onChange={handleInput}
         />
-        {/* {errors.password && (
-    <span className="errorPassword">{errors.password}</span>
-  )} */}
+        {errors.confirmedpassword && (
+          <span className="errorMessage">{errors.confirmedpassword}</span>
+        )}
       </div>
 
-      <button type="submit" className="button subscrition">
+      <button type="submit" className="button subscription">
         Je m'inscris
       </button>
     </>

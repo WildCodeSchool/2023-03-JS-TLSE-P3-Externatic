@@ -4,7 +4,7 @@ import { useState, useContext } from "react";
 import axios from "axios";
 
 // Import fichier depuis utils
-import ValidationConnexion from "../utils/ValidationConnexion";
+// import ValidationConnexion from "../utils/ValidationConnexion";
 
 // Import components
 import LinkLogInSubscribe from "../components/LinkLogInSubscribe";
@@ -18,8 +18,9 @@ import "../css/pages/Connexion.css";
 
 function Connexion() {
   const { setUserCookie } = useContext(TokenContext);
-  const { values, setValues } = useContext(ValidationFormContext);
-  const { errors, setErrors } = useContext(ValidationFormContext);
+  const { values, setValues, errors, setErrors, ValidationConnexion } =
+    useContext(ValidationFormContext);
+
   const [loginError, setLoginError] = useState(false);
   const navigate = useNavigate();
 
@@ -29,6 +30,7 @@ function Connexion() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors(ValidationConnexion(values));
+
     if (
       (values.email === "" && values.password === "") ||
       (values.email !== "" && values.password === "") ||

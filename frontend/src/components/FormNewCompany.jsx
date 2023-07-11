@@ -1,7 +1,15 @@
 // Import packages
 import PropTypes from "prop-types";
+import { useContext } from "react";
+
+// Import du context
+import ValidationFormContext from "../contexts/ValidationFormContext";
+
+// Import du style
+import "../css/components/FormNewUser.css";
 
 function FormNewCompany({ handleInput }) {
+  const { errors } = useContext(ValidationFormContext);
   return (
     <>
       <div className="containerTextInput">
@@ -26,6 +34,9 @@ function FormNewCompany({ handleInput }) {
           autoComplete="off"
           onChange={handleInput}
         />
+        {errors.companyName && (
+          <span className="errorMessage">{errors.companyName}</span>
+        )}
       </div>
 
       <div className="containerTextInput">
@@ -46,10 +57,11 @@ function FormNewCompany({ handleInput }) {
           type="text"
           placeholder="Numéro SIRET"
           required=""
-          name="lastname"
+          name="siret"
           autoComplete="off"
           onChange={handleInput}
         />
+        {errors.siret && <span className="errorMessage">{errors.siret}</span>}
       </div>
 
       {/* email */}
@@ -75,7 +87,7 @@ function FormNewCompany({ handleInput }) {
           autoComplete="off"
           onChange={handleInput}
         />
-        {/* {errors.email && <span className="errorEmail">{errors.email}</span>} */}
+        {errors.email && <span className="errorMessage">{errors.email}</span>}
       </div>
       {/* password */}
       <div className="containerTextInput">
@@ -103,9 +115,9 @@ function FormNewCompany({ handleInput }) {
           name="password"
           onChange={handleInput}
         />
-        {/* {errors.password && (
-                      <span className="errorPassword">{errors.password}</span>
-                    )} */}
+        {errors.password && (
+          <span className="errorMessage">{errors.password}</span>
+        )}
       </div>
       {/* password confirmation */}
       <div className="containerTextInput">
@@ -133,12 +145,12 @@ function FormNewCompany({ handleInput }) {
           name="password"
           onChange={handleInput}
         />
-        {/* {errors.password && (
-                      <span className="errorPassword">{errors.password}</span>
-                    )} */}
+        {errors.confirmedpassword && (
+          <span className="errorMessage">{errors.confirmedpassword}</span>
+        )}
       </div>
 
-      <button type="submit" className="button subscrition">
+      <button type="submit" className="button subscription">
         Je m'inscris
       </button>
     </>

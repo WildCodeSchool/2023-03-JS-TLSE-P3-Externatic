@@ -19,14 +19,15 @@ import cardCompany from "../assets/images/card_company.png";
 import "../css/pages/Subscribe.css";
 
 // Import utils
-import ValidationConnexion from "../utils/ValidationConnexion";
+// import ValidationConnexion from "../utils/ValidationConnexion";
 
 function Subscribe() {
   const [showForm, setShowForm] = useState(false);
   const [isApplicantCardFocused, setIsApplicantCardFocused] = useState(false);
   const [isCompanyCardFocused, setIsCompanyCardFocused] = useState(false);
-  const { values, setValues } = useContext(ValidationFormContext);
-  const { setErrors } = useContext(ValidationFormContext);
+  const { values, setValues, setErrors, ValidationConnexion } = useContext(
+    ValidationFormContext
+  );
 
   useEffect(() => {
     const handleClickOutside = (e) => {
