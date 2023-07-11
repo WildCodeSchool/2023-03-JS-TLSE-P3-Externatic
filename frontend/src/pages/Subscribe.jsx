@@ -18,9 +18,6 @@ import cardCompany from "../assets/images/card_company.png";
 // Import style
 import "../css/pages/Subscribe.css";
 
-// Import utils
-// import ValidationConnexion from "../utils/ValidationConnexion";
-
 function Subscribe() {
   const [showForm, setShowForm] = useState(false);
   const [isApplicantCardFocused, setIsApplicantCardFocused] = useState(false);

@@ -3,9 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import axios from "axios";
 
-// Import fichier depuis utils
-// import ValidationConnexion from "../utils/ValidationConnexion";
-
 // Import components
 import LinkLogInSubscribe from "../components/LinkLogInSubscribe";
 
