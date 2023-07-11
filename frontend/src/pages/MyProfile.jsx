@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "../css/pages/MyProfile.css";
 import identificationBlack from "../assets/icons/identification_black.svg";
 import mailBlack from "../assets/icons/mail_black.svg";
 import mobileBlack from "../assets/icons/mobile_black.svg";
