@@ -10,6 +10,7 @@
 .forgottenPassword {
   font-size: smaller;
   color: var(--basic-grey);
+  padding-top: 1rem;
   padding-left: 9rem;
 }
 

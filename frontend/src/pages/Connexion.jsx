@@ -15,8 +15,14 @@ import "../css/pages/Connexion.css";
 
 function Connexion() {
   const { setUserCookie } = useContext(TokenContext);
-  const { values, setValues, errors, setErrors, ValidationConnexion } =
-    useContext(ValidationFormContext);
+  const {
+    values,
+    setValues,
+    errors,
+    setErrors,
+    ValidationConnexion,
+    handleInputClick,
+  } = useContext(ValidationFormContext);
 
   const [loginError, setLoginError] = useState(false);
   const navigate = useNavigate();
@@ -76,8 +82,11 @@ function Connexion() {
               name="email"
               autoComplete="off"
               onChange={handleInput}
+              onClick={handleInputClick}
             />
-            {errors.email && <span className="errorEmail">{errors.email}</span>}
+            {errors.email && (
+              <span className="errorMessage">{errors.email}</span>
+            )}
           </div>
 
           <div className="containerTextInput">
@@ -104,9 +113,10 @@ function Connexion() {
               required=""
               name="password"
               onChange={handleInput}
+              onClick={handleInputClick}
             />
             {errors.password && (
-              <span className="errorPassword">{errors.password}</span>
+              <span className="errorMessage">{errors.password}</span>
             )}
           </div>
           <Link to="/" className="forgottenPassword">

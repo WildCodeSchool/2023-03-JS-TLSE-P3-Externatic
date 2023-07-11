@@ -22,9 +22,8 @@ function Subscribe() {
   const [showForm, setShowForm] = useState(false);
   const [isApplicantCardFocused, setIsApplicantCardFocused] = useState(false);
   const [isCompanyCardFocused, setIsCompanyCardFocused] = useState(false);
-  const { values, setValues, setErrors, ValidationConnexion } = useContext(
-    ValidationFormContext
-  );
+  const { values, setValues, errors, setErrors, ValidationConnexion } =
+    useContext(ValidationFormContext);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -60,17 +59,31 @@ function Subscribe() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors(ValidationConnexion(values));
-
-    axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/signup`, values)
-      .then((response) => {
-        if (response.data.token) {
-          navigate("/login");
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    if (Object.keys(errors).length === 0 && isApplicantCardFocused) {
+      axios
+        .post(`${import.meta.env.VITE_BACKEND_URL}/signup/applicant`, values)
+        .then((response) => {
+          if (response.data.token) {
+            navigate("/login");
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    } else if (Object.keys(errors).length === 0 && isCompanyCardFocused) {
+      axios
+        .post(`${import.meta.env.VITE_BACKEND_URL}/signup/company`, values)
+        .then((response) => {
+          if (response.data.token) {
+            navigate("/login");
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    } else {
+      console.error("Votre inscription n'a pu aboutir");
+    }
   };
   return (
     <>
@@ -112,4 +125,5 @@ function Subscribe() {
     </>
   );
 }
+
 export default Subscribe;

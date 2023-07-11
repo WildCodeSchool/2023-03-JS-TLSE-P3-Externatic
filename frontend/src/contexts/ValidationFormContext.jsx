@@ -16,6 +16,9 @@ export function ValidationFormContextProvider({ children }) {
     password: "",
     confirmedPassword: "",
   });
+  const handleInputClick = () => {
+    setErrors(false);
+  };
   function ValidationConnexion(el) {
     const error = {};
 
@@ -106,7 +109,14 @@ export function ValidationFormContextProvider({ children }) {
   }
 
   const ValidationFormContextValue = useMemo(() => {
-    return { values, setValues, errors, setErrors, ValidationConnexion };
+    return {
+      values,
+      setValues,
+      errors,
+      setErrors,
+      ValidationConnexion,
+      handleInputClick,
+    };
   });
   return (
     <ValidationFormContext.Provider value={ValidationFormContextValue}>
