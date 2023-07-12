@@ -13,14 +13,12 @@
   --shadow_initial: 2px 4px 8px -2px grey;
   --shadow_hover: 4px 8px 16px -4px grey;
   --border_card: 1px solid lightgrey;
-
-  /* Global style */
-  font-family: "Jost", sans-serif;
 }
 
 /* Font sizes */
 * {
   font-size: 1rem;
+  font-family: "Jost", sans-serif;
 }
 
 h1,
@@ -37,6 +35,10 @@ h1 {
 
 h2 {
   font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.3rem;
 }
 
 /* Global queries */

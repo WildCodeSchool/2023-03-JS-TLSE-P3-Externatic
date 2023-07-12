@@ -29,6 +29,10 @@
   font-size: 1.2rem;
 }
 
+.deleteUserButton {
+  cursor: pointer;
+}
+
 .deleteUserButton img {
   width: 1.5rem;
 }

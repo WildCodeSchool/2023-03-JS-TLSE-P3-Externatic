@@ -8,8 +8,12 @@ function UsersManagement() {
   const [allApplicants, setAllApplicants] = useState([]);
   const [allCompanies, setAllCompanies] = useState([]);
   const [adminInsertion, setAdminInsertion] = useState(false);
-  const [applicantInsertion, setApplicantInsertion] = useState(false);
-  const [companyInsertion, setCompanyInsertion] = useState(false);
+  const [adminInsertionObject] = useState({
+    firstname: "",
+    lastname: "",
+    email: "",
+    password: "",
+  });
 
   const getAdmins = () => {
     axios.get(`${import.meta.env.VITE_BACKEND_URL}/admins`).then((results) => {
@@ -17,7 +21,27 @@ function UsersManagement() {
     });
   };
 
-  const createAdmin = (id) => {};
+  const createAdmin = (e) => {
+    e.preventDefault();
+    if (
+      adminInsertionObject.firstname &&
+      adminInsertionObject.lastname &&
+      adminInsertionObject.email &&
+      adminInsertionObject.password
+    ) {
+      axios
+        .post(
+          `${import.meta.env.VITE_BACKEND_URL}/signup/admin`,
+          adminInsertionObject
+        )
+        .then(() => {
+          getAdmins();
+          setAdminInsertion(false);
+        });
+    } else {
+      alert("Veuillez remplir tous les champs.");
+    }
+  };
   const deleteAdmin = (id) => {
     axios
       .delete(`${import.meta.env.VITE_BACKEND_URL}/admins/${id}`)
@@ -34,7 +58,6 @@ function UsersManagement() {
       });
   };
 
-  const createApplicant = (id) => {};
   const deleteApplicant = (id) => {
     axios
       .delete(`${import.meta.env.VITE_BACKEND_URL}/applicants/${id}`)
@@ -50,7 +73,6 @@ function UsersManagement() {
         setAllCompanies(results.data);
       });
   };
-  const createCompany = (id) => {};
   const deleteCompany = (id) => {
     axios
       .delete(`${import.meta.env.VITE_BACKEND_URL}/companies/${id}`)
@@ -64,10 +86,6 @@ function UsersManagement() {
     getApplicants();
     getCompanies();
   }, []);
-
-  useEffect(() => {
-    console.log(allAdmins, allApplicants, allCompanies);
-  }, [allAdmins, allApplicants, allCompanies]);
 
   return (
     <div className="userManagementSection">
@@ -108,13 +126,126 @@ function UsersManagement() {
         >
           Ajouter un Administrateur
         </button>
-        {adminInsertion ? <div className="userManagementSection"></div> : null}
+        {adminInsertion ? (
+          <form onSubmit={createAdmin} className="form">
+            <h3>Nouvel administrateur</h3>
+            <div className="containerTextInput">
+              <input
+                type="text"
+                name="firstname"
+                placeholder="Prénom"
+                className="textInput"
+                onChange={(e) => {
+                  adminInsertionObject.firstname = e.target.value;
+                }}
+                required
+              />
+            </div>
+            <div className="containerTextInput">
+              <input
+                type="text"
+                name="lastname"
+                placeholder="Nom"
+                className="textInput"
+                onChange={(e) => {
+                  adminInsertionObject.lastname = e.target.value;
+                }}
+                required
+              />
+            </div>
+
+            <div className="containerTextInput">
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                className="textInput"
+                onChange={(e) => {
+                  adminInsertionObject.email = e.target.value;
+                }}
+                required
+              />
+            </div>
+
+            <div className="containerTextInput">
+              <input
+                type="password"
+                name="password"
+                placeholder="Mot de passe"
+                className="textInput"
+                onChange={(e) => {
+                  adminInsertionObject.password = e.target.value;
+                }}
+                required
+              />
+            </div>
+            <button type="submit" className="button">
+              Ajouter l'administrateur
+            </button>
+          </form>
+        ) : null}
       </div>
       <div className="userManagement">
         <h2>Candidats</h2>
+        {allApplicants
+          ? allApplicants.map((applicant) => (
+              <div className="userManagementCardContainer">
+                <div className="userManagementCard">
+                  <div className="userManagementCardRightPart">
+                    <p>ID: {applicant.id}</p>
+                    <p>
+                      {applicant.firstname} {applicant.lastname}
+                    </p>
+                  </div>
+                  <div className="userManagementCardRightPart">
+                    <p>Candidat</p>
+                    <button
+                      type="button"
+                      className="deleteUserButton"
+                      onClick={() => deleteApplicant(applicant.id)}
+                    >
+                      <img
+                        src={deleteUser}
+                        alt="Icône de suppression de l'utilisateur"
+                      />
+                    </button>
+                  </div>
+                </div>
+                <hr />
+              </div>
+            ))
+          : null}
       </div>
       <div className="userManagement">
         <h2>Entreprises</h2>
+        {allCompanies
+          ? allCompanies.map((company) => (
+              <div className="userManagementCardContainer">
+                <div className="userManagementCard">
+                  <div className="userManagementCardRightPart">
+                    <p>ID: {company.id}</p>
+                    <p>
+                      {company.name} | SIRET: {company.siret}
+                    </p>
+                  </div>
+                  <div className="userManagementCardRightPart">
+                    <p>Entreprise</p>
+                    <button
+                      type="button"
+                      className="deleteUserButton"
+                      onClick={() => deleteCompany(company.id)}
+                    >
+                      <img
+                        src={deleteUser}
+                        alt="Icône de suppression de l'utilisateur"
+                      />
+                    </button>
+                  </div>
+                </div>
+                <hr />
+              </div>
+            ))
+          : null}
       </div>
     </div>
   );

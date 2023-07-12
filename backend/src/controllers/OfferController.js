@@ -38,7 +38,22 @@ const getFilteredOffers = (req, res) => {
     });
 };
 
+// ------------Delete Applicant------------
+const deleteOfferByCompanyId = (req, res, next) => {
+  const { id } = req.params;
+  models.offer
+    .deleteByCompanyId(id)
+    .then(() => {
+      next();
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 module.exports = {
   getAllOffers,
   getFilteredOffers,
+  deleteOfferByCompanyId,
 };

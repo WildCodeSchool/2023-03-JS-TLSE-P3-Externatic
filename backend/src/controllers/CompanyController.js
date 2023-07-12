@@ -35,4 +35,22 @@ const postCompany = (req, res) => {
     });
 };
 
-module.exports = { getAllCompanies, postCompany };
+// ------------Delete Company------------
+const deleteCompany = (req, res) => {
+  const { id } = req.params;
+  models.company
+    .delete(id)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+module.exports = { getAllCompanies, deleteCompany, postCompany };

@@ -39,11 +39,11 @@ const getAdminById = (req, res) => {
   const { sub } = req.payload;
   models.admin
     .findId(sub)
-    .then(([admins]) => {
-      if (admins[0] != null) {
-        res.status(200).json(admins[0]);
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
       } else {
-        res.sendStatus(401);
+        res.sendStatus(204);
       }
     })
     .catch((err) => {
