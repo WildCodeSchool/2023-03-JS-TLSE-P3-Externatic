@@ -11,10 +11,7 @@ import TokenContext from "../contexts/TokenContext";
 function MyProfile() {
   const [errors, setErrors] = useState({});
   const { userRole } = useContext(TokenContext);
-  const [ancienMdp, setAncienMdp] = useState("");
-  const [nouveauMdp, setNouveauMdp] = useState("");
-  const [newMdp, setNewMdp] = useState("");
-  const [error, setError] = useState({});
+
   const validateTelephone = () => {
     // Logique de validation du téléphone
   };
