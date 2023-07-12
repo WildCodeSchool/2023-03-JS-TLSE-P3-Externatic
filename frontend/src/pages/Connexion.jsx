@@ -9,9 +9,6 @@ import ValidationConnexion from "../utils/ValidationConnexion";
 // Import context
 import TokenContext from "../contexts/TokenContext";
 
-// Import style
-import "../css/pages/Connexion.css";
-
 function Connexion() {
   const { setUserCookie } = useContext(TokenContext);
   const [values, setValues] = useState({
