@@ -11,6 +11,10 @@ import TokenContext from "../contexts/TokenContext";
 function MyProfile() {
   const [errors, setErrors] = useState({});
   const { userRole } = useContext(TokenContext);
+  const [ancienMdp, setAncienMdp] = useState("");
+  const [nouveauMdp, setNouveauMdp] = useState("");
+  const [newMdp, setNewMdp] = useState("");
+  const [error, setError] = useState({});
   const validateTelephone = () => {
     // Logique de validation du téléphone
   };
@@ -57,9 +61,8 @@ function MyProfile() {
     <div className="myProfileSection">
       {userRole && userRole === "applicant" && (
         <>
-          <h1>Profile Applicant</h1>
           <form onSubmit={handleSubmit} className="form">
-            <h2>Modifier mon profil</h2>
+            <h2>Modifier mon profil (Candidat)</h2>
             <div className="groupRadio">
               <div className="containerRadioInput">
                 <label htmlFor="femmeInput" className="labelRadioInput">
@@ -223,11 +226,10 @@ function MyProfile() {
         </>
       )}
 
-      {userRole && userRole === "Admin" && (
+      {userRole && userRole === "admin" && (
         <>
-          <h1>MyProfile Admin</h1>
           <form onSubmit={handleSubmit} className="form">
-            <h2>Modifier mon profil</h2>
+            <h2>Modifier mon profil (Admin)</h2>
             <div className="groupRadio">
               <div className="containerRadioInput">
                 <label htmlFor="femmeInput" className="labelRadioInput">
@@ -376,11 +378,10 @@ function MyProfile() {
         </>
       )}
 
-      {userRole && userRole === "Company" && (
+      {userRole && userRole === "company" && (
         <>
-          <h1>MyProfile Company</h1>
           <form onSubmit={handleSubmit} className="form">
-            <h2>Modifier mon profil</h2>
+            <h2>Modifier mon profil (Entreprise)</h2>
             <div className="groupRadio">
               <div className="containerRadioInput">
                 <label htmlFor="femmeInput" className="labelRadioInput">

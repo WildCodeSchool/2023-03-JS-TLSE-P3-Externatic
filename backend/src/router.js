@@ -50,4 +50,7 @@ router.get("/categories", getAllCategories);
 // ------------contrats------------
 router.get("/contracts-type", getAllContracts);
 
+// ------------user------------
+router.get("/users/:id");
+
 module.exports = router;
