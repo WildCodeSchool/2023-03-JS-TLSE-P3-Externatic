@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import PropTypes from "prop-types";
 import { useState } from "react";
 // Import style
@@ -9,7 +10,7 @@ import iconWhiteCity from "../assets/icons/white_city_fill.svg";
 import iconWhiteContract from "../assets/icons/contract_white.svg";
 
 function OfferCardList({ offer, onCardClick }) {
-  const { id, title, city, name } = offer;
+  const { id, title, city, contract_type_name } = offer;
   const [offerIsFavorite, setOfferIsFavorite] = useState(false);
   const handleClickOfferIsFavorite = () => {
     setOfferIsFavorite(!offerIsFavorite);
@@ -36,7 +37,7 @@ function OfferCardList({ offer, onCardClick }) {
         </div>
         <div className="offerTextAndIcon">
           <img src={iconWhiteContract} alt="icon contract" />
-          <p>{name}</p>
+          <p>{contract_type_name}</p>
         </div>
       </div>
       <button type="button" className="buttonCard" onClick={handleCardClick}>
@@ -51,7 +52,7 @@ OfferCardList.propTypes = {
     id: PropTypes.number,
     title: PropTypes.string,
     city: PropTypes.string,
-    name: PropTypes.string,
+    contract_type_name: PropTypes.string,
   }).isRequired,
   onCardClick: PropTypes.func.isRequired,
 };

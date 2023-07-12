@@ -119,12 +119,12 @@ function Offers() {
                       <input
                         type="checkbox"
                         className="optionCheckbox"
-                        id={el.name}
-                        name={el.name}
+                        id={el.category_name}
+                        name={el.category_name}
                         onChange={() => handleCheck(el, "category")}
                       />
-                      <label htmlFor={el.name} className="optionLabel">
-                        {el.name}
+                      <label htmlFor={el.category_name} className="optionLabel">
+                        {el.category_name}
                       </label>
                     </div>
                   ))
@@ -151,12 +151,15 @@ function Offers() {
                       <input
                         type="checkbox"
                         className="optionCheckbox"
-                        id={el.name}
-                        name={el.name}
+                        id={el.contract_type_name}
+                        name={el.contract_type_name}
                         onChange={() => handleCheck(el, "contract")}
                       />
-                      <label htmlFor={el.name} className="optionLabel">
-                        {el.name}
+                      <label
+                        htmlFor={el.contract_type_name}
+                        className="optionLabel"
+                      >
+                        {el.contract_type_name}
                       </label>
                     </div>
                   ))

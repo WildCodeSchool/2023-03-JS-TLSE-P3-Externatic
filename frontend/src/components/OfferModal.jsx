@@ -16,7 +16,7 @@ function OfferModal({ modalOfferIsOpen, setModalOfferIsOpen, offer }) {
     job_responsibilities,
     technical_environment,
     benefits,
-    name,
+    contract_type_name,
   } = offer;
   return (
     <Modal
@@ -58,7 +58,7 @@ function OfferModal({ modalOfferIsOpen, setModalOfferIsOpen, offer }) {
           </div>
           <div className="offerTextAndIcon">
             <img src={iconBlackContract} alt="icon contract" />
-            <h3>{name}</h3>
+            <h3>{contract_type_name}</h3>
           </div>
           <div className="offerTextAndIcon">
             <img src={iconPinkRocket} alt="icon contract" />
@@ -97,7 +97,7 @@ OfferModal.propTypes = {
     job_responsibilities: PropTypes.string,
     technical_environment: PropTypes.string,
     benefits: PropTypes.string,
-    name: PropTypes.string,
+    contract_type_name: PropTypes.string,
   }).isRequired,
   modalOfferIsOpen: PropTypes.bool.isRequired,
   setModalOfferIsOpen: PropTypes.bool.isRequired,
