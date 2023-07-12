@@ -7,7 +7,11 @@ export default ValidationFormContext;
 
 export function ValidationFormContextProvider({ children }) {
   const [errors, setErrors] = useState({});
-  const [values, setValues] = useState({
+  const [formDataLogIn, setFormDataLogIn] = useState({
+    email: "",
+    password: "",
+  });
+  const [formDataSubscription, setFormDataSubscription] = useState({
     titleName: "",
     firstname: "",
     lastname: "",
@@ -17,6 +21,7 @@ export function ValidationFormContextProvider({ children }) {
     password: "",
     confirmedPassword: "",
   });
+
   const resetInputOnClick = () => {
     setErrors(false);
   };
@@ -31,8 +36,8 @@ export function ValidationFormContextProvider({ children }) {
     const siretPattern = /^\d{14}$/;
 
     // vérification madame ou monsieur coché
-    if (!el.titleName || !el.titleName) {
-      error.titleName = "Veuillez cocher Madame ou Monsieur";
+    if (!el.titleName) {
+      error.titleName = "Veuillez sélectionner Madame ou Monsieur";
     } else {
       error.titleName = "";
     }
@@ -67,10 +72,8 @@ export function ValidationFormContextProvider({ children }) {
     // vérification du SIRET
     if (el.siret === "") {
       error.siret = "Veuillez saisir le SIRET de l'entreprise";
-    } else if (el.siret.length !== 14) {
-      error.siret = "Le SIRET doit faire contenir 14 chiffres";
     } else if (!siretPattern.test(el.siret)) {
-      error.siret = "Le SIRET ne doit contenir que des chiffres";
+      error.siret = "Le SIRET doit contenir exactement 14 chiffres";
     } else {
       error.siret = "";
     }
@@ -106,14 +109,16 @@ export function ValidationFormContextProvider({ children }) {
 
   const ValidationFormContextValue = useMemo(() => {
     return {
-      values,
-      setValues,
+      formDataLogIn,
+      setFormDataLogIn,
+      formDataSubscription,
+      setFormDataSubscription,
       errors,
       setErrors,
       ValidationConnexion,
       resetInputOnClick,
     };
-  }, [values, errors]);
+  }, [formDataLogIn, formDataSubscription, errors]);
   return (
     <ValidationFormContext.Provider value={ValidationFormContextValue}>
       {children}

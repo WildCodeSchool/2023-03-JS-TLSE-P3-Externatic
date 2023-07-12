@@ -13,8 +13,8 @@ import ValidationFormContext from "../contexts/ValidationFormContext";
 function Connexion() {
   const { setUserCookie } = useContext(TokenContext);
   const {
-    values,
-    setValues,
+    formDataLogIn,
+    setFormDataLogIn,
     errors,
     setErrors,
     ValidationConnexion,
@@ -25,22 +25,22 @@ function Connexion() {
   const navigate = useNavigate();
 
   const handleInput = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
+    setFormDataLogIn({ ...formDataLogIn, [e.target.name]: e.target.value });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    setErrors(ValidationConnexion(values));
+    setErrors(ValidationConnexion(formDataLogIn));
 
     if (
-      (values.email === "" && values.password === "") ||
-      (values.email !== "" && values.password === "") ||
-      (values.email === "" && values.password !== "")
+      (formDataLogIn.email === "" && formDataLogIn.password === "") ||
+      (formDataLogIn.email !== "" && formDataLogIn.password === "") ||
+      (formDataLogIn.email === "" && formDataLogIn.password !== "")
     ) {
       setLoginError(false);
       return;
     }
     axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/login`, values)
+      .post(`${import.meta.env.VITE_BACKEND_URL}/login`, formDataLogIn)
       .then((response) => {
         if (response.data.token) {
           setUserCookie(response.data.token, response.data.user.role);
@@ -75,7 +75,7 @@ function Connexion() {
               className="textInput"
               type="email"
               placeholder="Email"
-              required=""
+              // required
               name="email"
               autoComplete="off"
               onChange={handleInput}
@@ -107,7 +107,7 @@ function Connexion() {
               className="textInput"
               type="password"
               placeholder="Mot de passe"
-              required=""
+              // required
               name="password"
               onChange={handleInput}
               onClick={resetInputOnClick}

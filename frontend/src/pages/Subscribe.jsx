@@ -19,8 +19,13 @@ function Subscribe() {
   const [showForm, setShowForm] = useState(false);
   const [isApplicantCardFocused, setIsApplicantCardFocused] = useState(false);
   const [isCompanyCardFocused, setIsCompanyCardFocused] = useState(false);
-  const { values, setValues, errors, setErrors, ValidationConnexion } =
-    useContext(ValidationFormContext);
+  const {
+    formDataSubscription,
+    setFormDataSubscription,
+    errors,
+    setErrors,
+    ValidationConnexion,
+  } = useContext(ValidationFormContext);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -32,6 +37,7 @@ function Subscribe() {
         setShowForm(false);
         setIsApplicantCardFocused(false);
         setIsCompanyCardFocused(false);
+        setErrors(false);
       }
     };
     document.addEventListener("click", handleClickOutside);
@@ -43,28 +49,37 @@ function Subscribe() {
     setShowForm(true);
     setIsApplicantCardFocused(true);
     setIsCompanyCardFocused(false);
+    setErrors(false);
   };
   const handleCompanyCardClick = () => {
     setShowForm(true);
     setIsApplicantCardFocused(false);
     setIsCompanyCardFocused(true);
+    setErrors(false);
   };
   const navigate = useNavigate();
   const handleInput = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-    if (values) {
+    setFormDataSubscription({
+      ...formDataSubscription,
+      [e.target.name]: e.target.value,
+    });
+    if (formDataSubscription) {
       setErrors(false);
     }
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    setErrors(ValidationConnexion(values));
+    setErrors(ValidationConnexion(formDataSubscription));
     if (Object.keys(errors).length === 0 && isApplicantCardFocused) {
       axios
-        .post(`${import.meta.env.VITE_BACKEND_URL}/signup/applicant`, values)
+        .post(
+          `${import.meta.env.VITE_BACKEND_URL}/signup/applicant`,
+          formDataSubscription
+        )
         .then((response) => {
           if (response.status === 201) {
             navigate("/connexion");
+            setErrors(false);
           } else if (response.status === 403) {
             console.error("Ce mail est déjà utilisé");
           }
@@ -74,10 +89,14 @@ function Subscribe() {
         });
     } else if (Object.keys(errors).length === 0 && isCompanyCardFocused) {
       axios
-        .post(`${import.meta.env.VITE_BACKEND_URL}/signup/company`, values)
+        .post(
+          `${import.meta.env.VITE_BACKEND_URL}/signup/company`,
+          formDataSubscription
+        )
         .then((response) => {
           if (response.status === 201) {
             navigate("/connexion");
+            setErrors(false);
           } else if (response.status === 403) {
             console.error("Ce mail est déjà utilisé");
           }
@@ -117,10 +136,16 @@ function Subscribe() {
           <div className="formContainer">
             <form className="form subscription" onSubmit={handleSubmit}>
               {isApplicantCardFocused && (
-                <FormNewApplicant handleInput={handleInput} />
+                <FormNewApplicant
+                  handleInput={handleInput}
+                  handleSubmit={handleSubmit}
+                />
               )}
               {isCompanyCardFocused && (
-                <FormNewCompany handleInput={handleInput} />
+                <FormNewCompany
+                  handleInput={handleInput}
+                  handleSubmit={handleSubmit}
+                />
               )}
             </form>
           </div>

@@ -6,14 +6,17 @@ import PropTypes from "prop-types";
 import ValidationFormContext from "../contexts/ValidationFormContext";
 
 function FormNewApplicant({ handleInput }) {
-  const { errors, resetInputOnClick, values, setValues } = useContext(
-    ValidationFormContext
-  );
+  const {
+    errors,
+    resetInputOnClick,
+    formDataSubscription,
+    setFormDataSubscription,
+  } = useContext(ValidationFormContext);
   const handleTitleNameMiss = () => {
-    setValues({ ...values, titleName: "Mme" });
+    setFormDataSubscription({ ...formDataSubscription, titleName: "Mme" });
   };
   const handleTitleNameMister = () => {
-    setValues({ ...values, titleName: "Mr" });
+    setFormDataSubscription({ ...formDataSubscription, titleName: "Mr" });
   };
   return (
     <>
@@ -24,19 +27,24 @@ function FormNewApplicant({ handleInput }) {
             id="radio1"
             className="radioInput"
             name="titleName"
-            onClick={handleTitleNameMiss}
+            onChange={handleTitleNameMiss}
+            onClick={resetInputOnClick}
           />
           <label htmlFor="radio1" className="labelRadioInput miss">
             Madame
           </label>
         </div>
+        {errors.titleName && (
+          <span className="errorMessageTitleName">{errors.titleName}</span>
+        )}
         <div className="containerRadioInput">
           <input
             type="radio"
             id="radio2"
             className="radioInput"
             name="titleName"
-            onClick={handleTitleNameMister}
+            onChange={handleTitleNameMister}
+            onClick={resetInputOnClick}
           />
           <label htmlFor="radio2" className="labelRadioInput mister">
             Monsieur
