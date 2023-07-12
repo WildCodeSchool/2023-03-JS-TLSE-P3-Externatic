@@ -55,8 +55,6 @@ function UsersManagement() {
           getAdmins();
           setAdminInsertion(false);
         });
-    } else {
-      alert("Veuillez remplir tous les champs.");
     }
   };
   const deleteAdmin = (id) => {
