@@ -14,6 +14,7 @@ import MainNavBar from "./components/MainNavBar";
 // Import du style
 import "./reset.css";
 import "./App.css";
+import "./css/components/OfferModal.css";
 
 // Import des contexts
 import { MenuContextProvider } from "./contexts/MenuContext";

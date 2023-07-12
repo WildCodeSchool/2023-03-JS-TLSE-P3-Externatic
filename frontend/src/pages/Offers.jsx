@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 // import des composants
 import OfferCardList from "../components/OfferCardList";
+import OfferModal from "../components/OfferModal";
 
 function Offers() {
   const [offersList, setOffersList] = useState([]);
@@ -9,6 +10,14 @@ function Offers() {
   const [contractList, setContractList] = useState([]);
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [isContractOpen, setIsContractOpen] = useState(false);
+  const [modalOfferIsOpen, setModalOfferIsOpen] = useState(false);
+  const [selectedOffer, setSelectedOffer] = useState([]);
+
+  const handleOpenModalOffer = (offerId) => {
+    const findOffer = offersList.find((offer) => offer.id === offerId);
+    setSelectedOffer(findOffer);
+    setModalOfferIsOpen(true);
+  };
 
   const handleSubmit = () => {};
 
@@ -28,6 +37,11 @@ function Offers() {
 
   return (
     <div>
+      <OfferModal
+        modalOfferIsOpen={modalOfferIsOpen}
+        setModalOfferIsOpen={setModalOfferIsOpen}
+        offer={selectedOffer}
+      />
       <form onSubmit={handleSubmit} className="form">
         <div className="containerTextInput">
           <input type="text" className="textInput" placeholder="Mot-clé..." />
@@ -106,7 +120,15 @@ function Offers() {
         </button>
       </form>
       {offersList.length
-        ? offersList.map((el) => <OfferCardList key={el.id} offer={el} />)
+        ? offersList.map((el) => (
+            <OfferCardList
+              key={el.id}
+              offer={el}
+              modalOfferIsOpen={modalOfferIsOpen}
+              setModalOfferIsOpen={setModalOfferIsOpen}
+              onCardClick={handleOpenModalOffer}
+            />
+          ))
         : "Chargement..."}
     </div>
   );

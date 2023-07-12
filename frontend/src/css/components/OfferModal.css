@@ -1,0 +1,47 @@
+#offerModalContent > h2,
+h3 {
+  text-align: left;
+}
+#offerModalContent > p {
+  text-align: left;
+}
+#offerModalContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.titleModal {
+  color: var(--main-color);
+}
+.crossSectionModal {
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--light-grey);
+  background-color: white;
+}
+.buttonModal {
+  display: flex;
+  justify-content: end;
+}
+
+.ReactModal__Overlay {
+  transform: translateY(100vh);
+  transition: transform 500ms;
+}
+
+.ReactModal__Overlay--after-open {
+  transform: translateY(0vh);
+}
+
+.ReactModal__Overlay--before-close {
+  transform: translateY(100vh);
+}
+
+@media screen and (min-width: 768px) {
+  #offerModalContent {
+    width: 50%;
+    height: auto;
+  }
+  .ReactModal__Content--after-open {
+    padding: 2rem;
+  }
+}
