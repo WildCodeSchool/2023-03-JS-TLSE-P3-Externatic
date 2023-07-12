@@ -10,11 +10,13 @@ import Dashboard from "./pages/Dashboard";
 
 // Import des composants
 import MainNavBar from "./components/MainNavBar";
-import Footer from "./components/Footer";
 
 // Import du style
 import "./reset.css";
 import "./App.css";
+import "./css/pages/Offers.css";
+import "./css/pages/Connexion.css";
+import "./css/pages/MyProfile.css";
 import "./css/pages/UsersManagement.css";
 
 // Import des contexts
@@ -35,7 +37,6 @@ function App() {
               <Route path="offers" element={<Offers />} />
               <Route path="dashboard/*" element={<Dashboard />} />
             </Routes>
-            <Footer />
           </Router>
         </TokenContextProvider>
       </MenuContextProvider>

@@ -1,14 +1,21 @@
 .userManagement {
   width: 95%;
   max-width: 60rem;
-  margin: 1.5rem;
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.userManagementCardContainer {
+  width: 100%;
 }
 
 .userManagementCard {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 0.5rem;
 }
 
 .userManagementCardRightPart {

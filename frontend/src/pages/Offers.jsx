@@ -1,14 +1,53 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+// import des composants
+import OfferCardList from "../components/OfferCardList";
+
 function Offers() {
   const [offersList, setOffersList] = useState([]);
   const [categoriesList, setCategoriesList] = useState([]);
   const [contractList, setContractList] = useState([]);
+  const [keywordInput, setKeywordInput] = useState("");
+  const [localizationInput, setLocalizationInput] = useState("");
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [isContractOpen, setIsContractOpen] = useState(false);
 
-  const handleSubmit = () => {};
+  const handleCheck = (el, list) => {
+    if (list === "category") {
+      for (let i = 0; i < categoriesList.length; i += 1) {
+        if (categoriesList[i].id === el.id) {
+          if (categoriesList[i].checked) {
+            categoriesList[i].checked = false;
+          } else {
+            categoriesList[i].checked = true;
+          }
+        }
+      }
+    } else if (list === "contract") {
+      for (let i = 0; i < contractList.length; i += 1) {
+        if (contractList[i].id === el.id) {
+          if (contractList[i].checked) {
+            contractList[i].checked = false;
+          } else {
+            contractList[i].checked = true;
+          }
+        }
+      }
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post(`${import.meta.env.VITE_BACKEND_URL}/filtered-offers`, {
+        keyword: keywordInput,
+        localization: localizationInput,
+        categories: categoriesList,
+        contract: contractList,
+      })
+      .then((results) => setOffersList(results.data));
+  };
 
   useEffect(() => {
     axios
@@ -25,16 +64,26 @@ function Offers() {
   }, []);
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} className="form">
+    <div className="offersPage">
+      <form onSubmit={handleSubmit} className="form formOffersFilters">
         <div className="containerTextInput">
-          <input type="text" className="textInput" placeholder="Mot-clé..." />
+          <input
+            type="text"
+            className="textInput"
+            placeholder="Mot-clé..."
+            onChange={(e) => {
+              setKeywordInput(e.target.value);
+            }}
+          />
         </div>
         <div className="containerTextInput">
           <input
             type="text"
             className="textInput"
             placeholder="Localisation..."
+            onChange={(e) => {
+              setLocalizationInput(e.target.value);
+            }}
           />
         </div>
         <div type="button" className="selectContainer">
@@ -58,6 +107,7 @@ function Offers() {
                         className="optionCheckbox"
                         id={el.name}
                         name={el.name}
+                        onChange={() => handleCheck(el, "category")}
                       />
                       <label htmlFor={el.name} className="optionLabel">
                         {el.name}
@@ -89,6 +139,7 @@ function Offers() {
                         className="optionCheckbox"
                         id={el.name}
                         name={el.name}
+                        onChange={() => handleCheck(el, "contract")}
                       />
                       <label htmlFor={el.name} className="optionLabel">
                         {el.name}
@@ -103,9 +154,11 @@ function Offers() {
           Lancer la recherche
         </button>
       </form>
-      {offersList.length
-        ? offersList.map((el) => <p key={el.id}>{el.title}</p>)
-        : "Chargement..."}
+      <div className="offersListContainer">
+        {offersList.length
+          ? offersList.map((el) => <OfferCardList key={el.id} offer={el} />)
+          : "Chargement..."}
+      </div>
     </div>
   );
 }

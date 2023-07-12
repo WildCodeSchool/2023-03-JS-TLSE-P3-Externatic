@@ -53,21 +53,22 @@ const getAdminById = (req, res) => {
 };
 
 // ------------Delete Admin------------
-// const deleteAdmin = (req, res) => {
-//   const { id } = req.params;
-//   models.admin
-//     .delete(id)
-//     .then(([admins]) => {
-//       res.send(admins).status(200);
-//     })
-//     .catch((err) => {
-//       console.error(err);
-//       res.sendStatus(500);
-//     });
-// };
+const deleteAdmin = (req, res) => {
+  const { id } = req.params;
+  models.admin
+    .delete(id)
+    .then(([admins]) => {
+      res.send(admins).status(200);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
 
 module.exports = {
   getAllAdmins,
   postAdmin,
   getAdminById,
+  deleteAdmin,
 };
