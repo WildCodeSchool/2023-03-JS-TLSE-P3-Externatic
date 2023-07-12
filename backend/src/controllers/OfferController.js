@@ -3,7 +3,7 @@ const models = require("../models");
 // ------------Récupérer toutes les offres------------
 const getAllOffers = (req, res) => {
   models.offer
-    .findAll()
+    .findOffer()
     .then(([offers]) => {
       res.send(offers).status(200);
     })

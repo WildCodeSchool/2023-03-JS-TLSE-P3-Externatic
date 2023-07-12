@@ -5,16 +5,14 @@ class OfferManager extends AbstractManager {
     super({ table: "offer" });
   }
 
+  findOffer() {
+    return this.database.query(
+      `select * from ${this.table} INNER JOIN contract_type AS c ON ${this.table}.contract_type_id_offer = c.id`
+    );
+  }
+
   findByFilters(keyword, localization, categories, contract) {
-    let finalQuery = `SELECT * FROM ${this.table}`;
-
-    if (categories.length) {
-      finalQuery += ` JOIN category ON offer.category_id_offer = category.id`;
-    }
-
-    if (contract.length) {
-      finalQuery += ` JOIN contract_type ON offer.contract_type_id_offer = contract_type.id`;
-    }
+    let finalQuery = `SELECT * FROM ${this.table} JOIN category ON offer.category_id_offer = category.id JOIN contract_type ON offer.contract_type_id_offer = contract_type.id`;
 
     if (keyword || localization || categories.length || contract.length) {
       finalQuery += ` WHERE`;
