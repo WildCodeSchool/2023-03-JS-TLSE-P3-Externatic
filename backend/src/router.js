@@ -6,6 +6,8 @@ const {
   verifyEmailForSubscription,
   hashPassword,
   verifyPassword,
+  verifyToken,
+  verifyAdmin,
 } = require("./services/auth");
 
 const { getUserByEmail } = require("./controllers/UserController");
@@ -32,21 +34,17 @@ const {
 const { getAllCategories } = require("./controllers/CategoryController");
 const { getAllContracts } = require("./controllers/ContractController");
 
-// ------------inscription de l'admin------------
-router.post(
-  "/signup/admin",
-  verifyEmailForSubscription,
-  hashPassword,
-  postAdmin
-);
-// ------------inscription du candidat------------
+router.use(express.json());
+
+// ------------GLOBAL ROUTES------------
+// ------------Applicant subscription------------
 router.post(
   "/signup/applicant",
   verifyEmailForSubscription,
   hashPassword,
   postApplicant
 );
-// ------------inscription de l'entreprise------------
+// ------------Company subscription------------
 router.post(
   "/signup/company",
   verifyEmailForSubscription,
@@ -54,25 +52,43 @@ router.post(
   postCompany
 );
 
-// ------------connexion d'un utilisateur------------
+// ------------User connection------------
 router.post("/login", getUserByEmail, verifyPassword);
 
-// ------------offres------------
+// ------------Offers------------
 router.get("/offers", getAllOffers);
 router.post("/filtered-offers", getFilteredOffers);
 
-// ------------catégories------------
+// ------------Categories------------
 router.get("/categories", getAllCategories);
 
-// ------------contrats------------
+// ------------Contracts------------
 router.get("/contracts-type", getAllContracts);
 
-// ------------users------------
-router.get("/admins", getAllAdmins);
-router.delete("/admins/:id", deleteAdmin);
-router.get("/applicants", getAllApplicants);
-router.delete("/applicants/:id", deleteApplicant);
-router.get("/companies", getAllCompanies);
-router.delete("/companies/:id", deleteOfferByCompanyId, deleteCompany);
+// ------------TOKEN WALL------------
+router.use(verifyToken);
+
+// ------------ADMIN ROUTES------------
+// ------------Users management------------
+router.get("/admins", verifyAdmin, getAllAdmins);
+router.delete("/admins/:id", verifyAdmin, deleteAdmin);
+router.get("/applicants", verifyAdmin, getAllApplicants);
+router.delete("/applicants/:id", verifyAdmin, deleteApplicant);
+router.get("/companies", verifyAdmin, getAllCompanies);
+router.delete(
+  "/companies/:id",
+  verifyAdmin,
+  deleteOfferByCompanyId,
+  deleteCompany
+);
+
+// ------------Admin subscription------------
+router.post(
+  "/signup/admin",
+  verifyAdmin,
+  verifyEmailForSubscription,
+  hashPassword,
+  postAdmin
+);
 
 module.exports = router;
