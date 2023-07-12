@@ -3,30 +3,44 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import axios from "axios";
 
-// Import fichier depuis utils
-import ValidationConnexion from "../utils/ValidationConnexion";
+// Import components
+import LinkLogInSubscribe from "../components/LinkLogInSubscribe";
 
 // Import context
 import TokenContext from "../contexts/TokenContext";
+import ValidationFormContext from "../contexts/ValidationFormContext";
 
 function Connexion() {
   const { setUserCookie } = useContext(TokenContext);
-  const [values, setValues] = useState({
-    email: "",
-    password: "",
-  });
-  const navigate = useNavigate();
-  const [errors, setErrors] = useState({});
+  const {
+    formDataLogIn,
+    setFormDataLogIn,
+    errors,
+    setErrors,
+    ValidationConnexion,
+    resetInputOnClick,
+  } = useContext(ValidationFormContext);
+
   const [loginError, setLoginError] = useState(false);
+  const navigate = useNavigate();
 
   const handleInput = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
+    setFormDataLogIn({ ...formDataLogIn, [e.target.name]: e.target.value });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    setErrors(ValidationConnexion(values));
+    setErrors(ValidationConnexion(formDataLogIn));
+
+    if (
+      (formDataLogIn.email === "" && formDataLogIn.password === "") ||
+      (formDataLogIn.email !== "" && formDataLogIn.password === "") ||
+      (formDataLogIn.email === "" && formDataLogIn.password !== "")
+    ) {
+      setLoginError(false);
+      return;
+    }
     axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/login`, values)
+      .post(`${import.meta.env.VITE_BACKEND_URL}/login`, formDataLogIn)
       .then((response) => {
         if (response.data.token) {
           setUserCookie(response.data.token, response.data.user.role);
@@ -41,16 +55,7 @@ function Connexion() {
 
   return (
     <div>
-      <nav className="navBarConnexion">
-        <ul>
-          <li className="signinSelected">
-            <Link to="/subscribe">S'inscrire</Link>
-          </li>
-          <li className="loginSelected">
-            <Link to="/connexion">Se connecter</Link>
-          </li>
-        </ul>
-      </nav>
+      <LinkLogInSubscribe />
       <div className="containerLogin">
         <form className="form connexion" onSubmit={handleSubmit}>
           <div className="containerTextInput">
@@ -70,12 +75,15 @@ function Connexion() {
               className="textInput"
               type="email"
               placeholder="Email"
-              required=""
+              // required
               name="email"
               autoComplete="off"
               onChange={handleInput}
+              onClick={resetInputOnClick}
             />
-            {errors.email && <span className="errorEmail">{errors.email}</span>}
+            {errors.email && (
+              <span className="errorMessage">{errors.email}</span>
+            )}
           </div>
 
           <div className="containerTextInput">
@@ -99,21 +107,24 @@ function Connexion() {
               className="textInput"
               type="password"
               placeholder="Mot de passe"
-              required=""
+              // required
               name="password"
               onChange={handleInput}
+              onClick={resetInputOnClick}
             />
             {errors.password && (
-              <span className="errorPassword">{errors.password}</span>
+              <span className="errorMessage">{errors.password}</span>
             )}
           </div>
           <Link to="/" className="forgottenPassword">
             Mot de passe oublié?
           </Link>
           {loginError && (
-            <span className="errorLogin">Les identifiants sont incorrects</span>
+            <span className="errorLogin">
+              Nous n'avons pas trouvé votre compte
+            </span>
           )}
-          <button type="submit" className="button">
+          <button type="submit" className="button connection">
             Je me connecte
           </button>
         </form>
