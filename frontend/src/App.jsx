@@ -18,6 +18,7 @@ import "./css/pages/Offers.css";
 import "./css/pages/Connexion.css";
 import "./css/pages/MyProfile.css";
 import "./css/components/OfferModal.css";
+import "./css/pages/UsersManagement.css";
 import "./css/components/FormNewUser.css";
 import "./css/pages/Subscribe.css";
 
