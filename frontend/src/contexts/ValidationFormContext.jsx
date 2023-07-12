@@ -100,7 +100,7 @@ export function ValidationFormContextProvider({ children }) {
     // vérification de la confirmation du mot de passe
     if (el.confirmedpassword === "" || el.password === "") {
       error.confirmedpassword = "Veuillez confirmer votre mot de passe";
-    } else if (el.password !== el.confirmedpassword) {
+    } else if (el.confirmedpassword !== el.password) {
       error.confirmedpassword = "Les mots de passe ne correspondent pas";
     } else {
       error.confirmedpassword = "";

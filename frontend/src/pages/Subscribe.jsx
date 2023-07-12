@@ -63,7 +63,7 @@ function Subscribe() {
       axios
         .post(`${import.meta.env.VITE_BACKEND_URL}/signup/applicant`, values)
         .then((response) => {
-          if (response.data.token) {
+          if (response.status === 201) {
             navigate("/login");
           }
         })
@@ -74,7 +74,7 @@ function Subscribe() {
       axios
         .post(`${import.meta.env.VITE_BACKEND_URL}/signup/company`, values)
         .then((response) => {
-          if (response.data.token) {
+          if (response.status === 201) {
             navigate("/login");
           }
         })
@@ -82,7 +82,7 @@ function Subscribe() {
           console.error(err);
         });
     } else {
-      console.error("Votre inscription n'a pu aboutir");
+      console.error("Votre inscription n'a pas abouti");
     }
   };
   return (

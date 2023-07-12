@@ -91,7 +91,7 @@ function FormNewApplicant({ handleInput }) {
           type="text"
           placeholder="Nom"
           required=""
-          name="company name"
+          name="lastname"
           autoComplete="off"
           onChange={handleInput}
         />

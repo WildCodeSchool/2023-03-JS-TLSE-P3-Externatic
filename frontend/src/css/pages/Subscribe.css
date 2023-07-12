@@ -23,10 +23,10 @@
   border-radius: 16px;
   background-color: #fff;
   cursor: pointer;
-
-  &:focus {
-    border: solid var(--main-color);
-  }
+}
+.applicantCard.focused,
+.companyCard.focused {
+  border: solid var(--main-color);
 }
 
 .applicantCard h2,
