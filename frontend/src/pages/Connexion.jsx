@@ -10,9 +10,6 @@ import LinkLogInSubscribe from "../components/LinkLogInSubscribe";
 import TokenContext from "../contexts/TokenContext";
 import ValidationFormContext from "../contexts/ValidationFormContext";
 
-// Import style
-import "../css/pages/Connexion.css";
-
 function Connexion() {
   const { setUserCookie } = useContext(TokenContext);
   const {
