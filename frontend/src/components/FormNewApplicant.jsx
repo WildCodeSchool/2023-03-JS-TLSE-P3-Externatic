@@ -29,7 +29,6 @@ function FormNewApplicant({ handleInput }) {
           <label htmlFor="radio1" className="labelRadioInput miss">
             Madame
           </label>
-          {/* <p>Selected title name: {values.title_name}</p> */}
         </div>
         <div className="containerRadioInput">
           <input
