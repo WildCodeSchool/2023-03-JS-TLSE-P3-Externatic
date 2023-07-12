@@ -9,9 +9,6 @@ import ValidationConnexion from "../utils/ValidationConnexion";
 // Import context
 import TokenContext from "../contexts/TokenContext";
 
-// Import style
-import "../css/pages/Connexion.css";
-
 function Connexion() {
   const { setUserCookie } = useContext(TokenContext);
   const [values, setValues] = useState({
@@ -20,6 +17,7 @@ function Connexion() {
   });
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
+  const [loginError, setLoginError] = useState(false);
 
   const handleInput = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -27,7 +25,6 @@ function Connexion() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors(ValidationConnexion(values));
-
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/login`, values)
       .then((response) => {
@@ -38,6 +35,7 @@ function Connexion() {
       })
       .catch((err) => {
         console.error(err);
+        setLoginError(true);
       });
   };
 
@@ -112,7 +110,9 @@ function Connexion() {
           <Link to="/" className="forgottenPassword">
             Mot de passe oublié?
           </Link>
-
+          {loginError && (
+            <span className="errorLogin">Les identifiants sont incorrects</span>
+          )}
           <button type="submit" className="button">
             Je me connecte
           </button>

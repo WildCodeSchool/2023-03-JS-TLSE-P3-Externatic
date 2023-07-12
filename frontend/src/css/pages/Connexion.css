@@ -32,10 +32,15 @@
   width: max-content;
   margin-top: 5rem;
 }
+
 .forgottenPassword {
   font-size: smaller;
   color: var(--basic-grey);
   padding-left: 9rem;
+}
+
+.errorLogin {
+  color: var(--main-color);
 }
 
 @media screen and (min-width: 768px) {
