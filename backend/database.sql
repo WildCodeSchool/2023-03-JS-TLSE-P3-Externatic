@@ -36,12 +36,12 @@ INSERT INTO `applicant` (title_name, firstname, lastname, email, hashed_password
 
 CREATE TABLE `category` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(80) NOT NULL,
+  `category_name` varchar(80) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- INSERT INTO `category`
-INSERT INTO `category` (name) VALUES ('Design et expérience utilisateur'), ('Développement informatique'), ('Sécurité informatique'), ('Data science et analytique'), ('Infrastructure et réseaux'), ('Gestion de projets et de produits');
+INSERT INTO `category` (category_name) VALUES ('Design et expérience utilisateur'), ('Développement informatique'), ('Sécurité informatique'), ('Data science et analytique'), ('Infrastructure et réseaux'), ('Gestion de projets et de produits');
 
 -- Table structure for table `company`
 CREATE TABLE `company` (
@@ -75,12 +75,12 @@ CREATE TABLE `company_applicant` (
 
 CREATE TABLE `contract_type` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(80) NOT NULL,
+  `contract_type_name` varchar(80) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- INSERT INTO `contract_type`
-INSERT INTO `contract_type` (name) VALUES ('CDI'),('CDD'),('Alternance'),('Freelance'),('Intérim'),('Stage');
+INSERT INTO `contract_type` (contract_type_name) VALUES ('CDI'),('CDD'),('Alternance'),('Freelance'),('Intérim'),('Stage');
 
 -- Table structure for table `offer`
 
