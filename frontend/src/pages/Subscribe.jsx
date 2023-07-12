@@ -15,9 +15,6 @@ import ValidationFormContext from "../contexts/ValidationFormContext";
 import cardApplicant from "../assets/images/card_applicant.png";
 import cardCompany from "../assets/images/card_company.png";
 
-// Import style
-import "../css/pages/Subscribe.css";
-
 function Subscribe() {
   const [showForm, setShowForm] = useState(false);
   const [isApplicantCardFocused, setIsApplicantCardFocused] = useState(false);
@@ -55,6 +52,9 @@ function Subscribe() {
   const navigate = useNavigate();
   const handleInput = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
+    if (values) {
+      setErrors(false);
+    }
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -64,7 +64,9 @@ function Subscribe() {
         .post(`${import.meta.env.VITE_BACKEND_URL}/signup/applicant`, values)
         .then((response) => {
           if (response.status === 201) {
-            navigate("/login");
+            navigate("/connexion");
+          } else if (response.status === 403) {
+            console.error("Ce mail est déjà utilisé");
           }
         })
         .catch((err) => {
@@ -75,7 +77,9 @@ function Subscribe() {
         .post(`${import.meta.env.VITE_BACKEND_URL}/signup/company`, values)
         .then((response) => {
           if (response.status === 201) {
-            navigate("/login");
+            navigate("/connexion");
+          } else if (response.status === 403) {
+            console.error("Ce mail est déjà utilisé");
           }
         })
         .catch((err) => {

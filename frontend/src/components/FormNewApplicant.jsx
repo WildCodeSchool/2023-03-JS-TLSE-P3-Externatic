@@ -5,13 +5,45 @@ import PropTypes from "prop-types";
 // Import context
 import ValidationFormContext from "../contexts/ValidationFormContext";
 
-// Import du style
-import "../css/components/FormNewUser.css";
-
 function FormNewApplicant({ handleInput }) {
-  const { errors } = useContext(ValidationFormContext);
+  const { errors, resetInputOnClick, values, setValues } = useContext(
+    ValidationFormContext
+  );
+  const handleTitleNameMiss = () => {
+    setValues({ ...values, titleName: "Mme" });
+  };
+  const handleTitleNameMister = () => {
+    setValues({ ...values, titleName: "Mr" });
+  };
   return (
     <>
+      <div className="containerTitleName">
+        <div className="containerRadioInput">
+          <input
+            type="radio"
+            id="radio1"
+            className="radioInput"
+            name="titleName"
+            onClick={handleTitleNameMiss}
+          />
+          <label htmlFor="radio1" className="labelRadioInput miss">
+            Madame
+          </label>
+          {/* <p>Selected title name: {values.title_name}</p> */}
+        </div>
+        <div className="containerRadioInput">
+          <input
+            type="radio"
+            id="radio2"
+            className="radioInput"
+            name="titleName"
+            onClick={handleTitleNameMister}
+          />
+          <label htmlFor="radio2" className="labelRadioInput mister">
+            Monsieur
+          </label>
+        </div>
+      </div>
       {/* fisrtname */}
       <div className="containerTextInput">
         <svg
@@ -50,6 +82,7 @@ function FormNewApplicant({ handleInput }) {
           name="firstname"
           autoComplete="off"
           onChange={handleInput}
+          onClick={resetInputOnClick}
         />
         {errors.firstname && (
           <span className="errorMessage">{errors.firstname}</span>
@@ -94,6 +127,7 @@ function FormNewApplicant({ handleInput }) {
           name="lastname"
           autoComplete="off"
           onChange={handleInput}
+          onClick={resetInputOnClick}
         />
         {errors.lastname && (
           <span className="errorMessage">{errors.lastname}</span>
@@ -122,6 +156,7 @@ function FormNewApplicant({ handleInput }) {
           name="email"
           autoComplete="off"
           onChange={handleInput}
+          onClick={resetInputOnClick}
         />
         {errors.email && <span className="errorMessage">{errors.email}</span>}
       </div>
@@ -150,6 +185,7 @@ function FormNewApplicant({ handleInput }) {
           required=""
           name="password"
           onChange={handleInput}
+          onClick={resetInputOnClick}
         />
         {errors.password && (
           <span className="errorMessage">{errors.password}</span>
@@ -180,6 +216,7 @@ function FormNewApplicant({ handleInput }) {
           required=""
           name="confirmedPassword"
           onChange={handleInput}
+          onClick={resetInputOnClick}
         />
         {errors.confirmedpassword && (
           <span className="errorMessage">{errors.confirmedpassword}</span>

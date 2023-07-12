@@ -8,15 +8,16 @@ export default ValidationFormContext;
 export function ValidationFormContextProvider({ children }) {
   const [errors, setErrors] = useState({});
   const [values, setValues] = useState({
+    titleName: "",
     firstname: "",
     lastname: "",
-    companyName: "",
-    siret: "",
+    name: "",
+    siret: 0,
     email: "",
     password: "",
     confirmedPassword: "",
   });
-  const handleInputClick = () => {
+  const resetInputOnClick = () => {
     setErrors(false);
   };
   function ValidationConnexion(el) {
@@ -29,14 +30,16 @@ export function ValidationFormContextProvider({ children }) {
 
     const siretPattern = /^\d{14}$/;
 
-    const passwordPattern =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/;
+    // vérification madame ou monsieur coché
+    if (!el.titleName || !el.titleName) {
+      error.titleName = "Veuillez cocher Madame ou Monsieur";
+    } else {
+      error.titleName = "";
+    }
 
     // vérification du prénom
     if (el.firstname === "") {
       error.firstname = "Veuillez saisir votre prénom";
-    } else if (el.firstname.length > 20) {
-      error.firstname = "Le prénom est trop long";
     } else if (!namePattern.test(el.firstname)) {
       error.firstname = "Le prénom ne doit contenir que des lettres";
     } else {
@@ -46,8 +49,6 @@ export function ValidationFormContextProvider({ children }) {
     // vérification du nom
     if (el.lastname === "") {
       error.lastname = "Veuillez saisir votre nom";
-    } else if (el.lastname.length > 20) {
-      error.lastname = "Le nom est trop long";
     } else if (!namePattern.test(el.lastname)) {
       error.lastname = "Le nom ne doit contenir que des lettres";
     } else {
@@ -55,21 +56,19 @@ export function ValidationFormContextProvider({ children }) {
     }
 
     // vérification du nom de l'entreprise
-    if (el.companyName === "") {
-      error.companyName = "Veuillez saisir le nom de l'entreprise";
-    } else if (el.companyName.length > 30) {
-      error.companyName = "Le nom de l'entreprise est trop long";
-    } else if (!namePattern.test(el.companyName)) {
-      error.companyName = "Le nom ne doit contenir que des lettres";
+    if (el.name === "") {
+      error.name = "Veuillez saisir le nom de l'entreprise";
+    } else if (!namePattern.test(el.name)) {
+      error.name = "Le nom ne doit contenir que des lettres";
     } else {
-      error.companyName = "";
+      error.name = "";
     }
 
     // vérification du SIRET
     if (el.siret === "") {
       error.siret = "Veuillez saisir le SIRET de l'entreprise";
-    } else if (el.siret.length !== 15) {
-      error.siret = "Le SIRET doit faire contenir 15 chiffres";
+    } else if (el.siret.length !== 14) {
+      error.siret = "Le SIRET doit faire contenir 14 chiffres";
     } else if (!siretPattern.test(el.siret)) {
       error.siret = "Le SIRET ne doit contenir que des chiffres";
     } else {
@@ -88,11 +87,8 @@ export function ValidationFormContextProvider({ children }) {
     // vérification du mot de passe
     if (el.password === "") {
       error.password = "Le mot de passe est requis";
-    } else if (el.password.length < 8) {
-      error.password = "Le mot de passe doit contenir 8 caractères minimum ";
-    } else if (!passwordPattern.test(el.password)) {
-      error.password =
-        "Le mot de passe doit contenir au moins 8 caractères, une majuscule, un chiffre et un caractère spécial";
+    } else if (el.password.length < 4) {
+      error.password = "Le mot de passe doit contenir 4 caractères minimum ";
     } else {
       error.password = "";
     }
@@ -115,9 +111,9 @@ export function ValidationFormContextProvider({ children }) {
       errors,
       setErrors,
       ValidationConnexion,
-      handleInputClick,
+      resetInputOnClick,
     };
-  });
+  }, [values, errors]);
   return (
     <ValidationFormContext.Provider value={ValidationFormContextValue}>
       {children}

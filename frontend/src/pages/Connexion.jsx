@@ -18,7 +18,7 @@ function Connexion() {
     errors,
     setErrors,
     ValidationConnexion,
-    handleInputClick,
+    resetInputOnClick,
   } = useContext(ValidationFormContext);
 
   const [loginError, setLoginError] = useState(false);
@@ -79,7 +79,7 @@ function Connexion() {
               name="email"
               autoComplete="off"
               onChange={handleInput}
-              onClick={handleInputClick}
+              onClick={resetInputOnClick}
             />
             {errors.email && (
               <span className="errorMessage">{errors.email}</span>
@@ -110,7 +110,7 @@ function Connexion() {
               required=""
               name="password"
               onChange={handleInput}
-              onClick={handleInputClick}
+              onClick={resetInputOnClick}
             />
             {errors.password && (
               <span className="errorMessage">{errors.password}</span>

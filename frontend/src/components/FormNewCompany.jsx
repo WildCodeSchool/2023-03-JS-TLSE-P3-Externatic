@@ -9,7 +9,7 @@ import ValidationFormContext from "../contexts/ValidationFormContext";
 import "../css/components/FormNewUser.css";
 
 function FormNewCompany({ handleInput }) {
-  const { errors } = useContext(ValidationFormContext);
+  const { errors, resetInputOnClick } = useContext(ValidationFormContext);
   return (
     <>
       <div className="containerTextInput">
@@ -30,13 +30,12 @@ function FormNewCompany({ handleInput }) {
           type="text"
           placeholder="Nom de l'entreprise"
           required=""
-          name="lastname"
-          autoComplete="off"
+          name="name"
+          autoComplete="on"
           onChange={handleInput}
+          onClick={resetInputOnClick}
         />
-        {errors.companyName && (
-          <span className="errorMessage">{errors.companyName}</span>
-        )}
+        {errors.name && <span className="errorMessage">{errors.name}</span>}
       </div>
 
       <div className="containerTextInput">
@@ -58,8 +57,9 @@ function FormNewCompany({ handleInput }) {
           placeholder="Numéro SIRET"
           required=""
           name="siret"
-          autoComplete="off"
+          autoComplete="on"
           onChange={handleInput}
+          onClick={resetInputOnClick}
         />
         {errors.siret && <span className="errorMessage">{errors.siret}</span>}
       </div>
@@ -84,8 +84,9 @@ function FormNewCompany({ handleInput }) {
           placeholder="Email"
           required=""
           name="email"
-          autoComplete="off"
+          autoComplete="on"
           onChange={handleInput}
+          onClick={resetInputOnClick}
         />
         {errors.email && <span className="errorMessage">{errors.email}</span>}
       </div>
@@ -114,6 +115,7 @@ function FormNewCompany({ handleInput }) {
           required=""
           name="password"
           onChange={handleInput}
+          onClick={resetInputOnClick}
         />
         {errors.password && (
           <span className="errorMessage">{errors.password}</span>
@@ -142,8 +144,9 @@ function FormNewCompany({ handleInput }) {
           type="password"
           placeholder="Confirmation mot de passe"
           required=""
-          name="password"
+          name="confirmedpassword"
           onChange={handleInput}
+          onClick={resetInputOnClick}
         />
         {errors.confirmedpassword && (
           <span className="errorMessage">{errors.confirmedpassword}</span>
