@@ -187,17 +187,21 @@ function Offers() {
         </button>
       </form>
       <div className="offersListContainer">
-        {offersList.length
-          ? offersList.map((el) => (
-              <OfferCardList
-                key={el.id}
-                offer={el}
-                modalOfferIsOpen={modalOfferIsOpen}
-                setModalOfferIsOpen={setModalOfferIsOpen}
-                onCardClick={handleOpenModalOffer}
-              />
-            ))
-          : "Chargement..."}
+        {offersList.length ? (
+          offersList.map((el) => (
+            <OfferCardList
+              key={el.id}
+              offer={el}
+              modalOfferIsOpen={modalOfferIsOpen}
+              setModalOfferIsOpen={setModalOfferIsOpen}
+              onCardClick={handleOpenModalOffer}
+            />
+          ))
+        ) : (
+          <div className="globalContainer">
+            <h3 className="errorTitle">Pas de résultat</h3>
+          </div>
+        )}
       </div>
     </div>
   );
