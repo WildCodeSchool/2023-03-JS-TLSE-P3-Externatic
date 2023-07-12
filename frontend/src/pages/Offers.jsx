@@ -15,6 +15,7 @@ function Offers() {
   const [isContractOpen, setIsContractOpen] = useState(false);
   const [modalOfferIsOpen, setModalOfferIsOpen] = useState(false);
   const [selectedOffer, setSelectedOffer] = useState([]);
+  // const [offerFavorite, setOfferFavorite] = useState([]);
 
   const handleOpenModalOffer = (offerId) => {
     const findOffer = offersList.find((offer) => offer.id === offerId);
@@ -71,7 +72,21 @@ function Offers() {
       .get(`${import.meta.env.VITE_BACKEND_URL}/contracts-type`)
       .then((results) => setContractList(results.data));
   }, []);
-
+  // const handleClickOfferIsFavorite = (applicantId, offerId) => {
+  //   axios
+  //     .post(
+  //       `${import.meta.env.VITE_BACKEND_URL}/favorites`,
+  //       { applicantId: applicant.id, offerId: offersList.id },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${userToken}`,
+  //         },
+  //       }
+  //     )
+  //     .then((results) => {
+  //       setOfferFavorite(results.data);
+  //     });
+  // };
   return (
     <div className="offersPage">
       <OfferModal

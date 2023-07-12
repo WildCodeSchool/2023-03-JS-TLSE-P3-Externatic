@@ -18,6 +18,7 @@ const {
 } = require("./controllers/OfferController");
 const { getAllCategories } = require("./controllers/CategoryController");
 const { getAllContracts } = require("./controllers/ContractController");
+const { addFavorite } = require("./controllers/FavoriteController");
 
 // ------------inscription de l'admin------------
 router.post(
@@ -53,5 +54,9 @@ router.get("/categories", getAllCategories);
 
 // ------------contrats------------
 router.get("/contracts-type", getAllContracts);
+
+// ------------offres favorites------------
+router.get("/favorites");
+router.post("/favorites", addFavorite);
 
 module.exports = router;
