@@ -18,7 +18,6 @@
   padding: 1rem;
 }
 
-
 .loginLink a,
 .signinLink a {
   color: var(--basic-grey);
@@ -31,18 +30,16 @@
   .loginLink a,
   .signinLink a {
     font-size: 1.4rem;
-    
   }
 
-  .navBarConnexion{
+  .navBarConnexion {
     margin: 4rem;
   }
 
-  .signinLinkSelected a{
+  .signinLinkSelected a {
     padding-right: 4rem;
   }
-  .loginLinkSelected a{
+  .loginLinkSelected a {
     padding-left: 4rem;
   }
-
 }

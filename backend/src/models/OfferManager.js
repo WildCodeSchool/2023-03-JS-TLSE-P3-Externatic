@@ -7,7 +7,7 @@ class OfferManager extends AbstractManager {
 
   findOffer() {
     return this.database.query(
-      `select * from ${this.table} INNER JOIN contract_type AS c ON ${this.table}.contract_type_id_offer = c.id`
+      `select o.id, o.title, o.company_id, o.city, o.contract_type_id_offer, o.job_responsibilities, o.technical_environment, o.benefits, o.category_id_offer, c.contract_type_name, company.name AS company_name from ${this.table} AS o INNER JOIN contract_type AS c ON o.contract_type_id_offer = c.id INNER JOIN company ON o.company_id = company.id`
     );
   }
 
