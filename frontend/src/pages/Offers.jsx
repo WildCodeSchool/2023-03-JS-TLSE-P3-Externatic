@@ -113,22 +113,24 @@ function Offers() {
             <hr className="divider" />
 
             <div className="selectOptionsContainer">
-              {categoriesList
-                ? categoriesList.map((el) => (
-                    <div value="" className="selectOption" key={el.id}>
-                      <input
-                        type="checkbox"
-                        className="optionCheckbox"
-                        id={el.category_name}
-                        name={el.category_name}
-                        onChange={() => handleCheck(el, "category")}
-                      />
-                      <label htmlFor={el.category_name} className="optionLabel">
-                        {el.category_name}
-                      </label>
-                    </div>
-                  ))
-                : "Chargement..."}
+              {categoriesList.length ? (
+                categoriesList.map((el) => (
+                  <div value="" className="selectOption" key={el.id}>
+                    <input
+                      type="checkbox"
+                      className="optionCheckbox"
+                      id={el.category_name}
+                      name={el.category_name}
+                      onChange={() => handleCheck(el, "category")}
+                    />
+                    <label htmlFor={el.category_name} className="optionLabel">
+                      {el.category_name}
+                    </label>
+                  </div>
+                ))
+              ) : (
+                <h3 className="errorTitle">Chargement...</h3>
+              )}
             </div>
           </div>
         </div>
@@ -145,25 +147,27 @@ function Offers() {
             <hr className="divider" />
 
             <div className="selectOptionsContainer">
-              {contractList
-                ? contractList.map((el) => (
-                    <div value="" className="selectOption" key={el.id}>
-                      <input
-                        type="checkbox"
-                        className="optionCheckbox"
-                        id={el.contract_type_name}
-                        name={el.contract_type_name}
-                        onChange={() => handleCheck(el, "contract")}
-                      />
-                      <label
-                        htmlFor={el.contract_type_name}
-                        className="optionLabel"
-                      >
-                        {el.contract_type_name}
-                      </label>
-                    </div>
-                  ))
-                : "Chargement..."}
+              {contractList.length ? (
+                contractList.map((el) => (
+                  <div value="" className="selectOption" key={el.id}>
+                    <input
+                      type="checkbox"
+                      className="optionCheckbox"
+                      id={el.contract_type_name}
+                      name={el.contract_type_name}
+                      onChange={() => handleCheck(el, "contract")}
+                    />
+                    <label
+                      htmlFor={el.contract_type_name}
+                      className="optionLabel"
+                    >
+                      {el.contract_type_name}
+                    </label>
+                  </div>
+                ))
+              ) : (
+                <h3 className="errorTitle">Chargement...</h3>
+              )}
             </div>
           </div>
         </div>

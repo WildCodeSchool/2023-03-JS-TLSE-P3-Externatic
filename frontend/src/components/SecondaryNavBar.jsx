@@ -31,12 +31,12 @@ function SecondaryNavBar() {
             Les utilisateurs
           </NavLink>
           <NavLink
-            to="./reports-management"
+            to="./fields-management"
             className={({ isActive }) => {
               return isActive ? "linkSelected" : "";
             }}
           >
-            Signalements
+            Les champs
           </NavLink>
           <NavLink
             to="./my-profile"
