@@ -92,9 +92,23 @@ const verifyToken = (req, res, next) => {
   }
 };
 
+const verifyAdmin = (req, res, next) => {
+  try {
+    if (req.payload.role !== "admin") {
+      res.sendStatus(403);
+    } else {
+      next();
+    }
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(401);
+  }
+};
+
 module.exports = {
   verifyEmailForSubscription,
   hashPassword,
   verifyPassword,
   verifyToken,
+  verifyAdmin,
 };

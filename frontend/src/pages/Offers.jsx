@@ -3,6 +3,7 @@ import axios from "axios";
 
 // import des composants
 import OfferCardList from "../components/OfferCardList";
+import OfferModal from "../components/OfferModal";
 
 function Offers() {
   const [offersList, setOffersList] = useState([]);
@@ -12,6 +13,14 @@ function Offers() {
   const [localizationInput, setLocalizationInput] = useState("");
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [isContractOpen, setIsContractOpen] = useState(false);
+  const [modalOfferIsOpen, setModalOfferIsOpen] = useState(false);
+  const [selectedOffer, setSelectedOffer] = useState([]);
+
+  const handleOpenModalOffer = (offerId) => {
+    const findOffer = offersList.find((offer) => offer.id === offerId);
+    setSelectedOffer(findOffer);
+    setModalOfferIsOpen(true);
+  };
 
   const handleCheck = (el, list) => {
     if (list === "category") {
@@ -65,6 +74,11 @@ function Offers() {
 
   return (
     <div className="offersPage">
+      <OfferModal
+        modalOfferIsOpen={modalOfferIsOpen}
+        setModalOfferIsOpen={setModalOfferIsOpen}
+        offer={selectedOffer}
+      />
       <form onSubmit={handleSubmit} className="form formOffersFilters">
         <div className="containerTextInput">
           <input
@@ -105,12 +119,12 @@ function Offers() {
                       <input
                         type="checkbox"
                         className="optionCheckbox"
-                        id={el.name}
-                        name={el.name}
+                        id={el.category_name}
+                        name={el.category_name}
                         onChange={() => handleCheck(el, "category")}
                       />
-                      <label htmlFor={el.name} className="optionLabel">
-                        {el.name}
+                      <label htmlFor={el.category_name} className="optionLabel">
+                        {el.category_name}
                       </label>
                     </div>
                   ))
@@ -137,12 +151,15 @@ function Offers() {
                       <input
                         type="checkbox"
                         className="optionCheckbox"
-                        id={el.name}
-                        name={el.name}
+                        id={el.contract_type_name}
+                        name={el.contract_type_name}
                         onChange={() => handleCheck(el, "contract")}
                       />
-                      <label htmlFor={el.name} className="optionLabel">
-                        {el.name}
+                      <label
+                        htmlFor={el.contract_type_name}
+                        className="optionLabel"
+                      >
+                        {el.contract_type_name}
                       </label>
                     </div>
                   ))
@@ -155,9 +172,21 @@ function Offers() {
         </button>
       </form>
       <div className="offersListContainer">
-        {offersList.length
-          ? offersList.map((el) => <OfferCardList key={el.id} offer={el} />)
-          : "Chargement..."}
+        {offersList.length ? (
+          offersList.map((el) => (
+            <OfferCardList
+              key={el.id}
+              offer={el}
+              modalOfferIsOpen={modalOfferIsOpen}
+              setModalOfferIsOpen={setModalOfferIsOpen}
+              onCardClick={handleOpenModalOffer}
+            />
+          ))
+        ) : (
+          <div className="globalContainer">
+            <h3 className="errorTitle">Pas de résultat</h3>
+          </div>
+        )}
       </div>
     </div>
   );
