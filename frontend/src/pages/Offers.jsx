@@ -1,5 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
+
+// Import context
+import FiltersContext from "../contexts/FiltersContext";
 
 // import des composants
 import OfferCardList from "../components/OfferCardList";
@@ -7,14 +10,14 @@ import OfferModal from "../components/OfferModal";
 
 function Offers() {
   const [offersList, setOffersList] = useState([]);
-  const [categoriesList, setCategoriesList] = useState([]);
-  const [contractList, setContractList] = useState([]);
   const [keywordInput, setKeywordInput] = useState("");
   const [localizationInput, setLocalizationInput] = useState("");
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [isContractOpen, setIsContractOpen] = useState(false);
   const [modalOfferIsOpen, setModalOfferIsOpen] = useState(false);
   const [selectedOffer, setSelectedOffer] = useState([]);
+  const { categoriesList, contractList, getCategories, getContracts } =
+    useContext(FiltersContext);
 
   const handleOpenModalOffer = (offerId) => {
     const findOffer = offersList.find((offer) => offer.id === offerId);
@@ -63,13 +66,8 @@ function Offers() {
       .get(`${import.meta.env.VITE_BACKEND_URL}/offers`)
       .then((results) => setOffersList(results.data));
 
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/categories`)
-      .then((results) => setCategoriesList(results.data));
-
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/contracts-type`)
-      .then((results) => setContractList(results.data));
+    getCategories();
+    getContracts();
   }, []);
 
   return (

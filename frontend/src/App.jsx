@@ -19,28 +19,32 @@ import "./css/pages/Connexion.css";
 import "./css/pages/MyProfile.css";
 import "./css/components/OfferModal.css";
 import "./css/pages/UsersManagement.css";
+import "./css/pages/FieldsManagement.css";
 
 // Import des contexts
 import { MenuContextProvider } from "./contexts/MenuContext";
 import { TokenContextProvider } from "./contexts/TokenContext";
+import { FiltersContextProvider } from "./contexts/FiltersContext";
 
 function App() {
   return (
     <div className="App">
-      <MenuContextProvider>
-        <TokenContextProvider>
-          <Router>
-            <MainNavBar />
-            <Routes>
-              <Route path="" element={<Home />} />
-              <Route path="connexion" element={<Connexion />} />
-              <Route path="subscribe" element={<Subscribe />} />
-              <Route path="offers" element={<Offers />} />
-              <Route path="dashboard/*" element={<Dashboard />} />
-            </Routes>
-          </Router>
-        </TokenContextProvider>
-      </MenuContextProvider>
+      <FiltersContextProvider>
+        <MenuContextProvider>
+          <TokenContextProvider>
+            <Router>
+              <MainNavBar />
+              <Routes>
+                <Route path="" element={<Home />} />
+                <Route path="connexion" element={<Connexion />} />
+                <Route path="subscribe" element={<Subscribe />} />
+                <Route path="offers" element={<Offers />} />
+                <Route path="dashboard/*" element={<Dashboard />} />
+              </Routes>
+            </Router>
+          </TokenContextProvider>
+        </MenuContextProvider>
+      </FiltersContextProvider>
     </div>
   );
 }

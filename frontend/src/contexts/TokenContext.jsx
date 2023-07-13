@@ -17,6 +17,9 @@ export function TokenContextProvider({ children }) {
       Cookies.set("userToken", token, {
         expires: 1 / 24,
       });
+      Cookies.set("userRole", role, {
+        expires: 1 / 24,
+      });
       setUserToken(token);
       setUserRole(role);
     } else {
