@@ -18,7 +18,7 @@
 /* Font sizes */
 * {
   font-size: 1rem;
-  font-family: "Jost", sans-serif;
+  font-family: "Jost", sans-serif !important;
 }
 
 h1,
@@ -152,6 +152,7 @@ a:hover {
   margin: 1rem 0;
   border: none;
   background: transparent;
+  width: 100%;
   &:focus {
     outline: none;
   }
