@@ -1,41 +1,16 @@
-.navBarConnexion {
-  display: flex;
-  justify-content: center;
-  margin: 3rem;
-}
-
-.navBarConnexion li {
-  display: inline-block;
-}
-
-.loginSelected a {
-  font-weight: bold;
-  font-size: larger;
-  text-decoration: underline 0.15rem;
-  text-underline-offset: 0.5rem;
-  color: black;
-}
-
-.signinSelected a {
-  color: var(--basic-grey);
-  text-decoration: none;
-  margin: auto 3rem auto 1.5rem;
-  font-size: larger;
-}
-
-.errorEmail,
-.errorPassword {
+.errorMessage {
   color: var(--main-color);
   font-style: italic;
   font-size: smaller;
   position: absolute;
-  width: max-content;
+  width: 100%;
   margin-top: 5rem;
 }
 
 .forgottenPassword {
   font-size: smaller;
   color: var(--basic-grey);
+  padding-top: 1rem;
   padding-left: 9rem;
 }
 
@@ -44,11 +19,6 @@
 }
 
 @media screen and (min-width: 768px) {
-  .loginSelected a,
-  .signinSelected a {
-    font-size: 1.7rem;
-    margin: 2rem;
-  }
   .containerLogin {
     background-image: url("../../assets/images/admin-connexion.png");
     background-size: 50%;
@@ -67,5 +37,8 @@
   .form.connexion {
     margin: 6rem 5rem;
     width: fit-content;
+    height: 25rem;
+    justify-content: space-around;
   }
+
 }

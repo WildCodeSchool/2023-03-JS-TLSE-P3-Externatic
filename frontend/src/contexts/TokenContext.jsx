@@ -1,5 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-
 // Import packages
 import { createContext, useState, useMemo } from "react";
 import Cookies from "js-cookie";
