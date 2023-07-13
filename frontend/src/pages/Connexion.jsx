@@ -1,5 +1,5 @@
 // Import packages
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import axios from "axios";
 
@@ -116,9 +116,6 @@ function Connexion() {
               <span className="errorMessage">{errors.password}</span>
             )}
           </div>
-          <Link to="/" className="forgottenPassword">
-            Mot de passe oublié?
-          </Link>
           {loginError && (
             <span className="errorLogin">
               Nous n'avons pas trouvé votre compte
