@@ -33,7 +33,10 @@ const {
 } = require("./controllers/OfferController");
 const { getAllCategories } = require("./controllers/CategoryController");
 const { getAllContracts } = require("./controllers/ContractController");
-const { addFavorite } = require("./controllers/FavoriteController");
+const {
+  addFavorite,
+  getAllFavories,
+} = require("./controllers/FavoriteController");
 
 router.use(express.json());
 
@@ -68,7 +71,6 @@ router.get("/contracts-type", getAllContracts);
 
 // ------------offres favorites------------
 router.get("/favorites");
-router.post("/favorites", addFavorite);
 
 // ------------TOKEN WALL------------
 router.use(verifyToken);
@@ -95,5 +97,8 @@ router.post(
   hashPassword,
   postAdmin
 );
-
+// ------------APPLICANT ROUTES------------
+// ------------Applicants favorites------------
+router.post("/favorites", addFavorite);
+router.get("/favorites", getAllFavories);
 module.exports = router;

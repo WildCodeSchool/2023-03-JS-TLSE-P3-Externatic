@@ -1,5 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
+
+// Import context
+import TokenContext from "../contexts/TokenContext";
 
 // import des composants
 import OfferCardList from "../components/OfferCardList";
@@ -15,7 +18,7 @@ function Offers() {
   const [isContractOpen, setIsContractOpen] = useState(false);
   const [modalOfferIsOpen, setModalOfferIsOpen] = useState(false);
   const [selectedOffer, setSelectedOffer] = useState([]);
-  // const [offerFavorite, setOfferFavorite] = useState([]);
+  const { userToken } = useContext(TokenContext);
 
   const handleOpenModalOffer = (offerId) => {
     const findOffer = offersList.find((offer) => offer.id === offerId);
@@ -72,21 +75,21 @@ function Offers() {
       .get(`${import.meta.env.VITE_BACKEND_URL}/contracts-type`)
       .then((results) => setContractList(results.data));
   }, []);
-  // const handleClickOfferIsFavorite = (applicantId, offerId) => {
-  //   axios
-  //     .post(
-  //       `${import.meta.env.VITE_BACKEND_URL}/favorites`,
-  //       { applicantId: applicant.id, offerId: offersList.id },
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${userToken}`,
-  //         },
-  //       }
-  //     )
-  //     .then((results) => {
-  //       setOfferFavorite(results.data);
-  //     });
-  // };
+  const addFavorite = (e, offer) => {
+    e.preventDefault();
+    const favoriteData = {
+      offerId: offer.id,
+    };
+    axios.post(
+      `${import.meta.env.VITE_BACKEND_URL}/favorites`,
+      { favoriteData },
+      {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      }
+    );
+  };
   return (
     <div className="offersPage">
       <OfferModal
@@ -195,6 +198,7 @@ function Offers() {
               modalOfferIsOpen={modalOfferIsOpen}
               setModalOfferIsOpen={setModalOfferIsOpen}
               onCardClick={handleOpenModalOffer}
+              addFavorite={addFavorite}
             />
           ))
         ) : (

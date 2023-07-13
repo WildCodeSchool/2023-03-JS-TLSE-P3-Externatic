@@ -33,25 +33,6 @@ const postAdmin = (req, res) => {
     });
 };
 
-// ------------Admin by ID------------
-
-const getAdminById = (req, res) => {
-  const { sub } = req.payload;
-  models.admin
-    .findId(sub)
-    .then(([result]) => {
-      if (result.affectedRows === 0) {
-        res.sendStatus(404);
-      } else {
-        res.sendStatus(204);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
-};
-
 // ------------Delete Admin------------
 const deleteAdmin = (req, res) => {
   const { id } = req.params;
@@ -69,6 +50,5 @@ const deleteAdmin = (req, res) => {
 module.exports = {
   getAllAdmins,
   postAdmin,
-  getAdminById,
   deleteAdmin,
 };

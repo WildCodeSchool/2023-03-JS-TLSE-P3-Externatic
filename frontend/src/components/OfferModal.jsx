@@ -33,10 +33,7 @@ function OfferModal({ modalOfferIsOpen, setModalOfferIsOpen, offer }) {
         content: {
           border: "1px solid #ccc",
           borderRadius: "4px",
-          height: "100%",
-          margin: "auto",
-          inset: "1rem 0.4rem 0 0.4rem",
-          padding: "0.5rem",
+          inset: "0",
         },
       }}
     >

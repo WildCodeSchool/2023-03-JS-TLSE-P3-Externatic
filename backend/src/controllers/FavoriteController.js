@@ -1,7 +1,8 @@
 const models = require("../models");
 // ------------Ajouter une offre en favori------------
 const addFavorite = (req, res) => {
-  const { applicantId, offerId } = req.body;
+  const { offerId } = req.body;
+  const applicantId = req.payload.sub;
   models.applicant_offer_favorites
     .insertFavorite(applicantId, offerId)
     .then(([favorites]) => {

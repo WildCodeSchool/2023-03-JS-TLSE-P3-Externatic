@@ -5,8 +5,7 @@ class FavoriteManager extends AbstractManager {
     super({ table: "applicant_offer_favorites" });
   }
 
-  insertFavorite(favorite) {
-    const { applicantId, offerId } = favorite;
+  insertFavorite(applicantId, offerId) {
     return this.database.query(
       `insert into ${this.table} (applicant_id_applicant_offer_favorites, offer_id_applicant_offer_favorites) values (?, ?)`,
       [applicantId, offerId]

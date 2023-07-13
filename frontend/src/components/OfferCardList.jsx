@@ -9,7 +9,7 @@ import iconWhiteHeartFill from "../assets/icons/white_heart_fill.svg";
 import iconWhiteCity from "../assets/icons/white_city_fill.svg";
 import iconWhiteContract from "../assets/icons/contract_white.svg";
 
-function OfferCardList({ offer, onCardClick }) {
+function OfferCardList({ offer, onCardClick, addFavorite }) {
   const { id, title, city, contract_type_name } = offer;
   const [offerIsFavorite, setOfferIsFavorite] = useState(false);
   const handleClickOfferIsFavorite = () => {
@@ -23,7 +23,13 @@ function OfferCardList({ offer, onCardClick }) {
       <div className="offerCardColor">
         <div className="offerTitleAndIcon">
           <h3 className="titleOfferCard">{title}</h3>
-          <button type="button" onClick={handleClickOfferIsFavorite}>
+          <button
+            type="button"
+            onClick={(e) => {
+              handleClickOfferIsFavorite();
+              addFavorite(e, offer);
+            }}
+          >
             <img
               src={offerIsFavorite ? iconWhiteHeartFill : iconWhiteHeartEmpty}
               alt="icon add favorite"
@@ -55,6 +61,7 @@ OfferCardList.propTypes = {
     contract_type_name: PropTypes.string,
   }).isRequired,
   onCardClick: PropTypes.func.isRequired,
+  addFavorite: PropTypes.func.isRequired,
 };
 
 export default OfferCardList;
