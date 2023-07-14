@@ -19,11 +19,14 @@ import "./css/pages/Connexion.css";
 import "./css/pages/MyProfile.css";
 import "./css/components/OfferModal.css";
 import "./css/pages/UsersManagement.css";
+import "./css/components/FormNewUser.css";
+import "./css/pages/Subscribe.css";
 import "./css/pages/FieldsManagement.css";
 
 // Import des contexts
 import { MenuContextProvider } from "./contexts/MenuContext";
 import { TokenContextProvider } from "./contexts/TokenContext";
+import { ValidationFormContextProvider } from "./contexts/ValidationFormContext";
 import { FiltersContextProvider } from "./contexts/FiltersContext";
 
 function App() {
@@ -32,16 +35,18 @@ function App() {
       <FiltersContextProvider>
         <MenuContextProvider>
           <TokenContextProvider>
-            <Router>
-              <MainNavBar />
-              <Routes>
-                <Route path="" element={<Home />} />
-                <Route path="connexion" element={<Connexion />} />
-                <Route path="subscribe" element={<Subscribe />} />
-                <Route path="offers" element={<Offers />} />
-                <Route path="dashboard/*" element={<Dashboard />} />
-              </Routes>
-            </Router>
+            <ValidationFormContextProvider>
+              <Router>
+                <MainNavBar />
+                <Routes>
+                  <Route path="" element={<Home />} />
+                  <Route path="connexion" element={<Connexion />} />
+                  <Route path="subscribe" element={<Subscribe />} />
+                  <Route path="offers" element={<Offers />} />
+                  <Route path="dashboard/*" element={<Dashboard />} />
+                </Routes>
+              </Router>
+            </ValidationFormContextProvider>
           </TokenContextProvider>
         </MenuContextProvider>
       </FiltersContextProvider>
