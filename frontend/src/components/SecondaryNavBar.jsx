@@ -20,7 +20,7 @@ function SecondaryNavBar() {
               return isActive ? "linkSelected" : "";
             }}
           >
-            Les offres
+            Gestion des offres
           </NavLink>
           <NavLink
             to="./users-management"
@@ -28,15 +28,15 @@ function SecondaryNavBar() {
               return isActive ? "linkSelected" : "";
             }}
           >
-            Les utilisateurs
+            Gestion des utilisateurs
           </NavLink>
           <NavLink
-            to="./reports-management"
+            to="./fields-management"
             className={({ isActive }) => {
               return isActive ? "linkSelected" : "";
             }}
           >
-            Signalements
+            Gestion des filtres
           </NavLink>
           <NavLink
             to="./my-profile"
