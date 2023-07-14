@@ -23,7 +23,7 @@ export function ValidationFormContextProvider({ children }) {
   });
 
   const resetInputOnClick = () => {
-    setErrors(false);
+    setErrors({});
   };
   function ValidationConnexion(el) {
     const error = {};
