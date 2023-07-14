@@ -12,9 +12,11 @@ function FieldsManagement() {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [isNewCategoryOpen, setIsNewCategoryOpen] = useState(false);
   const [newCategoryContent, setNewCategoryContent] = useState("");
+  const [categoryShowError, setCategoryShowError] = useState(false);
   const [isContractOpen, setIsContractOpen] = useState(false);
   const [isNewContractOpen, setIsNewContractOpen] = useState(false);
   const [newContractContent, setNewConctractContent] = useState("");
+  const [contractShowError, setContractShowError] = useState(false);
 
   const { userToken } = useContext(TokenContext);
   const { categoriesList, contractList, getCategories, getContracts } =
@@ -48,6 +50,13 @@ function FieldsManagement() {
       .then(() => {
         getCategories();
         setIsNewCategoryOpen(false);
+        setCategoryShowError(false);
+        setNewCategoryContent("");
+      })
+      .catch((err) => {
+        if (err.response.status === 403) {
+          setCategoryShowError(true);
+        }
       });
   };
 
@@ -79,6 +88,13 @@ function FieldsManagement() {
       .then(() => {
         getContracts();
         setIsNewContractOpen(false);
+        setContractShowError(false);
+        setNewConctractContent("");
+      })
+      .catch((err) => {
+        if (err.response.status === 403) {
+          setContractShowError(true);
+        }
       });
   };
 
@@ -142,7 +158,7 @@ function FieldsManagement() {
                 >
                   <input
                     type="text"
-                    placeholder="Nom de la catégorie"
+                    placeholder="Catégorie"
                     className="textInput"
                     onChange={(e) => {
                       setNewCategoryContent(e.target.value);
@@ -153,6 +169,11 @@ function FieldsManagement() {
                   </button>
                 </form>
                 <hr />
+                {categoryShowError ? (
+                  <p className="error">
+                    Veuillez renseigner un nom pour cette catégorie.
+                  </p>
+                ) : null}
               </div>
             ) : null}
             <button
@@ -160,6 +181,7 @@ function FieldsManagement() {
               className="button"
               onClick={() => {
                 setIsNewCategoryOpen(!isNewCategoryOpen);
+                setCategoryShowError(false);
               }}
             >
               Nouvelle catégorie
@@ -220,7 +242,7 @@ function FieldsManagement() {
                 >
                   <input
                     type="text"
-                    placeholder="Nom du type de contrat"
+                    placeholder="Type de contrat"
                     className="textInput"
                     onChange={(e) => {
                       setNewConctractContent(e.target.value);
@@ -231,6 +253,11 @@ function FieldsManagement() {
                   </button>
                 </form>
                 <hr />
+                {contractShowError ? (
+                  <p className="error">
+                    Veuillez renseigner un nom pour ce type de contrat.
+                  </p>
+                ) : null}
               </div>
             ) : null}
             <button
@@ -238,6 +265,7 @@ function FieldsManagement() {
               className="button"
               onClick={() => {
                 setIsNewContractOpen(!isNewContractOpen);
+                setContractShowError(false);
               }}
             >
               Nouveau type de contrat

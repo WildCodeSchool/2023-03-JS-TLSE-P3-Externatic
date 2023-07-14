@@ -34,15 +34,19 @@ const deleteCategory = (req, res) => {
 // ------------Add category------------
 
 const addCategory = (req, res) => {
-  models.category
-    .addCategory(req.body.categoryName)
-    .then(() => {
-      res.sendStatus(201);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
+  if (req.body.categoryName) {
+    models.category
+      .addCategory(req.body.categoryName)
+      .then(() => {
+        res.sendStatus(201);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  } else {
+    res.sendStatus(403);
+  }
 };
 
 module.exports = {

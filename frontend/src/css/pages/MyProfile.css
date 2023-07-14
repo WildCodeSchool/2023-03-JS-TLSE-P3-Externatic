@@ -11,11 +11,11 @@
 }
 
 .error {
-  position: absolute;
+  /* position: absolute; */
   color: #ca2061;
-  top: 100%;
+  /* top: 100%;
   left: 0;
-  margin-top: 4px;
+  margin-top: 4px; */
 }
 
 .errorInput {
