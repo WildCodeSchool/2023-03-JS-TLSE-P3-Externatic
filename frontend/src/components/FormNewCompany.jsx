@@ -58,6 +58,7 @@ function FormNewCompany({ handleInput }) {
           required=""
           name="siret"
           autoComplete="on"
+          maxLength="14"
           onChange={handleInput}
           onClick={resetInputOnClick}
         />

@@ -7,10 +7,10 @@
   margin-top: 5rem;
 }
 
-
 .errorLogin {
   color: var(--main-color);
 }
+
 
 @media screen and (min-width: 768px) {
   .containerLogin {
@@ -34,5 +34,4 @@
     height: 25rem;
     justify-content: space-around;
   }
-
 }

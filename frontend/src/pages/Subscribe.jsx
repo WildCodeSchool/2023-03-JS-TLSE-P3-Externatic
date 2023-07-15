@@ -2,6 +2,7 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 // Import components
 import LinkLogInSubscribe from "../components/LinkLogInSubscribe";
@@ -95,14 +96,37 @@ function Subscribe() {
         )
         .then((response) => {
           if (response.status === 201) {
+            Swal.fire({
+              icon: "success",
+              text: "Votre compte a bien été créé, veuillez vous connecter",
+              customClass: {
+                title: "my-swal-title",
+                confirmButton: "my-swal-confirm-button",
+              },
+            });
             navigate("/connexion");
             setErrors(false);
           } else if (response.status === 403) {
-            console.error("Ce mail est déjà utilisé");
+            Swal.fire({
+              icon: "warning",
+              text: "Ce mail est déjà utilisé",
+              customClass: {
+                title: "my-swal-title",
+                confirmButton: "my-swal-confirm-button",
+              },
+            });
           }
         })
         .catch((err) => {
           console.error(err);
+          Swal.fire({
+            icon: "warning",
+            text: "Votre inscription n'a pas abouti, veuillez réessayer",
+            customClass: {
+              title: "my-swal-title",
+              confirmButton: "my-swal-confirm-button",
+            },
+          });
         });
     } else {
       console.error("Votre inscription n'a pas abouti");
