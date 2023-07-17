@@ -24,6 +24,7 @@ input[type="radio"].radioInput + label.labelRadioInput.mister {
 
 input[type="radio"].radioInput:checked + label.labelRadioInput {
   color: var(--main-color);
+  font-weight: bold;
 }
 
 .errorMessage {

@@ -22,6 +22,9 @@ import "./css/pages/UsersManagement.css";
 import "./css/components/FormNewUser.css";
 import "./css/pages/Subscribe.css";
 import "./css/pages/FieldsManagement.css";
+import "./css/components/CustomStyleSwal.css";
+import "./css/pages/MyPublishedOffers.css";
+import "./css/components/MainNavBar.css";
 
 // Import des contexts
 import { MenuContextProvider } from "./contexts/MenuContext";

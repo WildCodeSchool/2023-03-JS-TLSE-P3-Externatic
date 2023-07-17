@@ -38,13 +38,63 @@ const getFilteredOffers = (req, res) => {
     });
 };
 
-// ------------Delete Applicant------------
-const deleteOfferByCompanyId = (req, res, next) => {
+// ------------Delete Offer------------
+const deleteOfferById = (req, res) => {
   const { id } = req.params;
   models.offer
-    .deleteByCompanyId(id)
+    .delete(id)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+// ------------Get Company Offers------------
+const getCompanyOffers = (req, res) => {
+  models.offer
+    .findCompanyOffers(req.payload.sub)
+    .then(([offers]) => {
+      res.send(offers).status(200);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+// ------------Create offer------------
+const addOffer = (req, res) => {
+  const {
+    title,
+    contractType,
+    category,
+    city,
+    missions,
+    technical,
+    advantages,
+  } = req.body;
+  models.offer
+    .createOffer(
+      {
+        title,
+        contractType,
+        category,
+        city,
+        missions,
+        technical,
+        advantages,
+      },
+      req.payload.sub
+    )
     .then(() => {
-      next();
+      res.sendStatus(201);
     })
     .catch((err) => {
       console.error(err);
@@ -55,5 +105,7 @@ const deleteOfferByCompanyId = (req, res, next) => {
 module.exports = {
   getAllOffers,
   getFilteredOffers,
-  deleteOfferByCompanyId,
+  deleteOfferById,
+  getCompanyOffers,
+  addOffer,
 };

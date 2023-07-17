@@ -75,7 +75,7 @@ function Connexion() {
               className="textInput"
               type="email"
               placeholder="Email"
-              // required
+              required=""
               name="email"
               autoComplete="off"
               onChange={handleInput}
@@ -107,7 +107,7 @@ function Connexion() {
               className="textInput"
               type="password"
               placeholder="Mot de passe"
-              // required
+              required=""
               name="password"
               onChange={handleInput}
               onClick={resetInputOnClick}

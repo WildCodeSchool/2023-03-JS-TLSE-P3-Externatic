@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState, useContext } from "react";
+import Swal from "sweetalert2";
 
 // Import images
 import deleteUser from "../../assets/icons/black_delete_user.svg";
@@ -51,22 +52,63 @@ function UsersManagement() {
             },
           }
         )
+
         .then(() => {
+          Swal.fire({
+            icon: "success",
+            text: "Le compte a bien été créé !",
+            iconColor: "#ca2061",
+            width: 300,
+            confirmButtonColor: "black",
+          });
           getAdmins();
           setAdminInsertion(false);
+        })
+        .catch((err) => {
+          if (err.response.status === 403) {
+            Swal.fire({
+              icon: "error",
+              text: "Ce mail a déjà été utilisé, veuillez en saisir un autre",
+              iconColor: "#ca2061",
+              width: 300,
+              confirmButtonColor: "black",
+            });
+          }
         });
     }
   };
   const deleteAdmin = (id) => {
-    axios
-      .delete(`${import.meta.env.VITE_BACKEND_URL}/admins/${id}`, {
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-        },
-      })
-      .then(() => {
-        getAdmins();
-      });
+    Swal.fire({
+      title: "Etes-vous sûr de vouloir supprimer ce compte?",
+      text: "Cette suppression est irréversible !",
+      icon: "warning",
+      iconColor: "#ca2061",
+      showCancelButton: true,
+      confirmButtonColor: "#ca2061",
+      cancelButtonColor: "black",
+      confirmButtonText: "Supprimer ce compte",
+      cancelButtonText: "Annuler",
+      width: 400,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          text: "Ce compte a bien été supprimé",
+          icon: "success",
+          confirmButtonColor: "black",
+          width: 300,
+        });
+
+        axios
+          .delete(`${import.meta.env.VITE_BACKEND_URL}/admins/${id}`, {
+            headers: {
+              Authorization: `Bearer ${userToken}`,
+            },
+          })
+          .then(() => {
+            getAdmins();
+          });
+      }
+    });
   };
 
   const getApplicants = () => {
@@ -82,15 +124,36 @@ function UsersManagement() {
   };
 
   const deleteApplicant = (id) => {
-    axios
-      .delete(`${import.meta.env.VITE_BACKEND_URL}/applicants/${id}`, {
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-        },
-      })
-      .then(() => {
-        getApplicants();
-      });
+    Swal.fire({
+      title: "Etes-vous sûr de vouloir supprimer ce compte?",
+      text: "Cette suppression est irréversible !",
+      icon: "warning",
+      iconColor: "#ca2061",
+      showCancelButton: true,
+      confirmButtonColor: "#ca2061",
+      cancelButtonColor: "black",
+      confirmButtonText: "Supprimer ce compte",
+      cancelButtonText: "Annuler",
+      width: 400,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          text: "Ce compte a bien été supprimé",
+          icon: "success",
+          confirmButtonColor: "black",
+          width: 300,
+        });
+        axios
+          .delete(`${import.meta.env.VITE_BACKEND_URL}/applicants/${id}`, {
+            headers: {
+              Authorization: `Bearer ${userToken}`,
+            },
+          })
+          .then(() => {
+            getApplicants();
+          });
+      }
+    });
   };
 
   const getCompanies = () => {
@@ -105,15 +168,36 @@ function UsersManagement() {
       });
   };
   const deleteCompany = (id) => {
-    axios
-      .delete(`${import.meta.env.VITE_BACKEND_URL}/companies/${id}`, {
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-        },
-      })
-      .then(() => {
-        getCompanies();
-      });
+    Swal.fire({
+      title: "Etes-vous sûr de vouloir supprimer ce compte?",
+      text: "Cette suppression est irréversible !",
+      icon: "warning",
+      iconColor: "#ca2061",
+      showCancelButton: true,
+      confirmButtonColor: "#ca2061",
+      cancelButtonColor: "black",
+      confirmButtonText: "Supprimer ce compte",
+      cancelButtonText: "Annuler",
+      width: 400,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          text: "Ce compte a bien été supprimé",
+          icon: "success",
+          confirmButtonColor: "black",
+          width: 300,
+        });
+        axios
+          .delete(`${import.meta.env.VITE_BACKEND_URL}/companies/${id}`, {
+            headers: {
+              Authorization: `Bearer ${userToken}`,
+            },
+          })
+          .then(() => {
+            getCompanies();
+          });
+      }
+    });
   };
 
   useEffect(() => {
@@ -287,7 +371,9 @@ function UsersManagement() {
         </div>
       ) : (
         <div className="globalContainer">
-          <h3 className="errorTitle">⛔ Vous n'êtes pas administrateur</h3>
+          <h3 className="errorTitle">
+            ⛔ Vous devez être connecté avec un compte administrateur
+          </h3>
         </div>
       )}
     </div>

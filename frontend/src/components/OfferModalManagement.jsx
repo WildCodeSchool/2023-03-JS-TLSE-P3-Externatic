@@ -10,7 +10,11 @@ import iconPinkRocket from "../assets/icons/rocket_pink.svg";
 import iconPinkTools from "../assets/icons/tools_pink.svg";
 import iconBlackProfil from "../assets/icons/person_black.svg";
 
-function OfferModal({ modalOfferIsOpen, setModalOfferIsOpen, offer }) {
+function OfferModalManagement({
+  modalOfferIsOpen,
+  setModalOfferIsOpen,
+  offer,
+}) {
   const {
     title,
     city,
@@ -37,6 +41,7 @@ function OfferModal({ modalOfferIsOpen, setModalOfferIsOpen, offer }) {
           borderRadius: "4px",
           margin: "auto",
           inset: "0",
+          padding: "0.5rem",
         },
       }}
     >
@@ -94,7 +99,7 @@ function OfferModal({ modalOfferIsOpen, setModalOfferIsOpen, offer }) {
   );
 }
 
-OfferModal.propTypes = {
+OfferModalManagement.propTypes = {
   offer: PropTypes.shape({
     title: PropTypes.string,
     city: PropTypes.string,
@@ -108,4 +113,4 @@ OfferModal.propTypes = {
   setModalOfferIsOpen: PropTypes.func.isRequired,
 };
 
-export default OfferModal;
+export default OfferModalManagement;
