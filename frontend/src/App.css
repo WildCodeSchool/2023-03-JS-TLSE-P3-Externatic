@@ -81,7 +81,7 @@ a {
   border: var(--border_card);
   box-shadow: var(--shadow_initial);
   border-radius: 1rem;
-  gap: 2rem;
+  gap: 1rem;
   width: 95%;
   max-width: 60rem;
   background-color: white;
@@ -233,4 +233,9 @@ a:hover {
 .divider {
   width: 90%;
   border-top: 1px solid var(--light-grey);
+}
+
+.error {
+  color: red;
+  font-weight: bold;
 }
