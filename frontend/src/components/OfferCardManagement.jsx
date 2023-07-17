@@ -1,6 +1,5 @@
 /* eslint-disable camelcase */
 import PropTypes from "prop-types";
-// import { useState } from "react";
 
 // Import icones
 import trash from "../assets/icons/white_trash.svg";
