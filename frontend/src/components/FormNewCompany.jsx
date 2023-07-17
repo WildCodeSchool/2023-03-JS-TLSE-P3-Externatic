@@ -149,8 +149,8 @@ function FormNewCompany({ handleInput }) {
           onChange={handleInput}
           onClick={resetInputOnClick}
         />
-        {errors.confirmedpassword && (
-          <span className="errorMessage">{errors.confirmedpassword}</span>
+        {errors.confirmedPassword && (
+          <span className="errorMessage">{errors.confirmedPassword}</span>
         )}
       </div>
 

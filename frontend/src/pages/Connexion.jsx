@@ -49,7 +49,6 @@ function Connexion() {
       })
       .catch((err) => {
         console.error(err);
-
         setLoginError(true);
       });
   };

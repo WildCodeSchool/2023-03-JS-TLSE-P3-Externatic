@@ -38,7 +38,7 @@ function Subscribe() {
         setShowForm(false);
         setIsApplicantCardFocused(false);
         setIsCompanyCardFocused(false);
-        setErrors(false);
+        setErrors({});
       }
     };
     document.addEventListener("click", handleClickOutside);
@@ -50,13 +50,13 @@ function Subscribe() {
     setShowForm(true);
     setIsApplicantCardFocused(true);
     setIsCompanyCardFocused(false);
-    setErrors(false);
+    setErrors({});
   };
   const handleCompanyCardClick = () => {
     setShowForm(true);
     setIsApplicantCardFocused(false);
     setIsCompanyCardFocused(true);
-    setErrors(false);
+    setErrors({});
   };
   const navigate = useNavigate();
   const handleInput = (e) => {
@@ -71,24 +71,54 @@ function Subscribe() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors(ValidationConnexion(formDataSubscription));
-    if (Object.keys(errors).length === 0 && isApplicantCardFocused) {
+    if (!errors && isApplicantCardFocused) {
       axios
         .post(
           `${import.meta.env.VITE_BACKEND_URL}/signup/applicant`,
           formDataSubscription
         )
         .then((response) => {
+          Swal.fire({
+            icon: "success",
+            text: "Votre compte a bien été créé, veuillez vous connecter",
+            iconColor: "#ca2061",
+            width: 300,
+            confirmButtonColor: "black",
+          });
           if (response.status === 201) {
             navigate("/connexion");
             setErrors(false);
-          } else if (response.status === 403) {
-            console.error("Ce mail est déjà utilisé");
           }
         })
         .catch((err) => {
           console.error(err);
+          if (err.response.status === 403) {
+            Swal.fire({
+              icon: "error",
+              text: "Ce mail a déjà été utilisé, veuillez en saisir un autre",
+              iconColor: "#ca2061",
+              width: 300,
+              confirmButtonColor: "black",
+            });
+          } else if (err.response.status === 500) {
+            Swal.fire({
+              icon: "error",
+              text: "Une erreur est survenue, veuillez réessayer plus tard",
+              iconColor: "#ca2061",
+              width: 300,
+              confirmButtonColor: "black",
+            });
+          }
         });
-    } else if (Object.keys(errors).length === 0 && isCompanyCardFocused) {
+      setFormDataSubscription({
+        titleName: "",
+        firstname: "",
+        lastname: "",
+        email: "",
+        password: "",
+        confirmedPassword: "",
+      });
+    } else if (!errors && isCompanyCardFocused) {
       axios
         .post(
           `${import.meta.env.VITE_BACKEND_URL}/signup/company`,
@@ -99,37 +129,41 @@ function Subscribe() {
             Swal.fire({
               icon: "success",
               text: "Votre compte a bien été créé, veuillez vous connecter",
-              customClass: {
-                title: "my-swal-title",
-                confirmButton: "my-swal-confirm-button",
-              },
+              iconColor: "#ca2061",
+              width: 300,
+              confirmButtonColor: "black",
             });
             navigate("/connexion");
             setErrors(false);
-          } else if (response.status === 403) {
-            Swal.fire({
-              icon: "warning",
-              text: "Ce mail est déjà utilisé",
-              customClass: {
-                title: "my-swal-title",
-                confirmButton: "my-swal-confirm-button",
-              },
-            });
           }
         })
         .catch((err) => {
           console.error(err);
-          Swal.fire({
-            icon: "warning",
-            text: "Votre inscription n'a pas abouti, veuillez réessayer",
-            customClass: {
-              title: "my-swal-title",
-              confirmButton: "my-swal-confirm-button",
-            },
-          });
+          if (err.response.status === 403) {
+            Swal.fire({
+              icon: "error",
+              text: "Ce mail a déjà été utilisé, veuillez en saisir un autre",
+              iconColor: "#ca2061",
+              width: 300,
+              confirmButtonColor: "black",
+            });
+          } else {
+            Swal.fire({
+              icon: "error",
+              text: "Une erreur est survenue, veuillez réessayer plus tard",
+              iconColor: "#ca2061",
+              width: 300,
+              confirmButtonColor: "black",
+            });
+          }
         });
-    } else {
-      console.error("Votre inscription n'a pas abouti");
+      setFormDataSubscription({
+        name: "",
+        siret: 0,
+        email: "",
+        password: "",
+        confirmedPassword: "",
+      });
     }
   };
   return (
