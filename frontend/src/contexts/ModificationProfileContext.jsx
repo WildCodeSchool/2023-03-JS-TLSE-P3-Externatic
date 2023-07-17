@@ -10,7 +10,7 @@ export function ModificationProfileContextProvider({ children }) {
 
   const ModificationProfileContextValue = useMemo(() => {
     return { editingInputs, setEditingInputs };
-  }, [editingInputs, setEditingInputs]);
+  }, [editingInputs]);
   return (
     <ModificationProfileContext.Provider
       value={ModificationProfileContextValue}

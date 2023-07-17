@@ -11,16 +11,23 @@ export function ValidationFormContextProvider({ children }) {
     email: "",
     password: "",
   });
-  const [formDataSubscription, setFormDataSubscription] = useState({
-    titleName: "",
-    firstname: "",
-    lastname: "",
-    name: "",
-    siret: 0,
-    email: "",
-    password: "",
-    confirmedPassword: "",
-  });
+  const [formDataCompanySubscription, setFormDataCompanySubscription] =
+    useState({
+      name: "",
+      siret: 0,
+      email: "",
+      password: "",
+      confirmedPassword: "",
+    });
+  const [formaDataApplicantSubscription, setFormDataApplicantSubscription] =
+    useState({
+      titleName: "",
+      firstname: "",
+      lastname: "",
+      email: "",
+      password: "",
+      confirmedPassword: "",
+    });
   const resetInputOnClick = () => {
     setErrors({});
   };
@@ -37,6 +44,8 @@ export function ValidationFormContextProvider({ children }) {
     // vérification madame ou monsieur coché
     if (!el.titleName) {
       error.titleName = "Veuillez sélectionner Madame ou Monsieur";
+    } else {
+      error.titleName = "";
     }
 
     // vérification du prénom
@@ -93,14 +102,21 @@ export function ValidationFormContextProvider({ children }) {
     return {
       formDataLogIn,
       setFormDataLogIn,
-      formDataSubscription,
-      setFormDataSubscription,
+      formDataCompanySubscription,
+      setFormDataCompanySubscription,
+      formaDataApplicantSubscription,
+      setFormDataApplicantSubscription,
       errors,
       setErrors,
       ValidationConnexion,
       resetInputOnClick,
     };
-  }, [formDataLogIn, formDataSubscription, errors]);
+  }, [
+    formDataLogIn,
+    formDataCompanySubscription,
+    formaDataApplicantSubscription,
+    errors,
+  ]);
   return (
     <ValidationFormContext.Provider value={ValidationFormContextValue}>
       {children}

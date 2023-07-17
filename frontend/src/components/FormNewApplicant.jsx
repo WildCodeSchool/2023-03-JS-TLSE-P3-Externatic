@@ -9,15 +9,21 @@ function FormNewApplicant({ handleInput }) {
   const {
     errors,
     resetInputOnClick,
-    formDataSubscription,
-    setFormDataSubscription,
+    formDataApplicantSubscription,
+    setFormDataApplicantSubscription,
   } = useContext(ValidationFormContext);
 
   const handleTitleNameMiss = () => {
-    setFormDataSubscription({ ...formDataSubscription, titleName: "Mme" });
+    setFormDataApplicantSubscription({
+      ...formDataApplicantSubscription,
+      titleName: "Mme",
+    });
   };
   const handleTitleNameMister = () => {
-    setFormDataSubscription({ ...formDataSubscription, titleName: "Mr" });
+    setFormDataApplicantSubscription({
+      ...formDataApplicantSubscription,
+      titleName: "Mr",
+    });
   };
   return (
     <>

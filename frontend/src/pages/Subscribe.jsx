@@ -21,8 +21,10 @@ function Subscribe() {
   const [isApplicantCardFocused, setIsApplicantCardFocused] = useState(false);
   const [isCompanyCardFocused, setIsCompanyCardFocused] = useState(false);
   const {
-    formDataSubscription,
-    setFormDataSubscription,
+    formDataCompanySubscription,
+    formDataApplicantSubscription,
+    setFormDataCompanySubscription,
+    setFormDataApplicantSubscription,
     setErrors,
     ValidationConnexion,
   } = useContext(ValidationFormContext);
@@ -37,7 +39,7 @@ function Subscribe() {
         setShowForm(false);
         setIsApplicantCardFocused(false);
         setIsCompanyCardFocused(false);
-        setErrors({});
+        setErrors(false);
       }
     };
     document.addEventListener("click", handleClickOutside);
@@ -49,84 +51,42 @@ function Subscribe() {
     setShowForm(true);
     setIsApplicantCardFocused(true);
     setIsCompanyCardFocused(false);
-    setErrors({});
+    setErrors(false);
   };
   const handleCompanyCardClick = () => {
     setShowForm(true);
     setIsApplicantCardFocused(false);
     setIsCompanyCardFocused(true);
-    setErrors({});
+    setErrors(false);
   };
   const navigate = useNavigate();
-  const handleInput = (e) => {
-    setFormDataSubscription({
-      ...formDataSubscription,
+  const handleInputCompany = (e) => {
+    setFormDataCompanySubscription({
+      ...formDataCompanySubscription,
       [e.target.name]: e.target.value,
     });
-    if (formDataSubscription) {
+    if (formDataCompanySubscription) {
+      setErrors(false);
+    }
+  };
+  const handleInputApplicant = (e) => {
+    setFormDataApplicantSubscription({
+      ...formDataApplicantSubscription,
+      [e.target.name]: e.target.value,
+    });
+    if (formDataApplicantSubscription) {
       setErrors(false);
     }
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formDataErrors = ValidationConnexion(formDataSubscription);
-
-    setErrors(ValidationConnexion(formDataSubscription));
+    const formDataErrors = ValidationConnexion(formDataApplicantSubscription);
+    setErrors(ValidationConnexion(formDataApplicantSubscription));
     if (Object.keys(formDataErrors).length === 0 && isApplicantCardFocused) {
       axios
         .post(
           `${import.meta.env.VITE_BACKEND_URL}/signup/applicant`,
-          formDataSubscription
-        )
-        .then((response) => {
-          Swal.fire({
-            icon: "success",
-            text: "Votre compte a bien été créé, veuillez vous connecter",
-            iconColor: "#ca2061",
-            width: 300,
-            confirmButtonColor: "black",
-          });
-          if (response.status === 201) {
-            navigate("/connexion");
-            setErrors(false);
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-          if (err.response.status === 403) {
-            Swal.fire({
-              icon: "error",
-              text: "Ce mail a déjà été utilisé, veuillez en saisir un autre",
-              iconColor: "#ca2061",
-              width: 300,
-              confirmButtonColor: "black",
-            });
-          } else if (err.response.status === 500) {
-            Swal.fire({
-              icon: "error",
-              text: "Une erreur est survenue, veuillez réessayer plus tard",
-              iconColor: "#ca2061",
-              width: 300,
-              confirmButtonColor: "black",
-            });
-          }
-        });
-      setFormDataSubscription({
-        titleName: "",
-        firstname: "",
-        lastname: "",
-        email: "",
-        password: "",
-        confirmedPassword: "",
-      });
-    } else if (
-      Object.keys(formDataErrors).length === 0 &&
-      isCompanyCardFocused
-    ) {
-      axios
-        .post(
-          `${import.meta.env.VITE_BACKEND_URL}/signup/company`,
-          formDataSubscription
+          formDataApplicantSubscription
         )
         .then((response) => {
           if (response.status === 201) {
@@ -161,7 +121,57 @@ function Subscribe() {
             });
           }
         });
-      setFormDataSubscription({
+      setFormDataApplicantSubscription({
+        titleName: "",
+        firstname: "",
+        lastname: "",
+        email: "",
+        password: "",
+        confirmedPassword: "",
+      });
+    } else if (
+      Object.keys(formDataErrors).length === 0 &&
+      isCompanyCardFocused
+    ) {
+      axios
+        .post(
+          `${import.meta.env.VITE_BACKEND_URL}/signup/company`,
+          formDataCompanySubscription
+        )
+        .then((response) => {
+          if (response.status === 201) {
+            Swal.fire({
+              icon: "success",
+              text: "Votre compte a bien été créé, veuillez vous connecter",
+              iconColor: "#ca2061",
+              width: 300,
+              confirmButtonColor: "black",
+            });
+            navigate("/connexion");
+            setErrors(false);
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+          if (err.response.status === 403) {
+            Swal.fire({
+              icon: "error",
+              text: "Ce mail a déjà été utilisé, veuillez en saisir un autre",
+              iconColor: "#ca2061",
+              width: 300,
+              confirmButtonColor: "black",
+            });
+          } else {
+            Swal.fire({
+              icon: "error",
+              text: "Une erreur est survenue, veuillez réessayer plus tard",
+              iconColor: "#ca2061",
+              width: 300,
+              confirmButtonColor: "black",
+            });
+          }
+        });
+      setFormDataCompanySubscription({
         name: "",
         siret: 0,
         email: "",
@@ -196,20 +206,16 @@ function Subscribe() {
         </section>
         {showForm && (
           <div className="formContainer">
-            <form className="form subscription" onSubmit={handleSubmit}>
-              {isApplicantCardFocused && (
-                <FormNewApplicant
-                  handleInput={handleInput}
-                  handleSubmit={handleSubmit}
-                />
-              )}
-              {isCompanyCardFocused && (
-                <FormNewCompany
-                  handleInput={handleInput}
-                  handleSubmit={handleSubmit}
-                />
-              )}
-            </form>
+            {isApplicantCardFocused && (
+              <form className="form subscription" onSubmit={handleSubmit}>
+                <FormNewApplicant handleInput={handleInputApplicant} />
+              </form>
+            )}
+            {isCompanyCardFocused && (
+              <form className="form subscription" onSubmit={handleSubmit}>
+                <FormNewCompany handleInput={handleInputCompany} />
+              </form>
+            )}
           </div>
         )}
       </div>
