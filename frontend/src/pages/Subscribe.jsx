@@ -27,6 +27,7 @@ function Subscribe() {
     setFormDataApplicantSubscription,
     setErrors,
     ValidationConnexion,
+    validationInputsApplicant,
   } = useContext(ValidationFormContext);
 
   useEffect(() => {
@@ -80,9 +81,17 @@ function Subscribe() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formDataErrors = ValidationConnexion(formDataApplicantSubscription);
+    const formDataApplicantErrors = validationInputsApplicant(
+      formDataApplicantSubscription
+    );
+    const formDataCompanyErrors = ValidationConnexion(
+      formDataApplicantSubscription
+    );
     setErrors(ValidationConnexion(formDataApplicantSubscription));
-    if (Object.keys(formDataErrors).length === 0 && isApplicantCardFocused) {
+    if (
+      Object.keys(formDataApplicantErrors).length === 0 &&
+      isApplicantCardFocused
+    ) {
       axios
         .post(
           `${import.meta.env.VITE_BACKEND_URL}/signup/applicant`,
@@ -130,7 +139,7 @@ function Subscribe() {
         confirmedPassword: "",
       });
     } else if (
-      Object.keys(formDataErrors).length === 0 &&
+      Object.keys(formDataCompanyErrors).length === 0 &&
       isCompanyCardFocused
     ) {
       axios

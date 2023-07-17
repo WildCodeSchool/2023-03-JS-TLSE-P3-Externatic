@@ -19,7 +19,7 @@ export function ValidationFormContextProvider({ children }) {
       password: "",
       confirmedPassword: "",
     });
-  const [formaDataApplicantSubscription, setFormDataApplicantSubscription] =
+  const [formDataApplicantSubscription, setFormDataApplicantSubscription] =
     useState({
       titleName: "",
       firstname: "",
@@ -31,15 +31,13 @@ export function ValidationFormContextProvider({ children }) {
   const resetInputOnClick = () => {
     setErrors({});
   };
-  function ValidationConnexion(el) {
-    const error = {};
 
+  function validationInputsApplicant(el) {
+    const error = {};
     const emailPattern =
       /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,3}$/;
 
     const namePattern = /^[a-zA-Z]/;
-
-    const siretPattern = /^\d{14}$/;
 
     // vérification madame ou monsieur coché
     if (!el.titleName) {
@@ -61,6 +59,36 @@ export function ValidationFormContextProvider({ children }) {
     } else if (!namePattern.test(el.lastname)) {
       error.lastname = "Le nom ne doit contenir que des lettres";
     }
+    // vérification de l'email
+    if (el.email === "") {
+      error.email = "Le mail est requis";
+    } else if (!emailPattern.test(el.email)) {
+      error.email = "Le mail n'est pas valide";
+    }
+
+    // vérification du mot de passe
+    if (el.password === "") {
+      error.password = "Le mot de passe est requis";
+    } else if (el.password.length < 4) {
+      error.password = "Le mot de passe doit contenir 4 caractères minimum ";
+    }
+    // vérification de la confirmation du mot de passe
+    if (el.confirmedPassword === "" || el.password === "") {
+      error.confirmedPassword = "Veuillez confirmer votre mot de passe";
+    } else if (el.confirmedPassword !== el.password) {
+      error.confirmedPassword = "Les mots de passe ne correspondent pas";
+    }
+    return error;
+  }
+  function ValidationConnexion(el) {
+    const error = {};
+
+    const emailPattern =
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,3}$/;
+
+    const namePattern = /^[a-zA-Z]/;
+
+    const siretPattern = /^\d{14}$/;
 
     // vérification du nom de l'entreprise
     if (el.name === "") {
@@ -104,17 +132,18 @@ export function ValidationFormContextProvider({ children }) {
       setFormDataLogIn,
       formDataCompanySubscription,
       setFormDataCompanySubscription,
-      formaDataApplicantSubscription,
+      formDataApplicantSubscription,
       setFormDataApplicantSubscription,
       errors,
       setErrors,
       ValidationConnexion,
+      validationInputsApplicant,
       resetInputOnClick,
     };
   }, [
     formDataLogIn,
     formDataCompanySubscription,
-    formaDataApplicantSubscription,
+    formDataApplicantSubscription,
     errors,
   ]);
   return (
