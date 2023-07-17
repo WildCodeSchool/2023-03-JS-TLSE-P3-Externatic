@@ -11,6 +11,13 @@ class FavoriteManager extends AbstractManager {
       [applicantId, offerId]
     );
   }
+
+  findFavories(applicantId) {
+    return this.database.query(
+      `select * from ${this.table} WHERE applicant_id_applicant_offer_favorites = ?`,
+      [applicantId]
+    );
+  }
 }
 
 module.exports = FavoriteManager;

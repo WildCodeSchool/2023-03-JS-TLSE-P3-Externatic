@@ -16,10 +16,13 @@ function Offers() {
   const [localizationInput, setLocalizationInput] = useState("");
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [isContractOpen, setIsContractOpen] = useState(false);
+  // gestion de la modale
   const [modalOfferIsOpen, setModalOfferIsOpen] = useState(false);
   const [selectedOffer, setSelectedOffer] = useState([]);
+
   const { userToken } = useContext(TokenContext);
 
+  // gestion de la modale
   const handleOpenModalOffer = (offerId) => {
     const findOffer = offersList.find((offer) => offer.id === offerId);
     setSelectedOffer(findOffer);
@@ -75,20 +78,17 @@ function Offers() {
       .get(`${import.meta.env.VITE_BACKEND_URL}/contracts-type`)
       .then((results) => setContractList(results.data));
   }, []);
-  const addFavorite = (e, offer) => {
-    e.preventDefault();
+
+  // gestion de la mise en favoris
+  const addFavorite = (offer) => {
     const favoriteData = {
       offerId: offer.id,
     };
-    axios.post(
-      `${import.meta.env.VITE_BACKEND_URL}/favorites`,
-      { favoriteData },
-      {
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-        },
-      }
-    );
+    axios.post(`${import.meta.env.VITE_BACKEND_URL}/favorites`, favoriteData, {
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+      },
+    });
   };
   return (
     <div className="offersPage">

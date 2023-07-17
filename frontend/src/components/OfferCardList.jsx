@@ -25,9 +25,9 @@ function OfferCardList({ offer, onCardClick, addFavorite }) {
           <h3 className="titleOfferCard">{title}</h3>
           <button
             type="button"
-            onClick={(e) => {
+            onClick={() => {
               handleClickOfferIsFavorite();
-              addFavorite(e, offer);
+              addFavorite(offer);
             }}
           >
             <img

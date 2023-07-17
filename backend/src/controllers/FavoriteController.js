@@ -5,8 +5,8 @@ const addFavorite = (req, res) => {
   const applicantId = req.payload.sub;
   models.applicant_offer_favorites
     .insertFavorite(applicantId, offerId)
-    .then(([favorites]) => {
-      res.location(`/favorites${favorites.insertId}`).sendStatus(201);
+    .then(() => {
+      res.sendStatus(201);
     })
     .catch((err) => {
       console.error(err);
@@ -15,8 +15,9 @@ const addFavorite = (req, res) => {
 };
 // ------------Récupérer tous les favoris------------
 const getAllFavories = (req, res) => {
+  const applicantId = req.payload.sub;
   models.applicant_offer_favorites
-    .findAll()
+    .findFavories(applicantId)
     .then(([favorites]) => {
       res.send(favorites).status(200);
     })
