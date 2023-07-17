@@ -34,7 +34,6 @@ export function ValidationFormContextProvider({ children }) {
     const namePattern = /^[a-zA-Z]/;
 
     const siretPattern = /^\d{14}$/;
-
     // vérification madame ou monsieur coché
     if (!el.titleName) {
       error.titleName = "Veuillez sélectionner Madame ou Monsieur";
@@ -43,24 +42,21 @@ export function ValidationFormContextProvider({ children }) {
     // vérification du prénom
     if (el.firstname === "") {
       error.firstname = "Veuillez saisir votre prénom";
-    }
-    if (!namePattern.test(el.firstname)) {
+    } else if (!namePattern.test(el.firstname)) {
       error.firstname = "Le prénom ne doit contenir que des lettres";
     }
 
     // vérification du nom
     if (el.lastname === "") {
       error.lastname = "Veuillez saisir votre nom";
-    }
-    if (!namePattern.test(el.lastname)) {
+    } else if (!namePattern.test(el.lastname)) {
       error.lastname = "Le nom ne doit contenir que des lettres";
     }
 
     // vérification du nom de l'entreprise
     if (el.name === "") {
       error.name = "Veuillez saisir le nom de l'entreprise";
-    }
-    if (!namePattern.test(el.name)) {
+    } else if (!namePattern.test(el.name)) {
       error.name = "Le nom ne doit contenir que des lettres";
     }
 
@@ -74,8 +70,7 @@ export function ValidationFormContextProvider({ children }) {
     // vérification de l'email
     if (el.email === "") {
       error.email = "Le mail est requis";
-    }
-    if (!emailPattern.test(el.email)) {
+    } else if (!emailPattern.test(el.email)) {
       error.email = "Le mail n'est pas valide";
     }
 

@@ -23,7 +23,6 @@ function Subscribe() {
   const {
     formDataSubscription,
     setFormDataSubscription,
-    errors,
     setErrors,
     ValidationConnexion,
   } = useContext(ValidationFormContext);
@@ -70,8 +69,9 @@ function Subscribe() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    const formDataErrors = ValidationConnexion(formDataSubscription);
     setErrors(ValidationConnexion(formDataSubscription));
-    if (!errors && isApplicantCardFocused) {
+    if (Object.keys(formDataErrors).length === 0 && isApplicantCardFocused) {
       axios
         .post(
           `${import.meta.env.VITE_BACKEND_URL}/signup/applicant`,
@@ -118,7 +118,10 @@ function Subscribe() {
         password: "",
         confirmedPassword: "",
       });
-    } else if (!errors && isCompanyCardFocused) {
+    } else if (
+      Object.keys(formDataErrors).length === 0 &&
+      isCompanyCardFocused
+    ) {
       axios
         .post(
           `${import.meta.env.VITE_BACKEND_URL}/signup/company`,
