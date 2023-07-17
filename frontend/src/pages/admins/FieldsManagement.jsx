@@ -278,7 +278,9 @@ function FieldsManagement() {
         </div>
       ) : (
         <div className="globalContainer">
-          <h3 className="errorTitle">⛔ Vous n'êtes pas administrateur</h3>
+          <h3 className="errorTitle">
+            ⛔ Vous devez être connecté avec un compte administrateur
+          </h3>
         </div>
       )}
     </div>
