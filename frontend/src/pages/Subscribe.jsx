@@ -70,6 +70,7 @@ function Subscribe() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const formDataErrors = ValidationConnexion(formDataSubscription);
+
     setErrors(ValidationConnexion(formDataSubscription));
     if (Object.keys(formDataErrors).length === 0 && isApplicantCardFocused) {
       axios

@@ -34,6 +34,7 @@ export function ValidationFormContextProvider({ children }) {
     const namePattern = /^[a-zA-Z]/;
 
     const siretPattern = /^\d{14}$/;
+
     // vérification madame ou monsieur coché
     if (!el.titleName) {
       error.titleName = "Veuillez sélectionner Madame ou Monsieur";

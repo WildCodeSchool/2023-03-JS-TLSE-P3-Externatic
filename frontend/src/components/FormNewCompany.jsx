@@ -145,7 +145,7 @@ function FormNewCompany({ handleInput }) {
           type="password"
           placeholder="Confirmation mot de passe"
           required=""
-          name="confirmedpassword"
+          name="confirmedPassword"
           onChange={handleInput}
           onClick={resetInputOnClick}
         />
