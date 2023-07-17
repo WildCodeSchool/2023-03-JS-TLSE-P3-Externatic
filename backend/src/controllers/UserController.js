@@ -36,6 +36,11 @@ const getUserByEmail = (req, res, next) => {
     });
 };
 
+const getUser = (req, res) => {
+  res.send("coucou");
+};
+
 module.exports = {
   getUserByEmail,
+  getUser,
 };

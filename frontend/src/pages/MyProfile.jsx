@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, userRole } from "react";
 import "../css/pages/MyProfile.css";
 import identificationBlack from "../assets/icons/identification_black.svg";
 import mailBlack from "../assets/icons/mail_black.svg";
@@ -6,11 +6,9 @@ import mobileBlack from "../assets/icons/mobile_black.svg";
 import cityBlack from "../assets/icons/black_city.svg";
 import whiteTrash from "../assets/icons/white_trash.svg";
 import lockBlack from "../assets/icons/lock_black.svg";
-import TokenContext from "../contexts/TokenContext";
 
 function MyProfile() {
   const [errors, setErrors] = useState({});
-  const { userRole } = useContext(TokenContext);
 
   const validateTelephone = () => {
     // Logique de validation du téléphone
@@ -53,6 +51,7 @@ function MyProfile() {
       // Effectuer l'action de soumission du formulaire ici
     }
   };
+  // Requete pour recuperer les infos de user connecté
 
   return (
     <div className="myProfileSection">

@@ -10,7 +10,7 @@ const {
   verifyAdmin,
 } = require("./services/auth");
 
-const { getUserByEmail } = require("./controllers/UserController");
+const { getUserByEmail, getUser } = require("./controllers/UserController");
 const {
   getAllAdmins,
   deleteAdmin,
@@ -54,6 +54,8 @@ router.post(
 
 // ------------User connection------------
 router.post("/login", getUserByEmail, verifyPassword);
+
+router.get("/users", verifyToken, getUser)
 
 // ------------Offers------------
 router.get("/offers", getAllOffers);
