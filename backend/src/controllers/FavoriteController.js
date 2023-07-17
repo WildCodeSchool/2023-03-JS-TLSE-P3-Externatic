@@ -13,6 +13,7 @@ const addFavorite = (req, res) => {
       res.sendStatus(500);
     });
 };
+
 // ------------Récupérer tous les favoris------------
 const getAllFavories = (req, res) => {
   const applicantId = req.payload.sub;
@@ -26,7 +27,22 @@ const getAllFavories = (req, res) => {
       res.sendStatus(500);
     });
 };
+// ------------Supprimer une offre des favoris------------
+const deleteFavorite = (req, res) => {
+  const { offerId } = req.body;
+  const applicantId = req.payload.sub;
+  models.applicant_offer_favorites
+    .removeFavorite(applicantId, offerId)
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
 module.exports = {
   addFavorite,
   getAllFavories,
+  deleteFavorite,
 };

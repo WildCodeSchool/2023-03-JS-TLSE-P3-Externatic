@@ -37,7 +37,6 @@ function OfferModal({ modalOfferIsOpen, setModalOfferIsOpen, offer }) {
           borderRadius: "4px",
           margin: "auto",
           inset: "0",
-          padding: "0.5rem",
         },
       }}
     >

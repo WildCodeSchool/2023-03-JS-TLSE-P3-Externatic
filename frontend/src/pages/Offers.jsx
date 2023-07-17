@@ -3,8 +3,6 @@ import axios from "axios";
 
 // Import context
 import FiltersContext from "../contexts/FiltersContext";
-
-// Import context
 import TokenContext from "../contexts/TokenContext";
 
 // import des composants
@@ -22,8 +20,9 @@ function Offers() {
   const [selectedOffer, setSelectedOffer] = useState([]);
   const { categoriesList, contractList, getCategories, getContracts } =
     useContext(FiltersContext);
-
   const { userToken } = useContext(TokenContext);
+  // gestion de la mise en favoris
+  const [offersFavorited, setOffersFavorited] = useState([]);
 
   // gestion de la modale
   const handleOpenModalOffer = (offerId) => {
@@ -79,15 +78,72 @@ function Offers() {
 
   // gestion de la mise en favoris
   const addFavorite = (offer) => {
-    const favoriteData = {
-      offerId: offer.id,
-    };
-    axios.post(`${import.meta.env.VITE_BACKEND_URL}/favorites`, favoriteData, {
-      headers: {
-        Authorization: `Bearer ${userToken}`,
-      },
-    });
+    const isAlreadyFavorite = offersFavorited.some(
+      (favoriteOffer) => favoriteOffer.offer_id === offer.id
+    );
+    // console.log(`la liste des offres ${offer}`);
+    if (!isAlreadyFavorite) {
+      const favoriteData = {
+        offerId: offer.id,
+      };
+      axios
+        .post(`${import.meta.env.VITE_BACKEND_URL}/favorites`, favoriteData, {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        })
+        .then(() => {
+          setOffersFavorited([...offersFavorited, offer]);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    } else {
+      // console.log("offer already favorited");
+    }
   };
+  const favoriesByApplicantId = () => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/favorites`, {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      })
+      .then((results) => setOffersFavorited(results.data));
+  };
+
+  const removeFavorite = (offer) => {
+    const isAlreadyFavorite = offersFavorited.some(
+      (favoriteOffer) => favoriteOffer.offer_id === offer.id
+    );
+    if (isAlreadyFavorite) {
+      const favoriteData = {
+        offerId: offer.id,
+      };
+      axios
+        .delete(`${import.meta.env.VITE_BACKEND_URL}/favorites`, {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+          data: favoriteData,
+        })
+        .then(() => {
+          setOffersFavorited(
+            offersFavorited.filter(
+              (favoriteOffer) => favoriteOffer.id !== offer.id
+            )
+          );
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  };
+  useEffect(() => {
+    addFavorite(selectedOffer);
+    favoriesByApplicantId();
+    removeFavorite(selectedOffer);
+  }, []);
   return (
     <div className="offersPage">
       <OfferModal
@@ -201,6 +257,9 @@ function Offers() {
               setModalOfferIsOpen={setModalOfferIsOpen}
               onCardClick={handleOpenModalOffer}
               addFavorite={addFavorite}
+              removeFavorite={removeFavorite}
+              offersFavorited={offersFavorited}
+              setOffersFavorited={setOffersFavorited}
             />
           ))
         ) : (

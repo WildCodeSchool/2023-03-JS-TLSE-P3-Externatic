@@ -1,6 +1,5 @@
 /* eslint-disable camelcase */
 import PropTypes from "prop-types";
-import { useState } from "react";
 // Import style
 import "../css/components/OfferCardList.css";
 // Import icones
@@ -9,15 +8,31 @@ import iconWhiteHeartFill from "../assets/icons/white_heart_fill.svg";
 import iconWhiteCity from "../assets/icons/white_city_fill.svg";
 import iconWhiteContract from "../assets/icons/contract_white.svg";
 
-function OfferCardList({ offer, onCardClick, addFavorite }) {
+function OfferCardList({
+  offer,
+  onCardClick,
+  addFavorite,
+  offersFavorited,
+  removeFavorite,
+}) {
   const { id, title, city, contract_type_name } = offer;
-  const [offerIsFavorite, setOfferIsFavorite] = useState(false);
-  const handleClickOfferIsFavorite = () => {
-    setOfferIsFavorite(!offerIsFavorite);
-  };
   const handleCardClick = () => {
     onCardClick(id);
   };
+  const offerIsFavorite = offersFavorited.some(
+    (favoriteOffer) => favoriteOffer.offer_id === offer.id
+  );
+  const handleClickOfferIsFavorite = () => {
+    if (!offerIsFavorite) {
+      addFavorite(offer);
+      // console.log("offer added");
+    } else {
+      removeFavorite(offer);
+      // console.log("offer removed");
+    }
+  };
+  // console.log(offer);
+
   return (
     <div className="offerCard offerCardList">
       <div className="offerCardColor">
@@ -25,13 +40,15 @@ function OfferCardList({ offer, onCardClick, addFavorite }) {
           <h3 className="titleOfferCard">{title}</h3>
           <button
             type="button"
-            onClick={() => {
-              handleClickOfferIsFavorite();
-              addFavorite(offer);
-            }}
+            // onClick={() => {
+            //   // handleClickOfferIsFavorite();
+            //   addFavorite(offer);
+            // }}
+            onClick={handleClickOfferIsFavorite}
           >
             <img
               src={offerIsFavorite ? iconWhiteHeartFill : iconWhiteHeartEmpty}
+              // src={iconWhiteHeartEmpty}
               alt="icon add favorite"
               className="heart"
             />
@@ -62,6 +79,20 @@ OfferCardList.propTypes = {
   }).isRequired,
   onCardClick: PropTypes.func.isRequired,
   addFavorite: PropTypes.func.isRequired,
+  removeFavorite: PropTypes.func.isRequired,
+  offersFavorited: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      benefits: PropTypes.string,
+      city: PropTypes.string,
+      company_name: PropTypes.string,
+      contract_type_name: PropTypes.string,
+      job_responsibilities: PropTypes.string,
+      offer_id: PropTypes.number,
+      technical_environment: PropTypes.string,
+      title: PropTypes.string,
+    })
+  ).isRequired,
 };
 
 export default OfferCardList;

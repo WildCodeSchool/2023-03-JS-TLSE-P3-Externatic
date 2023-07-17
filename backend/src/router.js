@@ -44,6 +44,7 @@ const {
 const {
   addFavorite,
   getAllFavories,
+  deleteFavorite,
 } = require("./controllers/FavoriteController");
 
 router.use(express.json());
@@ -76,9 +77,6 @@ router.get("/categories", getAllCategories);
 
 // ------------Contracts------------
 router.get("/contracts-type", getAllContracts);
-
-// ------------offres favorites------------
-router.get("/favorites");
 
 // ------------TOKEN WALL------------
 router.use(verifyToken);
@@ -115,4 +113,5 @@ router.post("/contracts-type", verifyAdmin, addContract);
 // ------------Applicants favorites------------
 router.post("/favorites", addFavorite);
 router.get("/favorites", getAllFavories);
+router.delete("/favorites", deleteFavorite);
 module.exports = router;
