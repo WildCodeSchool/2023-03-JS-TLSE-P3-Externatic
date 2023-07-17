@@ -7,7 +7,6 @@
   margin-top: 5rem;
 }
 
-
 .errorLogin {
   color: var(--main-color);
 }
@@ -34,5 +33,4 @@
     height: 25rem;
     justify-content: space-around;
   }
-
 }
