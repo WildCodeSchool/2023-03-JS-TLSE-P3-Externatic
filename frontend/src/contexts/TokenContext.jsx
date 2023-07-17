@@ -1,5 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-
 // Import packages
 import { createContext, useState, useMemo } from "react";
 import Cookies from "js-cookie";
@@ -15,6 +13,9 @@ export function TokenContextProvider({ children }) {
   const setUserCookie = (token, role) => {
     if (token) {
       Cookies.set("userToken", token, {
+        expires: 1 / 24,
+      });
+      Cookies.set("userRole", role, {
         expires: 1 / 24,
       });
       setUserToken(token);

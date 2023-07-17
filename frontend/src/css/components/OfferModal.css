@@ -40,7 +40,6 @@ h3 {
   #offerModalContent {
     width: 60%;
     height: 80vh;
-    margin: auto;
   }
   .ReactModal__Content--after-open {
     padding: 2rem;

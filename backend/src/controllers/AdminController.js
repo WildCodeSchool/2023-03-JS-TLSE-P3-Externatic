@@ -38,8 +38,12 @@ const deleteAdmin = (req, res) => {
   const { id } = req.params;
   models.admin
     .delete(id)
-    .then(([admins]) => {
-      res.send(admins).status(200);
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
     })
     .catch((err) => {
       console.error(err);

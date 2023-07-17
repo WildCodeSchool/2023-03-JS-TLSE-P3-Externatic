@@ -1,0 +1,50 @@
+.containerTitleName {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+.containerRadioInput input {
+  padding: 1rem;
+}
+
+input[type="radio"].radioInput {
+  display: none;
+}
+
+input[type="radio"].radioInput + label.labelRadioInput {
+  transition: all 0.5s ease-in-out;
+  cursor: pointer;
+}
+input[type="radio"].radioInput + label.labelRadioInput.miss,
+input[type="radio"].radioInput + label.labelRadioInput.mister {
+  &:hover {
+    color: var(--main-color);
+  }
+}
+
+input[type="radio"].radioInput:checked + label.labelRadioInput {
+  color: var(--main-color);
+}
+
+.errorMessage {
+  color: var(--main-color);
+  font-style: italic;
+  font-size: smaller;
+  position: absolute;
+  width: 100%;
+  margin-top: 5rem;
+}
+.errorMessageTitleName {
+  color: var(--main-color);
+  font-style: italic;
+  font-size: smaller;
+  width: 100%;
+  position: absolute;
+  text-align: center;
+  margin-top: 1.5rem;
+}
+@media screen and (min-width: 768px) {
+  .button.subscription {
+    margin-top: 1rem;
+  }
+}

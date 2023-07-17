@@ -31,8 +31,16 @@ const {
   getFilteredOffers,
   deleteOfferByCompanyId,
 } = require("./controllers/OfferController");
-const { getAllCategories } = require("./controllers/CategoryController");
-const { getAllContracts } = require("./controllers/ContractController");
+const {
+  getAllCategories,
+  deleteCategory,
+  addCategory,
+} = require("./controllers/CategoryController");
+const {
+  getAllContracts,
+  deleteContract,
+  addContract,
+} = require("./controllers/ContractController");
 const {
   addFavorite,
   getAllFavories,
@@ -97,6 +105,12 @@ router.post(
   hashPassword,
   postAdmin
 );
+
+// ------------Fields management------------
+router.delete("/categories/:id", verifyAdmin, deleteCategory);
+router.post("/categories", verifyAdmin, addCategory);
+router.delete("/contracts-type/:id", verifyAdmin, deleteContract);
+router.post("/contracts-type", verifyAdmin, addContract);
 // ------------APPLICANT ROUTES------------
 // ------------Applicants favorites------------
 router.post("/favorites", addFavorite);

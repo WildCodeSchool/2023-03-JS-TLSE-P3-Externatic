@@ -8,6 +8,7 @@ import iconBlackCity from "../assets/icons/black_city_fill.svg";
 import iconBlackContract from "../assets/icons/contract_black.svg";
 import iconPinkRocket from "../assets/icons/rocket_pink.svg";
 import iconPinkTools from "../assets/icons/tools_pink.svg";
+import iconBlackProfil from "../assets/icons/person_black.svg";
 
 function OfferModal({ modalOfferIsOpen, setModalOfferIsOpen, offer }) {
   const {
@@ -17,6 +18,7 @@ function OfferModal({ modalOfferIsOpen, setModalOfferIsOpen, offer }) {
     technical_environment,
     benefits,
     contract_type_name,
+    company_name,
   } = offer;
   return (
     <Modal
@@ -33,7 +35,9 @@ function OfferModal({ modalOfferIsOpen, setModalOfferIsOpen, offer }) {
         content: {
           border: "1px solid #ccc",
           borderRadius: "4px",
+          margin: "auto",
           inset: "0",
+          padding: "0.5rem",
         },
       }}
     >
@@ -48,7 +52,11 @@ function OfferModal({ modalOfferIsOpen, setModalOfferIsOpen, offer }) {
       </div>
       {offer && (
         <>
-          <h2>{title}</h2>
+          <h3>{title}</h3>
+          <div className="offerTextAndIcon">
+            <img src={iconBlackProfil} alt="icon profil" />
+            <h3>{company_name}</h3>
+          </div>
           <div className="offerTextAndIcon">
             <img src={iconBlackCity} alt="icon city" />
             <h3>{city}</h3>
@@ -95,6 +103,7 @@ OfferModal.propTypes = {
     technical_environment: PropTypes.string,
     benefits: PropTypes.string,
     contract_type_name: PropTypes.string,
+    company_name: PropTypes.string,
   }).isRequired,
   modalOfferIsOpen: PropTypes.bool.isRequired,
   setModalOfferIsOpen: PropTypes.bool.isRequired,

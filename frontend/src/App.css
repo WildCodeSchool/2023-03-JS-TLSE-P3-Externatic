@@ -18,7 +18,7 @@
 /* Font sizes */
 * {
   font-size: 1rem;
-  font-family: "Jost", sans-serif;
+  font-family: "Jost", sans-serif !important;
 }
 
 h1,
@@ -81,7 +81,7 @@ a {
   border: var(--border_card);
   box-shadow: var(--shadow_initial);
   border-radius: 1rem;
-  gap: 2rem;
+  gap: 1rem;
   width: 95%;
   max-width: 60rem;
   background-color: white;
@@ -112,6 +112,7 @@ a {
   color: #fff;
   font-size: 1rem;
   font-weight: bold;
+  box-shadow: var(--shadow_initial);
 }
 
 .button * {
@@ -151,6 +152,7 @@ a:hover {
   margin: 1rem 0;
   border: none;
   background: transparent;
+  width: 100%;
   &:focus {
     outline: none;
   }
@@ -231,4 +233,9 @@ a:hover {
 .divider {
   width: 90%;
   border-top: 1px solid var(--light-grey);
+}
+
+.error {
+  color: red;
+  font-weight: bold;
 }
