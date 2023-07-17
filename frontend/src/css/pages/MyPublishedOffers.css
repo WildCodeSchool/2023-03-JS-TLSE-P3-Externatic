@@ -1,0 +1,10 @@
+.radioDiv {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.radioContainer {
+  display: flex;
+  align-items: center;
+}
