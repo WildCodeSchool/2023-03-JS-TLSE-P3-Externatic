@@ -21,7 +21,6 @@ export function ValidationFormContextProvider({ children }) {
     password: "",
     confirmedPassword: "",
   });
-
   const resetInputOnClick = () => {
     setErrors({});
   };

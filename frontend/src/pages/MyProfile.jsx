@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+// Import des packages
+import { useState } from "react";
+
+// Import des icons
 import identificationBlack from "../assets/icons/identification_black.svg";
 import mailBlack from "../assets/icons/mail_black.svg";
 import mobileBlack from "../assets/icons/mobile_black.svg";
