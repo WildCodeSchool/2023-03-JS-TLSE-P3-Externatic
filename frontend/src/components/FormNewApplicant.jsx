@@ -12,6 +12,7 @@ function FormNewApplicant({ handleInput }) {
     formDataSubscription,
     setFormDataSubscription,
   } = useContext(ValidationFormContext);
+
   const handleTitleNameMiss = () => {
     setFormDataSubscription({ ...formDataSubscription, titleName: "Mme" });
   };
@@ -225,8 +226,8 @@ function FormNewApplicant({ handleInput }) {
           onChange={handleInput}
           onClick={resetInputOnClick}
         />
-        {errors.confirmedpassword && (
-          <span className="errorMessage">{errors.confirmedpassword}</span>
+        {errors.confirmedPassword && (
+          <span className="errorMessage">{errors.confirmedPassword}</span>
         )}
       </div>
 
