@@ -30,6 +30,7 @@ const {
   getAllOffers,
   getFilteredOffers,
   deleteOfferByCompanyId,
+  deleteOfferById,
 } = require("./controllers/OfferController");
 const {
   getAllCategories,
@@ -104,5 +105,8 @@ router.delete("/categories/:id", verifyAdmin, deleteCategory);
 router.post("/categories", verifyAdmin, addCategory);
 router.delete("/contracts-type/:id", verifyAdmin, deleteContract);
 router.post("/contracts-type", verifyAdmin, addContract);
+
+// ------------Offers management------------
+router.delete("/offers/:id", verifyAdmin, deleteOfferById);
 
 module.exports = router;
