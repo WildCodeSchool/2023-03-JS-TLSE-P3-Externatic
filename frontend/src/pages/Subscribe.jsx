@@ -79,14 +79,14 @@ function Subscribe() {
           formDataSubscription
         )
         .then((response) => {
-          Swal.fire({
-            icon: "success",
-            text: "Votre compte a bien été créé, veuillez vous connecter",
-            iconColor: "#ca2061",
-            width: 300,
-            confirmButtonColor: "black",
-          });
           if (response.status === 201) {
+            Swal.fire({
+              icon: "success",
+              text: "Votre compte a bien été créé, veuillez vous connecter",
+              iconColor: "#ca2061",
+              width: 300,
+              confirmButtonColor: "black",
+            });
             navigate("/connexion");
             setErrors(false);
           }
