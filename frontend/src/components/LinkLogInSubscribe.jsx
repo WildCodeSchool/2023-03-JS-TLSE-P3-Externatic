@@ -9,7 +9,7 @@ import ValidationFormContext from "../contexts/ValidationFormContext";
 import "../css/components/LinkLogInSubscribe.css";
 
 function LinkLogInSubscribe() {
-  const { handleInputClick } = useContext(ValidationFormContext);
+  const { resetInputOnClick } = useContext(ValidationFormContext);
   const currentUrl = window.location.pathname;
   return (
     <div>
@@ -17,12 +17,12 @@ function LinkLogInSubscribe() {
         <nav className="navBarConnexion">
           <ul>
             <li className="signinLinkSelected">
-              <Link to="/subscribe" onClick={handleInputClick}>
+              <Link to="/subscribe" onClick={resetInputOnClick}>
                 S'inscrire
               </Link>
             </li>
             <li className="loginLink">
-              <Link to="/connexion" onClick={handleInputClick}>
+              <Link to="/connexion" onClick={resetInputOnClick}>
                 Se connecter
               </Link>
             </li>
@@ -32,12 +32,12 @@ function LinkLogInSubscribe() {
         <nav className="navBarConnexion">
           <ul>
             <li className="signinLink">
-              <Link to="/subscribe" onClick={handleInputClick}>
+              <Link to="/subscribe" onClick={resetInputOnClick}>
                 S'inscrire
               </Link>
             </li>
             <li className="loginLinkSelected">
-              <Link to="/connexion" onClick={handleInputClick}>
+              <Link to="/connexion" onClick={resetInputOnClick}>
                 Se connecter
               </Link>
             </li>

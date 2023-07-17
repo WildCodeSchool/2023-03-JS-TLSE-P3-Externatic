@@ -1,0 +1,21 @@
+.my-swal-title {
+    color: var(--main-color);
+  }
+  .swal2-confirm.my-swal-confirm-button.swal2-styled {
+    background-color: black;
+    border-radius: 5rem;
+    padding: 0.5rem 1rem;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    width: 6rem;
+    outline: none;
+    &:hover {
+      background-color: var(--main-color);
+    }
+    &:active {
+      border-color: transparent;
+    }
+  }
+
+

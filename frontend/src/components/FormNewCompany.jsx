@@ -58,6 +58,7 @@ function FormNewCompany({ handleInput }) {
           required=""
           name="siret"
           autoComplete="on"
+          maxLength="14"
           onChange={handleInput}
           onClick={resetInputOnClick}
         />
@@ -144,12 +145,12 @@ function FormNewCompany({ handleInput }) {
           type="password"
           placeholder="Confirmation mot de passe"
           required=""
-          name="confirmedpassword"
+          name="confirmedPassword"
           onChange={handleInput}
           onClick={resetInputOnClick}
         />
-        {errors.confirmedpassword && (
-          <span className="errorMessage">{errors.confirmedpassword}</span>
+        {errors.confirmedPassword && (
+          <span className="errorMessage">{errors.confirmedPassword}</span>
         )}
       </div>
 
