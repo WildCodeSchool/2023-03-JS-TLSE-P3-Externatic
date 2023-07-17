@@ -21,7 +21,6 @@ import "./css/components/OfferModal.css";
 import "./css/pages/UsersManagement.css";
 import "./css/components/FormNewUser.css";
 import "./css/pages/Subscribe.css";
-import "./css/pages/Home.css";
 import "./css/pages/FieldsManagement.css";
 
 // Import des contexts

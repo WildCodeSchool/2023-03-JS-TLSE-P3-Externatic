@@ -33,15 +33,19 @@ const deleteContract = (req, res) => {
 
 // ------------Add contract------------
 const addContract = (req, res) => {
-  models.contract_type
-    .addContract(req.body.contractTypeName)
-    .then(() => {
-      res.sendStatus(201);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
+  if (req.body.contractTypeName) {
+    models.contract_type
+      .addContract(req.body.contractTypeName)
+      .then(() => {
+        res.sendStatus(201);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  } else {
+    res.sendStatus(403);
+  }
 };
 
 module.exports = {
