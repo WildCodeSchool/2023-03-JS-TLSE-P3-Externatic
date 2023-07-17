@@ -55,7 +55,7 @@ router.post(
 // ------------User connection------------
 router.post("/login", getUserByEmail, verifyPassword);
 
-router.get("/users", verifyToken, getUser)
+router.get("/users", verifyToken, getUser);
 
 // ------------Offers------------
 router.get("/offers", getAllOffers);
