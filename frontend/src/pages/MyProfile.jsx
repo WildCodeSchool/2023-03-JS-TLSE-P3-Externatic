@@ -121,7 +121,7 @@ function MyProfile() {
           {errors.prenom && <small className="error">{errors.prenom}</small>}
         </div>
         <div className="containerTextInput">
-          <img className="iconForm" src={mailBlack} alt="person" />
+          <img className="iconForm" src={mailBlack} alt="mail" />
           <input
             type="email"
             placeholder=" Email"

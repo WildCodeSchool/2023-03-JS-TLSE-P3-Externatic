@@ -15,30 +15,31 @@
   object-fit: contain;
 }
 
-.searchContainer {
-  margin-top: 20px;
+.searchContainer{
+  width: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
   position: relative;
 }
-
-.searchInput {
-  width: 400px;
-  border-radius: 20px;
-  padding: 6px;
-  padding-right: 30px;
+.containerTextInput.searchBar {
+max-width: 70%;
+border-bottom: inherit;
 }
 
-.iconForm_1 {
+.textInput.searchBar {
+  width: 70%;
+  border-radius: 6rem;
+  padding: 1rem;
+  padding-right: 30px;
+  border: solid 1px var(--basic-grey);
+}
+
+.iconForm.searchBar {
   position: absolute;
-  right: 10px;
+  right: 15%;
   top: 50%;
   transform: translateY(-50%);
-}
-
-.carouselContainer {
-  position: relative;
-  overflow: hidden;
 }
 
 .carouselContent {
@@ -59,11 +60,10 @@
 
 .descriptionHome {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content:space-around;
   margin: 20px;
   max-width: 800px;
-  margin-left: auto; /* Ajoutez cette ligne pour centrer le contenu */
+  margin-left: auto;
   margin-right: auto;
 }
 
@@ -95,7 +95,56 @@
   right: 10px;
 }
 
-/* Styles pour les écrans de petite taille (mobile) */
+/* recherche new */
+.searchContainer {
+  margin-top: 20px;
+  margin-bottom: 130px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.searchIcon {
+  position: absolute;
+  top: 50%;
+  right: 10px; /* Ajustez cette valeur en fonction de vos besoins */
+  transform: translateY(-50%);
+}
+/* gestien de suggestion recherche*/
+.searchContainer {
+  position: relative;
+}
+
+.searchSuggestionsContainer {
+  position: absolute;
+  top: calc(
+    100% + 5px
+  ); 
+  /* Ajustez la valeur pour définir l'espace entre l'input et les suggestions */
+  width: 100%;
+  background-color: #fff; /* Couleur de fond des suggestions */
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre des suggestions */
+}
+
+.searchSuggestions {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.searchSuggestions li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.searchSuggestions li:hover {
+  background-color: #f5f5f5; /* Couleur de fond au survol d'une suggestion */
+}
+.searchSuggestions li.selected {
+  background-color: #f5f5f5;
+}
+
 @media screen and (max-width: 576px) {
   .searchInput {
     width: 100%;
@@ -111,7 +160,7 @@
 }
 
 /* Styles pour les écrans de taille moyenne (tablette) */
-@media screen and (min-width: 576px) and (max-width: 768px) {
+@media screen and (min-width: 577px) and (max-width: 768px) {
   .carouselItem {
     flex: 0 0 50%;
   }

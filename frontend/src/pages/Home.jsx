@@ -1,12 +1,16 @@
+// Imports des packages
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
+
+// Import des components
 import OfferCardLarge from "../components/OfferCardLarge";
 import OfferModal from "../components/OfferModal";
+
+// Import des icones
 import searchBlack from "../assets/icons/search_black.svg";
 import externaticHello from "../assets/icons/externatic-hello.svg";
 import externaticSablier from "../assets/icons/externatic-sablier.svg";
 import rocketPink from "../assets/icons/rocket_pink.svg";
-import "../css/pages/Home.css";
 
 function Home() {
   const [offersList, setOffersList] = useState([]);
@@ -15,7 +19,10 @@ function Home() {
   const carouselRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [carouselWidth, setCarouselWidth] = useState(0);
+  const [searchValue, setSearchValue] = useState(""); // barre de recherche
+  const [searchSuggestions, setSearchSuggestions] = useState([]);
 
+  // Affichage des offres et caroussel
   const handleOpenModalOffer = (offerId) => {
     const findOffer = offersList.find((offer) => offer.id === offerId);
     setSelectedOffer(findOffer);
@@ -73,6 +80,30 @@ function Home() {
     setActiveIndex(newIndex);
     moveCarousel(newIndex);
   };
+  // Traitement de la barre de recherche
+
+  const handleSearchInputChange = (event) => {
+    const { value } = event.target;
+    setSearchValue(value);
+  };
+
+  useEffect(() => {
+    const fetchSearchResults = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/offers`
+        );
+        const filteredResults = response.data.filter((offer) =>
+          offer.title.toLowerCase().includes(searchValue.toLowerCase())
+        );
+        setSearchSuggestions(filteredResults);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchSearchResults();
+  }, [searchValue]);
 
   return (
     <div>
@@ -89,12 +120,25 @@ function Home() {
           />
         </div>
         <div className="searchContainer">
-          <img className="iconForm_1" src={searchBlack} alt="person" />
-          <input
-            type="text"
-            placeholder="Web développeur, data analyst ..."
-            className="searchInput"
-          />
+          <div className="containerTextInput searchBar">
+            <input
+              type="text"
+              placeholder="Web développeur, data analyst ..."
+              className="textInput searchBar"
+              value={searchValue}
+              onChange={handleSearchInputChange}
+            />
+            <img className="iconForm searchBar" src={searchBlack} alt="loupe" />
+          </div>
+          {searchValue && searchSuggestions.length > 0 && (
+            <div className="searchSuggestionsContainer">
+              <ul className="searchSuggestions">
+                {searchSuggestions.map((suggestion) => (
+                  <li key={suggestion.id}>{suggestion.title}</li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
       <div className="carouselContainer">
