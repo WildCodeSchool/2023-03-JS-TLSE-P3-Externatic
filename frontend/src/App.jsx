@@ -27,7 +27,6 @@ import "./css/components/CustomStyleSwal.css";
 // Import des contexts
 import { MenuContextProvider } from "./contexts/MenuContext";
 import { TokenContextProvider } from "./contexts/TokenContext";
-import { ValidationFormContextProvider } from "./contexts/ValidationFormContext";
 import { FiltersContextProvider } from "./contexts/FiltersContext";
 import { ModificationProfileContextProvider } from "./contexts/ModificationProfileContext";
 
@@ -37,20 +36,18 @@ function App() {
       <FiltersContextProvider>
         <MenuContextProvider>
           <TokenContextProvider>
-            <ValidationFormContextProvider>
-              <ModificationProfileContextProvider>
-                <Router>
-                  <MainNavBar />
-                  <Routes>
-                    <Route path="" element={<Home />} />
-                    <Route path="connexion" element={<Connexion />} />
-                    <Route path="subscribe" element={<Subscribe />} />
-                    <Route path="offers" element={<Offers />} />
-                    <Route path="dashboard/*" element={<Dashboard />} />
-                  </Routes>
-                </Router>
-              </ModificationProfileContextProvider>
-            </ValidationFormContextProvider>
+            <ModificationProfileContextProvider>
+              <Router>
+                <MainNavBar />
+                <Routes>
+                  <Route path="" element={<Home />} />
+                  <Route path="connexion" element={<Connexion />} />
+                  <Route path="subscribe" element={<Subscribe />} />
+                  <Route path="offers" element={<Offers />} />
+                  <Route path="dashboard/*" element={<Dashboard />} />
+                </Routes>
+              </Router>
+            </ModificationProfileContextProvider>
           </TokenContextProvider>
         </MenuContextProvider>
       </FiltersContextProvider>

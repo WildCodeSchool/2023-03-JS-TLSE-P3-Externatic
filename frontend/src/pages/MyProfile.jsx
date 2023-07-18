@@ -1,10 +1,6 @@
 // Import des packages
 import { useState } from "react";
 
-// Import des components
-import MyProfileApplicant from "../components/MyProfileApplicant";
-import MyProfileCompany from "../components/MyProfileCompany";
-import MyProfileAdmin from "../components/MyProfileAdministrator";
 // Import des icons
 
 import whiteTrash from "../assets/icons/white_trash.svg";
@@ -61,9 +57,7 @@ function MyProfile() {
   return (
     <div className="myProfileSection">
       <form onSubmit={handleSubmit} className="form">
-        <MyProfileApplicant />
-        <MyProfileCompany />
-        <MyProfileAdmin />
+        coucou
       </form>
       <form className="form">
         <h2>Modifier mon mot de passe</h2>

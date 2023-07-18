@@ -1,8 +1,8 @@
 // Import packages
-import { useState, useEffect, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import Swal from "sweetalert2";
+import { useState, useEffect } from "react";
+// import { useNavigate } from "react-router-dom";
+// import axios from "axios";
+// import Swal from "sweetalert2";
 
 // Import components
 import LinkLogInSubscribe from "../components/LinkLogInSubscribe";
@@ -10,7 +10,7 @@ import FormNewApplicant from "../components/FormNewApplicant";
 import FormNewCompany from "../components/FormNewCompany";
 
 // Import context
-import ValidationFormContext from "../contexts/ValidationFormContext";
+// import ValidationFormContext from "../contexts/ValidationFormContext";
 
 // Import images
 import cardApplicant from "../assets/images/card_applicant.png";
@@ -20,15 +20,12 @@ function Subscribe() {
   const [showForm, setShowForm] = useState(false);
   const [isApplicantCardFocused, setIsApplicantCardFocused] = useState(false);
   const [isCompanyCardFocused, setIsCompanyCardFocused] = useState(false);
-  const {
-    formDataCompanySubscription,
-    formDataApplicantSubscription,
-    setFormDataCompanySubscription,
-    setFormDataApplicantSubscription,
-    setErrors,
-    ValidationConnexion,
-    validationInputsApplicant,
-  } = useContext(ValidationFormContext);
+
+  // const {
+
+  //   setErrors,
+
+  // } = useContext(ValidationFormContext);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -40,7 +37,7 @@ function Subscribe() {
         setShowForm(false);
         setIsApplicantCardFocused(false);
         setIsCompanyCardFocused(false);
-        setErrors(false);
+        // setErrors(false);
       }
     };
     document.addEventListener("click", handleClickOutside);
@@ -52,143 +49,15 @@ function Subscribe() {
     setShowForm(true);
     setIsApplicantCardFocused(true);
     setIsCompanyCardFocused(false);
-    setErrors(false);
+    // setErrorsFormApplicant(false);
   };
   const handleCompanyCardClick = () => {
     setShowForm(true);
     setIsApplicantCardFocused(false);
     setIsCompanyCardFocused(true);
-    setErrors(false);
+    // setErrorsFormCompany(false);
   };
-  const navigate = useNavigate();
-  const handleInputCompany = (e) => {
-    setFormDataCompanySubscription({
-      ...formDataCompanySubscription,
-      [e.target.name]: e.target.value,
-    });
-    if (formDataCompanySubscription) {
-      setErrors(false);
-    }
-  };
-  const handleInputApplicant = (e) => {
-    setFormDataApplicantSubscription({
-      ...formDataApplicantSubscription,
-      [e.target.name]: e.target.value,
-    });
-    if (formDataApplicantSubscription) {
-      setErrors(false);
-    }
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const formDataApplicantErrors = validationInputsApplicant(
-      formDataApplicantSubscription
-    );
-    const formDataCompanyErrors = ValidationConnexion(
-      formDataApplicantSubscription
-    );
-    setErrors(ValidationConnexion(formDataApplicantSubscription));
-    if (
-      Object.keys(formDataApplicantErrors).length === 0 &&
-      isApplicantCardFocused
-    ) {
-      axios
-        .post(
-          `${import.meta.env.VITE_BACKEND_URL}/signup/applicant`,
-          formDataApplicantSubscription
-        )
-        .then((response) => {
-          if (response.status === 201) {
-            Swal.fire({
-              icon: "success",
-              text: "Votre compte a bien été créé, veuillez vous connecter",
-              iconColor: "#ca2061",
-              width: 300,
-              confirmButtonColor: "black",
-            });
-            navigate("/connexion");
-            setErrors(false);
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-          if (err.response.status === 403) {
-            Swal.fire({
-              icon: "error",
-              text: "Ce mail a déjà été utilisé, veuillez en saisir un autre",
-              iconColor: "#ca2061",
-              width: 300,
-              confirmButtonColor: "black",
-            });
-          } else {
-            Swal.fire({
-              icon: "error",
-              text: "Une erreur est survenue, veuillez réessayer plus tard",
-              iconColor: "#ca2061",
-              width: 300,
-              confirmButtonColor: "black",
-            });
-          }
-        });
-      setFormDataApplicantSubscription({
-        titleName: "",
-        firstname: "",
-        lastname: "",
-        email: "",
-        password: "",
-        confirmedPassword: "",
-      });
-    } else if (
-      Object.keys(formDataCompanyErrors).length === 0 &&
-      isCompanyCardFocused
-    ) {
-      axios
-        .post(
-          `${import.meta.env.VITE_BACKEND_URL}/signup/company`,
-          formDataCompanySubscription
-        )
-        .then((response) => {
-          if (response.status === 201) {
-            Swal.fire({
-              icon: "success",
-              text: "Votre compte a bien été créé, veuillez vous connecter",
-              iconColor: "#ca2061",
-              width: 300,
-              confirmButtonColor: "black",
-            });
-            navigate("/connexion");
-            setErrors(false);
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-          if (err.response.status === 403) {
-            Swal.fire({
-              icon: "error",
-              text: "Ce mail a déjà été utilisé, veuillez en saisir un autre",
-              iconColor: "#ca2061",
-              width: 300,
-              confirmButtonColor: "black",
-            });
-          } else {
-            Swal.fire({
-              icon: "error",
-              text: "Une erreur est survenue, veuillez réessayer plus tard",
-              iconColor: "#ca2061",
-              width: 300,
-              confirmButtonColor: "black",
-            });
-          }
-        });
-      setFormDataCompanySubscription({
-        name: "",
-        siret: 0,
-        email: "",
-        password: "",
-        confirmedPassword: "",
-      });
-    }
-  };
+
   return (
     <>
       <LinkLogInSubscribe />
@@ -215,16 +84,8 @@ function Subscribe() {
         </section>
         {showForm && (
           <div className="formContainer">
-            {isApplicantCardFocused && (
-              <form className="form subscription" onSubmit={handleSubmit}>
-                <FormNewApplicant handleInput={handleInputApplicant} />
-              </form>
-            )}
-            {isCompanyCardFocused && (
-              <form className="form subscription" onSubmit={handleSubmit}>
-                <FormNewCompany handleInput={handleInputCompany} />
-              </form>
-            )}
+            {isApplicantCardFocused && <FormNewApplicant />}
+            {isCompanyCardFocused && <FormNewCompany />}
           </div>
         )}
       </div>
