@@ -1,0 +1,36 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding:0.4rem 0.8rem;
+  background-color: #555555;
+  position: fixed;
+  height: 15vh;
+  color: white;
+  z-index: 10;
+  bottom: 0;
+  width: 100vh;
+}
+.footer p{
+  font-size: 1.1rem;
+}
+.footer strong{
+ font-weight: 800;
+}
+.right-column {
+  text-align: right;
+}
+.left-column {
+  flex-direction: column;
+  width: 50%;
+}
+@media (min-width: 768px) {
+
+  .footer {
+    
+    padding: 0.5rem 1rem;
+    height: 14vh;
+    line-height: 1.5rem;
+    width: 100%;
+  }
+}

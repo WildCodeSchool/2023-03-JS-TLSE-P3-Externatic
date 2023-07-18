@@ -32,6 +32,7 @@ import { MenuContextProvider } from "./contexts/MenuContext";
 import { TokenContextProvider } from "./contexts/TokenContext";
 import { FiltersContextProvider } from "./contexts/FiltersContext";
 import { ModificationProfileContextProvider } from "./contexts/ModificationProfileContext";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
             <ModificationProfileContextProvider>
               <Router>
                 <MainNavBar />
+                <Footer />
                 <Routes>
                   <Route path="" element={<Home />} />
                   <Route path="connexion" element={<Connexion />} />
