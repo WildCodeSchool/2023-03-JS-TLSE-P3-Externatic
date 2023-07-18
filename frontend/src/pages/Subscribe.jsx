@@ -1,16 +1,10 @@
 // Import packages
 import { useState, useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
-// import axios from "axios";
-// import Swal from "sweetalert2";
 
 // Import components
 import LinkLogInSubscribe from "../components/LinkLogInSubscribe";
 import FormNewApplicant from "../components/FormNewApplicant";
 import FormNewCompany from "../components/FormNewCompany";
-
-// Import context
-// import ValidationFormContext from "../contexts/ValidationFormContext";
 
 // Import images
 import cardApplicant from "../assets/images/card_applicant.png";
