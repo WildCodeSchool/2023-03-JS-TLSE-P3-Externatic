@@ -151,6 +151,11 @@ function Home() {
         </button>
         <div className="carouselContent" ref={carouselRef}>
           {offersList.length ? (
+            (offersList.filter((val) => {
+              return val.title
+                .toLowerCase()
+                .includes(searchValue.toLowerCase());
+            }),
             offersList.map((offer, index) => (
               <div
                 className={`carouselItem ${
@@ -165,7 +170,7 @@ function Home() {
                   onCardClick={handleOpenModalOffer}
                 />
               </div>
-            ))
+            )))
           ) : (
             <div className="globalContainer">
               <img className="iconForm_1" src={searchBlack} alt="person" />
