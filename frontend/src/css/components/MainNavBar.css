@@ -94,4 +94,12 @@
   .crossSection {
     display: none;
   }
+
+  button .greenSpanRole {
+    color: lightgreen;
+  }
+
+  button .redSpanRole {
+    color: red;
+  }
 }

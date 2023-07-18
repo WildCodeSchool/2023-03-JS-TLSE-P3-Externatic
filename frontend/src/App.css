@@ -158,6 +158,13 @@ a:hover {
   }
 }
 
+.textAreaInput {
+  width: 100%;
+  min-width: 50%;
+  max-width: 100%;
+  min-height: 10rem;
+}
+
 /* Global radio input */
 .containerRadioInput {
   display: flex;

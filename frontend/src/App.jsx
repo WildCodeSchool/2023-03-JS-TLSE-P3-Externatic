@@ -22,13 +22,16 @@ import "./css/pages/UsersManagement.css";
 import "./css/components/FormNewUser.css";
 import "./css/pages/Subscribe.css";
 import "./css/pages/FieldsManagement.css";
+import "./css/components/CustomStyleSwal.css";
+import "./css/pages/MyPublishedOffers.css";
+import "./css/components/MainNavBar.css";
 import "./css/pages/Home.css";
 
 // Import des contexts
 import { MenuContextProvider } from "./contexts/MenuContext";
 import { TokenContextProvider } from "./contexts/TokenContext";
-import { ValidationFormContextProvider } from "./contexts/ValidationFormContext";
 import { FiltersContextProvider } from "./contexts/FiltersContext";
+import { ModificationProfileContextProvider } from "./contexts/ModificationProfileContext";
 
 function App() {
   return (
@@ -36,7 +39,7 @@ function App() {
       <FiltersContextProvider>
         <MenuContextProvider>
           <TokenContextProvider>
-            <ValidationFormContextProvider>
+            <ModificationProfileContextProvider>
               <Router>
                 <MainNavBar />
                 <Routes>
@@ -47,7 +50,7 @@ function App() {
                   <Route path="dashboard/*" element={<Dashboard />} />
                 </Routes>
               </Router>
-            </ValidationFormContextProvider>
+            </ModificationProfileContextProvider>
           </TokenContextProvider>
         </MenuContextProvider>
       </FiltersContextProvider>

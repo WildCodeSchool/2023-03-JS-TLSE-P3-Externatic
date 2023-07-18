@@ -22,6 +22,7 @@ export function TokenContextProvider({ children }) {
       setUserRole(role);
     } else {
       Cookies.remove("userToken");
+      Cookies.remove("userRole");
       setUserToken(null);
     }
   };
