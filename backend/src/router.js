@@ -28,20 +28,11 @@ const {
 } = require("./controllers/CompanyController");
 const {
   getAllOffers,
-  getFilteredOffers,
+  // getFilteredOffers,
   deleteOfferByCompanyId,
-  deleteOfferById,
 } = require("./controllers/OfferController");
-const {
-  getAllCategories,
-  deleteCategory,
-  addCategory,
-} = require("./controllers/CategoryController");
-const {
-  getAllContracts,
-  deleteContract,
-  addContract,
-} = require("./controllers/ContractController");
+const { getAllCategories } = require("./controllers/CategoryController");
+const { getAllContracts } = require("./controllers/ContractController");
 
 router.use(express.json());
 
@@ -66,7 +57,6 @@ router.post("/login", getUserByEmail, verifyPassword);
 
 // ------------Offers------------
 router.get("/offers", getAllOffers);
-router.post("/filtered-offers", getFilteredOffers);
 
 // ------------Categories------------
 router.get("/categories", getAllCategories);
@@ -99,14 +89,5 @@ router.post(
   hashPassword,
   postAdmin
 );
-
-// ------------Fields management------------
-router.delete("/categories/:id", verifyAdmin, deleteCategory);
-router.post("/categories", verifyAdmin, addCategory);
-router.delete("/contracts-type/:id", verifyAdmin, deleteContract);
-router.post("/contracts-type", verifyAdmin, addContract);
-
-// ------------Offers management------------
-router.delete("/offers/:id", verifyAdmin, deleteOfferById);
 
 module.exports = router;
