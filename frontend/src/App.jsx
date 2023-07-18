@@ -29,8 +29,8 @@ import "./css/components/MainNavBar.css";
 // Import des contexts
 import { MenuContextProvider } from "./contexts/MenuContext";
 import { TokenContextProvider } from "./contexts/TokenContext";
-import { ValidationFormContextProvider } from "./contexts/ValidationFormContext";
 import { FiltersContextProvider } from "./contexts/FiltersContext";
+import { ModificationProfileContextProvider } from "./contexts/ModificationProfileContext";
 
 function App() {
   return (
@@ -38,7 +38,7 @@ function App() {
       <FiltersContextProvider>
         <MenuContextProvider>
           <TokenContextProvider>
-            <ValidationFormContextProvider>
+            <ModificationProfileContextProvider>
               <Router>
                 <MainNavBar />
                 <Routes>
@@ -49,7 +49,7 @@ function App() {
                   <Route path="dashboard/*" element={<Dashboard />} />
                 </Routes>
               </Router>
-            </ValidationFormContextProvider>
+            </ModificationProfileContextProvider>
           </TokenContextProvider>
         </MenuContextProvider>
       </FiltersContextProvider>
