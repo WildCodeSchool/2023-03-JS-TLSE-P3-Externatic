@@ -13,12 +13,25 @@ const addFavorite = (req, res) => {
       res.sendStatus(500);
     });
 };
-
+// ------------Récupérer une offre favori------------
+const getFavorite = (req, res) => {
+  const applicantId = req.payload.sub;
+  const offerId = req.params.id;
+  models.applicant_offer_favorites
+    .findFavorite(applicantId, offerId)
+    .then(([favorites]) => {
+      res.json(favorites).status(200);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
 // ------------Récupérer tous les favoris------------
-const getAllFavories = (req, res) => {
+const getAllFavorites = (req, res) => {
   const applicantId = req.payload.sub;
   models.applicant_offer_favorites
-    .findFavories(applicantId)
+    .findFavorites(applicantId)
     .then(([favorites]) => {
       res.send(favorites).status(200);
     })
@@ -29,12 +42,16 @@ const getAllFavories = (req, res) => {
 };
 // ------------Supprimer une offre des favoris------------
 const deleteFavorite = (req, res) => {
-  const { offerId } = req.body;
+  const offerId = req.params.id;
   const applicantId = req.payload.sub;
   models.applicant_offer_favorites
     .removeFavorite(applicantId, offerId)
-    .then(() => {
-      res.sendStatus(201);
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
     })
     .catch((err) => {
       console.error(err);
@@ -43,6 +60,7 @@ const deleteFavorite = (req, res) => {
 };
 module.exports = {
   addFavorite,
-  getAllFavories,
+  getAllFavorites,
   deleteFavorite,
+  getFavorite,
 };

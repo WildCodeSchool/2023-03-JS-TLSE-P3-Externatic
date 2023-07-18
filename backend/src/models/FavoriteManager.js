@@ -12,9 +12,16 @@ class FavoriteManager extends AbstractManager {
     );
   }
 
-  findFavories(applicantId) {
+  findFavorite(applicantId, offerId) {
     return this.database.query(
-      `SELECT app.offer_id_applicant_offer_favorites AS offer_id, o.id, o.title, o.city, o.job_responsibilities, o.technical_environment, o.benefits, c.contract_type_name, company.name AS company_name FROM ${this.table} AS app INNER JOIN offer AS o ON app.offer_id_applicant_offer_favorites = o.id INNER JOIN contract_type AS c ON o.contract_type_id_offer = c.id INNER JOIN company ON o.company_id = company.id WHERE applicant_id_applicant_offer_favorites = ?`,
+      `SELECT * FROM ${this.table} WHERE applicant_id_applicant_offer_favorites = ? AND offer_id_applicant_offer_favorites = ?`,
+      [applicantId, offerId]
+    );
+  }
+
+  findFavorites(applicantId) {
+    return this.database.query(
+      `SELECT applicant_id_applicant_offer_favorites AS applicant_id, offer_id_applicant_offer_favorites AS offer_id FROM ${this.table} WHERE applicant_id_applicant_offer_favorites = ?`,
       [applicantId]
     );
   }

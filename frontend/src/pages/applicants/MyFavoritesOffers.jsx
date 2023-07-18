@@ -10,32 +10,43 @@ import OfferModal from "../../components/OfferModal";
 
 function MyFavoritesOffers() {
   const { userToken } = useContext(TokenContext);
-  // const [offersFavoriesByApplicantId, setOffersFavoriesByApplicantId] =
-  useState([]);
   // gestion de la modale
   const [modalOfferIsOpen, setModalOfferIsOpen] = useState(false);
   const [selectedOffer, setSelectedOffer] = useState([]);
+
+  const [offersList, setOffersList] = useState([]);
+
   // gestion de la mise en favoris
   const [offersFavorited, setOffersFavorited] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/offers`)
+      .then((results) => setOffersList(results.data));
+  }, []);
   // gestion de la modale
   const handleOpenModalOffer = (offerId) => {
-    const findOffer = offersFavorited.find((offer) => offer.id === offerId);
+    const findOffer = offersList.find((offer) => offer.id === offerId);
     setSelectedOffer(findOffer);
     setModalOfferIsOpen(true);
   };
-  const favoriesByApplicantId = () => {
+  const favoritesByApplicantId = () => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/favorites`, {
+      .get(`${import.meta.env.VITE_BACKEND_URL}/all-favorites`, {
         headers: {
           Authorization: `Bearer ${userToken}`,
         },
       })
-      .then((results) => setOffersFavorited(results.data));
+      .then((results) => {
+        setOffersFavorited(results.data);
+      });
   };
   useEffect(() => {
-    favoriesByApplicantId();
+    favoritesByApplicantId();
   }, []);
-
+  const findFavoritesOffers = offersList.filter((offer) =>
+    offersFavorited.some((favorite) => favorite.offer_id === offer.id)
+  );
   return (
     <div className="offersFavoriesContainer">
       <OfferModal
@@ -43,17 +54,22 @@ function MyFavoritesOffers() {
         setModalOfferIsOpen={setModalOfferIsOpen}
         offer={selectedOffer}
       />
-      {offersFavorited.map((offer) => (
-        <OfferCardList
-          key={offer.id}
-          offer={offer}
-          modalOfferIsOpen={modalOfferIsOpen}
-          setModalOfferIsOpen={setModalOfferIsOpen}
-          onCardClick={handleOpenModalOffer}
-          offersFavorited={offersFavorited}
-          setOffersFavorited={setOffersFavorited}
-        />
-      ))}
+      {findFavoritesOffers.length ? (
+        findFavoritesOffers.map((el) => (
+          <OfferCardList
+            key={el.id}
+            offer={el}
+            modalOfferIsOpen={modalOfferIsOpen}
+            setModalOfferIsOpen={setModalOfferIsOpen}
+            onCardClick={handleOpenModalOffer}
+            favoritesByApplicantId={favoritesByApplicantId}
+          />
+        ))
+      ) : (
+        <div className="globalContainer">
+          <h3 className="errorTitle">Vous n'avez aucune offre en favoris</h3>
+        </div>
+      )}
     </div>
   );
 }

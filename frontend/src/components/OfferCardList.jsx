@@ -1,5 +1,8 @@
 /* eslint-disable camelcase */
+import { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
+import axios from "axios";
+import TokenContext from "../contexts/TokenContext";
 // Import style
 import "../css/components/OfferCardList.css";
 // Import icones
@@ -8,51 +11,84 @@ import iconWhiteHeartFill from "../assets/icons/white_heart_fill.svg";
 import iconWhiteCity from "../assets/icons/white_city_fill.svg";
 import iconWhiteContract from "../assets/icons/contract_white.svg";
 
-function OfferCardList({
-  offer,
-  onCardClick,
-  addFavorite,
-  offersFavorited,
-  removeFavorite,
-}) {
+function OfferCardList({ offer, onCardClick, favoritesByApplicantId }) {
   const { id, title, city, contract_type_name } = offer;
+  const [isFavorite, setIsFavorite] = useState(false);
+  const { userToken } = useContext(TokenContext);
   const handleCardClick = () => {
     onCardClick(id);
   };
-  const offerIsFavorite = offersFavorited.some(
-    (favoriteOffer) => favoriteOffer.offer_id === offer.id
-  );
-  const handleClickOfferIsFavorite = () => {
-    if (!offerIsFavorite) {
-      addFavorite(offer);
-      // console.log("offer added");
-    } else {
-      removeFavorite(offer);
-      // console.log("offer removed");
-    }
+  const verifyIsFavorite = () => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/favorites/${offer.id}`, {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      })
+      .then((res) => {
+        if (res.data.length) {
+          setIsFavorite(true);
+        } else {
+          setIsFavorite(false);
+        }
+      });
   };
-  // console.log(offer);
 
+  const addFavorite = () => {
+    axios
+      .post(
+        `${import.meta.env.VITE_BACKEND_URL}/favorites`,
+        {
+          offerId: offer.id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      )
+      .then(() => {
+        verifyIsFavorite();
+      });
+  };
+
+  const deleteFavorite = () => {
+    axios
+      .delete(`${import.meta.env.VITE_BACKEND_URL}/favorites/${offer.id}`, {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      })
+      .then(() => {
+        verifyIsFavorite();
+        favoritesByApplicantId();
+      });
+  };
+  useEffect(() => {
+    verifyIsFavorite();
+  }, []);
   return (
     <div className="offerCard offerCardList">
       <div className="offerCardColor">
         <div className="offerTitleAndIcon">
           <h3 className="titleOfferCard">{title}</h3>
-          <button
-            type="button"
-            // onClick={() => {
-            //   // handleClickOfferIsFavorite();
-            //   addFavorite(offer);
-            // }}
-            onClick={handleClickOfferIsFavorite}
-          >
-            <img
-              src={offerIsFavorite ? iconWhiteHeartFill : iconWhiteHeartEmpty}
-              // src={iconWhiteHeartEmpty}
-              alt="icon add favorite"
-              className="heart"
-            />
-          </button>
+          {isFavorite ? (
+            <button type="button" onClick={() => deleteFavorite()}>
+              <img
+                src={iconWhiteHeartFill}
+                alt="icon add favorite"
+                className="heart"
+              />
+            </button>
+          ) : (
+            <button type="button" onClick={() => addFavorite()}>
+              <img
+                src={iconWhiteHeartEmpty}
+                alt="icon add favorite"
+                className="heart"
+              />
+            </button>
+          )}
         </div>
         <div className="offerTextAndIcon">
           <img src={iconWhiteCity} alt="icon city" />
@@ -78,21 +114,7 @@ OfferCardList.propTypes = {
     contract_type_name: PropTypes.string,
   }).isRequired,
   onCardClick: PropTypes.func.isRequired,
-  addFavorite: PropTypes.func.isRequired,
-  removeFavorite: PropTypes.func.isRequired,
-  offersFavorited: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      benefits: PropTypes.string,
-      city: PropTypes.string,
-      company_name: PropTypes.string,
-      contract_type_name: PropTypes.string,
-      job_responsibilities: PropTypes.string,
-      offer_id: PropTypes.number,
-      technical_environment: PropTypes.string,
-      title: PropTypes.string,
-    })
-  ).isRequired,
+  favoritesByApplicantId: PropTypes.func.isRequired,
 };
 
 export default OfferCardList;
