@@ -46,34 +46,24 @@ function FormNewApplicant() {
     const namePattern = /^[a-zA-Z]/;
 
     // vérification madame ou monsieur coché
-    if (el.titleName !== "Mr" || el.titleName !== "Mme") {
+    if (!el.titleName) {
       error.titleName = "Veuillez sélectionner Madame ou Monsieur";
     }
 
     // vérification du prénom
-    if (el.firstname === "") {
-      error.firstname = "Veuillez saisir votre prénom";
-    } else if (!namePattern.test(el.firstname)) {
+    if (!namePattern.test(el.firstname)) {
       error.firstname = "Le prénom ne doit contenir que des lettres";
     }
 
     // vérification du nom
-    if (el.lastname === "") {
-      error.lastname = "Veuillez saisir votre nom";
-    } else if (!namePattern.test(el.lastname)) {
+    if (!namePattern.test(el.lastname)) {
       error.lastname = "Le nom ne doit contenir que des lettres";
     }
     // vérification de l'email
-    if (el.email === "") {
-      error.email = "Le mail est requis";
-    } else if (!emailPattern.test(el.email)) {
+    if (!emailPattern.test(el.email)) {
       error.email = "Le mail n'est pas valide";
     }
 
-    // vérification du mot de passe
-    if (el.password === "") {
-      error.password = "Le mot de passe est requis";
-    }
     // vérification de la confirmation du mot de passe
     if (el.confirmedPassword === "" || el.password === "") {
       error.confirmedPassword = "Veuillez confirmer votre mot de passe";
@@ -88,7 +78,11 @@ function FormNewApplicant() {
     setErrorsFormApplicant(
       validationInputsApplicant(formDataApplicantSubscription)
     );
-    if (errorsFormApplicant === {}) {
+    const errorDataApplicant = validationInputsApplicant(
+      formDataApplicantSubscription
+    );
+
+    if (Object.keys(errorDataApplicant).length === 0) {
       axios
         .post(
           `${import.meta.env.VITE_BACKEND_URL}/signup/applicant`,

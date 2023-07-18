@@ -24,6 +24,9 @@ function FormNewCompany() {
       ...formDataCompanySubscription,
       [e.target.name]: e.target.value,
     });
+    if (formDataCompanySubscription) {
+      setErrorsFormCompany({});
+    }
   };
 
   // Fontion pour valider les champs du formulaire
@@ -38,27 +41,17 @@ function FormNewCompany() {
     const siretPattern = /^\d{14}$/;
 
     // vérification du nom de l'entreprise
-    if (el.name === "") {
-      error.name = "Veuillez saisir le nom de l'entreprise";
-    } else if (!namePattern.test(el.name)) {
+    if (!namePattern.test(el.name)) {
       error.name = "Le nom ne doit contenir que des lettres";
-    } else {
-      error.name = "";
     }
 
     // vérification du SIRET
-    if (el.siret === "") {
-      error.siret = "Veuillez saisir le SIRET de l'entreprise";
-    } else if (!siretPattern.test(el.siret)) {
+    if (!siretPattern.test(el.siret)) {
       error.siret = "Le SIRET doit contenir exactement 14 chiffres";
-    } else {
-      error.siret = "";
     }
 
     // vérification de l'email
-    if (el.email === "") {
-      error.email = "Le mail est requis";
-    } else if (!emailPattern.test(el.email)) {
+    if (!emailPattern.test(el.email)) {
       error.email = "Le mail n'est pas valide";
     }
 
@@ -77,10 +70,11 @@ function FormNewCompany() {
 
   const handleSubmitCompany = (e) => {
     e.preventDefault();
-
     setErrorsFormCompany(validationInputsCompany(formDataCompanySubscription));
-
-    if (errorsFormCompany === {}) {
+    const errorsDataCompany = validationInputsCompany(
+      formDataCompanySubscription
+    );
+    if (Object.keys(errorsDataCompany).length === 0) {
       axios
         .post(
           `${import.meta.env.VITE_BACKEND_URL}/signup/company`,
@@ -208,9 +202,6 @@ function FormNewCompany() {
           autoComplete="on"
           onChange={handleInputCompany}
         />
-        {errorsFormCompany.email && (
-          <span className="errorMessage">{errorsFormCompany.email}</span>
-        )}
       </div>
       {/* password */}
       <div className="containerTextInput">

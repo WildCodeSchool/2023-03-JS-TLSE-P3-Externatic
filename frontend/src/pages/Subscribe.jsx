@@ -21,12 +21,6 @@ function Subscribe() {
   const [isApplicantCardFocused, setIsApplicantCardFocused] = useState(false);
   const [isCompanyCardFocused, setIsCompanyCardFocused] = useState(false);
 
-  // const {
-
-  //   setErrors,
-
-  // } = useContext(ValidationFormContext);
-
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (
@@ -37,7 +31,6 @@ function Subscribe() {
         setShowForm(false);
         setIsApplicantCardFocused(false);
         setIsCompanyCardFocused(false);
-        // setErrors(false);
       }
     };
     document.addEventListener("click", handleClickOutside);
@@ -49,13 +42,11 @@ function Subscribe() {
     setShowForm(true);
     setIsApplicantCardFocused(true);
     setIsCompanyCardFocused(false);
-    // setErrorsFormApplicant(false);
   };
   const handleCompanyCardClick = () => {
     setShowForm(true);
     setIsApplicantCardFocused(false);
     setIsCompanyCardFocused(true);
-    // setErrorsFormCompany(false);
   };
 
   return (
