@@ -6,7 +6,6 @@ import FiltersContext from "../contexts/FiltersContext";
 
 // import des composants
 import OfferCardList from "../components/OfferCardList";
-import OfferModal from "../components/OfferModal";
 
 function Offers() {
   const [offersList, setOffersList] = useState([]);
@@ -14,18 +13,8 @@ function Offers() {
   const [localizationInput, setLocalizationInput] = useState("");
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [isContractOpen, setIsContractOpen] = useState(false);
-  // gestion de la modale
-  const [modalOfferIsOpen, setModalOfferIsOpen] = useState(false);
-  const [selectedOffer, setSelectedOffer] = useState([]);
   const { categoriesList, contractList, getCategories, getContracts } =
     useContext(FiltersContext);
-
-  // gestion de la modale
-  const handleOpenModalOffer = (offerId) => {
-    const findOffer = offersList.find((offer) => offer.id === offerId);
-    setSelectedOffer(findOffer);
-    setModalOfferIsOpen(true);
-  };
 
   const handleCheck = (el, list) => {
     if (list === "category") {
@@ -74,11 +63,6 @@ function Offers() {
 
   return (
     <div className="offersPage">
-      <OfferModal
-        modalOfferIsOpen={modalOfferIsOpen}
-        setModalOfferIsOpen={setModalOfferIsOpen}
-        offer={selectedOffer}
-      />
       <form onSubmit={handleSubmit} className="form formOffersFilters">
         <div className="containerTextInput">
           <input
@@ -177,15 +161,7 @@ function Offers() {
       </form>
       <div className="offersListContainer">
         {offersList.length ? (
-          offersList.map((el) => (
-            <OfferCardList
-              key={el.id}
-              offer={el}
-              modalOfferIsOpen={modalOfferIsOpen}
-              setModalOfferIsOpen={setModalOfferIsOpen}
-              onCardClick={handleOpenModalOffer}
-            />
-          ))
+          offersList.map((el) => <OfferCardList key={el.id} offer={el} />)
         ) : (
           <div className="globalContainer">
             <h3 className="errorTitle">Pas de résultat</h3>

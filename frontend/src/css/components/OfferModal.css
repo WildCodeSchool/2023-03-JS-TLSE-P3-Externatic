@@ -10,11 +10,18 @@ h3 {
   flex-direction: column;
   gap: 1rem;
 }
+#offerModalContent::-webkit-scrollbar {
+  width: 0.2rem;
+}
+#offerModalContent::-webkit-scrollbar-thumb {
+  background-color: var(--main-color);
+  border-radius: 1rem;
+}
 .titleModal {
   color: var(--main-color);
 }
 .crossSectionModal {
-  padding: 0.5rem;
+  padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--light-grey);
   background-color: white;
 }

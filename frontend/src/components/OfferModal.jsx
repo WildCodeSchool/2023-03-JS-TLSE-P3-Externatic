@@ -6,11 +6,20 @@ import Modal from "react-modal";
 import cross from "../assets/icons/cross.svg";
 import iconBlackCity from "../assets/icons/black_city_fill.svg";
 import iconBlackContract from "../assets/icons/contract_black.svg";
+import iconBlackHeartEmpty from "../assets/icons/black_heart_empty.svg";
+import iconBlackHeartFill from "../assets/icons/black_heart_fill.svg";
 import iconPinkRocket from "../assets/icons/rocket_pink.svg";
 import iconPinkTools from "../assets/icons/tools_pink.svg";
 import iconBlackProfil from "../assets/icons/person_black.svg";
 
-function OfferModal({ modalOfferIsOpen, setModalOfferIsOpen, offer }) {
+function OfferModal({
+  modalOfferIsOpen,
+  setModalOfferIsOpen,
+  offer,
+  isFavorite,
+  addFavorite,
+  deleteFavorite,
+}) {
   const {
     title,
     city,
@@ -51,7 +60,26 @@ function OfferModal({ modalOfferIsOpen, setModalOfferIsOpen, offer }) {
       </div>
       {offer && (
         <>
-          <h3>{title}</h3>
+          <div className="offerTitleAndIcon">
+            <h3 className="titleOfferCard">{title}</h3>
+            {isFavorite ? (
+              <button type="button" onClick={() => deleteFavorite()}>
+                <img
+                  src={iconBlackHeartFill}
+                  alt="icon add favorite"
+                  className="heart"
+                />
+              </button>
+            ) : (
+              <button type="button" onClick={() => addFavorite()}>
+                <img
+                  src={iconBlackHeartEmpty}
+                  alt="icon add favorite"
+                  className="heart"
+                />
+              </button>
+            )}
+          </div>
           <div className="offerTextAndIcon">
             <img src={iconBlackProfil} alt="icon profil" />
             <h3>{company_name}</h3>
@@ -106,6 +134,9 @@ OfferModal.propTypes = {
   }).isRequired,
   modalOfferIsOpen: PropTypes.bool.isRequired,
   setModalOfferIsOpen: PropTypes.func.isRequired,
+  isFavorite: PropTypes.bool.isRequired,
+  addFavorite: PropTypes.func.isRequired,
+  deleteFavorite: PropTypes.func.isRequired,
 };
 
 export default OfferModal;
