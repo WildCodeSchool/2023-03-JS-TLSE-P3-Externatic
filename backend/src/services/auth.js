@@ -131,6 +131,19 @@ const verifyAdminOrCompany = (req, res, next) => {
   }
 };
 
+const verifyApplicant = (req, res, next) => {
+  try {
+    if (req.payload.role !== "applicant") {
+      res.sendStatus(403);
+    } else {
+      next();
+    }
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(401);
+  }
+};
+
 module.exports = {
   verifyEmailForSubscription,
   hashPassword,
@@ -139,4 +152,5 @@ module.exports = {
   verifyAdmin,
   verifyCompany,
   verifyAdminOrCompany,
+  verifyApplicant,
 };
