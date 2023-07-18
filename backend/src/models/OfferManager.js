@@ -61,10 +61,29 @@ class OfferManager extends AbstractManager {
     return this.database.query(finalQuery);
   }
 
-  deleteByCompanyId(id) {
+  findCompanyOffers(id) {
     return this.database.query(
-      `delete from ${this.table} where company_id = ?`,
+      `SELECT *, offer.id FROM ${this.table} JOIN contract_type ON offer.contract_type_id_offer = contract_type.id WHERE company_id = ?`,
       [id]
+    );
+  }
+
+  createOffer(
+    { title, contractType, category, city, missions, technical, advantages },
+    companyId
+  ) {
+    return this.database.query(
+      `INSERT INTO ${this.table} (title, company_id, city, contract_type_id_offer, category_id_offer, job_responsibilities, technical_environment, benefits) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        title,
+        companyId,
+        city,
+        contractType,
+        category,
+        missions,
+        technical,
+        advantages,
+      ]
     );
   }
 }
