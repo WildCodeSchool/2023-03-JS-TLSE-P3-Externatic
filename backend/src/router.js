@@ -17,6 +17,7 @@ const {
 
 const {
   getUserByEmail,
+  getUser,
   validateNewPassword,
 } = require("./controllers/UserController");
 const {
@@ -48,7 +49,7 @@ const {
 } = require("./controllers/CompanyController");
 const {
   getAllOffers,
-  getFilteredOffers,
+  // getFilteredOffers,
   deleteOfferById,
   getCompanyOffers,
   addOffer,
@@ -91,9 +92,10 @@ router.post(
 // ------------User connection------------
 router.post("/login", getUserByEmail, verifyPassword, login);
 
+router.get("/users", verifyToken, getUser);
+
 // ------------Offers------------
 router.get("/offers", getAllOffers);
-router.post("/filtered-offers", getFilteredOffers);
 
 // ------------Categories------------
 router.get("/categories", getAllCategories);
