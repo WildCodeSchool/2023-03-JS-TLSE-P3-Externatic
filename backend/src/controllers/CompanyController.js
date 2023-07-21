@@ -53,4 +53,95 @@ const deleteCompany = (req, res) => {
     });
 };
 
-module.exports = { getAllCompanies, deleteCompany, postCompany };
+// ------------Company by ID------------
+
+const getCompany = (req, res) => {
+  const id = req.payload.sub;
+  models.company
+    .find(id)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.json(result).status(200);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+const getCompanyById = (req, res, next) => {
+  const id = req.payload.sub;
+  models.company
+    .find(id)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        [req.user] = result;
+        next();
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+// ------------Modify Company------------
+const modifyCompany = (req, res) => {
+  const id = req.payload.sub;
+  const { name, email, city, phone, siret } = req.body;
+  models.company
+    .updateCompany({
+      id,
+      name,
+      email,
+      city,
+      phone,
+      siret,
+    })
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+// ------------Modify password Admin------------
+
+const modifyPasswordCompany = (req, res) => {
+  const id = req.payload.sub;
+  const { hashedPassword } = req.body;
+  models.company
+    .updatePassword(id, hashedPassword)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+module.exports = {
+  getAllCompanies,
+  deleteCompany,
+  postCompany,
+  getCompany,
+  modifyCompany,
+  getCompanyById,
+  modifyPasswordCompany,
+};

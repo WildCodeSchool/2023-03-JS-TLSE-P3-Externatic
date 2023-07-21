@@ -10,23 +10,41 @@ const {
   verifyAdmin,
   verifyCompany,
   verifyAdminOrCompany,
+  login,
+  hashNewPassword,
+  verifyApplicant,
 } = require("./services/auth");
 
-const { getUserByEmail } = require("./controllers/UserController");
+const {
+  getUserByEmail,
+  validateNewPassword,
+} = require("./controllers/UserController");
 const {
   getAllAdmins,
   deleteAdmin,
   postAdmin,
+  getAdmin,
+  getAdminById,
+  modifyAdmin,
+  modifyPasswordAdmin,
 } = require("./controllers/AdminController");
 const {
   getAllApplicants,
   deleteApplicant,
   postApplicant,
+  getApplicant,
+  modifyApplicant,
+  getApplicantById,
+  modifyPasswordApplicant,
 } = require("./controllers/ApplicantController");
 const {
   getAllCompanies,
   deleteCompany,
   postCompany,
+  getCompany,
+  modifyCompany,
+  getCompanyById,
+  modifyPasswordCompany,
 } = require("./controllers/CompanyController");
 const {
   getAllOffers,
@@ -65,7 +83,7 @@ router.post(
 );
 
 // ------------User connection------------
-router.post("/login", getUserByEmail, verifyPassword);
+router.post("/login", getUserByEmail, verifyPassword, login);
 
 // ------------Offers------------
 router.get("/offers", getAllOffers);
@@ -80,12 +98,52 @@ router.get("/contracts-type", getAllContracts);
 // ------------TOKEN WALL------------
 router.use(verifyToken);
 
+// ------------APPLICANT ROUTES------------
+// ------------MyProfile------------
+router.get("/applicant", verifyApplicant, getApplicant);
+router.put("/applicants", verifyApplicant, modifyApplicant);
+router.put(
+  "/applicants/password",
+  verifyApplicant,
+  getApplicantById,
+  verifyPassword,
+  validateNewPassword,
+  hashNewPassword,
+  modifyPasswordApplicant
+);
+
 // ------------COMPANY ROUTES------------
+// ------------MyProfile------------
+router.get("/company", verifyCompany, getCompany);
+router.put("/companies", verifyCompany, modifyCompany);
+router.put(
+  "/companies/password",
+  verifyCompany,
+  getCompanyById,
+  verifyPassword,
+  validateNewPassword,
+  hashNewPassword,
+  modifyPasswordCompany
+);
+
 // ------------Offers management------------
 router.get("/company-offers", verifyCompany, getCompanyOffers);
 router.post("/create-offer", verifyAdminOrCompany, addOffer);
 
 // ------------ADMIN ROUTES------------
+// ------------MyProfile------------
+router.get("/admin", verifyAdmin, getAdmin);
+router.put("/admins", verifyAdmin, modifyAdmin);
+router.put(
+  "/admins/password",
+  verifyAdmin,
+  getAdminById,
+  verifyPassword,
+  validateNewPassword,
+  hashNewPassword,
+  modifyPasswordAdmin
+);
+
 // ------------Users management------------
 router.get("/admins", verifyAdmin, getAllAdmins);
 router.delete("/admins/:id", verifyAdmin, deleteAdmin);

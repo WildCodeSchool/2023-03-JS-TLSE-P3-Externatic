@@ -35,15 +35,33 @@ const postAdmin = (req, res) => {
 
 // ------------Admin by ID------------
 
-const getAdminById = (req, res) => {
-  const { sub } = req.payload;
+const getAdmin = (req, res) => {
+  const id = req.payload.sub;
   models.admin
-    .findId(sub)
+    .find(id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
       } else {
-        res.sendStatus(204);
+        res.json(result).status(200);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+const getAdminById = (req, res, next) => {
+  const id = req.payload.sub;
+  models.admin
+    .find(id)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        [req.user] = result;
+        next();
       }
     })
     .catch((err) => {
@@ -70,9 +88,56 @@ const deleteAdmin = (req, res) => {
     });
 };
 
+// ------------Modify Admin------------
+const modifyAdmin = (req, res) => {
+  const id = req.payload.sub;
+  const { firstname, lastname, email } = req.body;
+  models.admin
+    .updateAdmin({
+      id,
+      firstname,
+      lastname,
+      email,
+    })
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+// ------------Modify password Admin------------
+
+const modifyPasswordAdmin = (req, res) => {
+  const id = req.payload.sub;
+  const { hashedPassword } = req.body;
+  models.admin
+    .updatePassword(id, hashedPassword)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 module.exports = {
   getAllAdmins,
   postAdmin,
-  getAdminById,
   deleteAdmin,
+  getAdmin,
+  getAdminById,
+  modifyAdmin,
+  modifyPasswordAdmin,
 };

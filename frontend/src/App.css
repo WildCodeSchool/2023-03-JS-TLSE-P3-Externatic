@@ -104,6 +104,13 @@ a {
   background-color: white;
 }
 
+.formContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 /* Global buttons */
 .button {
   background-color: black;
@@ -244,5 +251,10 @@ a:hover {
 
 .error {
   color: red;
+  font-weight: bold;
+}
+
+.success {
+  color: green;
   font-weight: bold;
 }

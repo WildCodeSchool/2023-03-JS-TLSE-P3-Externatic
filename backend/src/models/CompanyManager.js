@@ -17,10 +17,10 @@ class CompanyManager extends AbstractManager {
   // ------------modification de l'entreprise - Route PUT------------
 
   updateCompany(company) {
-    const { name, email, hashedPassword, city, phone, siret, id } = company;
+    const { id, name, email, city, phone, siret } = company;
     return this.database.query(
-      `update ${this.table} set name = ?, email = ?, hashed_password = ?, city = ?, phone = ?, siret = ? where id = ?`,
-      [name, email, hashedPassword, city, phone, siret, id]
+      `update ${this.table} set name = ?, email = ?, city = ?, phone = ?, siret = ?, id where id = ?`,
+      [name, email, city, phone, siret, id]
     );
   }
 }

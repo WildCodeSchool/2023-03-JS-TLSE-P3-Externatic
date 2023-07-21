@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+
+// Import des images
 import identificationBlack from "../assets/icons/identification_black.svg";
 import mailBlack from "../assets/icons/mail_black.svg";
 import mobileBlack from "../assets/icons/mobile_black.svg";
@@ -6,7 +8,17 @@ import cityBlack from "../assets/icons/black_city.svg";
 import whiteTrash from "../assets/icons/white_trash.svg";
 import lockBlack from "../assets/icons/lock_black.svg";
 
+// Import des composants
+import AdminForm from "../components/AdminForm";
+import CompanyForm from "../components/CompanyForm";
+import ApplicantForm from "../components/ApplicantForm";
+
+// Import context
+import TokenContext from "../contexts/TokenContext";
+
 function MyProfile() {
+  const { userRole } = useContext(TokenContext);
+
   const [errors, setErrors] = useState({});
   const [telephoneError, setTelephoneError] = useState("");
 
@@ -56,6 +68,9 @@ function MyProfile() {
 
   return (
     <div className="myProfileSection">
+      {userRole === "admin" ? <AdminForm /> : null}
+      {userRole === "company" ? <CompanyForm /> : null}
+      {userRole === "applicant" ? <ApplicantForm /> : null}
       {/* My_Profile Candidat */}
       <form onSubmit={handleSubmit} className="form">
         <h2>Modifier mon profil</h2>

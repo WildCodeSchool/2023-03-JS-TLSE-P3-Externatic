@@ -36,6 +36,16 @@ const getUserByEmail = (req, res, next) => {
     });
 };
 
+const validateNewPassword = (req, res, next) => {
+  const { newPassword, confirmNewPassword } = req.body;
+  if (newPassword === confirmNewPassword) {
+    next();
+  } else {
+    res.sendStatus(400);
+  }
+};
+
 module.exports = {
   getUserByEmail,
+  validateNewPassword,
 };
