@@ -8,18 +8,13 @@ import LinkLogInSubscribe from "../components/LinkLogInSubscribe";
 
 // Import context
 import TokenContext from "../contexts/TokenContext";
-import ValidationFormContext from "../contexts/ValidationFormContext";
 
 function Connexion() {
   const { setUserCookie } = useContext(TokenContext);
-  const {
-    formDataLogIn,
-    setFormDataLogIn,
-    errors,
-    setErrors,
-    ValidationConnexion,
-    resetInputOnClick,
-  } = useContext(ValidationFormContext);
+  const [formDataLogIn, setFormDataLogIn] = useState({
+    email: "",
+    password: "",
+  });
 
   const [loginError, setLoginError] = useState(false);
   const navigate = useNavigate();
@@ -29,16 +24,6 @@ function Connexion() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    setErrors(ValidationConnexion(formDataLogIn));
-
-    if (
-      (formDataLogIn.email === "" && formDataLogIn.password === "") ||
-      (formDataLogIn.email !== "" && formDataLogIn.password === "") ||
-      (formDataLogIn.email === "" && formDataLogIn.password !== "")
-    ) {
-      setLoginError(false);
-      return;
-    }
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/login`, formDataLogIn)
       .then((response) => {
@@ -75,15 +60,11 @@ function Connexion() {
               className="textInput"
               type="email"
               placeholder="Email"
-              required=""
+              required
               name="email"
               autoComplete="off"
               onChange={handleInput}
-              onClick={resetInputOnClick}
             />
-            {errors.email && (
-              <span className="errorMessage">{errors.email}</span>
-            )}
           </div>
 
           <div className="containerTextInput">
@@ -107,14 +88,10 @@ function Connexion() {
               className="textInput"
               type="password"
               placeholder="Mot de passe"
-              required=""
+              required
               name="password"
               onChange={handleInput}
-              onClick={resetInputOnClick}
             />
-            {errors.password && (
-              <span className="errorMessage">{errors.password}</span>
-            )}
           </div>
           {loginError && (
             <span className="errorLogin">

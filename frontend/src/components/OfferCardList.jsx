@@ -1,6 +1,10 @@
 /* eslint-disable camelcase */
+import { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
-import { useState } from "react";
+import axios from "axios";
+import TokenContext from "../contexts/TokenContext";
+// Import des composants
+import OfferModal from "./OfferModal";
 // Import style
 import "../css/components/OfferCardList.css";
 // Import icones
@@ -9,27 +13,87 @@ import iconWhiteHeartFill from "../assets/icons/white_heart_fill.svg";
 import iconWhiteCity from "../assets/icons/white_city_fill.svg";
 import iconWhiteContract from "../assets/icons/contract_white.svg";
 
-function OfferCardList({ offer, onCardClick }) {
-  const { id, title, city, contract_type_name } = offer;
-  const [offerIsFavorite, setOfferIsFavorite] = useState(false);
-  const handleClickOfferIsFavorite = () => {
-    setOfferIsFavorite(!offerIsFavorite);
+function OfferCardList({ offer, favoritesByApplicantId }) {
+  const { title, city, contract_type_name } = offer;
+  const [isFavorite, setIsFavorite] = useState(false);
+  const { userToken, userRole } = useContext(TokenContext);
+
+  // gestion de la modale
+  const [modalOfferIsOpen, setModalOfferIsOpen] = useState(false);
+  const verifyIsFavorite = () => {
+    if (userToken) {
+      axios
+        .get(`${import.meta.env.VITE_BACKEND_URL}/favorites/${offer.id}`, {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        })
+        .then((res) => {
+          if (res.data.length) {
+            setIsFavorite(true);
+          } else {
+            setIsFavorite(false);
+          }
+        });
+    }
   };
-  const handleCardClick = () => {
-    onCardClick(id);
+
+  const addFavorite = () => {
+    axios
+      .post(
+        `${import.meta.env.VITE_BACKEND_URL}/favorites`,
+        {
+          offerId: offer.id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      )
+      .then(() => {
+        verifyIsFavorite();
+      });
   };
+
+  const deleteFavorite = () => {
+    axios
+      .delete(`${import.meta.env.VITE_BACKEND_URL}/favorites/${offer.id}`, {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      })
+      .then(() => {
+        verifyIsFavorite();
+        favoritesByApplicantId();
+      });
+  };
+  useEffect(() => {
+    verifyIsFavorite();
+  }, []);
   return (
     <div className="offerCard offerCardList">
       <div className="offerCardColor">
         <div className="offerTitleAndIcon">
           <h3 className="titleOfferCard">{title}</h3>
-          <button type="button" onClick={handleClickOfferIsFavorite}>
-            <img
-              src={offerIsFavorite ? iconWhiteHeartFill : iconWhiteHeartEmpty}
-              alt="icon add favorite"
-              className="heart"
-            />
-          </button>
+          {isFavorite && userRole === "applicant" ? (
+            <button type="button" onClick={() => deleteFavorite()}>
+              <img
+                src={iconWhiteHeartFill}
+                alt="icon add favorite"
+                className="heart"
+              />
+            </button>
+          ) : null}
+          {!isFavorite && userRole === "applicant" ? (
+            <button type="button" onClick={() => addFavorite()}>
+              <img
+                src={iconWhiteHeartEmpty}
+                alt="icon add favorite"
+                className="heart"
+              />
+            </button>
+          ) : null}
         </div>
         <div className="offerTextAndIcon">
           <img src={iconWhiteCity} alt="icon city" />
@@ -40,9 +104,21 @@ function OfferCardList({ offer, onCardClick }) {
           <p>{contract_type_name}</p>
         </div>
       </div>
-      <button type="button" className="buttonCard" onClick={handleCardClick}>
+      <button
+        type="button"
+        className="buttonCard"
+        onClick={() => setModalOfferIsOpen(true)}
+      >
         Consulter l'offre
       </button>
+      <OfferModal
+        modalOfferIsOpen={modalOfferIsOpen}
+        setModalOfferIsOpen={setModalOfferIsOpen}
+        offer={offer}
+        isFavorite={isFavorite}
+        addFavorite={addFavorite}
+        deleteFavorite={deleteFavorite}
+      />
     </div>
   );
 }
@@ -54,7 +130,7 @@ OfferCardList.propTypes = {
     city: PropTypes.string,
     contract_type_name: PropTypes.string,
   }).isRequired,
-  onCardClick: PropTypes.func.isRequired,
+  favoritesByApplicantId: PropTypes.func.isRequired,
 };
 
 export default OfferCardList;

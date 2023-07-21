@@ -1,26 +1,138 @@
 // Import packages
-import { useContext } from "react";
-import PropTypes from "prop-types";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Swal from "sweetalert2";
 
-// Import context
-import ValidationFormContext from "../contexts/ValidationFormContext";
-
-function FormNewApplicant({ handleInput }) {
-  const {
-    errors,
-    resetInputOnClick,
-    formDataSubscription,
-    setFormDataSubscription,
-  } = useContext(ValidationFormContext);
+function FormNewApplicant() {
+  const [errorsFormApplicant, setErrorsFormApplicant] = useState({});
+  const [formDataApplicantSubscription, setFormDataApplicantSubscription] =
+    useState({
+      titleName: "",
+      firstname: "",
+      lastname: "",
+      email: "",
+      password: "",
+      confirmedPassword: "",
+    });
+  const navigate = useNavigate();
 
   const handleTitleNameMiss = () => {
-    setFormDataSubscription({ ...formDataSubscription, titleName: "Mme" });
+    setFormDataApplicantSubscription({
+      ...formDataApplicantSubscription,
+      titleName: "Mme",
+    });
   };
+
   const handleTitleNameMister = () => {
-    setFormDataSubscription({ ...formDataSubscription, titleName: "Mr" });
+    setFormDataApplicantSubscription({
+      ...formDataApplicantSubscription,
+      titleName: "Mr",
+    });
+  };
+
+  const handleInputApplicant = (e) => {
+    setFormDataApplicantSubscription({
+      ...formDataApplicantSubscription,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  // Fonction pour valider les champs du formulaire
+  function validationInputsApplicant(el) {
+    const error = {};
+    const emailPattern =
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,3}$/;
+    const namePattern = /^[a-zA-Z]/;
+
+    // vérification madame ou monsieur coché
+    if (!el.titleName) {
+      error.titleName = "Veuillez sélectionner Madame ou Monsieur";
+    }
+
+    // vérification du prénom
+    if (!namePattern.test(el.firstname)) {
+      error.firstname = "Le prénom ne doit contenir que des lettres";
+    }
+
+    // vérification du nom
+    if (!namePattern.test(el.lastname)) {
+      error.lastname = "Le nom ne doit contenir que des lettres";
+    }
+    // vérification de l'email
+    if (!emailPattern.test(el.email)) {
+      error.email = "Le mail n'est pas valide";
+    }
+
+    // vérification de la confirmation du mot de passe
+    if (el.confirmedPassword === "" || el.password === "") {
+      error.confirmedPassword = "Veuillez confirmer votre mot de passe";
+    } else if (el.confirmedPassword !== el.password) {
+      error.confirmedPassword = "Les mots de passe ne correspondent pas";
+    }
+    return error;
+  }
+  const handleSubmitApplicant = (e) => {
+    e.preventDefault();
+
+    setErrorsFormApplicant(
+      validationInputsApplicant(formDataApplicantSubscription)
+    );
+    const errorDataApplicant = validationInputsApplicant(
+      formDataApplicantSubscription
+    );
+
+    if (Object.keys(errorDataApplicant).length === 0) {
+      axios
+        .post(
+          `${import.meta.env.VITE_BACKEND_URL}/signup/applicant`,
+          formDataApplicantSubscription
+        )
+        .then((response) => {
+          if (response.status === 201) {
+            Swal.fire({
+              icon: "success",
+              text: "Votre compte a bien été créé, veuillez vous connecter",
+              iconColor: "#ca2061",
+              width: 300,
+              confirmButtonColor: "black",
+            });
+            navigate("/connexion");
+            setErrorsFormApplicant(false);
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+          if (err.response.status === 403) {
+            Swal.fire({
+              icon: "error",
+              text: "Ce mail a déjà été utilisé, veuillez en saisir un autre",
+              iconColor: "#ca2061",
+              width: 300,
+              confirmButtonColor: "black",
+            });
+          } else {
+            Swal.fire({
+              icon: "error",
+              text: "Une erreur est survenue, veuillez réessayer plus tard",
+              iconColor: "#ca2061",
+              width: 300,
+              confirmButtonColor: "black",
+            });
+          }
+        });
+      setFormDataApplicantSubscription({
+        titleName: "",
+        firstname: "",
+        lastname: "",
+        email: "",
+        password: "",
+        confirmedPassword: "",
+      });
+    }
   };
   return (
-    <>
+    <form className="form subscription" onSubmit={handleSubmitApplicant}>
       <div className="containerTitleName">
         <div className="containerRadioInput">
           <input
@@ -29,14 +141,15 @@ function FormNewApplicant({ handleInput }) {
             className="radioInput"
             name="titleName"
             onChange={handleTitleNameMiss}
-            onClick={resetInputOnClick}
           />
           <label htmlFor="radio1" className="labelRadioInput miss">
             Madame
           </label>
         </div>
-        {errors.titleName && (
-          <span className="errorMessageTitleName">{errors.titleName}</span>
+        {errorsFormApplicant.titleName && (
+          <span className="errorMessageTitleName">
+            {errorsFormApplicant.titleName}
+          </span>
         )}
         <div className="containerRadioInput">
           <input
@@ -45,7 +158,6 @@ function FormNewApplicant({ handleInput }) {
             className="radioInput"
             name="titleName"
             onChange={handleTitleNameMister}
-            onClick={resetInputOnClick}
           />
           <label htmlFor="radio2" className="labelRadioInput mister">
             Monsieur
@@ -86,14 +198,13 @@ function FormNewApplicant({ handleInput }) {
           className="textInput"
           type="text"
           placeholder="Prénom"
-          required=""
+          required
           name="firstname"
           autoComplete="off"
-          onChange={handleInput}
-          onClick={resetInputOnClick}
+          onChange={handleInputApplicant}
         />
-        {errors.firstname && (
-          <span className="errorMessage">{errors.firstname}</span>
+        {errorsFormApplicant.firstname && (
+          <span className="errorMessage">{errorsFormApplicant.firstname}</span>
         )}
       </div>
 
@@ -131,14 +242,13 @@ function FormNewApplicant({ handleInput }) {
           className="textInput"
           type="text"
           placeholder="Nom"
-          required=""
+          required
           name="lastname"
           autoComplete="off"
-          onChange={handleInput}
-          onClick={resetInputOnClick}
+          onChange={handleInputApplicant}
         />
-        {errors.lastname && (
-          <span className="errorMessage">{errors.lastname}</span>
+        {errorsFormApplicant.lastname && (
+          <span className="errorMessage">{errorsFormApplicant.lastname}</span>
         )}
       </div>
 
@@ -160,13 +270,14 @@ function FormNewApplicant({ handleInput }) {
           className="textInput"
           type="email"
           placeholder="Email"
-          required=""
+          required
           name="email"
           autoComplete="off"
-          onChange={handleInput}
-          onClick={resetInputOnClick}
+          onChange={handleInputApplicant}
         />
-        {errors.email && <span className="errorMessage">{errors.email}</span>}
+        {errorsFormApplicant.email && (
+          <span className="errorMessage">{errorsFormApplicant.email}</span>
+        )}
       </div>
       {/* password */}
       <div className="containerTextInput">
@@ -190,13 +301,13 @@ function FormNewApplicant({ handleInput }) {
           className="textInput"
           type="password"
           placeholder="Mot de passe"
-          required=""
+          required
           name="password"
-          onChange={handleInput}
-          onClick={resetInputOnClick}
+          minLength={4}
+          onChange={handleInputApplicant}
         />
-        {errors.password && (
-          <span className="errorMessage">{errors.password}</span>
+        {errorsFormApplicant.password && (
+          <span className="errorMessage">{errorsFormApplicant.password}</span>
         )}
       </div>
       {/* password confirmation */}
@@ -221,24 +332,21 @@ function FormNewApplicant({ handleInput }) {
           className="textInput"
           type="password"
           placeholder="Confirmation mot de passe"
-          required=""
+          required
           name="confirmedPassword"
-          onChange={handleInput}
-          onClick={resetInputOnClick}
+          onChange={handleInputApplicant}
         />
-        {errors.confirmedPassword && (
-          <span className="errorMessage">{errors.confirmedPassword}</span>
+        {errorsFormApplicant.confirmedPassword && (
+          <span className="errorMessage">
+            {errorsFormApplicant.confirmedPassword}
+          </span>
         )}
       </div>
 
       <button type="submit" className="button subscription">
         Je m'inscris
       </button>
-    </>
+    </form>
   );
 }
 export default FormNewApplicant;
-
-FormNewApplicant.propTypes = {
-  handleInput: PropTypes.func.isRequired,
-};

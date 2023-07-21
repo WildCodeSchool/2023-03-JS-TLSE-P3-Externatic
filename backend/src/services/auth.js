@@ -136,9 +136,9 @@ const verifyCompany = (req, res, next) => {
   }
 };
 
-const verifyApplicant = (req, res, next) => {
+const verifyAdminOrCompany = (req, res, next) => {
   try {
-    if (req.payload.role !== "applicant") {
+    if (req.payload.role !== "company" && req.payload.role !== "admin") {
       res.sendStatus(403);
     } else {
       next();
@@ -149,9 +149,9 @@ const verifyApplicant = (req, res, next) => {
   }
 };
 
-const verifyAdminOrCompany = (req, res, next) => {
+const verifyApplicant = (req, res, next) => {
   try {
-    if (req.payload.role !== "company" && req.payload.role !== "admin") {
+    if (req.payload.role !== "applicant") {
       res.sendStatus(403);
     } else {
       next();

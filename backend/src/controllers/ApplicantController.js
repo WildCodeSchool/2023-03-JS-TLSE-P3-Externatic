@@ -1,6 +1,6 @@
 const models = require("../models");
 
-// ------------Récupérer tous les applicants------------
+// ------------Récupérer tous les candidats------------
 const getAllApplicants = (req, res) => {
   models.applicant
     .findAll()

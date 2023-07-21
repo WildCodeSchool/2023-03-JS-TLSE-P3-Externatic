@@ -137,7 +137,7 @@ module.exports = {
   postAdmin,
   deleteAdmin,
   getAdmin,
-  getAdminById,
   modifyAdmin,
   modifyPasswordAdmin,
+  getAdminById,
 };
