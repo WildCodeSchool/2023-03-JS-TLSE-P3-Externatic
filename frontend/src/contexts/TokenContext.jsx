@@ -21,9 +21,10 @@ export function TokenContextProvider({ children }) {
       setUserToken(token);
       setUserRole(role);
     } else {
-      Cookies.remove("userToken");
       Cookies.remove("userRole");
+      Cookies.remove("userToken");
       setUserToken(null);
+      setUserRole(null);
     }
   };
   const TokenContextValue = useMemo(() => {

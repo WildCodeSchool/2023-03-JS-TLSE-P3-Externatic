@@ -1,6 +1,6 @@
 const models = require("../models");
 
-// ------------Récupérer tous les applicants------------
+// ------------Récupérer tous les candidats------------
 const getAllApplicants = (req, res) => {
   models.applicant
     .findAll()
@@ -63,4 +63,8 @@ const deleteApplicant = (req, res) => {
     });
 };
 
-module.exports = { getAllApplicants, deleteApplicant, postApplicant };
+module.exports = {
+  getAllApplicants,
+  deleteApplicant,
+  postApplicant,
+};
