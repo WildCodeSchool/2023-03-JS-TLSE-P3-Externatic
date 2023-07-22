@@ -25,6 +25,7 @@ import "./css/pages/FieldsManagement.css";
 import "./css/pages/MyPublishedOffers.css";
 import "./css/components/MainNavBar.css";
 import "./css/pages/Home.css";
+import "./css/components/InputSearch.css";
 
 // Import des contexts
 import { MenuContextProvider } from "./contexts/MenuContext";
