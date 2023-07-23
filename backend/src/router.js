@@ -49,7 +49,6 @@ const {
 } = require("./controllers/CompanyController");
 const {
   getAllOffers,
-  // getFilteredOffers,
   deleteOfferById,
   getCompanyOffers,
   addOffer,
@@ -119,6 +118,13 @@ router.put(
   hashNewPassword,
   modifyPasswordApplicant
 );
+router.delete("/applicant", verifyApplicant, deleteApplicant);
+
+// ------------Applicants favorites------------
+router.get("/favorites/:id", verifyApplicant, getFavorite);
+router.post("/favorites", verifyApplicant, addFavorite);
+router.delete("/favorites/:id", verifyApplicant, deleteFavorite);
+router.get("/all-favorites", verifyApplicant, getAllFavorites);
 
 // ------------COMPANY ROUTES------------
 // ------------MyProfile------------
@@ -133,6 +139,7 @@ router.put(
   hashNewPassword,
   modifyPasswordCompany
 );
+router.delete("/company", verifyCompany, deleteCompany);
 
 // ------------Offers management------------
 router.get("/company-offers", verifyCompany, getCompanyOffers);
@@ -151,6 +158,7 @@ router.put(
   hashNewPassword,
   modifyPasswordAdmin
 );
+router.delete("/admin", verifyAdmin, deleteAdmin);
 
 // ------------Users management------------
 router.get("/admins", verifyAdmin, getAllAdmins);
@@ -177,10 +185,5 @@ router.post("/contracts-type", verifyAdmin, addContract);
 
 // ------------Offers management------------
 router.delete("/offers/:id", verifyAdminOrCompany, deleteOfferById);
-// ------------APPLICANT ROUTES------------
-// ------------Applicants favorites------------
-router.get("/favorites/:id", verifyApplicant, getFavorite);
-router.post("/favorites", verifyApplicant, addFavorite);
-router.delete("/favorites/:id", verifyApplicant, deleteFavorite);
-router.get("/all-favorites", verifyApplicant, getAllFavorites);
+
 module.exports = router;

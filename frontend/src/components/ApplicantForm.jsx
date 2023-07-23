@@ -1,4 +1,5 @@
 import { useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 // Import des packages
@@ -14,18 +15,17 @@ import lockBlack from "../assets/icons/lock_black.svg";
 
 function ApplicantForm() {
   // id, title_name, firstname, lastname, email, password, message, city, phone
-
-  const { userToken } = useContext(TokenContext);
+  const { userToken, setUserCookie } = useContext(TokenContext);
   const [titleName, setTitleName] = useState("");
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [city, setCity] = useState("");
   const [phone, setPhone] = useState(null);
-
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -132,6 +132,98 @@ function ApplicantForm() {
       });
   };
 
+  const deleteAccount = () => {
+    Swal.fire({
+      title: "Êtes-vous sûr de vouloir supprimer votre compte?",
+      showDenyButton: true,
+      confirmButtonText: "Delete",
+      denyButtonText: `Cancel`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`${import.meta.env.VITE_BACKEND_URL}/applicant`, {
+            headers: {
+              Authorization: `Bearer ${userToken}`,
+            },
+          })
+          .then((res) => {
+            if (res.status === 204) {
+              setUserCookie();
+              Swal.fire({
+                icon: "success",
+                text: "Votre compte a bien été supprimé",
+                iconColor: "green",
+                width: 300,
+                buttonsStyling: false,
+                customClass: {
+                  confirmButton: "button",
+                },
+              });
+              navigate("/");
+            } else {
+              Swal.fire({
+                icon: "error",
+                text: "An error has occurred",
+                iconColor: "red",
+                width: 300,
+                buttonsStyling: false,
+                customClass: {
+                  confirmButton: "button",
+                },
+              });
+            }
+          })
+          .catch((err) => {
+            if (err.response.status === 404) {
+              Swal.fire({
+                icon: "error",
+                text: "Delete failed",
+                iconColor: "red",
+                width: 300,
+                buttonsStyling: false,
+                customClass: {
+                  confirmButton: "button",
+                },
+              });
+            } else if (err.response.status === 401) {
+              Swal.fire({
+                icon: "error",
+                text: "You must be logged in",
+                iconColor: "red",
+                width: 300,
+                buttonsStyling: false,
+                customClass: {
+                  confirmButton: "button",
+                },
+              });
+            } else if (err.response.status === 500) {
+              Swal.fire({
+                icon: "error",
+                text: "An error has occurred (status 500)",
+                iconColor: "red",
+                width: 300,
+                buttonsStyling: false,
+                customClass: {
+                  confirmButton: "button",
+                },
+              });
+            } else {
+              Swal.fire({
+                icon: "error",
+                text: "An error has occurred",
+                iconColor: "red",
+                width: 300,
+                buttonsStyling: false,
+                customClass: {
+                  confirmButton: "button",
+                },
+              });
+            }
+          });
+      }
+    });
+  };
+
   useEffect(() => {
     getUserInfos();
   }, []);
@@ -150,18 +242,14 @@ function ApplicantForm() {
               className="radioInput"
               name="titleName"
               value="Mme"
+              onChange={(e) => setTitleName(e.target.value)}
               checked={titleName === "Mme"}
-              onChange={() => {
-                if (titleName !== "Mme") {
-                  setTitleName("Mme");
-                }
-              }}
+              required
             />
             <label htmlFor="radio1" className="labelRadioInput miss">
               Madame
             </label>
           </div>
-
           <div className="containerRadioInput">
             <input
               type="radio"
@@ -169,12 +257,8 @@ function ApplicantForm() {
               className="radioInput"
               name="titleName"
               value="Mr"
+              onChange={(e) => setTitleName(e.target.value)}
               checked={titleName === "Mr"}
-              onChange={() => {
-                if (titleName !== "Mr") {
-                  setTitleName("Mr");
-                }
-              }}
             />
             <label htmlFor="radio2" className="labelRadioInput mister">
               Monsieur
@@ -210,7 +294,7 @@ function ApplicantForm() {
           <img className="iconForm" src={mailBlack} alt="person" />
           <input
             type="email"
-            placeholder=" Email"
+            placeholder="Email"
             name="email"
             className="textInput"
             value={email}
@@ -223,7 +307,7 @@ function ApplicantForm() {
           <input
             type="text"
             placeholder="Ville"
-            name="city"
+            name="text"
             className="textInput"
             value={city}
             onChange={(e) => setCity(e.target.value)}
@@ -232,10 +316,9 @@ function ApplicantForm() {
         <div className="containerTextInput">
           <img className="iconForm" src={mailBlack} alt="person" />
           <input
-            type="tel"
-            pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
-            placeholder="Téléphone"
-            name="phone"
+            type="text"
+            placeholder="Tél"
+            name="text"
             className="textInput"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
@@ -288,6 +371,9 @@ function ApplicantForm() {
           Modifier mon mot de passe
         </button>
       </form>
+      <button type="button" onClick={() => deleteAccount()} className="button">
+        Supprimer mon compte
+      </button>
     </div>
   );
 }

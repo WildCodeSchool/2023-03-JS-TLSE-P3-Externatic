@@ -22,13 +22,6 @@ class AdminManager extends AbstractManager {
       [firstname, lastname, email, id]
     );
   }
-
-  updateAdminPassword(id, hashedPassword) {
-    return this.database.query(
-      `update ${this.table} set hashed_password = ? where id = ?`,
-      [hashedPassword, id]
-    );
-  }
 }
 
 module.exports = AdminManager;

@@ -94,7 +94,7 @@ a {
   flex-direction: column;
   align-items: center;
   margin: auto;
-  padding: 2.5rem;
+  padding: 1rem;
   border: var(--border_card);
   box-shadow: var(--shadow_initial);
   border-radius: 1rem;
@@ -108,6 +108,7 @@ a {
   width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 2rem;
 }
 

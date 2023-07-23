@@ -47,7 +47,12 @@ const postApplicant = (req, res) => {
 
 // ------------Delete Applicant------------
 const deleteApplicant = (req, res) => {
-  const { id } = req.params;
+  let id;
+  if (req.params.id) {
+    id = req.params.id;
+  } else {
+    id = req.payload.sub;
+  }
   models.applicant
     .delete(id)
     .then(([result]) => {

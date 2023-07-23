@@ -72,7 +72,12 @@ const getAdminById = (req, res, next) => {
 
 // ------------Delete Admin------------
 const deleteAdmin = (req, res) => {
-  const { id } = req.params;
+  let id;
+  if (req.params.id) {
+    id = req.params.id;
+  } else {
+    id = req.payload.sub;
+  }
   models.admin
     .delete(id)
     .then(([result]) => {

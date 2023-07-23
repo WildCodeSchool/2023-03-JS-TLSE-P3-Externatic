@@ -37,7 +37,12 @@ const postCompany = (req, res) => {
 
 // ------------Delete Company------------
 const deleteCompany = (req, res) => {
-  const { id } = req.params;
+  let id;
+  if (req.params.id) {
+    id = req.params.id;
+  } else {
+    id = req.payload.sub;
+  }
   models.company
     .delete(id)
     .then(([result]) => {
@@ -54,7 +59,6 @@ const deleteCompany = (req, res) => {
 };
 
 // ------------Company by ID------------
-
 const getCompany = (req, res) => {
   const id = req.payload.sub;
   models.company
@@ -93,11 +97,11 @@ const getCompanyById = (req, res, next) => {
 // ------------Modify Company------------
 const modifyCompany = (req, res) => {
   const id = req.payload.sub;
-  const { name, email, city, phone, siret } = req.body;
+  const { companyName, email, city, phone, siret } = req.body;
   models.company
     .updateCompany({
       id,
-      name,
+      companyName,
       email,
       city,
       phone,
@@ -116,8 +120,7 @@ const modifyCompany = (req, res) => {
     });
 };
 
-// ------------Modify password Admin------------
-
+// ------------Modify password Company------------
 const modifyPasswordCompany = (req, res) => {
   const id = req.payload.sub;
   const { hashedPassword } = req.body;
