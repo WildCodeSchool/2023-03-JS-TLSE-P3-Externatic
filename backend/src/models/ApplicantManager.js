@@ -17,7 +17,7 @@ class ApplicantManager extends AbstractManager {
       phone,
     } = applicant;
     return this.database.query(
-      `insert into ${this.table} (title_name, firstname, lastname, email, hashed_password, city, phone) values (?, ?, ?, ?, ?, ?, ?, ?)`,
+      `insert into ${this.table} (title_name, firstname, lastname, email, hashed_password, city, phone) values (?, ?, ?, ?, ?, ?, ?)`,
       [titleName, firstname, lastname, email, hashedPassword, city, phone]
     );
   }

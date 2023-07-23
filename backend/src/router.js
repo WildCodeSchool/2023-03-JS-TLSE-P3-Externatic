@@ -52,6 +52,8 @@ const {
   deleteOfferById,
   getCompanyOffers,
   addOffer,
+  getFilteredOffers,
+  deleteOffersToDeleteCompany,
 } = require("./controllers/OfferController");
 const {
   getAllCategories,
@@ -95,6 +97,7 @@ router.get("/users", verifyToken, getUser);
 
 // ------------Offers------------
 router.get("/offers", getAllOffers);
+router.post("/filtered-offers", getFilteredOffers);
 
 // ------------Categories------------
 router.get("/categories", getAllCategories);
@@ -139,7 +142,12 @@ router.put(
   hashNewPassword,
   modifyPasswordCompany
 );
-router.delete("/company", verifyCompany, deleteCompany);
+router.delete(
+  "/company",
+  verifyCompany,
+  deleteOffersToDeleteCompany,
+  deleteCompany
+);
 
 // ------------Offers management------------
 router.get("/company-offers", verifyCompany, getCompanyOffers);
@@ -166,7 +174,12 @@ router.delete("/admins/:id", verifyAdmin, deleteAdmin);
 router.get("/applicants", verifyAdmin, getAllApplicants);
 router.delete("/applicants/:id", verifyAdmin, deleteApplicant);
 router.get("/companies", verifyAdmin, getAllCompanies);
-router.delete("/companies/:id", verifyAdmin, deleteCompany);
+router.delete(
+  "/companies/:id",
+  verifyAdmin,
+  deleteOffersToDeleteCompany,
+  deleteCompany
+);
 
 // ------------Admin subscription------------
 router.post(

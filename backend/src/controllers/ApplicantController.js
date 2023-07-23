@@ -15,16 +15,8 @@ const getAllApplicants = (req, res) => {
 // ------------Création du candidat------------
 
 const postApplicant = (req, res) => {
-  const {
-    titleName,
-    firstname,
-    lastname,
-    email,
-    hashedPassword,
-    message,
-    city,
-    phone,
-  } = req.body;
+  const { titleName, firstname, lastname, email, hashedPassword, city, phone } =
+    req.body;
   models.applicant
     .createApplicant({
       titleName,
@@ -32,7 +24,6 @@ const postApplicant = (req, res) => {
       lastname,
       email,
       hashedPassword,
-      message,
       city,
       phone,
     })
