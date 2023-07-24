@@ -3,27 +3,8 @@
   height: 20rem;
 }
 
-.inputContainer {
-  padding: 0 2rem;
-  position: relative;
-  width: 100%;
-  
-}
-
-.resultsSearch {
-  visibility: hidden;
-}
-
-.resultsSearch.show {
-  visibility: visible;
-}
-
-.searchSuggestions {
-  position: absolute;
-  z-index: 3;
-  width: 20rem;
-  background-color: #898989ce;
-  padding: 0.5rem;
+.userNotConnected {
+  line-height: 3.5rem;
 }
 
 .carouselContent {
@@ -34,26 +15,6 @@
 .carouselItem {
   flex: 0 0 25%;
   margin-right: 10px;
-}
-
-.TextIcon {
-  display: flex;
-  justify-content: center;
-  margin: 16px;
-}
-
-.descriptionHome {
-  display: flex;
-  justify-content: space-around;
-  margin: 20px;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.itemtext p {
-  text-align: center;
-  margin: 40px 0 0 30px;
 }
 
 .carouselContainer {
@@ -75,20 +36,76 @@
   right: 10px;
 }
 
+/* style de la description Externatic */
+.descriptionHomePage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem;
+  max-width: 20rem;
+}
+
+.titleDescription {
+  margin: 1rem 0;
+}
+.aboutExternatic {
+  margin: 1rem auto;
+}
+.textDescription {
+  text-align: center;
+}
+.textAndIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.icon.hand,
+.icon.rocket,
+.icon.hourglass {
+  margin-right: 0.8rem;
+}
+
+.icon.rocket {
+  width: 2rem;
+}
+
 @media screen and (min-width: 768px) {
   .imageContainer {
     height: 35rem;
   }
-  .inputContainer {
-   display: flex;
-   flex-direction: column;
-   margin: 0 auto;
-  }
+
   .carouselItem {
     flex: 0 0 100%;
   }
-}
 
+  /* style de la description Externatic */
+  .descriptionHomePage {
+    max-width: 80%;
+    margin: 2rem auto;
+    gap: 2rem;
+  }
+  .containerDescription {
+    display: flex;
+    flex-direction: row;
+    gap: 6rem;
+  }
+  .aboutExternatic {
+    max-width: 25rem;
+  }
+  .textDescription {
+    font-size: 1.5rem;
+    padding: 0 1rem;
+    line-height: 2rem;
+  }
+  .textAndIcon {
+    margin-bottom: 3rem;
+  }
+  .textAndIcon > h2 {
+    font-size: 1.8rem;
+  }
+}
 /* Styles pour les écrans de taille moyenne (tablette) */
 @media screen and (min-width: 577px) and (max-width: 768px) {
   .carouselItem {
