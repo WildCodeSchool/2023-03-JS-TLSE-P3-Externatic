@@ -36,10 +36,6 @@ const getUserByEmail = (req, res, next) => {
     });
 };
 
-const getUser = (req, res) => {
-  res.send("coucou");
-};
-
 const validateNewPassword = (req, res, next) => {
   const { newPassword, confirmNewPassword } = req.body;
   if (newPassword === confirmNewPassword) {
@@ -51,6 +47,5 @@ const validateNewPassword = (req, res, next) => {
 
 module.exports = {
   getUserByEmail,
-  getUser,
   validateNewPassword,
 };
