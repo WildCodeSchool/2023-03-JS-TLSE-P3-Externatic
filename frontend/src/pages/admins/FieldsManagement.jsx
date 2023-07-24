@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 // Import context
 import TokenContext from "../../contexts/TokenContext";
@@ -23,14 +24,53 @@ function FieldsManagement() {
     useContext(FiltersContext);
 
   const handleDeleteCategory = (id) => {
-    axios
-      .delete(`${import.meta.env.VITE_BACKEND_URL}/categories/${id}`, {
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-        },
+    Swal.fire({
+      title: "Etes-vous sûr de vouloir supprimer cette catégorie?",
+      text: "Cette suppression est irréversible !",
+      icon: "warning",
+      iconColor: "#ca2061",
+      showCancelButton: true,
+      confirmButtonColor: "#ca2061",
+      cancelButtonColor: "black",
+      confirmButtonText: "Supprimer cette catégorie",
+      cancelButtonText: "Annuler",
+      width: 400,
+    })
+      .then((result) => {
+        if (result.isConfirmed) {
+          axios
+            .delete(`${import.meta.env.VITE_BACKEND_URL}/categories/${id}`, {
+              headers: {
+                Authorization: `Bearer ${userToken}`,
+              },
+            })
+            .then(() => {
+              Swal.fire({
+                icon: "succeess",
+                text: "Suppression effectuée.",
+                iconColor: "#ca2061",
+                width: 300,
+                buttonsStyling: false,
+                customClass: {
+                  confirmButton: "button",
+                },
+              });
+              getCategories();
+            });
+        }
       })
-      .then(() => {
-        getCategories();
+      .catch((err) => {
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.error,
+          iconColor: "#ca2061",
+          width: 300,
+          buttonsStyling: false,
+          customClass: {
+            confirmButton: "button",
+          },
+        });
       });
   };
 
@@ -54,22 +94,58 @@ function FieldsManagement() {
         setNewCategoryContent("");
       })
       .catch((err) => {
-        if (err.response.status === 403) {
-          setCategoryShowError(true);
-        }
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.error,
+          iconColor: "#ca2061",
+          width: 300,
+          buttonsStyling: false,
+          customClass: {
+            confirmButton: "button",
+          },
+        });
       });
   };
 
   const handleDeleteContract = (id) => {
-    axios
-      .delete(`${import.meta.env.VITE_BACKEND_URL}/contracts-type/${id}`, {
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-        },
-      })
-      .then(() => {
-        getContracts();
-      });
+    Swal.fire({
+      title: "Etes-vous sûr de vouloir supprimer ce type de?",
+      text: "Cette suppression est irréversible !",
+      icon: "warning",
+      iconColor: "#ca2061",
+      showCancelButton: true,
+      confirmButtonColor: "#ca2061",
+      cancelButtonColor: "black",
+      confirmButtonText: "Supprimer cette offre",
+      cancelButtonText: "Annuler",
+      width: 400,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`${import.meta.env.VITE_BACKEND_URL}/contracts-type/${id}`, {
+            headers: {
+              Authorization: `Bearer ${userToken}`,
+            },
+          })
+          .then(() => {
+            getContracts();
+          })
+          .catch((err) => {
+            console.error(err);
+            Swal.fire({
+              icon: "error",
+              text: err.response.data.error,
+              iconColor: "#ca2061",
+              width: 300,
+              buttonsStyling: false,
+              customClass: {
+                confirmButton: "button",
+              },
+            });
+          });
+      }
+    });
   };
 
   const handleAddContract = (e) => {
@@ -92,9 +168,17 @@ function FieldsManagement() {
         setNewConctractContent("");
       })
       .catch((err) => {
-        if (err.response.status === 403) {
-          setContractShowError(true);
-        }
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.error,
+          iconColor: "#ca2061",
+          width: 300,
+          buttonsStyling: false,
+          customClass: {
+            confirmButton: "button",
+          },
+        });
       });
   };
 

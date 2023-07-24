@@ -14,7 +14,6 @@ import mailBlack from "../assets/icons/mail_black.svg";
 import lockBlack from "../assets/icons/lock_black.svg";
 
 function ApplicantForm() {
-  // id, title_name, firstname, lastname, email, password, message, city, phone
   const { userToken, setUserCookie } = useContext(TokenContext);
   const [titleName, setTitleName] = useState("");
   const [firstname, setFirstname] = useState("");
@@ -50,20 +49,28 @@ function ApplicantForm() {
         if (res.status === 204) {
           Swal.fire({
             icon: "success",
-            text: "Les modifications ont bien été prises en compte",
+            text: "Les modifications ont bien été effectuées.",
             iconColor: "#ca2061",
             width: 300,
-            confirmButtonColor: "black",
-          });
-        } else {
-          Swal.fire({
-            icon: "success",
-            text: "Une erreur a été rencontrée",
-            iconColor: "#ca2061",
-            width: 300,
-            confirmButtonColor: "black",
+            buttonsStyling: false,
+            customClass: {
+              confirmButton: "button",
+            },
           });
         }
+      })
+      .catch((err) => {
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.error,
+          iconColor: "#ca2061",
+          width: 300,
+          buttonsStyling: false,
+          customClass: {
+            confirmButton: "button",
+          },
+        });
       });
   };
 
@@ -90,28 +97,25 @@ function ApplicantForm() {
             text: "Le mot de passe a bien été modifié",
             iconColor: "#ca2061",
             width: 300,
-            confirmButtonColor: "black",
+            buttonsStyling: false,
+            customClass: {
+              confirmButton: "button",
+            },
           });
         }
       })
       .catch((err) => {
-        if (err.response.status === 401) {
-          Swal.fire({
-            icon: "error",
-            text: "Le mot de passe est incorrect",
-            iconColor: "#ca2061",
-            width: 300,
-            confirmButtonColor: "black",
-          });
-        } else if (err.response.status === 400) {
-          Swal.fire({
-            icon: "error",
-            text: "Les deux mots de passe doivent être identiques",
-            iconColor: "#ca2061",
-            width: 300,
-            confirmButtonColor: "black",
-          });
-        }
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.error,
+          iconColor: "#ca2061",
+          width: 300,
+          buttonsStyling: false,
+          customClass: {
+            confirmButton: "button",
+          },
+        });
       });
   };
 
@@ -129,6 +133,19 @@ function ApplicantForm() {
         setEmail(results.data[0].email);
         setCity(results.data[0].city);
         setPhone(results.data[0].phone);
+      })
+      .catch((err) => {
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.error,
+          iconColor: "#ca2061",
+          width: 300,
+          buttonsStyling: false,
+          customClass: {
+            confirmButton: "button",
+          },
+        });
       });
   };
 
@@ -160,65 +177,20 @@ function ApplicantForm() {
                 },
               });
               navigate("/");
-            } else {
-              Swal.fire({
-                icon: "error",
-                text: "An error has occurred",
-                iconColor: "red",
-                width: 300,
-                buttonsStyling: false,
-                customClass: {
-                  confirmButton: "button",
-                },
-              });
             }
           })
           .catch((err) => {
-            if (err.response.status === 404) {
-              Swal.fire({
-                icon: "error",
-                text: "Delete failed",
-                iconColor: "red",
-                width: 300,
-                buttonsStyling: false,
-                customClass: {
-                  confirmButton: "button",
-                },
-              });
-            } else if (err.response.status === 401) {
-              Swal.fire({
-                icon: "error",
-                text: "You must be logged in",
-                iconColor: "red",
-                width: 300,
-                buttonsStyling: false,
-                customClass: {
-                  confirmButton: "button",
-                },
-              });
-            } else if (err.response.status === 500) {
-              Swal.fire({
-                icon: "error",
-                text: "An error has occurred (status 500)",
-                iconColor: "red",
-                width: 300,
-                buttonsStyling: false,
-                customClass: {
-                  confirmButton: "button",
-                },
-              });
-            } else {
-              Swal.fire({
-                icon: "error",
-                text: "An error has occurred",
-                iconColor: "red",
-                width: 300,
-                buttonsStyling: false,
-                customClass: {
-                  confirmButton: "button",
-                },
-              });
-            }
+            console.error(err);
+            Swal.fire({
+              icon: "error",
+              text: err.response.data.error,
+              iconColor: "#ca2061",
+              width: 300,
+              buttonsStyling: false,
+              customClass: {
+                confirmButton: "button",
+              },
+            });
           });
       }
     });

@@ -23,7 +23,9 @@ const getUserByEmail = (req, res, next) => {
                 req.user.role = "company";
                 next();
               } else {
-                res.sendStatus(401);
+                res
+                  .status(401)
+                  .send({ error: "Cet utilisateur n'existe pas." });
               }
             });
           }
@@ -32,7 +34,7 @@ const getUserByEmail = (req, res, next) => {
     })
     .catch((err) => {
       console.error(err);
-      res.status(500).send("Error retrieving data from database");
+      res.status(500).send({ error: "Une erreur est survenue." });
     });
 };
 
@@ -45,7 +47,7 @@ const validateNewPassword = (req, res, next) => {
   if (newPassword === confirmNewPassword) {
     next();
   } else {
-    res.sendStatus(400);
+    res.status(400).send({ error: "Les mot de passe ne sont pas identiques." });
   }
 };
 

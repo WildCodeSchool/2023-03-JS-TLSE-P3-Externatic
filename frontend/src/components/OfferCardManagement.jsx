@@ -2,6 +2,7 @@
 import PropTypes from "prop-types";
 import { useState, useContext } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 // import des composants
 import OfferModalManagement from "./OfferModalManagement";
@@ -27,7 +28,45 @@ function OfferCardManagement({ offer, getOffers }) {
         },
       })
       .then(() => {
-        getOffers();
+        Swal.fire({
+          title: "Etes-vous sûr de vouloir supprimer cette offre?",
+          text: "Cette suppression est irréversible !",
+          icon: "warning",
+          iconColor: "#ca2061",
+          showCancelButton: true,
+          confirmButtonColor: "#ca2061",
+          cancelButtonColor: "black",
+          confirmButtonText: "Supprimer cette offre",
+          cancelButtonText: "Annuler",
+          width: 400,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire({
+              icon: "succeess",
+              text: "Suppression effectuée.",
+              iconColor: "#ca2061",
+              width: 300,
+              buttonsStyling: false,
+              customClass: {
+                confirmButton: "button",
+              },
+            });
+            getOffers();
+          }
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.error,
+          iconColor: "#ca2061",
+          width: 300,
+          buttonsStyling: false,
+          customClass: {
+            confirmButton: "button",
+          },
+        });
       });
   };
 

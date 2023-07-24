@@ -37,6 +37,7 @@ const {
   modifyApplicant,
   getApplicantById,
   modifyPasswordApplicant,
+  validateApplicantInfosForSubscription,
 } = require("./controllers/ApplicantController");
 const {
   getAllCompanies,
@@ -46,6 +47,7 @@ const {
   modifyCompany,
   getCompanyById,
   modifyPasswordCompany,
+  validateCompanyInfosForSubscription,
 } = require("./controllers/CompanyController");
 const {
   getAllOffers,
@@ -70,6 +72,7 @@ const {
   getAllFavorites,
   getFavorite,
   deleteFavorite,
+  deleteFavoritesToDeleteApplicant,
 } = require("./controllers/FavoriteController");
 
 router.use(express.json());
@@ -79,6 +82,7 @@ router.use(express.json());
 router.post(
   "/signup/applicant",
   verifyEmailForSubscription,
+  validateApplicantInfosForSubscription,
   hashPassword,
   postApplicant
 );
@@ -86,6 +90,7 @@ router.post(
 router.post(
   "/signup/company",
   verifyEmailForSubscription,
+  validateCompanyInfosForSubscription,
   hashPassword,
   postCompany
 );
@@ -121,7 +126,12 @@ router.put(
   hashNewPassword,
   modifyPasswordApplicant
 );
-router.delete("/applicant", verifyApplicant, deleteApplicant);
+router.delete(
+  "/applicant",
+  verifyApplicant,
+  deleteFavoritesToDeleteApplicant,
+  deleteApplicant
+);
 
 // ------------Applicants favorites------------
 router.get("/favorites/:id", verifyApplicant, getFavorite);
@@ -172,7 +182,12 @@ router.delete("/admin", verifyAdmin, deleteAdmin);
 router.get("/admins", verifyAdmin, getAllAdmins);
 router.delete("/admins/:id", verifyAdmin, deleteAdmin);
 router.get("/applicants", verifyAdmin, getAllApplicants);
-router.delete("/applicants/:id", verifyAdmin, deleteApplicant);
+router.delete(
+  "/applicants/:id",
+  verifyAdmin,
+  deleteFavoritesToDeleteApplicant,
+  deleteApplicant
+);
 router.get("/companies", verifyAdmin, getAllCompanies);
 router.delete(
   "/companies/:id",

@@ -9,7 +9,7 @@ const getAllCompanies = (req, res) => {
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500).send({ error: "Une erreur est survenue." });
     });
 };
 
@@ -31,7 +31,7 @@ const postCompany = (req, res) => {
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500).send({ error: "Une erreur est survenue." });
     });
 };
 
@@ -47,14 +47,14 @@ const deleteCompany = (req, res) => {
     .delete(id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
-        res.sendStatus(404);
+        res.status(404).send({ error: "La suppression a échouée." });
       } else {
         res.sendStatus(204);
       }
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500).send({ error: "Une erreur est survenue." });
     });
 };
 
@@ -65,14 +65,14 @@ const getCompany = (req, res) => {
     .find(id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
-        res.sendStatus(404);
+        res.status(404).send({ error: "L'entreprise n'existe pas." });
       } else {
         res.json(result).status(200);
       }
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500).send({ error: "Une erreur est survenue." });
     });
 };
 
@@ -82,7 +82,7 @@ const getCompanyById = (req, res, next) => {
     .find(id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
-        res.sendStatus(404);
+        res.status(404).send({ error: "L'entreprise n'existe pas." });
       } else {
         [req.user] = result;
         next();
@@ -90,7 +90,7 @@ const getCompanyById = (req, res, next) => {
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500).send({ error: "Une erreur est survenue." });
     });
 };
 
@@ -109,14 +109,14 @@ const modifyCompany = (req, res) => {
     })
     .then(([result]) => {
       if (result.affectedRows === 0) {
-        res.sendStatus(404);
+        res.status(404).send({ error: "L'entreprise n'existe pas." });
       } else {
         res.sendStatus(204);
       }
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500).send({ error: "Une erreur est survenue." });
     });
 };
 
@@ -128,15 +128,56 @@ const modifyPasswordCompany = (req, res) => {
     .updatePassword(id, hashedPassword)
     .then(([result]) => {
       if (result.affectedRows === 0) {
-        res.sendStatus(404);
+        res
+          .status(404)
+          .send({ error: "Le mot de passe n'a pas pu être modifié." });
       } else {
         res.sendStatus(204);
       }
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500).send({ error: "Une erreur est survenue." });
     });
+};
+
+const validateCompanyInfosForSubscription = (req, res, next) => {
+  const { name, siret, email, password, confirmedPassword } = req.body;
+  const emailPattern =
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,3}$/;
+  const siretPattern = /^\d{1,14}$/;
+  // const namePattern = /^[a-zA-Z]/;
+  // 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial, longueur 8
+  const passwordPattern =
+    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+  if (!name) {
+    res
+      .status(400)
+      .send({ error: "Vous devez renseigner le nom de votre entreprise." });
+  } else if (!siret) {
+    res
+      .status(400)
+      .send({ error: "Vous devez renseigner le SIRET de votre entreprise." });
+  } else if (!siretPattern.test(siret)) {
+    res
+      .status(400)
+      .send({ error: "Le numéro SIRET doit contenir 14 chiffres." });
+  } else if (!email) {
+    res.status(400).send({ error: "Vous devez renseigner un email." });
+  } else if (!emailPattern.test(email)) {
+    res.status(400).send({ error: "L'adresse email n'est pas valide." });
+  } else if (!passwordPattern.test(password)) {
+    res.status(400).send({
+      error:
+        "Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule, 1 chiffre et un caractère spécial.",
+    });
+  } else if (password !== confirmedPassword) {
+    res
+      .status(400)
+      .send({ error: "Les mots de passe ne sont pas identiques." });
+  } else {
+    next();
+  }
 };
 
 module.exports = {
@@ -147,4 +188,5 @@ module.exports = {
   modifyCompany,
   getCompanyById,
   modifyPasswordCompany,
+  validateCompanyInfosForSubscription,
 };

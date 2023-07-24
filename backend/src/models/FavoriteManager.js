@@ -32,6 +32,13 @@ class FavoriteManager extends AbstractManager {
       [applicantId, offerId]
     );
   }
+
+  deleteFavoriteByApplicantId(applicantId) {
+    return this.database.query(
+      `delete from ${this.table} where applicant_id_applicant_offer_favorites = ?`,
+      [applicantId]
+    );
+  }
 }
 
 module.exports = FavoriteManager;

@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
+
+// Import des composants
 import OfferCardLarge from "../components/OfferCardLarge";
 import OfferModal from "../components/OfferModal";
 
@@ -17,7 +20,20 @@ function Home() {
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/offers`)
-      .then((results) => setOffersList(results.data));
+      .then((results) => setOffersList(results.data))
+      .catch((err) => {
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.error,
+          iconColor: "#ca2061",
+          width: 300,
+          buttonsStyling: false,
+          customClass: {
+            confirmButton: "button",
+          },
+        });
+      });
   }, []);
   return (
     <div>

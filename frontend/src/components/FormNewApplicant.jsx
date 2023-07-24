@@ -5,10 +5,9 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 function FormNewApplicant() {
-  const [errorsFormApplicant, setErrorsFormApplicant] = useState({});
+  const [titleName, setTitleName] = useState("");
   const [formDataApplicantSubscription, setFormDataApplicantSubscription] =
     useState({
-      titleName: "",
       firstname: "",
       lastname: "",
       email: "",
@@ -17,20 +16,6 @@ function FormNewApplicant() {
     });
   const navigate = useNavigate();
 
-  const handleTitleNameMiss = () => {
-    setFormDataApplicantSubscription({
-      ...formDataApplicantSubscription,
-      titleName: "Mme",
-    });
-  };
-
-  const handleTitleNameMister = () => {
-    setFormDataApplicantSubscription({
-      ...formDataApplicantSubscription,
-      titleName: "Mr",
-    });
-  };
-
   const handleInputApplicant = (e) => {
     setFormDataApplicantSubscription({
       ...formDataApplicantSubscription,
@@ -38,99 +23,43 @@ function FormNewApplicant() {
     });
   };
 
-  // Fonction pour valider les champs du formulaire
-  function validationInputsApplicant(el) {
-    const error = {};
-    const emailPattern =
-      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,3}$/;
-    const namePattern = /^[a-zA-Z]/;
-
-    // vérification madame ou monsieur coché
-    if (!el.titleName) {
-      error.titleName = "Veuillez sélectionner Madame ou Monsieur";
-    }
-
-    // vérification du prénom
-    if (!namePattern.test(el.firstname)) {
-      error.firstname = "Le prénom ne doit contenir que des lettres";
-    }
-
-    // vérification du nom
-    if (!namePattern.test(el.lastname)) {
-      error.lastname = "Le nom ne doit contenir que des lettres";
-    }
-    // vérification de l'email
-    if (!emailPattern.test(el.email)) {
-      error.email = "Le mail n'est pas valide";
-    }
-
-    // vérification de la confirmation du mot de passe
-    if (el.confirmedPassword === "" || el.password === "") {
-      error.confirmedPassword = "Veuillez confirmer votre mot de passe";
-    } else if (el.confirmedPassword !== el.password) {
-      error.confirmedPassword = "Les mots de passe ne correspondent pas";
-    }
-    return error;
-  }
   const handleSubmitApplicant = (e) => {
     e.preventDefault();
-
-    setErrorsFormApplicant(
-      validationInputsApplicant(formDataApplicantSubscription)
-    );
-    const errorDataApplicant = validationInputsApplicant(
-      formDataApplicantSubscription
-    );
-
-    if (Object.keys(errorDataApplicant).length === 0) {
-      axios
-        .post(
-          `${import.meta.env.VITE_BACKEND_URL}/signup/applicant`,
-          formDataApplicantSubscription
-        )
-        .then((response) => {
-          if (response.status === 201) {
-            Swal.fire({
-              icon: "success",
-              text: "Votre compte a bien été créé, veuillez vous connecter",
-              iconColor: "#ca2061",
-              width: 300,
-              confirmButtonColor: "black",
-            });
-            navigate("/connexion");
-            setErrorsFormApplicant(false);
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-          if (err.response.status === 403) {
-            Swal.fire({
-              icon: "error",
-              text: "Ce mail a déjà été utilisé, veuillez en saisir un autre",
-              iconColor: "#ca2061",
-              width: 300,
-              confirmButtonColor: "black",
-            });
-          } else {
-            Swal.fire({
-              icon: "error",
-              text: "Une erreur est survenue, veuillez réessayer plus tard",
-              iconColor: "#ca2061",
-              width: 300,
-              confirmButtonColor: "black",
-            });
-          }
+    axios
+      .post(`${import.meta.env.VITE_BACKEND_URL}/signup/applicant`, {
+        titleName,
+        ...formDataApplicantSubscription,
+      })
+      .then((response) => {
+        if (response.status === 201) {
+          Swal.fire({
+            icon: "success",
+            text: "Votre compte a bien été créé.",
+            iconColor: "#ca2061",
+            width: 300,
+            buttonsStyling: false,
+            customClass: {
+              confirmButton: "button",
+            },
+          });
+          navigate("/connexion");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.error,
+          iconColor: "#ca2061",
+          width: 300,
+          buttonsStyling: false,
+          customClass: {
+            confirmButton: "button",
+          },
         });
-      setFormDataApplicantSubscription({
-        titleName: "",
-        firstname: "",
-        lastname: "",
-        email: "",
-        password: "",
-        confirmedPassword: "",
       });
-    }
   };
+
   return (
     <form className="form subscription" onSubmit={handleSubmitApplicant}>
       <div className="containerTitleName">
@@ -140,25 +69,28 @@ function FormNewApplicant() {
             id="radio1"
             className="radioInput"
             name="titleName"
-            onChange={handleTitleNameMiss}
-            required
+            value="Mme"
+            onChange={(e) => {
+              setTitleName(e.target.value);
+            }}
+            checked={titleName === "Mme"}
           />
           <label htmlFor="radio1" className="labelRadioInput miss">
             Madame
           </label>
         </div>
-        {errorsFormApplicant.titleName && (
-          <span className="errorMessageTitleName">
-            {errorsFormApplicant.titleName}
-          </span>
-        )}
+
         <div className="containerRadioInput">
           <input
             type="radio"
             id="radio2"
             className="radioInput"
             name="titleName"
-            onChange={handleTitleNameMister}
+            value="Mr"
+            onChange={(e) => {
+              setTitleName(e.target.value);
+            }}
+            checked={titleName === "Mr"}
           />
           <label htmlFor="radio2" className="labelRadioInput mister">
             Monsieur
@@ -199,14 +131,11 @@ function FormNewApplicant() {
           className="textInput"
           type="text"
           placeholder="Prénom"
-          required
           name="firstname"
           autoComplete="off"
+          value={formDataApplicantSubscription.firstname}
           onChange={handleInputApplicant}
         />
-        {errorsFormApplicant.firstname && (
-          <span className="errorMessage">{errorsFormApplicant.firstname}</span>
-        )}
       </div>
 
       {/* lastname */}
@@ -243,14 +172,11 @@ function FormNewApplicant() {
           className="textInput"
           type="text"
           placeholder="Nom"
-          required
           name="lastname"
           autoComplete="off"
+          value={formDataApplicantSubscription.lastname}
           onChange={handleInputApplicant}
         />
-        {errorsFormApplicant.lastname && (
-          <span className="errorMessage">{errorsFormApplicant.lastname}</span>
-        )}
       </div>
 
       {/* email */}
@@ -271,14 +197,11 @@ function FormNewApplicant() {
           className="textInput"
           type="email"
           placeholder="Email"
-          required
           name="email"
           autoComplete="off"
+          value={formDataApplicantSubscription.email}
           onChange={handleInputApplicant}
         />
-        {errorsFormApplicant.email && (
-          <span className="errorMessage">{errorsFormApplicant.email}</span>
-        )}
       </div>
       {/* password */}
       <div className="containerTextInput">
@@ -302,14 +225,10 @@ function FormNewApplicant() {
           className="textInput"
           type="password"
           placeholder="Mot de passe"
-          required
           name="password"
-          minLength={4}
+          value={formDataApplicantSubscription.password}
           onChange={handleInputApplicant}
         />
-        {errorsFormApplicant.password && (
-          <span className="errorMessage">{errorsFormApplicant.password}</span>
-        )}
       </div>
       {/* password confirmation */}
       <div className="containerTextInput">
@@ -333,15 +252,10 @@ function FormNewApplicant() {
           className="textInput"
           type="password"
           placeholder="Confirmation mot de passe"
-          required
           name="confirmedPassword"
+          value={formDataApplicantSubscription.confirmedPassword}
           onChange={handleInputApplicant}
         />
-        {errorsFormApplicant.confirmedPassword && (
-          <span className="errorMessage">
-            {errorsFormApplicant.confirmedPassword}
-          </span>
-        )}
       </div>
 
       <button type="submit" className="button subscription">

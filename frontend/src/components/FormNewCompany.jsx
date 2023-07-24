@@ -8,7 +8,6 @@ import Swal from "sweetalert2";
 import "../css/components/FormNewUser.css";
 
 function FormNewCompany() {
-  const [errorsFormCompany, setErrorsFormCompany] = useState({});
   const [formDataCompanySubscription, setFormDataCompanySubscription] =
     useState({
       name: "",
@@ -24,103 +23,44 @@ function FormNewCompany() {
       ...formDataCompanySubscription,
       [e.target.name]: e.target.value,
     });
-    if (formDataCompanySubscription) {
-      setErrorsFormCompany({});
-    }
   };
-
-  // Fontion pour valider les champs du formulaire
-  function validationInputsCompany(el) {
-    const error = {};
-
-    const emailPattern =
-      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,3}$/;
-
-    const namePattern = /^[a-zA-Z]/;
-
-    const siretPattern = /^\d{14}$/;
-
-    // vérification du nom de l'entreprise
-    if (!namePattern.test(el.name)) {
-      error.name = "Le nom ne doit contenir que des lettres";
-    }
-
-    // vérification du SIRET
-    if (!siretPattern.test(el.siret)) {
-      error.siret = "Le SIRET doit contenir exactement 14 chiffres";
-    }
-
-    // vérification de l'email
-    if (!emailPattern.test(el.email)) {
-      error.email = "Le mail n'est pas valide";
-    }
-
-    // vérification du mot de passe
-    if (el.password === "") {
-      error.password = "Le mot de passe est requis";
-    }
-    // vérification de la confirmation du mot de passe
-    if (el.confirmedPassword === "" || el.password === "") {
-      error.confirmedPassword = "Veuillez confirmer votre mot de passe";
-    } else if (el.confirmedPassword !== el.password) {
-      error.confirmedPassword = "Les mots de passe ne correspondent pas";
-    }
-    return error;
-  }
 
   const handleSubmitCompany = (e) => {
     e.preventDefault();
-    setErrorsFormCompany(validationInputsCompany(formDataCompanySubscription));
-    const errorsDataCompany = validationInputsCompany(
-      formDataCompanySubscription
-    );
-    if (Object.keys(errorsDataCompany).length === 0) {
-      axios
-        .post(
-          `${import.meta.env.VITE_BACKEND_URL}/signup/company`,
-          formDataCompanySubscription
-        )
-        .then((response) => {
-          if (response.status === 201) {
-            Swal.fire({
-              icon: "success",
-              text: "Votre compte a bien été créé, veuillez vous connecter",
-              iconColor: "#ca2061",
-              width: 300,
-              confirmButtonColor: "black",
-            });
-            navigate("/connexion");
-            setErrorsFormCompany(false);
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-          if (err.response.status === 403) {
-            Swal.fire({
-              icon: "error",
-              text: "Ce mail a déjà été utilisé, veuillez en saisir un autre",
-              iconColor: "#ca2061",
-              width: 300,
-              confirmButtonColor: "black",
-            });
-          } else {
-            Swal.fire({
-              icon: "error",
-              text: "Une erreur est survenue, veuillez réessayer plus tard",
-              iconColor: "#ca2061",
-              width: 300,
-              confirmButtonColor: "black",
-            });
-          }
+
+    axios
+      .post(
+        `${import.meta.env.VITE_BACKEND_URL}/signup/company`,
+        formDataCompanySubscription
+      )
+      .then((response) => {
+        if (response.status === 201) {
+          Swal.fire({
+            icon: "success",
+            text: "Votre compte a bien été créé.",
+            iconColor: "#ca2061",
+            width: 300,
+            buttonsStyling: false,
+            customClass: {
+              confirmButton: "button",
+            },
+          });
+          navigate("/connexion");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.error,
+          iconColor: "#ca2061",
+          width: 300,
+          buttonsStyling: false,
+          customClass: {
+            confirmButton: "button",
+          },
         });
-      setFormDataCompanySubscription({
-        name: "",
-        siret: 0,
-        email: "",
-        password: "",
-        confirmedPassword: "",
       });
-    }
   };
   return (
     <form className="form subscription" onSubmit={handleSubmitCompany}>
@@ -141,14 +81,11 @@ function FormNewCompany() {
           className="textInput"
           type="text"
           placeholder="Nom de l'entreprise"
-          required
           name="name"
           autoComplete="on"
+          value={formDataCompanySubscription.name}
           onChange={handleInputCompany}
         />
-        {errorsFormCompany.name && (
-          <span className="errorMessage">{errorsFormCompany.name}</span>
-        )}
       </div>
 
       <div className="containerTextInput">
@@ -168,15 +105,12 @@ function FormNewCompany() {
           className="textInput"
           type="text"
           placeholder="Numéro SIRET"
-          required
           name="siret"
           autoComplete="on"
-          maxLength="14"
+          maxLength={14}
+          value={formDataCompanySubscription.siret}
           onChange={handleInputCompany}
         />
-        {errorsFormCompany.siret && (
-          <span className="errorMessage">{errorsFormCompany.siret}</span>
-        )}
       </div>
 
       {/* email */}
@@ -197,9 +131,9 @@ function FormNewCompany() {
           className="textInput"
           type="email"
           placeholder="Email"
-          required
           name="email"
           autoComplete="on"
+          value={formDataCompanySubscription.email}
           onChange={handleInputCompany}
         />
       </div>
@@ -225,13 +159,10 @@ function FormNewCompany() {
           className="textInput"
           type="password"
           placeholder="Mot de passe"
-          required
           name="password"
+          value={formDataCompanySubscription.password}
           onChange={handleInputCompany}
         />
-        {errorsFormCompany.password && (
-          <span className="errorMessage">{errorsFormCompany.password}</span>
-        )}
       </div>
       {/* password confirmation */}
       <div className="containerTextInput">
@@ -255,15 +186,10 @@ function FormNewCompany() {
           className="textInput"
           type="password"
           placeholder="Confirmation mot de passe"
-          required
           name="confirmedPassword"
+          value={formDataCompanySubscription.confirmedPassword}
           onChange={handleInputCompany}
         />
-        {errorsFormCompany.confirmedPassword && (
-          <span className="errorMessage">
-            {errorsFormCompany.confirmedPassword}
-          </span>
-        )}
       </div>
 
       <button type="submit" className="button subscription">

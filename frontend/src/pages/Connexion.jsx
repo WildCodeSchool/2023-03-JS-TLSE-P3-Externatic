@@ -2,6 +2,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 // Import components
 import LinkLogInSubscribe from "../components/LinkLogInSubscribe";
@@ -16,7 +17,6 @@ function Connexion() {
     password: "",
   });
 
-  const [loginError, setLoginError] = useState(false);
   const navigate = useNavigate();
 
   const handleInput = (e) => {
@@ -27,14 +27,23 @@ function Connexion() {
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/login`, formDataLogIn)
       .then((response) => {
-        if (response.data.token) {
+        if (response.status === 200) {
           setUserCookie(response.data.token, response.data.user.role);
-          navigate("/dashboard/my-profile");
+          navigate("/");
         }
       })
       .catch((err) => {
         console.error(err);
-        setLoginError(true);
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.error,
+          iconColor: "#ca2061",
+          width: 300,
+          buttonsStyling: false,
+          customClass: {
+            confirmButton: "button",
+          },
+        });
       });
   };
 
@@ -93,11 +102,6 @@ function Connexion() {
               onChange={handleInput}
             />
           </div>
-          {loginError && (
-            <span className="errorLogin">
-              Nous n'avons pas trouvé votre compte
-            </span>
-          )}
           <button type="submit" className="button connection">
             Je me connecte
           </button>
