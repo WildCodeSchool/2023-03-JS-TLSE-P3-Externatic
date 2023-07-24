@@ -1,0 +1,84 @@
+.imageContainer {
+  width: 100%;
+  height: 20rem;
+}
+
+.userNotConnected {
+  line-height: 3rem;
+}
+
+/* style de la description Externatic */
+.descriptionHomePage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem;
+  max-width: 20rem;
+}
+.containerDescription {
+  display: flex;
+  gap: 2rem;
+  flex-direction: column;
+}
+.titleDescription {
+  margin: 1rem 0;
+}
+.aboutExternatic {
+  margin: 1rem auto;
+}
+.textDescription {
+  text-align: center;
+}
+.textAndIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.icon.hand,
+.icon.rocket,
+.icon.hourglass {
+  margin-right: 0.8rem;
+}
+
+.icon.rocket {
+  width: 2rem;
+}
+
+@media screen and (min-width: 768px) {
+  .imageContainer {
+    height: 35rem;
+  }
+
+  .userNotConnected {
+    line-height: 3.5rem;
+  }
+  /* style de la description Externatic */
+  .descriptionHomePage {
+    max-width: 80%;
+    margin: 2rem auto;
+    gap: 2rem;
+  }
+  
+  .containerDescription {
+    flex-direction: row;
+    gap: 6rem;
+  }
+
+  .aboutExternatic {
+    max-width: 25rem;
+  }
+
+  .textDescription {
+    font-size: 1.5rem;
+    padding: 0 1rem;
+    line-height: 2rem;
+  }
+  .textAndIcon {
+    margin-bottom: 3rem;
+  }
+  .textAndIcon > h2 {
+    font-size: 1.8rem;
+  }
+}
