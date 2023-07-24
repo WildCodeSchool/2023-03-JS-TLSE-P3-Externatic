@@ -6,7 +6,6 @@ import axios from "axios";
 function InputSearch() {
   const [searchValue, setSearchValue] = useState("");
   const [searchSuggestions, setSearchSuggestions] = useState([]);
-  // const [hasResults, setHasResults] = useState(false);
   const handleSearchInputChange = (event) => {
     const { value } = event.target;
     setSearchValue(value);
