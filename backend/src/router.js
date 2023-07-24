@@ -10,6 +10,7 @@ const {
   verifyAdmin,
   verifyCompany,
   verifyAdminOrCompany,
+  verifyApplicant,
 } = require("./services/auth");
 
 const { getUserByEmail } = require("./controllers/UserController");
@@ -45,6 +46,12 @@ const {
   deleteContract,
   addContract,
 } = require("./controllers/ContractController");
+const {
+  addFavorite,
+  getAllFavorites,
+  getFavorite,
+  deleteFavorite,
+} = require("./controllers/FavoriteController");
 
 router.use(express.json());
 
@@ -111,5 +118,10 @@ router.post("/contracts-type", verifyAdmin, addContract);
 
 // ------------Offers management------------
 router.delete("/offers/:id", verifyAdminOrCompany, deleteOfferById);
-
+// ------------APPLICANT ROUTES------------
+// ------------Applicants favorites------------
+router.get("/favorites/:id", verifyApplicant, getFavorite);
+router.post("/favorites", verifyApplicant, addFavorite);
+router.delete("/favorites/:id", verifyApplicant, deleteFavorite);
+router.get("/all-favorites", verifyApplicant, getAllFavorites);
 module.exports = router;

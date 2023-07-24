@@ -92,4 +92,8 @@
   .offerTextAndIcon {
     font-size: 1.2rem;
   }
+  .offersFavoriesContainer {
+    width: 60vw;
+    margin: auto;
+  }
 }
