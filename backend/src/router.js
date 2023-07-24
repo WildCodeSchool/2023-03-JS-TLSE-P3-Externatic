@@ -13,7 +13,7 @@ const {
   verifyApplicant,
 } = require("./services/auth");
 
-const { getUserByEmail } = require("./controllers/UserController");
+const { getUserByEmail, getUserById } = require("./controllers/UserController");
 const {
   getAllAdmins,
   deleteAdmin,
@@ -86,6 +86,9 @@ router.get("/contracts-type", getAllContracts);
 
 // ------------TOKEN WALL------------
 router.use(verifyToken);
+
+// ------------ GET USER by id ------------
+router.get("/users/:id", verifyToken, getUserById);
 
 // ------------COMPANY ROUTES------------
 // ------------Offers management------------

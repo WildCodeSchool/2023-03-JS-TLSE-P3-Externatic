@@ -1,9 +1,12 @@
 // Imports des packages
-import React, { useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import axios from "axios";
 
 // import OfferCardLarge from "../components/OfferCardLarge";
 import OfferModal from "../components/OfferModal";
-import InputSearch from "../components/InputSearch";
+
+// Import du context
+import TokenContext from "../contexts/TokenContext";
 
 // Import des assets
 import externaticHello from "../assets/icons/externatic-hello.svg";
@@ -14,22 +17,54 @@ import imageHeader from "../assets/images/header_image.svg";
 function Home() {
   const [modalOfferIsOpen, setModalOfferIsOpen] = useState(false);
   const [selectedOffer, setSelectedOffer] = useState({});
-  console.error(setSelectedOffer);
+  const [dataUser, setDataUser] = useState();
+  const { userToken, userId, userRole } = useContext(TokenContext);
+  console.info(setSelectedOffer);
+
+  useEffect(() => {
+    if (userId && userToken) {
+      axios
+        .get(
+          `${
+            import.meta.env.VITE_BACKEND_URL
+          }/users/${userId}?role=${userRole}`,
+          {
+            headers: {
+              Authorization: `Bearer ${userToken}`,
+            },
+          }
+        )
+        .then((results) => {
+          setDataUser(results.data[0]);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, [userId, userToken]);
+
   return (
     <>
+      <OfferModal
+        modalOfferIsOpen={modalOfferIsOpen}
+        setModalOfferIsOpen={setModalOfferIsOpen}
+        offer={selectedOffer}
+      />
       <div className="containerHome">
-        <OfferModal
-          modalOfferIsOpen={modalOfferIsOpen}
-          setModalOfferIsOpen={setModalOfferIsOpen}
-          offer={selectedOffer}
-        />
         <img
           className="imageContainer"
           src={imageHeader}
           alt="illustration recruteur candidat"
         />
       </div>
-      <InputSearch />
+      {userToken ? (
+        <h1 className="userConnected">
+          Bienvenue{" "}
+          {userRole === "company" ? dataUser?.name : dataUser?.firstname} !{" "}
+        </h1>
+      ) : (
+        <h1 className="userNotConnected">Bienvenue ! </h1>
+      )}
       <div className="descriptionHome">
         <div className="itemtext">
           <h2>La réussite de notre cabinet de recrutement informatique ?</h2>
