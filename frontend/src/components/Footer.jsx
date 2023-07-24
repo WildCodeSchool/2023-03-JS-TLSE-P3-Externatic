@@ -22,7 +22,7 @@ function Footer() {
         <h3>Réseaux sociaux</h3>
         <div className="middle-column">
           <a
-            href="https://www.instagram.com/"
+            href="https://www.linkedin.com/company/externatic/"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -33,14 +33,14 @@ function Footer() {
             />
           </a>
           <a
-            href="https://www.twitter.com/"
+            href="https://twitter.com/i/flow/login?redirect_after_login=%2FExternatic"
             target="_blank"
             rel="noopener noreferrer"
           >
             <img className="icon" src={twitterWhite} alt="Twitter" />
           </a>
           <a
-            href="https://www.instagram.com/"
+            href="https://www.instagram.com/externatic/"
             target="_blank"
             rel="noopener noreferrer"
           >
