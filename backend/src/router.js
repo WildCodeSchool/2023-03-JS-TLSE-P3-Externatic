@@ -17,6 +17,7 @@ const {
 
 const {
   getUserByEmail,
+  getUserById,
   validateNewPassword,
 } = require("./controllers/UserController");
 const {
@@ -109,6 +110,9 @@ router.get("/contracts-type", getAllContracts);
 
 // ------------TOKEN WALL------------
 router.use(verifyToken);
+
+// ------------ GET USER by id ------------
+router.get("/users/:id", verifyToken, getUserById);
 
 // ------------APPLICANT ROUTES------------
 // ------------MyProfile------------

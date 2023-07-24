@@ -11,7 +11,8 @@ import LinkLogInSubscribe from "../components/LinkLogInSubscribe";
 import TokenContext from "../contexts/TokenContext";
 
 function Connexion() {
-  const { setUserCookie } = useContext(TokenContext);
+  const { setUserCookie, setUserId } = useContext(TokenContext);
+
   const [formDataLogIn, setFormDataLogIn] = useState({
     email: "",
     password: "",
@@ -29,6 +30,7 @@ function Connexion() {
       .then((response) => {
         if (response.status === 200) {
           setUserCookie(response.data.token, response.data.user.role);
+          setUserId(response.data.user.id);
           navigate("/");
         }
       })
