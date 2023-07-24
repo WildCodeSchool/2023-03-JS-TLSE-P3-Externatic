@@ -13,6 +13,9 @@
 .errorInput {
   border: 2px solid #ca2061;
 }
+.containerTextInput {
+  position: relative;
+}
 
 @media screen and (min-width: 768px) {
 }

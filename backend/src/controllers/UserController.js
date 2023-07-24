@@ -36,6 +36,15 @@ const getUserByEmail = (req, res, next) => {
     });
 };
 
+const validateNewPassword = (req, res, next) => {
+  const { newPassword, confirmNewPassword } = req.body;
+  if (newPassword === confirmNewPassword) {
+    next();
+  } else {
+    res.sendStatus(400);
+  }
+};
+
 // ------------Trouver un utilisateur par son id ------------
 const getUserById = (req, res) => {
   const { id } = req.params;
@@ -59,5 +68,6 @@ const getUserById = (req, res) => {
 };
 module.exports = {
   getUserByEmail,
+  validateNewPassword,
   getUserById,
 };

@@ -98,7 +98,7 @@ CREATE TABLE `offer` (
   KEY `company_id_idx` (`company_id`),
   KEY `id_contract_type_idx` (`contract_type_id_offer`),
   KEY `id_category_idx` (`category_id_offer`),
-  CONSTRAINT `category_id_offer` FOREIGN KEY (`category_id_offer`) REFERENCES `company` (`id`),
+  CONSTRAINT `category_id_offer` FOREIGN KEY (`category_id_offer`) REFERENCES `category` (`id`),
   CONSTRAINT `company_id` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`),
   CONSTRAINT `id_contract_type` FOREIGN KEY (`contract_type_id_offer`) REFERENCES `contract_type` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
