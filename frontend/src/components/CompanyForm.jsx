@@ -224,7 +224,6 @@ function CompanyForm() {
     getUserInfos();
   }, []);
 
-  // id, name, email, password, city, phone, siret
   return (
     <div className="formContainer">
       <form onSubmit={handleSubmit} className="form">
