@@ -55,23 +55,41 @@ const hashPassword = (req, res, next) => {
       res.sendStatus(500);
     });
 };
+const hashNewPassword = (req, res, next) => {
+  argon2
+    .hash(req.body.newPassword, hashingOptions)
+    .then((hashedPassword) => {
+      req.body.hashedPassword = hashedPassword;
+      delete req.body.newPassword;
+      delete req.body.confirmNewPassword;
+      next();
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
 
-const verifyPassword = (req, res) => {
+const verifyPassword = (req, res, next) => {
   argon2.verify(req.user.hashed_password, req.body.password).then((valid) => {
     if (valid) {
-      const payload = {
-        sub: req.user.id,
-        role: req.user.role,
-      };
-      const token = jwt.sign(payload, process.env.JWT_SECRET, {
-        expiresIn: "1h",
-      });
-      delete req.user.hashed_password;
-      res.send({ token, user: req.user }).status(200);
+      next();
     } else {
       res.sendStatus(401);
     }
   });
+};
+
+const login = (req, res) => {
+  const payload = {
+    sub: req.user.id,
+    role: req.user.role,
+  };
+  const token = jwt.sign(payload, process.env.JWT_SECRET, {
+    expiresIn: "1h",
+  });
+  delete req.user.hashed_password;
+  res.send({ token, user: req.user }).status(200);
 };
 
 const verifyToken = (req, res, next) => {
@@ -152,5 +170,7 @@ module.exports = {
   verifyAdmin,
   verifyCompany,
   verifyAdminOrCompany,
+  login,
+  hashNewPassword,
   verifyApplicant,
 };

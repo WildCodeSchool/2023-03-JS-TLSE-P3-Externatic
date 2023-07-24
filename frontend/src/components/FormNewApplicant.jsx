@@ -141,6 +141,7 @@ function FormNewApplicant() {
             className="radioInput"
             name="titleName"
             onChange={handleTitleNameMiss}
+            required
           />
           <label htmlFor="radio1" className="labelRadioInput miss">
             Madame

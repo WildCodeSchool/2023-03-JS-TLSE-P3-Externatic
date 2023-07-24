@@ -91,13 +91,6 @@ function UsersManagement() {
       width: 400,
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          text: "Ce compte a bien été supprimé",
-          icon: "success",
-          confirmButtonColor: "black",
-          width: 300,
-        });
-
         axios
           .delete(`${import.meta.env.VITE_BACKEND_URL}/admins/${id}`, {
             headers: {
@@ -106,6 +99,12 @@ function UsersManagement() {
           })
           .then(() => {
             getAdmins();
+            Swal.fire({
+              text: "Ce compte a bien été supprimé",
+              icon: "success",
+              confirmButtonColor: "black",
+              width: 300,
+            });
           });
       }
     });
@@ -137,12 +136,6 @@ function UsersManagement() {
       width: 400,
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          text: "Ce compte a bien été supprimé",
-          icon: "success",
-          confirmButtonColor: "black",
-          width: 300,
-        });
         axios
           .delete(`${import.meta.env.VITE_BACKEND_URL}/applicants/${id}`, {
             headers: {
@@ -151,6 +144,12 @@ function UsersManagement() {
           })
           .then(() => {
             getApplicants();
+            Swal.fire({
+              text: "Ce compte a bien été supprimé",
+              icon: "success",
+              confirmButtonColor: "black",
+              width: 300,
+            });
           });
       }
     });
@@ -181,12 +180,6 @@ function UsersManagement() {
       width: 400,
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          text: "Ce compte a bien été supprimé",
-          icon: "success",
-          confirmButtonColor: "black",
-          width: 300,
-        });
         axios
           .delete(`${import.meta.env.VITE_BACKEND_URL}/companies/${id}`, {
             headers: {
@@ -195,6 +188,12 @@ function UsersManagement() {
           })
           .then(() => {
             getCompanies();
+            Swal.fire({
+              text: "Ce compte a bien été supprimé",
+              icon: "success",
+              confirmButtonColor: "black",
+              width: 300,
+            });
           });
       }
     });
@@ -214,7 +213,7 @@ function UsersManagement() {
             <h2>Administrateurs</h2>
             {allAdmins
               ? allAdmins.map((admin) => (
-                  <div className="userManagementCardContainer">
+                  <div className="userManagementCardContainer" key={admin.id}>
                     <div className="userManagementCard">
                       <div className="userManagementCardRightPart">
                         <p>ID: {admin.id}</p>
@@ -310,7 +309,10 @@ function UsersManagement() {
             <h2>Candidats</h2>
             {allApplicants
               ? allApplicants.map((applicant) => (
-                  <div className="userManagementCardContainer">
+                  <div
+                    className="userManagementCardContainer"
+                    key={applicant.id}
+                  >
                     <div className="userManagementCard">
                       <div className="userManagementCardRightPart">
                         <p>ID: {applicant.id}</p>
@@ -341,7 +343,7 @@ function UsersManagement() {
             <h2>Entreprises</h2>
             {allCompanies
               ? allCompanies.map((company) => (
-                  <div className="userManagementCardContainer">
+                  <div className="userManagementCardContainer" key={company.id}>
                     <div className="userManagementCard">
                       <div className="userManagementCardRightPart">
                         <p>ID: {company.id}</p>
