@@ -1,165 +1,84 @@
-.container_Home {
+.imageContainer {
+  width: 100%;
+  height: 20rem;
+}
+
+.userNotConnected {
+  line-height: 3rem;
+}
+
+/* style de la description Externatic */
+.descriptionHomePage {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  margin: 2rem;
+  max-width: 20rem;
 }
-
-.imageContainer {
-  margin-top: 20px;
-}
-
-.imageContainer img {
-  width: 100%;
-  height: 400px;
-  object-fit: contain;
-}
-
-.searchContainer {
-  width: 100%;
+.containerDescription {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+  gap: 2rem;
+  flex-direction: column;
 }
-.containerTextInput.searchBar {
-  max-width: 70%;
-  border-bottom: inherit;
+.titleDescription {
+  margin: 1rem 0;
 }
-
-.textInput.searchBar {
-  width: 70%;
-  border-radius: 6rem;
-  padding: 1rem;
-  padding-right: 30px;
-  border: solid 1px var(--basic-grey);
+.aboutExternatic {
+  margin: 1rem auto;
 }
-
-.iconForm.searchBar {
-  position: absolute;
-  right: 31%;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.carouselContent {
-  display: flex;
-  transition: transform 0.3s ease-in-out;
-}
-
-.carouselItem {
-  flex: 0 0 25%;
-  margin-right: 10px;
-}
-
-.TextIcon {
-  display: flex;
-  justify-content: center;
-  margin: 16px;
-}
-
-.descriptionHome {
-  display: flex;
-  justify-content: space-around;
-  margin: 20px;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.itemtext p {
+.textDescription {
   text-align: center;
-  margin: 40px 0 0 30px;
 }
-
-.iconForm {
-  margin-right: 20px;
-}
-
-.carouselContainer {
-  position: relative;
-}
-
-.carouselButton {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-}
-
-.prevButton {
-  left: 10px;
-}
-
-.nextButton {
-  right: 10px;
-}
-
-/* recherche new */
-.searchContainer {
-  margin-top: 20px;
-  margin-bottom: 130px;
+.textAndIcon {
   display: flex;
   align-items: center;
-  position: relative;
+  justify-content: center;
+  margin-bottom: 1rem;
 }
 
-.searchIcon {
-  position: absolute;
-  top: 50%;
-  right: 10px; /* Ajustez cette valeur en fonction de vos besoins */
-  transform: translateY(-50%);
-}
-/* gestien de suggestion recherche*/
-.searchContainer {
-  position: relative;
+.icon.hand,
+.icon.rocket,
+.icon.hourglass {
+  margin-right: 0.8rem;
 }
 
-.searchSuggestionsContainer {
-  position: absolute;
-  top: calc(100% + 5px);
-  /* Ajustez la valeur pour définir l'espace entre l'input et les suggestions */
-  width: 100%;
-  background-color: #fff; /* Couleur de fond des suggestions */
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre des suggestions */
+.icon.rocket {
+  width: 2rem;
 }
 
-.searchSuggestions {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.searchSuggestions li {
-  padding: 10px;
-  cursor: pointer;
-}
-
-.searchSuggestions li:hover {
-  background-color: #f5f5f5; /* Couleur de fond au survol d'une suggestion */
-}
-.searchSuggestions li.selected {
-  background-color: #f5f5f5;
-}
-
-@media screen and (max-width: 576px) {
-  .searchInput {
-    width: 100%;
+@media screen and (min-width: 768px) {
+  .imageContainer {
+    height: 35rem;
   }
 
-  .imageContainer img {
-    height: 300px;
+  .userNotConnected {
+    line-height: 3.5rem;
+  }
+  /* style de la description Externatic */
+  .descriptionHomePage {
+    max-width: 80%;
+    margin: 2rem auto;
+    gap: 2rem;
+  }
+  
+  .containerDescription {
+    flex-direction: row;
+    gap: 6rem;
   }
 
-  .carouselItem {
-    flex: 0 0 100%;
+  .aboutExternatic {
+    max-width: 25rem;
   }
-}
 
-/* Styles pour les écrans de taille moyenne (tablette) */
-@media screen and (min-width: 577px) and (max-width: 768px) {
-  .carouselItem {
-    flex: 0 0 50%;
+  .textDescription {
+    font-size: 1.5rem;
+    padding: 0 1rem;
+    line-height: 2rem;
+  }
+  .textAndIcon {
+    margin-bottom: 3rem;
+  }
+  .textAndIcon > h2 {
+    font-size: 1.8rem;
   }
 }

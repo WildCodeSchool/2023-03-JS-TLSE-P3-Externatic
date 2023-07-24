@@ -23,6 +23,13 @@ class AbstractManager {
     return this.database.query(`delete from ${this.table} where id = ?`, [id]);
   }
 
+  updatePassword(id, hashedPassword) {
+    return this.database.query(
+      `update ${this.table} set hashed_password = ? where id = ?`,
+      [hashedPassword, id]
+    );
+  }
+
   setDatabase(database) {
     this.database = database;
   }

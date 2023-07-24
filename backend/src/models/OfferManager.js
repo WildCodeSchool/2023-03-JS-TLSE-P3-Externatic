@@ -86,6 +86,13 @@ class OfferManager extends AbstractManager {
       ]
     );
   }
+
+  deleteOfferByCompanyid(companyId) {
+    return this.database.query(
+      `delete from ${this.table} where company_id = ?`,
+      [companyId]
+    );
+  }
 }
 
 module.exports = OfferManager;

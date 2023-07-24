@@ -11,30 +11,49 @@ const {
   verifyCompany,
   verifyAdminOrCompany,
   verifyApplicant,
+  login,
+  hashNewPassword,
 } = require("./services/auth");
 
-const { getUserByEmail } = require("./controllers/UserController");
+const {
+  getUserByEmail,
+  getUserById,
+  validateNewPassword,
+} = require("./controllers/UserController");
 const {
   getAllAdmins,
   deleteAdmin,
   postAdmin,
+  getAdmin,
+  getAdminById,
+  modifyAdmin,
+  modifyPasswordAdmin,
 } = require("./controllers/AdminController");
 const {
   getAllApplicants,
   deleteApplicant,
   postApplicant,
+  getApplicant,
+  modifyApplicant,
+  getApplicantById,
+  modifyPasswordApplicant,
 } = require("./controllers/ApplicantController");
 const {
   getAllCompanies,
   deleteCompany,
   postCompany,
+  getCompany,
+  modifyCompany,
+  getCompanyById,
+  modifyPasswordCompany,
 } = require("./controllers/CompanyController");
 const {
   getAllOffers,
-  getFilteredOffers,
   deleteOfferById,
   getCompanyOffers,
   addOffer,
+  getFilteredOffers,
+  deleteOffersToDeleteCompany,
 } = require("./controllers/OfferController");
 const {
   getAllCategories,
@@ -72,7 +91,7 @@ router.post(
 );
 
 // ------------User connection------------
-router.post("/login", getUserByEmail, verifyPassword);
+router.post("/login", getUserByEmail, verifyPassword, login);
 
 // ------------Offers------------
 router.get("/offers", getAllOffers);
@@ -87,19 +106,81 @@ router.get("/contracts-type", getAllContracts);
 // ------------TOKEN WALL------------
 router.use(verifyToken);
 
+// ------------ GET USER by id ------------
+router.get("/users/:id", verifyToken, getUserById);
+
+// ------------APPLICANT ROUTES------------
+// ------------MyProfile------------
+router.get("/applicant", verifyApplicant, getApplicant);
+router.put("/applicants", verifyApplicant, modifyApplicant);
+router.put(
+  "/applicants/password",
+  verifyApplicant,
+  getApplicantById,
+  verifyPassword,
+  validateNewPassword,
+  hashNewPassword,
+  modifyPasswordApplicant
+);
+router.delete("/applicant", verifyApplicant, deleteApplicant);
+
+// ------------Applicants favorites------------
+router.get("/favorites/:id", verifyApplicant, getFavorite);
+router.post("/favorites", verifyApplicant, addFavorite);
+router.delete("/favorites/:id", verifyApplicant, deleteFavorite);
+router.get("/all-favorites", verifyApplicant, getAllFavorites);
+
 // ------------COMPANY ROUTES------------
+// ------------MyProfile------------
+router.get("/company", verifyCompany, getCompany);
+router.put("/companies", verifyCompany, modifyCompany);
+router.put(
+  "/companies/password",
+  verifyCompany,
+  getCompanyById,
+  verifyPassword,
+  validateNewPassword,
+  hashNewPassword,
+  modifyPasswordCompany
+);
+router.delete(
+  "/company",
+  verifyCompany,
+  deleteOffersToDeleteCompany,
+  deleteCompany
+);
+
 // ------------Offers management------------
 router.get("/company-offers", verifyCompany, getCompanyOffers);
 router.post("/create-offer", verifyAdminOrCompany, addOffer);
 
 // ------------ADMIN ROUTES------------
+// ------------MyProfile------------
+router.get("/admin", verifyAdmin, getAdmin);
+router.put("/admins", verifyAdmin, modifyAdmin);
+router.put(
+  "/admins/password",
+  verifyAdmin,
+  getAdminById,
+  verifyPassword,
+  validateNewPassword,
+  hashNewPassword,
+  modifyPasswordAdmin
+);
+router.delete("/admin", verifyAdmin, deleteAdmin);
+
 // ------------Users management------------
 router.get("/admins", verifyAdmin, getAllAdmins);
 router.delete("/admins/:id", verifyAdmin, deleteAdmin);
 router.get("/applicants", verifyAdmin, getAllApplicants);
 router.delete("/applicants/:id", verifyAdmin, deleteApplicant);
 router.get("/companies", verifyAdmin, getAllCompanies);
-router.delete("/companies/:id", verifyAdmin, deleteCompany);
+router.delete(
+  "/companies/:id",
+  verifyAdmin,
+  deleteOffersToDeleteCompany,
+  deleteCompany
+);
 
 // ------------Admin subscription------------
 router.post(
@@ -118,10 +199,5 @@ router.post("/contracts-type", verifyAdmin, addContract);
 
 // ------------Offers management------------
 router.delete("/offers/:id", verifyAdminOrCompany, deleteOfferById);
-// ------------APPLICANT ROUTES------------
-// ------------Applicants favorites------------
-router.get("/favorites/:id", verifyApplicant, getFavorite);
-router.post("/favorites", verifyApplicant, addFavorite);
-router.delete("/favorites/:id", verifyApplicant, deleteFavorite);
-router.get("/all-favorites", verifyApplicant, getAllFavorites);
+
 module.exports = router;
