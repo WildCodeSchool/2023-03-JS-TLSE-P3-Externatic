@@ -1,36 +1,69 @@
 .footer {
+  margin-top: 3rem;
   display: flex;
   align-items: center;
+  flex-direction: column;
   justify-content: space-between;
   padding:0.4rem 0.8rem;
-  background-color: #555555;
-  position: fixed;
-  height: 15vh;
+  background-color: #404040;
+  /* position: fixed; */
   color: white;
   z-index: 10;
-  bottom: 0;
-  width: 100vh;
+  /* bottom: 0; */
+  width: 100%;
+  gap: 1rem;
 }
 .footer p{
-  font-size: 1.1rem;
+  font-size: 0.8rem;
 }
 .footer strong{
  font-weight: 800;
 }
 .right-column {
-  text-align: right;
+  text-align: center;
 }
 .left-column {
   flex-direction: column;
-  width: 50%;
+  text-align: center;
 }
+.groupReseaux
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.groupReseaux h3{
+  font-size: 0.8rem;
+  text-align: center;
+}
+.icon.footerItem img
+{
+ height: 1rem;
+}
+.footer.hidden {
+  display: none;
+}
+.middle-column
+{
+  display: flex;
+  gap: 1rem;
+}
+
+
 @media (min-width: 768px) {
 
   .footer {
     
+  flex-direction: row;
     padding: 0.5rem 1rem;
-    height: 14vh;
-    line-height: 1.5rem;
     width: 100%;
   }
+  .left-column{
+    text-align: left;
+  }
+  .groupReseaux h3{
+    font-size: 0.8rem;
+    text-align: left;
+  }
+ 
 }

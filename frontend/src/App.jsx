@@ -43,7 +43,6 @@ function App() {
             <ModificationProfileContextProvider>
               <Router>
                 <MainNavBar />
-                <Footer />
                 <Routes>
                   <Route path="" element={<Home />} />
                   <Route path="connexion" element={<Connexion />} />
@@ -51,6 +50,8 @@ function App() {
                   <Route path="offers" element={<Offers />} />
                   <Route path="dashboard/*" element={<Dashboard />} />
                 </Routes>
+
+                <Footer />
               </Router>
             </ModificationProfileContextProvider>
           </TokenContextProvider>
