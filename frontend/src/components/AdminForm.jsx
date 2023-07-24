@@ -45,7 +45,7 @@ function AdminForm() {
             icon: "success",
             text: "Les modifications ont bien été prises en compte",
             iconColor: "#ca2061",
-            width: 300,
+            // width: 300,
             buttonsStyling: false,
             customClass: {
               confirmButton: "button",
