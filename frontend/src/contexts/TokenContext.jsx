@@ -10,6 +10,8 @@ export default TokenContext;
 export function TokenContextProvider({ children }) {
   const [userToken, setUserToken] = useState(Cookies.get("userToken") || null);
   const [userRole, setUserRole] = useState(Cookies.get("userRole") || null);
+  const [userId, setUserId] = useState();
+
   const setUserCookie = (token, role) => {
     if (token) {
       Cookies.set("userToken", token, {
@@ -28,8 +30,14 @@ export function TokenContextProvider({ children }) {
     }
   };
   const TokenContextValue = useMemo(() => {
-    return { userToken, userRole, setUserCookie };
-  });
+    return {
+      userToken,
+      userRole,
+      setUserCookie,
+      userId,
+      setUserId,
+    };
+  }, [userToken, userRole, userId]);
 
   return (
     <TokenContext.Provider value={TokenContextValue}>
