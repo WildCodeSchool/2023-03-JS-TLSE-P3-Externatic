@@ -1,191 +1,35 @@
 // Imports des packages
-import React, { useEffect, useState, useRef } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 
-// Import des components
-import OfferCardLarge from "../components/OfferCardLarge";
+// import OfferCardLarge from "../components/OfferCardLarge";
 import OfferModal from "../components/OfferModal";
+import InputSearch from "../components/InputSearch";
 
-// Import des icones
-import searchBlack from "../assets/icons/search_black.svg";
+// Import des assets
 import externaticHello from "../assets/icons/externatic-hello.svg";
 import externaticSablier from "../assets/icons/externatic-sablier.svg";
 import rocketPink from "../assets/icons/rocket_pink.svg";
+import imageHeader from "../assets/images/header_image.svg";
 
 function Home() {
-  const [offersList, setOffersList] = useState([]);
   const [modalOfferIsOpen, setModalOfferIsOpen] = useState(false);
   const [selectedOffer, setSelectedOffer] = useState({});
-  const carouselRef = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [carouselWidth, setCarouselWidth] = useState(0);
-  const [searchValue, setSearchValue] = useState(""); // barre de recherche
-  const [searchSuggestions, setSearchSuggestions] = useState([]);
-
-  // Affichage des offres et caroussel
-  const handleOpenModalOffer = (offerId) => {
-    const findOffer = offersList.find((offer) => offer.id === offerId);
-    setSelectedOffer(findOffer);
-    setModalOfferIsOpen(true);
-  };
-
-  const rotateCarousel = () => {
-    const cardWidth = carouselWidth / 4;
-    const visibleCards = Math.floor(carouselWidth / cardWidth);
-    const totalCards = offersList.length;
-    const newIndex = (activeIndex + visibleCards) % totalCards; // Utiliser visibleCards ici
-
-    setActiveIndex(newIndex);
-    carouselRef.current.style.transform = `translateX(-${
-      newIndex * cardWidth
-    }px)`;
-  };
-
-  useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/offers`)
-      .then((results) => setOffersList(results.data));
-  }, []);
-
-  useEffect(() => {
-    const carouselInterval = setInterval(() => {
-      rotateCarousel();
-    }, 5000);
-
-    return () => {
-      clearInterval(carouselInterval);
-    };
-  }, [offersList]);
-
-  useEffect(() => {
-    if (carouselRef.current) {
-      setCarouselWidth(carouselRef.current.offsetWidth);
-    }
-  }, [carouselRef]);
-
-  // traitement de chevrons gauche/droite
-  const moveCarousel = (index) => {
-    const cardWidth = carouselWidth / 4;
-    carouselRef.current.style.transform = `translateX(-${index * cardWidth}px)`;
-  };
-
-  const handlePrev = () => {
-    const newIndex = (activeIndex - 1 + offersList.length) % offersList.length;
-    setActiveIndex(newIndex);
-    moveCarousel(newIndex);
-  };
-
-  const handleNext = () => {
-    const newIndex = (activeIndex + 1) % offersList.length;
-    setActiveIndex(newIndex);
-    moveCarousel(newIndex);
-  };
-  // Traitement de la barre de recherche
-
-  const handleSearchInputChange = (event) => {
-    const { value } = event.target;
-    setSearchValue(value);
-  };
-
-  useEffect(() => {
-    const fetchSearchResults = async () => {
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/offers`
-        );
-        const filteredResults = response.data.filter((offer) =>
-          offer.title.toLowerCase().includes(searchValue.toLowerCase())
-        );
-        setSearchSuggestions(filteredResults);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchSearchResults();
-  }, [searchValue]);
-
+  console.error(setSelectedOffer);
   return (
-    <div>
-      <OfferModal
-        modalOfferIsOpen={modalOfferIsOpen}
-        setModalOfferIsOpen={setModalOfferIsOpen}
-        offer={selectedOffer}
-      />
-      <div className="container_Home">
-        <div className="imageContainer">
-          <img
-            src="../src/assets/images/header_image.svg"
-            alt="page d'accueil de l'entreprise"
-          />
-        </div>
-        <div className="searchContainer">
-          <div className="containerTextInput searchBar">
-            <input
-              type="text"
-              placeholder="Web développeur, data analyst ..."
-              className="textInput searchBar"
-              value={searchValue}
-              onChange={handleSearchInputChange}
-            />
-            <img className="iconForm searchBar" src={searchBlack} alt="loupe" />
-          </div>
-          {searchValue && searchSuggestions.length > 0 && (
-            <div className="searchSuggestionsContainer">
-              <ul className="searchSuggestions">
-                {searchSuggestions.map((suggestion) => (
-                  <li key={suggestion.id}>{suggestion.title}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
+    <>
+      <div className="containerHome">
+        <OfferModal
+          modalOfferIsOpen={modalOfferIsOpen}
+          setModalOfferIsOpen={setModalOfferIsOpen}
+          offer={selectedOffer}
+        />
+        <img
+          className="imageContainer"
+          src={imageHeader}
+          alt="illustration recruteur candidat"
+        />
       </div>
-      <div className="carouselContainer">
-        <button
-          className="button carouselButton prevButton"
-          type="button"
-          onClick={handlePrev}
-        >
-          &lt;
-        </button>
-        <div className="carouselContent" ref={carouselRef}>
-          {offersList.length ? (
-            (offersList.filter((val) => {
-              return val.title
-                .toLowerCase()
-                .includes(searchValue.toLowerCase());
-            }),
-            offersList.map((offer, index) => (
-              <div
-                className={`carouselItem ${
-                  index === activeIndex ? "active" : ""
-                }`}
-                key={offer.id}
-              >
-                <OfferCardLarge
-                  offer={offer}
-                  modalOfferIsOpen={modalOfferIsOpen}
-                  setModalOfferIsOpen={setModalOfferIsOpen}
-                  onCardClick={handleOpenModalOffer}
-                />
-              </div>
-            )))
-          ) : (
-            <div className="globalContainer">
-              <img className="iconForm_1" src={searchBlack} alt="person" />
-              <h3 className="errorTitle">Pas de résultat</h3>
-            </div>
-          )}
-        </div>
-        <button
-          className="button carouselButton nextButton"
-          type="button"
-          onClick={handleNext}
-        >
-          &gt;
-        </button>
-      </div>
+      <InputSearch />
       <div className="descriptionHome">
         <div className="itemtext">
           <h2>La réussite de notre cabinet de recrutement informatique ?</h2>
@@ -225,7 +69,7 @@ function Home() {
           notre politique RSE.
         </p>
       </div>
-    </div>
+    </>
   );
 }
 
