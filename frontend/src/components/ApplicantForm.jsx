@@ -14,7 +14,6 @@ import mailBlack from "../assets/icons/mail_black.svg";
 import lockBlack from "../assets/icons/lock_black.svg";
 
 function ApplicantForm() {
-  // id, title_name, firstname, lastname, email, password, message, city, phone
   const { userToken, setUserCookie } = useContext(TokenContext);
   const [titleName, setTitleName] = useState("");
   const [firstname, setFirstname] = useState("");
@@ -229,7 +228,6 @@ function ApplicantForm() {
   }, []);
 
   return (
-    // id, title_name, firstname, lastname, email, password, message, city, phone
 
     <div className="formContainer">
       <form onSubmit={handleSubmit} className="form">
