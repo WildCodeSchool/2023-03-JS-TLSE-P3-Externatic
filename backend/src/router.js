@@ -17,7 +17,6 @@ const {
 
 const {
   getUserByEmail,
-  getUser,
   validateNewPassword,
 } = require("./controllers/UserController");
 const {
@@ -92,8 +91,6 @@ router.post(
 
 // ------------User connection------------
 router.post("/login", getUserByEmail, verifyPassword, login);
-
-router.get("/users", verifyToken, getUser);
 
 // ------------Offers------------
 router.get("/offers", getAllOffers);
