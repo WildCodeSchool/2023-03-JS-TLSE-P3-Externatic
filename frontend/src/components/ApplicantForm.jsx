@@ -201,8 +201,6 @@ function ApplicantForm() {
   }, []);
 
   return (
-    // id, title_name, firstname, lastname, email, password, message, city, phone
-
     <div className="formContainer">
       <form onSubmit={handleSubmit} className="form">
         <h2>Modifier mon profil</h2>
@@ -338,7 +336,6 @@ function ApplicantForm() {
             required
           />
         </div>
-
         <button type="submit" className="button">
           Modifier mon mot de passe
         </button>
