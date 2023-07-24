@@ -1,10 +1,11 @@
 // Import des packages
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 function InputSearch() {
-  const [searchSuggestions, setSearchSuggestions] = useState([]);
   const [searchValue, setSearchValue] = useState("");
+  const [searchSuggestions, setSearchSuggestions] = useState([]);
   // const [hasResults, setHasResults] = useState(false);
   const handleSearchInputChange = (event) => {
     const { value } = event.target;
@@ -20,7 +21,6 @@ function InputSearch() {
         const filteredResults = response.data.filter((offer) =>
           offer.title.toLowerCase().includes(searchValue.toLowerCase())
         );
-        // console.log(filteredResults);
         setSearchSuggestions(filteredResults);
       } catch (error) {
         console.error(error);
@@ -29,6 +29,7 @@ function InputSearch() {
 
     fetchSearchResults();
   }, [searchValue]);
+
   return (
     <div className="inputContainer">
       <span className="inputMessage">Quel poste recherchez vous ?</span>
@@ -42,10 +43,17 @@ function InputSearch() {
         />
       </div>
       <div className="resultsSearch show">
+        {searchSuggestions.length === 0 && (
+          <p className="notFoundMessage">
+            Aucun résultat trouvé pour votre recherche
+          </p>
+        )}
         {searchValue && searchSuggestions.length > 0 && (
           <ul className="searchSuggestions">
             {searchSuggestions.map((suggestion) => (
-              <li key={suggestion.id}>{suggestion.title}</li>
+              <Link to={`/offers/${suggestion.id}`} key={suggestion.id}>
+                {suggestion.title}
+              </Link>
             ))}
           </ul>
         )}
