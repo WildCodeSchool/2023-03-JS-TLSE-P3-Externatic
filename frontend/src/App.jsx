@@ -31,6 +31,7 @@ import { MenuContextProvider } from "./contexts/MenuContext";
 import { TokenContextProvider } from "./contexts/TokenContext";
 import { FiltersContextProvider } from "./contexts/FiltersContext";
 import { ModificationProfileContextProvider } from "./contexts/ModificationProfileContext";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -48,6 +49,8 @@ function App() {
                   <Route path="offers" element={<Offers />} />
                   <Route path="dashboard/*" element={<Dashboard />} />
                 </Routes>
+
+                <Footer />
               </Router>
             </ModificationProfileContextProvider>
           </TokenContextProvider>
