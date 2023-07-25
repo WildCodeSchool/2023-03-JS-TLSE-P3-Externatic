@@ -89,7 +89,7 @@ function AdminForm() {
           Swal.fire({
             icon: "success",
             text: "Le mot de passe a bien été modifié",
-            iconColor: "#ca2061",
+            iconColor: "green",
             width: 300,
             buttonsStyling: false,
             customClass: {
