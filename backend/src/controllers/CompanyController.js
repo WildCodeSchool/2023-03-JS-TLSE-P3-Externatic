@@ -146,7 +146,7 @@ const validateCompanyInfosForSubscription = (req, res, next) => {
   const emailPattern =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,3}$/;
   const siretPattern = /^\d{1,14}$/;
-  // const namePattern = /^[a-zA-Z]/;
+
   // 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial, longueur 8
   const passwordPattern =
     /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
