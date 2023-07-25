@@ -5,7 +5,7 @@ function Error401Unauthorized({ message }) {
   return (
     <div className="containerError">
       <h2>{message}</h2>
-      <img className="imageError" src={error401} alt="No data" />
+      <img className="imageError" src={error401} alt="Unauthorized" />
     </div>
   );
 }

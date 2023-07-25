@@ -7,6 +7,7 @@ import OfferCardCarousel from "../components/OfferCardCarousel";
 import Error404 from "../components/Error404";
 import Error401Unauthorized from "../components/Error401Unauthorized";
 import ErrorNoData from "../components/ErrorNoData";
+import IsLoading from "../components/IsLoading";
 
 // Import du context
 import TokenContext from "../contexts/TokenContext";
@@ -130,6 +131,7 @@ function Home() {
       <Error404 message={messages.notFound} />
       <Error401Unauthorized message={messages.unauthorized} />
       <ErrorNoData message={messages.result} />
+      <IsLoading />
     </>
   );
 }

@@ -5,7 +5,7 @@ function Error404({ message }) {
   return (
     <div className="containerError">
       <h2>{message}</h2>
-      <img className="imageError" src={error404} alt="No data" />
+      <img className="imageError" src={error404} alt="Not found" />
     </div>
   );
 }
