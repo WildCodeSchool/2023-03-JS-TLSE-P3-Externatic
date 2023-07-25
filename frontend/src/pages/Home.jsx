@@ -76,8 +76,9 @@ function Home() {
         </h1>
       ) : (
         <h1 className="userNotConnected">
-          Bienvenue sur Externatic <br />
-          Votre cabinet de recrutement informatique{" "}
+          Externatic,
+          <br />
+          plus qu'un cabinet de recrutement spécialisé dans le domaine de l'IT
         </h1>
       )}
       <div className="offersListCardLargeContainer">

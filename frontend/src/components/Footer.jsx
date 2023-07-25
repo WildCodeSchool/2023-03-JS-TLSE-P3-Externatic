@@ -7,8 +7,8 @@ import instagramWhite from "../assets/icons/instagram_white.svg";
 function Footer() {
   return (
     <footer className="footer">
-      <div className="left-column">
-        <p className="contact-info">
+      <div className="leftColumn">
+        <p className="contactInfo">
           <strong>Contact</strong>
           <br />
           Tel. +33(0)2 8552 26 33
@@ -20,7 +20,7 @@ function Footer() {
       </div>
       <div className="groupReseaux">
         <h3>Réseaux sociaux</h3>
-        <div className="middle-column">
+        <div className="middleColumn">
           <a
             href="https://www.linkedin.com/company/externatic/"
             target="_blank"
@@ -48,7 +48,7 @@ function Footer() {
           </a>
         </div>
       </div>
-      <div className="right-column">
+      <div className="rightColumn">
         <p className="copyright">
           Externatic &copy; 2023 - Tous droits réservés.
         </p>

@@ -4,7 +4,7 @@
 }
 
 .userNotConnected {
-  line-height: 3rem;
+  padding: 0 0.5rem;
 }
 
 /* style de la description Externatic */
@@ -28,6 +28,8 @@
 }
 .textDescription {
   text-align: center;
+  line-height: 1.4rem;
+  font-size: large;
 }
 .textAndIcon {
   display: flex;
@@ -52,7 +54,11 @@
   }
 
   .userNotConnected {
-    line-height: 3.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 3rem;
+
   }
   /* style de la description Externatic */
   .descriptionHomePage {

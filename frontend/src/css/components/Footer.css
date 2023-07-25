@@ -1,26 +1,29 @@
 .footer {
   margin-top: 3rem;
+  padding: 0.5rem 0;
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 0.4rem 0.8rem;
   background-color: #404040;
   color: white;
-  z-index: 10;
   width: 100%;
   gap: 1rem;
+  height: fit-content;
 }
 .footer p {
-  font-size: 0.8rem;
+  font-size: 1rem;
+  padding: 0.5rem;
+  line-height: 1.4rem;
 }
 .footer strong {
-  font-weight: 800;
+  font-weight: bold;
+  font-size: 1.2rem;
 }
-.right-column {
+
+.rightColumn {
   text-align: center;
 }
-.left-column {
+.leftColumn {
   flex-direction: column;
   text-align: center;
 }
@@ -28,9 +31,11 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  gap: 0.9rem;
 }
 .groupReseaux h3 {
-  font-size: 0.8rem;
+  font-size: 1.2rem;
   text-align: center;
 }
 .icon.footerItem img {
@@ -39,22 +44,34 @@
 .footer.hidden {
   display: none;
 }
-.middle-column {
+.middleColumn {
   display: flex;
   gap: 1rem;
 }
 
-@media (min-width: 768px) {
+@media screen and (min-width: 768px) {
   .footer {
     flex-direction: row;
-    padding: 0.5rem 1rem;
+    justify-content: space-between;
+
+    padding: 0.5rem 2rem;
     width: 100%;
   }
-  .left-column {
+  .leftColumn {
     text-align: left;
   }
+
+  .footer strong {
+    font-size: 1.4rem;
+  }
+
   .groupReseaux h3 {
-    font-size: 0.8rem;
-    text-align: left;
+    font-size: 1.4rem;
+    text-align: center;
+    padding: 1rem 0;
+  }
+
+  .middleColumn {
+    justify-content: space-between;
   }
 }
