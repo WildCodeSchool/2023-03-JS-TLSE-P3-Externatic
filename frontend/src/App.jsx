@@ -1,18 +1,5 @@
-// Import du style
+// Reset CSS
 import "./reset.css";
-import "./App.css";
-import "./css/pages/Offers.css";
-import "./css/pages/Connexion.css";
-import "./css/pages/MyProfile.css";
-import "./css/components/OfferModal.css";
-import "./css/pages/UsersManagement.css";
-import "./css/components/FormNewUser.css";
-import "./css/pages/Subscribe.css";
-import "./css/pages/FieldsManagement.css";
-import "./css/pages/MyPublishedOffers.css";
-import "./css/components/MainNavBar.css";
-import "./css/components/OfferCardCarousel.css";
-import "./css/pages/Home.css";
 
 // Import des packages
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -26,6 +13,21 @@ import Dashboard from "./pages/Dashboard";
 
 // Import des composants
 import MainNavBar from "./components/MainNavBar";
+
+// Import du style
+import "./App.css";
+import "./css/pages/Offers.css";
+import "./css/pages/Connexion.css";
+import "./css/pages/MyProfile.css";
+import "./css/components/OfferModal.css";
+import "./css/pages/UsersManagement.css";
+import "./css/components/FormNewUser.css";
+import "./css/pages/Subscribe.css";
+import "./css/pages/FieldsManagement.css";
+import "./css/pages/MyPublishedOffers.css";
+import "./css/components/MainNavBar.css";
+import "./css/components/OfferCardCarousel.css";
+import "./css/pages/Home.css";
 
 // Import des contexts
 import { MenuContextProvider } from "./contexts/MenuContext";
