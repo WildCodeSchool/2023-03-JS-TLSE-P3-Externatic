@@ -75,10 +75,22 @@ const deleteFavoritesToDeleteApplicant = (req, res, next) => {
     });
 };
 
+const deleteFavToDeleteOffer = (req, res, next) => {
+  const offerId = req.params.id;
+  models.applicant_offer_favorites
+    .deleteFavByOfferId(offerId)
+    .then(() => next())
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send({ error: "Une erreur est survenue." });
+    });
+};
+
 module.exports = {
   addFavorite,
   getAllFavorites,
   deleteFavorite,
   getFavorite,
   deleteFavoritesToDeleteApplicant,
+  deleteFavToDeleteOffer,
 };

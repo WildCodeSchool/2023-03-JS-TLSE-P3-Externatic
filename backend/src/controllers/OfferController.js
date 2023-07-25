@@ -119,6 +119,32 @@ const deleteOffersToDeleteCompany = (req, res, next) => {
     });
 };
 
+const setOfferCategoryToNull = (req, res, next) => {
+  const categoryId = req.params.id;
+  models.offer
+    .setOfferCategoryToNullByCategoryId(categoryId)
+    .then(() => {
+      next();
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send({ error: "Une erreur est survenue." });
+    });
+};
+
+const setOfferContractTypeToNull = (req, res, next) => {
+  const contractId = req.params.id;
+  models.offer
+    .setOfferContractTypeToNullByCategoryId(contractId)
+    .then(() => {
+      next();
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send({ error: "Une erreur est survenue." });
+    });
+};
+
 module.exports = {
   getAllOffers,
   getFilteredOffers,
@@ -126,4 +152,6 @@ module.exports = {
   getCompanyOffers,
   addOffer,
   deleteOffersToDeleteCompany,
+  setOfferCategoryToNull,
+  setOfferContractTypeToNull,
 };

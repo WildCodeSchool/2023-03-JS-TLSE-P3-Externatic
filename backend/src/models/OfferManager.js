@@ -93,6 +93,20 @@ class OfferManager extends AbstractManager {
       [companyId]
     );
   }
+
+  setOfferCategoryToNullByCategoryId(categoryId) {
+    return this.database.query(
+      `update ${this.table} set category_id_offer = null where category_id_offer = ?`,
+      [categoryId]
+    );
+  }
+
+  setOfferContractTypeToNullByCategoryId(contractId) {
+    return this.database.query(
+      `update ${this.table} set contract_type_id_offer = null where contract_type_id_offer = ?`,
+      [contractId]
+    );
+  }
 }
 
 module.exports = OfferManager;

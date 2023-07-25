@@ -110,7 +110,7 @@ function FieldsManagement() {
 
   const handleDeleteContract = (id) => {
     Swal.fire({
-      title: "Etes-vous sûr de vouloir supprimer ce type de?",
+      title: "Etes-vous sûr de vouloir supprimer ce type de contrat?",
       text: "Cette suppression est irréversible !",
       icon: "warning",
       iconColor: "#ca2061",
@@ -129,6 +129,16 @@ function FieldsManagement() {
             },
           })
           .then(() => {
+            Swal.fire({
+              icon: "succeess",
+              text: "Suppression effectuée.",
+              iconColor: "#ca2061",
+              width: 300,
+              buttonsStyling: false,
+              customClass: {
+                confirmButton: "button",
+              },
+            });
             getContracts();
           })
           .catch((err) => {

@@ -56,6 +56,8 @@ const {
   addOffer,
   getFilteredOffers,
   deleteOffersToDeleteCompany,
+  setOfferCategoryToNull,
+  setOfferContractTypeToNull,
 } = require("./controllers/OfferController");
 const {
   getAllCategories,
@@ -73,6 +75,7 @@ const {
   getFavorite,
   deleteFavorite,
   deleteFavoritesToDeleteApplicant,
+  deleteFavToDeleteOffer,
 } = require("./controllers/FavoriteController");
 
 router.use(express.json());
@@ -207,12 +210,27 @@ router.post(
 );
 
 // ------------Fields management------------
-router.delete("/categories/:id", verifyAdmin, deleteCategory);
+router.delete(
+  "/categories/:id",
+  verifyAdmin,
+  setOfferCategoryToNull,
+  deleteCategory
+);
 router.post("/categories", verifyAdmin, addCategory);
-router.delete("/contracts-type/:id", verifyAdmin, deleteContract);
+router.delete(
+  "/contracts-type/:id",
+  verifyAdmin,
+  setOfferContractTypeToNull,
+  deleteContract
+);
 router.post("/contracts-type", verifyAdmin, addContract);
 
 // ------------Offers management------------
-router.delete("/offers/:id", verifyAdminOrCompany, deleteOfferById);
+router.delete(
+  "/offers/:id",
+  verifyAdminOrCompany,
+  deleteFavToDeleteOffer,
+  deleteOfferById
+);
 
 module.exports = router;

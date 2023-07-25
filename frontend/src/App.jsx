@@ -1,16 +1,3 @@
-// Import des packages
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-
-// Import des pages
-import Home from "./pages/Home";
-import Connexion from "./pages/Connexion";
-import Subscribe from "./pages/Subscribe";
-import Offers from "./pages/Offers";
-import Dashboard from "./pages/Dashboard";
-
-// Import des composants
-import MainNavBar from "./components/MainNavBar";
-
 // Import du style
 import "./reset.css";
 import "./App.css";
@@ -25,6 +12,19 @@ import "./css/pages/FieldsManagement.css";
 import "./css/pages/MyPublishedOffers.css";
 import "./css/components/MainNavBar.css";
 import "./css/pages/Home.css";
+
+// Import des packages
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
+// Import des pages
+import Home from "./pages/Home";
+import Connexion from "./pages/Connexion";
+import Subscribe from "./pages/Subscribe";
+import Offers from "./pages/Offers";
+import Dashboard from "./pages/Dashboard";
+
+// Import des composants
+import MainNavBar from "./components/MainNavBar";
 
 // Import des contexts
 import { MenuContextProvider } from "./contexts/MenuContext";
