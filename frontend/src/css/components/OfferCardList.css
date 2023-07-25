@@ -68,7 +68,7 @@
   width: 1.5rem;
   cursor: pointer;
 }
-@media sccreen and (min-width: 768px) {
+@media screen and (min-width: 768px) {
   .titleOfferCard {
     font-size: 1.5rem;
   }
