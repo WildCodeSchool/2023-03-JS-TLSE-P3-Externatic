@@ -25,6 +25,7 @@ import "./css/pages/FieldsManagement.css";
 import "./css/components/CustomStyleSwal.css";
 import "./css/pages/MyPublishedOffers.css";
 import "./css/components/MainNavBar.css";
+import "./css/components/OfferCardCarousel.css";
 
 // Import des contexts
 import { MenuContextProvider } from "./contexts/MenuContext";

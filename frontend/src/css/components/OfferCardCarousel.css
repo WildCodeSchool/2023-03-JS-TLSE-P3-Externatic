@@ -1,0 +1,52 @@
+.titleOfferCardLarge {
+  height: 3rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.titleOfferCardLarge > h3 {
+  width: 80%;
+}
+.offerCardLarge {
+  width: 95%;
+  max-width: 18.5rem;
+  margin-bottom: 2.4rem;
+}
+.offerTextAndIconCardLarge {
+  margin: auto;
+}
+.jobCardImage {
+  width: 60%;
+  margin: auto;
+}
+.carousel .control-next.control-arrow:before {
+  border-left: 8px solid var(--main-color);
+  background-color: transparent;
+}
+.carousel .control-prev.control-arrow:before {
+  border-right: 8px solid var(--main-color);
+  background-color: transparent;
+}
+.carousel .control-next.control-arrow,
+.carousel .control-prev.control-arrow {
+  height: 2rem;
+  width: 2rem;
+  margin: auto;
+}
+.carousel .control-next.control-arrow:focus,
+.carousel .control-prev.control-arrow:focus {
+  background-color: transparent;
+}
+.carousel .control-next.control-arrow:hover,
+.carousel .control-prev.control-arrow:hover {
+  background-color: transparent;
+}
+
+.carousel .carousel-status {
+  display: none;
+}
+.carousel-root {
+  max-width: 25rem;
+  margin: auto;
+}

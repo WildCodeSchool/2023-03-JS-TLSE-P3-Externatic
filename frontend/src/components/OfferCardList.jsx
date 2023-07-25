@@ -2,6 +2,7 @@
 import { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
+// Import context
 import TokenContext from "../contexts/TokenContext";
 // Import des composants
 import OfferModal from "./OfferModal";

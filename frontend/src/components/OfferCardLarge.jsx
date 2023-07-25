@@ -77,7 +77,8 @@ function OfferCardLarge({ offer, favoritesByApplicantId }) {
   return (
     <div className="offerCard offerCardLarge">
       <div className="offerCardColor">
-        <div className="heartCardLarge">
+        <div className="titleOfferCardLarge">
+          <h3>{title}</h3>
           {isFavorite && userRole === "applicant" ? (
             <button type="button" onClick={() => deleteFavorite()}>
               <img
@@ -97,20 +98,32 @@ function OfferCardLarge({ offer, favoritesByApplicantId }) {
             </button>
           ) : null}
         </div>
-        <img className="jobCardImage" src={jobCard} alt="job" />
-        <h3 className="titleOfferCard">{title}</h3>
+        <div className="jobCardImage">
+          <img src={jobCard} alt="job" />
+        </div>
+        {/* <div className="offerTextAndIconContainer"> */}
         <div className="offerTextAndIcon">
-          <img src={iconWhiteProfil} alt="icon profil" />
+          <div>
+            <img src={iconWhiteProfil} alt="icon profil" />
+          </div>
+
           <p>{company_name}</p>
         </div>
         <div className="offerTextAndIcon">
-          <img src={iconWhiteCity} alt="icon city" />
+          <div>
+            <img src={iconWhiteCity} alt="icon city" />
+          </div>
+
           <p>{city}</p>
         </div>
         <div className="offerTextAndIcon">
-          <img src={iconWhiteContract} alt="icon contract" />
+          <div>
+            <img src={iconWhiteContract} alt="icon contract" />
+          </div>
+
           <p>{contract_type_name}</p>
         </div>
+        {/* </div> */}
       </div>
       <button
         type="button"
