@@ -3,8 +3,7 @@ import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 
 // Import des components
-import OfferCardLarge from "../components/OfferCardLarge";
-import OfferModal from "../components/OfferModal";
+import OfferCardCarousel from "../components/OfferCardCarousel";
 
 // Import du context
 import TokenContext from "../contexts/TokenContext";
@@ -17,17 +16,9 @@ import imageHeader from "../assets/images/header_image.svg";
 
 function Home() {
   const [offersList, setOffersList] = useState([]);
-  const [modalOfferIsOpen, setModalOfferIsOpen] = useState(false);
-  const [selectedOffer, setSelectedOffer] = useState({});
   const [dataUser, setDataUser] = useState();
   const { userToken, userId, userRole } = useContext(TokenContext);
-  console.info(setSelectedOffer);
 
-  const handleOpenModalOffer = (offerId) => {
-    const findOffer = offersList.find((offer) => offer.id === offerId);
-    setSelectedOffer(findOffer);
-    setModalOfferIsOpen(true);
-  };
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/offers`)
@@ -57,11 +48,6 @@ function Home() {
 
   return (
     <>
-      <OfferModal
-        modalOfferIsOpen={modalOfferIsOpen}
-        setModalOfferIsOpen={setModalOfferIsOpen}
-        offer={selectedOffer}
-      />
       <div className="containerHome">
         <img
           className="imageContainer"
@@ -83,20 +69,8 @@ function Home() {
       )}
       <div className="offersListCardLargeContainer">
         {offersList.length ? (
-          offersList.map((offer) => (
-            <OfferCardLarge
-              key={offer.id}
-              offer={offer}
-              modalOfferIsOpen={modalOfferIsOpen}
-              setModalOfferIsOpen={setModalOfferIsOpen}
-              onCardClick={handleOpenModalOffer}
-            />
-          ))
-        ) : (
-          <div className="globalContainer">
-            <h3 className="errorTitle">Pas de résultat</h3>
-          </div>
-        )}
+          <OfferCardCarousel offersList={offersList} />
+        ) : null}
       </div>
       <section className="descriptionHomePage">
         <h1 className="titleDescription">
