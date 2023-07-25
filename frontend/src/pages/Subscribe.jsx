@@ -1,5 +1,5 @@
 // Import packages
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 // Import components
 import LinkLogInSubscribe from "../components/LinkLogInSubscribe";
@@ -15,23 +15,6 @@ function Subscribe() {
   const [isApplicantCardFocused, setIsApplicantCardFocused] = useState(false);
   const [isCompanyCardFocused, setIsCompanyCardFocused] = useState(false);
 
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (
-        !e.target.closest(".applicantCard") &&
-        !e.target.closest(".companyCard") &&
-        !e.target.closest(".formContainer")
-      ) {
-        setShowForm(false);
-        setIsApplicantCardFocused(false);
-        setIsCompanyCardFocused(false);
-      }
-    };
-    document.addEventListener("click", handleClickOutside);
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
   const handleApplicantCardClick = () => {
     setShowForm(true);
     setIsApplicantCardFocused(true);

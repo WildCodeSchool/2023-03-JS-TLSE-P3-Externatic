@@ -1,5 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 // Import context
 import FiltersContext from "../contexts/FiltersContext";
@@ -49,13 +50,39 @@ function Offers() {
         categories: categoriesList,
         contract: contractList,
       })
-      .then((results) => setOffersList(results.data));
+      .then((results) => setOffersList(results.data))
+      .catch((err) => {
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.error,
+          iconColor: "#ca2061",
+          width: 300,
+          buttonsStyling: false,
+          customClass: {
+            confirmButton: "button",
+          },
+        });
+      });
   };
 
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/offers`)
-      .then((results) => setOffersList(results.data));
+      .then((results) => setOffersList(results.data))
+      .catch((err) => {
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.error,
+          iconColor: "#ca2061",
+          width: 300,
+          buttonsStyling: false,
+          customClass: {
+            confirmButton: "button",
+          },
+        });
+      });
 
     getCategories();
     getContracts();

@@ -59,14 +59,6 @@ function SecondaryNavBar() {
             Mes offres publiées
           </NavLink>
           <NavLink
-            to="./my-received-applications"
-            className={({ isActive }) => {
-              return isActive ? "linkSelected" : "";
-            }}
-          >
-            Candidatures reçues
-          </NavLink>
-          <NavLink
             to="./my-profile"
             className={({ isActive }) => {
               return isActive ? "linkSelected" : "";
@@ -79,28 +71,12 @@ function SecondaryNavBar() {
       {userRole === "applicant" ? (
         <div className="applicantSecNav">
           <NavLink
-            to="./my-applications"
-            className={({ isActive }) => {
-              return isActive ? "linkSelected" : "";
-            }}
-          >
-            Mes candidatures
-          </NavLink>
-          <NavLink
             to="./my-favorite-offers"
             className={({ isActive }) => {
               return isActive ? "linkSelected" : "";
             }}
           >
             Mes offres favorites
-          </NavLink>
-          <NavLink
-            to="./my-searches"
-            className={({ isActive }) => {
-              return isActive ? "linkSelected" : "";
-            }}
-          >
-            Mes recherches
           </NavLink>
           <NavLink
             to="./my-profile"

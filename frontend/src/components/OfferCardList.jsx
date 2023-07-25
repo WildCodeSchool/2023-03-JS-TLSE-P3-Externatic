@@ -2,12 +2,17 @@
 import { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
-// Import context
+import Swal from "sweetalert2";
+
+// Import des context
 import TokenContext from "../contexts/TokenContext";
+
 // Import des composants
 import OfferModal from "./OfferModal";
+
 // Import style
 import "../css/components/OfferCardList.css";
+
 // Import icones
 import iconWhiteHeartEmpty from "../assets/icons/white_heart_empty.svg";
 import iconWhiteHeartFill from "../assets/icons/white_heart_fill.svg";
@@ -54,6 +59,19 @@ function OfferCardList({ offer, favoritesByApplicantId }) {
       )
       .then(() => {
         verifyIsFavorite();
+      })
+      .catch((err) => {
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.error,
+          iconColor: "#ca2061",
+          width: 300,
+          buttonsStyling: false,
+          customClass: {
+            confirmButton: "button",
+          },
+        });
       });
   };
 
@@ -67,6 +85,19 @@ function OfferCardList({ offer, favoritesByApplicantId }) {
       .then(() => {
         verifyIsFavorite();
         favoritesByApplicantId();
+      })
+      .catch((err) => {
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.error,
+          iconColor: "#ca2061",
+          width: 300,
+          buttonsStyling: false,
+          customClass: {
+            confirmButton: "button",
+          },
+        });
       });
   };
   useEffect(() => {
