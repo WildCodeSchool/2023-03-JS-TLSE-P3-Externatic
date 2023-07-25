@@ -1,6 +1,9 @@
 /* eslint-disable camelcase */
+import { useContext } from "react";
 import PropTypes from "prop-types";
 import Modal from "react-modal";
+// Import context
+import TokenContext from "../contexts/TokenContext";
 
 // import des icones
 import cross from "../assets/icons/cross.svg";
@@ -29,6 +32,7 @@ function OfferModal({
     contract_type_name,
     company_name,
   } = offer;
+  const { userRole } = useContext(TokenContext);
   return (
     <Modal
       closeTimeoutMS={200}
@@ -62,7 +66,7 @@ function OfferModal({
         <>
           <div className="offerTitleAndIcon">
             <h3 className="titleOfferCard">{title}</h3>
-            {isFavorite ? (
+            {isFavorite && userRole === "applicant" ? (
               <button type="button" onClick={() => deleteFavorite()}>
                 <img
                   src={iconBlackHeartFill}
@@ -70,7 +74,8 @@ function OfferModal({
                   className="heart"
                 />
               </button>
-            ) : (
+            ) : null}
+            {!isFavorite && userRole === "applicant" ? (
               <button type="button" onClick={() => addFavorite()}>
                 <img
                   src={iconBlackHeartEmpty}
@@ -78,7 +83,7 @@ function OfferModal({
                   className="heart"
                 />
               </button>
-            )}
+            ) : null}
           </div>
           <div className="offerTextAndIcon">
             <img src={iconBlackProfil} alt="icon profil" />

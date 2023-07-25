@@ -31,7 +31,9 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: start;
 }
+
 .offerTitleAndIcon {
   justify-content: space-between;
 }
@@ -61,31 +63,12 @@
 .offerCardList {
   width: 95%;
 }
-/* Style card large */
-.offerCardLarge {
-  width: 70%;
-  max-width: 300px;
-}
-.offerTextAndIconCardLarge {
-  margin: auto;
-}
-.heartCardLarge {
-  display: flex;
-  justify-content: end;
-}
-.offerCardLarge > .offerCardColor {
-  gap: 1.2rem;
-}
-.jobCardImage {
-  width: 50%;
-  margin: auto;
-}
 
 .trash {
   width: 1.5rem;
   cursor: pointer;
 }
-@media screen and (min-width: 768px) {
+@media sccreen and (min-width: 768px) {
   .titleOfferCard {
     font-size: 1.5rem;
   }
