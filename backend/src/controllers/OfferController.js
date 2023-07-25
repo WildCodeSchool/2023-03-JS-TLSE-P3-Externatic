@@ -102,10 +102,28 @@ const addOffer = (req, res) => {
     });
 };
 
+// ------------Delete offers before delete Company------------
+const deleteOffersToDeleteCompany = (req, res, next) => {
+  let companyId;
+  if (req.params.id) {
+    companyId = req.params.id;
+  } else {
+    companyId = req.payload.sub;
+  }
+  models.offer
+    .deleteOfferByCompanyid(companyId)
+    .then(() => next())
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 module.exports = {
   getAllOffers,
   getFilteredOffers,
   deleteOfferById,
   getCompanyOffers,
   addOffer,
+  deleteOffersToDeleteCompany,
 };

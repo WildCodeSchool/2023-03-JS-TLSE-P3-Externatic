@@ -10,7 +10,8 @@ import LinkLogInSubscribe from "../components/LinkLogInSubscribe";
 import TokenContext from "../contexts/TokenContext";
 
 function Connexion() {
-  const { setUserCookie } = useContext(TokenContext);
+  const { setUserCookie, setUserId } = useContext(TokenContext);
+
   const [formDataLogIn, setFormDataLogIn] = useState({
     email: "",
     password: "",
@@ -29,7 +30,8 @@ function Connexion() {
       .then((response) => {
         if (response.data.token) {
           setUserCookie(response.data.token, response.data.user.role);
-          navigate("/dashboard/my-profile");
+          setUserId(response.data.user.id);
+          navigate("/");
         }
       })
       .catch((err) => {

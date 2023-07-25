@@ -226,6 +226,7 @@ function FormNewCompany() {
           type="password"
           placeholder="Mot de passe"
           required
+          minLength={4}
           name="password"
           onChange={handleInputCompany}
         />

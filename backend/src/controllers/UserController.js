@@ -36,6 +36,38 @@ const getUserByEmail = (req, res, next) => {
     });
 };
 
+const validateNewPassword = (req, res, next) => {
+  const { newPassword, confirmNewPassword } = req.body;
+  if (newPassword === confirmNewPassword) {
+    next();
+  } else {
+    res.sendStatus(400);
+  }
+};
+
+// ------------Trouver un utilisateur par son id ------------
+const getUserById = (req, res) => {
+  const { id } = req.params;
+  const { role } = req.query;
+
+  if (role === "admin") {
+    models.admin.find(id).then(([admins]) => {
+      res.send(admins).status(200);
+    });
+  } else if (role === "applicant") {
+    models.applicant.find(id).then(([applicants]) => {
+      res.send(applicants).status(200);
+    });
+  } else if (role === "company") {
+    models.company.find(id).then(([companies]) => {
+      res.send(companies).status(200);
+    });
+  } else {
+    res.sendStatus(401);
+  }
+};
 module.exports = {
   getUserByEmail,
+  validateNewPassword,
+  getUserById,
 };
