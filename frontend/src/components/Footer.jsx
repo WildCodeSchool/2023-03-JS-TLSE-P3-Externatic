@@ -15,7 +15,7 @@ function Footer() {
           <br />
           Mail: contact@externatic.fr
           <br />
-          Adresse: 1 rue racine - 44000 NANTES - France
+          Adresse: 1 rue racine - 44000 NANTES
         </p>
       </div>
       <div className="groupReseaux">

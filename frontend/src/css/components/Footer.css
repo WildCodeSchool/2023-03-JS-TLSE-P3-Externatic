@@ -1,5 +1,5 @@
 .footer {
-  margin-top: 3rem;
+  margin-top: 10rem;
   padding: 0.5rem 0;
   display: flex;
   align-items: center;
@@ -25,7 +25,7 @@
 }
 .leftColumn {
   flex-direction: column;
-  text-align: center;
+  text-align: left;
 }
 .groupReseaux {
   display: flex;
@@ -53,12 +53,8 @@
   .footer {
     flex-direction: row;
     justify-content: space-between;
-
     padding: 0.5rem 2rem;
     width: 100%;
-  }
-  .leftColumn {
-    text-align: left;
   }
 
   .footer strong {
@@ -73,5 +69,6 @@
 
   .middleColumn {
     justify-content: space-between;
+    padding-bottom: 1.5rem;
   }
 }
