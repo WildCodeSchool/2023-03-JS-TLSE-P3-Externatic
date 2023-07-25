@@ -58,6 +58,7 @@
   box-shadow: var(--shadow_hover);
   transform: scale(1.05);
   transition: all 200ms ease;
+  cursor: pointer;
 }
 /* Style card list */
 .offerCardList {
@@ -68,7 +69,7 @@
   width: 1.5rem;
   cursor: pointer;
 }
-@media sccreen and (min-width: 768px) {
+@media screen and (min-width: 768px) {
   .titleOfferCard {
     font-size: 1.5rem;
   }

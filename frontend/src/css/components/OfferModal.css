@@ -29,6 +29,9 @@ h3 {
   border-bottom: 1px solid var(--light-grey);
   background-color: white;
 }
+.buttonClose:hover {
+  cursor: pointer;
+}
 .buttonModal {
   display: flex;
   justify-content: end;

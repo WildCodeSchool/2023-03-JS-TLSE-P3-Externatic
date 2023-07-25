@@ -1,9 +1,12 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
+// Import des composants
+import Error401Unauthorized from "../../components/Error401Unauthorized";
 
 // Import context
 import TokenContext from "../../contexts/TokenContext";
 import FiltersContext from "../../contexts/FiltersContext";
+import MessagesErrorContext from "../../contexts/MessagesErrorContext";
 
 // Import images
 import trash from "../../assets/icons/black_trash.svg";
@@ -21,6 +24,7 @@ function FieldsManagement() {
   const { userToken, userRole } = useContext(TokenContext);
   const { categoriesList, contractList, getCategories, getContracts } =
     useContext(FiltersContext);
+  const { messages } = useContext(MessagesErrorContext);
 
   const handleDeleteCategory = (id) => {
     axios
@@ -277,11 +281,7 @@ function FieldsManagement() {
           </div>
         </div>
       ) : (
-        <div className="globalContainer">
-          <h3 className="errorTitle">
-            ⛔ Vous devez être connecté avec un compte administrateur
-          </h3>
-        </div>
+        <Error401Unauthorized message={messages.unauthorized} />
       )}
     </div>
   );

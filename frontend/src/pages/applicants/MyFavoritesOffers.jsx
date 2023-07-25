@@ -3,13 +3,17 @@ import axios from "axios";
 
 // Import context
 import TokenContext from "../../contexts/TokenContext";
+import MessagesErrorContext from "../../contexts/MessagesErrorContext";
 
 // Import des composants
 import OfferCardList from "../../components/OfferCardList";
 import OfferModal from "../../components/OfferModal";
+import ErrorNoData from "../../components/ErrorNoData";
 
 function MyFavoritesOffers() {
   const { userToken } = useContext(TokenContext);
+  const { messages } = useContext(MessagesErrorContext);
+
   // gestion de la modale
   const [modalOfferIsOpen, setModalOfferIsOpen] = useState(false);
   const [selectedOffer, setSelectedOffer] = useState([]);
@@ -66,9 +70,7 @@ function MyFavoritesOffers() {
           />
         ))
       ) : (
-        <div className="globalContainer">
-          <h3 className="errorTitle">Vous n'avez aucune offre en favoris</h3>
-        </div>
+        <ErrorNoData message={messages.favorites} />
       )}
     </div>
   );

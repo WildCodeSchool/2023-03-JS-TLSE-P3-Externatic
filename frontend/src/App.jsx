@@ -10,7 +10,6 @@ import Dashboard from "./pages/Dashboard";
 
 // Import des composants
 import MainNavBar from "./components/MainNavBar";
-
 // Import du style
 import "./reset.css";
 import "./App.css";
@@ -26,34 +25,38 @@ import "./css/pages/MyPublishedOffers.css";
 import "./css/components/MainNavBar.css";
 import "./css/components/OfferCardCarousel.css";
 import "./css/pages/Home.css";
+import "./css/components/Error.css";
 
 // Import des contexts
 import { MenuContextProvider } from "./contexts/MenuContext";
 import { TokenContextProvider } from "./contexts/TokenContext";
 import { FiltersContextProvider } from "./contexts/FiltersContext";
 import { ModificationProfileContextProvider } from "./contexts/ModificationProfileContext";
+import { MessagesErrorContextProvider } from "./contexts/MessagesErrorContext";
 
 function App() {
   return (
     <div className="App">
-      <FiltersContextProvider>
-        <MenuContextProvider>
-          <TokenContextProvider>
-            <ModificationProfileContextProvider>
-              <Router>
-                <MainNavBar />
-                <Routes>
-                  <Route path="" element={<Home />} />
-                  <Route path="connexion" element={<Connexion />} />
-                  <Route path="subscribe" element={<Subscribe />} />
-                  <Route path="offers" element={<Offers />} />
-                  <Route path="dashboard/*" element={<Dashboard />} />
-                </Routes>
-              </Router>
-            </ModificationProfileContextProvider>
-          </TokenContextProvider>
-        </MenuContextProvider>
-      </FiltersContextProvider>
+      <MessagesErrorContextProvider>
+        <FiltersContextProvider>
+          <MenuContextProvider>
+            <TokenContextProvider>
+              <ModificationProfileContextProvider>
+                <Router>
+                  <MainNavBar />
+                  <Routes>
+                    <Route path="" element={<Home />} />
+                    <Route path="connexion" element={<Connexion />} />
+                    <Route path="subscribe" element={<Subscribe />} />
+                    <Route path="offers" element={<Offers />} />
+                    <Route path="dashboard/*" element={<Dashboard />} />
+                  </Routes>
+                </Router>
+              </ModificationProfileContextProvider>
+            </TokenContextProvider>
+          </MenuContextProvider>
+        </FiltersContextProvider>
+      </MessagesErrorContextProvider>
     </div>
   );
 }

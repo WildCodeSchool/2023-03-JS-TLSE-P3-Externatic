@@ -101,7 +101,6 @@ function OfferCardLarge({ offer, favoritesByApplicantId }) {
         <div className="jobCardImage">
           <img src={jobCard} alt="job" />
         </div>
-        {/* <div className="offerTextAndIconContainer"> */}
         <div className="offerTextAndIcon">
           <div>
             <img src={iconWhiteProfil} alt="icon profil" />
@@ -123,7 +122,6 @@ function OfferCardLarge({ offer, favoritesByApplicantId }) {
 
           <p>{contract_type_name}</p>
         </div>
-        {/* </div> */}
       </div>
       <button
         type="button"

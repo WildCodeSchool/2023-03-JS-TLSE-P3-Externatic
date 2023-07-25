@@ -3,9 +3,11 @@ import axios from "axios";
 
 // Import context
 import FiltersContext from "../contexts/FiltersContext";
+import MessagesErrorContext from "../contexts/MessagesErrorContext";
 
 // import des composants
 import OfferCardList from "../components/OfferCardList";
+import ErrorNoData from "../components/ErrorNoData";
 
 function Offers() {
   const [offersList, setOffersList] = useState([]);
@@ -15,6 +17,7 @@ function Offers() {
   const [isContractOpen, setIsContractOpen] = useState(false);
   const { categoriesList, contractList, getCategories, getContracts } =
     useContext(FiltersContext);
+  const { messages } = useContext(MessagesErrorContext);
 
   const handleCheck = (el, list) => {
     if (list === "category") {
@@ -163,9 +166,7 @@ function Offers() {
         {offersList.length ? (
           offersList.map((el) => <OfferCardList key={el.id} offer={el} />)
         ) : (
-          <div className="globalContainer">
-            <h3 className="errorTitle">Pas de résultat</h3>
-          </div>
+          <ErrorNoData message={messages.result} />
         )}
       </div>
     </div>
