@@ -63,7 +63,6 @@ html {
 body {
   width: 100vw;
   background-color: var(--background-grey);
-  padding-bottom: 3rem;
 }
 
 a {
@@ -85,6 +84,10 @@ a {
   width: 95%;
   max-width: 60rem;
   background-color: white;
+}
+
+.offersFavoriesContainer {
+  min-height: calc(100vh - 7vh - 48px - 15rem);
 }
 
 /* Global form */

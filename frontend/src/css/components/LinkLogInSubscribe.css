@@ -1,7 +1,13 @@
 .navBarConnexion {
   display: flex;
   justify-content: space-around;
-  margin: 2rem;
+  margin: 2rem 0;
+}
+
+.navBarConnexion ul {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
 }
 
 .navBarConnexion li {
