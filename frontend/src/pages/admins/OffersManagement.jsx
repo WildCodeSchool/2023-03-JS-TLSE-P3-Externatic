@@ -9,6 +9,7 @@ import MessagesErrorContext from "../../contexts/MessagesErrorContext";
 // import des composants
 import OfferCardManagement from "../../components/OfferCardManagement";
 import Error401Unauthorized from "../../components/Error401Unauthorized";
+import ErrorNoData from "../../components/ErrorNoData";
 
 function OffersManagement() {
   const { userRole } = useContext(TokenContext);
@@ -54,9 +55,7 @@ function OffersManagement() {
                 />
               ))
             ) : (
-              <div className="globalContainer">
-                <h3 className="errorTitle">Pas de résultat</h3>
-              </div>
+              <ErrorNoData message={messages.result} />
             )}
           </div>
         </div>

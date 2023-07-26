@@ -156,7 +156,7 @@ const validateApplicantInfosForSubscription = (req, res, next) => {
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,3}$/;
   // 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial, longueur 8
   const passwordPattern =
-    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-+/]).{8,}$/;
   if (titleName !== "Mr" && titleName !== "Mme") {
     res.status(400).send({ error: "Vous devez renseigner votre civilité." });
   } else if (!firstname) {
