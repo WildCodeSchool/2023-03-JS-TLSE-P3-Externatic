@@ -25,11 +25,11 @@
   text-decoration: underline;
   color: var(--main-color);
 }
-
 .linkSelected {
   text-decoration: underline;
   font-weight: bold;
 }
+
 
 @media screen and (min-width: 480px) {
   .secNav {

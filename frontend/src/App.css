@@ -111,6 +111,7 @@ a {
   gap: 2rem;
 }
 
+
 /* Global buttons */
 .button {
   background-color: black;
@@ -262,3 +263,4 @@ a:hover {
   color: green;
   font-weight: bold;
 }
+

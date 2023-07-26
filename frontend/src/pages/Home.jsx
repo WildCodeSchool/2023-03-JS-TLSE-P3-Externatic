@@ -63,24 +63,23 @@ function Home() {
   return (
     <>
       <div className="containerHome">
+        {userToken ? (
+          <h1 className="userConnected">
+            Bienvenue{" "}
+            {userRole === "company" ? dataUser?.name : dataUser?.firstname} !{" "}
+          </h1>
+        ) : null}
         <img
           className="imageContainer"
           src={imageHeader}
           alt="illustration recruteur candidat"
         />
-      </div>
-      {userToken ? (
-        <h1 className="userConnected">
-          Bienvenue{" "}
-          {userRole === "company" ? dataUser?.name : dataUser?.firstname} !{" "}
-        </h1>
-      ) : (
         <h1 className="userNotConnected">
           Externatic
           <br />
           Plus qu'un cabinet de recrutement informatique
         </h1>
-      )}
+      </div>
       <div className="offersListCardLargeContainer">
         {offersList.length ? (
           <OfferCardCarousel offersList={offersList} />
