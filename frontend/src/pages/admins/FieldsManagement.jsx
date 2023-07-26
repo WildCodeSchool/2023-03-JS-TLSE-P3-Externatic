@@ -50,7 +50,7 @@ function FieldsManagement() {
             })
             .then(() => {
               Swal.fire({
-                icon: "succeess",
+                icon: "success",
                 text: "Suppression effectuée.",
                 width: 300,
                 buttonsStyling: false,
@@ -134,7 +134,7 @@ function FieldsManagement() {
           })
           .then(() => {
             Swal.fire({
-              icon: "succeess",
+              icon: "success",
               text: "Suppression effectuée.",
               width: 300,
               buttonsStyling: false,

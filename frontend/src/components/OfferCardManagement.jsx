@@ -42,7 +42,7 @@ function OfferCardManagement({ offer, getOffers }) {
         }).then((result) => {
           if (result.isConfirmed) {
             Swal.fire({
-              icon: "succeess",
+              icon: "success",
               text: "Suppression effectuée.",
               width: 300,
               buttonsStyling: false,
