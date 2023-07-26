@@ -40,13 +40,9 @@ function MainNavBar() {
           onClick={() => setIsMenuShow(false)}
         >
           {userToken ? (
-            <Link to="/dashboard/my-profile">
-              Mon compte&nbsp;<span className="greenSpanRole">(connecté)</span>
-            </Link>
+            <Link to="/dashboard/my-profile">Mon compte</Link>
           ) : (
-            <Link to="/connexion">
-              Mon compte&nbsp;<span className="redSpanRole">(déconnecté)</span>
-            </Link>
+            <Link to="/connexion">Se connecter</Link>
           )}
         </button>
 

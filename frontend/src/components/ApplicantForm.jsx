@@ -12,6 +12,8 @@ import TokenContext from "../contexts/TokenContext";
 import identificationBlack from "../assets/icons/identification_black.svg";
 import mailBlack from "../assets/icons/mail_black.svg";
 import lockBlack from "../assets/icons/lock_black.svg";
+import mobile from "../assets/icons/mobile_black.svg";
+import cityImg from "../assets/icons/black_city_fill.svg";
 
 function ApplicantForm() {
   const { userToken, setUserCookie } = useContext(TokenContext);
@@ -49,20 +51,28 @@ function ApplicantForm() {
         if (res.status === 204) {
           Swal.fire({
             icon: "success",
-            text: "Les modifications ont bien été prises en compte",
+            text: "Les modifications ont bien été effectuées.",
             iconColor: "#ca2061",
             width: 300,
-            confirmButtonColor: "black",
-          });
-        } else {
-          Swal.fire({
-            icon: "success",
-            text: "Une erreur a été rencontrée",
-            iconColor: "#ca2061",
-            width: 300,
-            confirmButtonColor: "black",
+            buttonsStyling: false,
+            customClass: {
+              confirmButton: "button",
+            },
           });
         }
+      })
+      .catch((err) => {
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.error,
+          iconColor: "#ca2061",
+          width: 300,
+          buttonsStyling: false,
+          customClass: {
+            confirmButton: "button",
+          },
+        });
       });
   };
 
@@ -89,28 +99,25 @@ function ApplicantForm() {
             text: "Le mot de passe a bien été modifié",
             iconColor: "#ca2061",
             width: 300,
-            confirmButtonColor: "black",
+            buttonsStyling: false,
+            customClass: {
+              confirmButton: "button",
+            },
           });
         }
       })
       .catch((err) => {
-        if (err.response.status === 401) {
-          Swal.fire({
-            icon: "error",
-            text: "Le mot de passe est incorrect",
-            iconColor: "#ca2061",
-            width: 300,
-            confirmButtonColor: "black",
-          });
-        } else if (err.response.status === 400) {
-          Swal.fire({
-            icon: "error",
-            text: "Les deux mots de passe doivent être identiques",
-            iconColor: "#ca2061",
-            width: 300,
-            confirmButtonColor: "black",
-          });
-        }
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.error,
+          iconColor: "#ca2061",
+          width: 300,
+          buttonsStyling: false,
+          customClass: {
+            confirmButton: "button",
+          },
+        });
       });
   };
 
@@ -128,6 +135,19 @@ function ApplicantForm() {
         setEmail(results.data[0].email);
         setCity(results.data[0].city);
         setPhone(results.data[0].phone);
+      })
+      .catch((err) => {
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.error,
+          iconColor: "#ca2061",
+          width: 300,
+          buttonsStyling: false,
+          customClass: {
+            confirmButton: "button",
+          },
+        });
       });
   };
 
@@ -159,65 +179,20 @@ function ApplicantForm() {
                 },
               });
               navigate("/");
-            } else {
-              Swal.fire({
-                icon: "error",
-                text: "An error has occurred",
-                iconColor: "red",
-                width: 300,
-                buttonsStyling: false,
-                customClass: {
-                  confirmButton: "button",
-                },
-              });
             }
           })
           .catch((err) => {
-            if (err.response.status === 404) {
-              Swal.fire({
-                icon: "error",
-                text: "Delete failed",
-                iconColor: "red",
-                width: 300,
-                buttonsStyling: false,
-                customClass: {
-                  confirmButton: "button",
-                },
-              });
-            } else if (err.response.status === 401) {
-              Swal.fire({
-                icon: "error",
-                text: "You must be logged in",
-                iconColor: "red",
-                width: 300,
-                buttonsStyling: false,
-                customClass: {
-                  confirmButton: "button",
-                },
-              });
-            } else if (err.response.status === 500) {
-              Swal.fire({
-                icon: "error",
-                text: "An error has occurred (status 500)",
-                iconColor: "red",
-                width: 300,
-                buttonsStyling: false,
-                customClass: {
-                  confirmButton: "button",
-                },
-              });
-            } else {
-              Swal.fire({
-                icon: "error",
-                text: "An error has occurred",
-                iconColor: "red",
-                width: 300,
-                buttonsStyling: false,
-                customClass: {
-                  confirmButton: "button",
-                },
-              });
-            }
+            console.error(err);
+            Swal.fire({
+              icon: "error",
+              text: err.response.data.error,
+              iconColor: "#ca2061",
+              width: 300,
+              buttonsStyling: false,
+              customClass: {
+                confirmButton: "button",
+              },
+            });
           });
       }
     });
@@ -300,7 +275,7 @@ function ApplicantForm() {
           />
         </div>
         <div className="containerTextInput">
-          <img className="iconForm" src={mailBlack} alt="person" />
+          <img className="iconForm" src={cityImg} alt="person" />
           <input
             type="text"
             placeholder="Ville"
@@ -311,7 +286,7 @@ function ApplicantForm() {
           />
         </div>
         <div className="containerTextInput">
-          <img className="iconForm" src={mailBlack} alt="person" />
+          <img className="iconForm" src={mobile} alt="person" />
           <input
             type="text"
             placeholder="Tél"
@@ -367,7 +342,11 @@ function ApplicantForm() {
           Modifier mon mot de passe
         </button>
       </form>
-      <button type="button" onClick={() => deleteAccount()} className="button">
+      <button
+        type="button"
+        onClick={() => deleteAccount()}
+        className="button reverseButton"
+      >
         Supprimer mon compte
       </button>
     </div>

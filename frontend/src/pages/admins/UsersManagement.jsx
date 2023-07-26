@@ -35,6 +35,19 @@ function UsersManagement() {
       })
       .then((results) => {
         setAllAdmins(results.data);
+      })
+      .catch((err) => {
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.error,
+          iconColor: "#ca2061",
+          width: 300,
+          buttonsStyling: false,
+          customClass: {
+            confirmButton: "button",
+          },
+        });
       });
   };
 
@@ -63,21 +76,26 @@ function UsersManagement() {
             text: "Le compte a bien été créé !",
             iconColor: "#ca2061",
             width: 300,
-            confirmButtonColor: "black",
+            buttonsStyling: false,
+            customClass: {
+              confirmButton: "button",
+            },
           });
           getAdmins();
           setAdminInsertion(false);
         })
         .catch((err) => {
-          if (err.response.status === 403) {
-            Swal.fire({
-              icon: "error",
-              text: "Ce mail a déjà été utilisé, veuillez en saisir un autre",
-              iconColor: "#ca2061",
-              width: 300,
-              confirmButtonColor: "black",
-            });
-          }
+          console.error(err);
+          Swal.fire({
+            icon: "error",
+            text: err.response.data.error,
+            iconColor: "#ca2061",
+            width: 300,
+            buttonsStyling: false,
+            customClass: {
+              confirmButton: "button",
+            },
+          });
         });
     }
   };
@@ -93,25 +111,55 @@ function UsersManagement() {
       confirmButtonText: "Supprimer ce compte",
       cancelButtonText: "Annuler",
       width: 400,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        axios
-          .delete(`${import.meta.env.VITE_BACKEND_URL}/admins/${id}`, {
-            headers: {
-              Authorization: `Bearer ${userToken}`,
-            },
-          })
-          .then(() => {
-            getAdmins();
-            Swal.fire({
-              text: "Ce compte a bien été supprimé",
-              icon: "success",
-              confirmButtonColor: "black",
-              width: 300,
+    })
+      .then((result) => {
+        if (result.isConfirmed) {
+          axios
+            .delete(`${import.meta.env.VITE_BACKEND_URL}/admins/${id}`, {
+              headers: {
+                Authorization: `Bearer ${userToken}`,
+              },
+            })
+            .then(() => {
+              getAdmins();
+              Swal.fire({
+                text: "Ce compte a bien été supprimé",
+                icon: "success",
+                width: 300,
+                buttonsStyling: false,
+                customClass: {
+                  confirmButton: "button",
+                },
+              });
+            })
+            .catch((err) => {
+              console.error(err);
+              Swal.fire({
+                icon: "error",
+                text: err.response.data.error,
+                iconColor: "#ca2061",
+                width: 300,
+                buttonsStyling: false,
+                customClass: {
+                  confirmButton: "button",
+                },
+              });
             });
-          });
-      }
-    });
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.error,
+          iconColor: "#ca2061",
+          width: 300,
+          buttonsStyling: false,
+          customClass: {
+            confirmButton: "button",
+          },
+        });
+      });
   };
 
   const getApplicants = () => {
@@ -123,6 +171,19 @@ function UsersManagement() {
       })
       .then((results) => {
         setAllApplicants(results.data);
+      })
+      .catch((err) => {
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.error,
+          iconColor: "#ca2061",
+          width: 300,
+          buttonsStyling: false,
+          customClass: {
+            confirmButton: "button",
+          },
+        });
       });
   };
 
@@ -151,8 +212,24 @@ function UsersManagement() {
             Swal.fire({
               text: "Ce compte a bien été supprimé",
               icon: "success",
-              confirmButtonColor: "black",
+              buttonsStyling: false,
+              customClass: {
+                confirmButton: "button",
+              },
               width: 300,
+            });
+          })
+          .catch((err) => {
+            console.error(err);
+            Swal.fire({
+              icon: "error",
+              text: err.response.data.error,
+              iconColor: "#ca2061",
+              width: 300,
+              buttonsStyling: false,
+              customClass: {
+                confirmButton: "button",
+              },
             });
           });
       }
@@ -168,6 +245,19 @@ function UsersManagement() {
       })
       .then((results) => {
         setAllCompanies(results.data);
+      })
+      .catch((err) => {
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.error,
+          iconColor: "#ca2061",
+          width: 300,
+          buttonsStyling: false,
+          customClass: {
+            confirmButton: "button",
+          },
+        });
       });
   };
   const deleteCompany = (id) => {
@@ -182,25 +272,55 @@ function UsersManagement() {
       confirmButtonText: "Supprimer ce compte",
       cancelButtonText: "Annuler",
       width: 400,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        axios
-          .delete(`${import.meta.env.VITE_BACKEND_URL}/companies/${id}`, {
-            headers: {
-              Authorization: `Bearer ${userToken}`,
-            },
-          })
-          .then(() => {
-            getCompanies();
-            Swal.fire({
-              text: "Ce compte a bien été supprimé",
-              icon: "success",
-              confirmButtonColor: "black",
-              width: 300,
+    })
+      .then((result) => {
+        if (result.isConfirmed) {
+          axios
+            .delete(`${import.meta.env.VITE_BACKEND_URL}/companies/${id}`, {
+              headers: {
+                Authorization: `Bearer ${userToken}`,
+              },
+            })
+            .then(() => {
+              getCompanies();
+              Swal.fire({
+                text: "Ce compte a bien été supprimé",
+                icon: "success",
+                buttonsStyling: false,
+                customClass: {
+                  confirmButton: "button",
+                },
+                width: 300,
+              });
+            })
+            .catch((err) => {
+              console.error(err);
+              Swal.fire({
+                icon: "error",
+                text: err.response.data.error,
+                iconColor: "#ca2061",
+                width: 300,
+                buttonsStyling: false,
+                customClass: {
+                  confirmButton: "button",
+                },
+              });
             });
-          });
-      }
-    });
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.error,
+          iconColor: "#ca2061",
+          width: 300,
+          buttonsStyling: false,
+          customClass: {
+            confirmButton: "button",
+          },
+        });
+      });
   };
 
   useEffect(() => {

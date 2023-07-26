@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 // Import context
 import TokenContext from "../../contexts/TokenContext";
@@ -32,7 +33,20 @@ function MyPublishedOffers() {
             Authorization: `Bearer ${userToken}`,
           },
         })
-        .then((results) => setOffersList(results.data));
+        .then((results) => setOffersList(results.data))
+        .catch((err) => {
+          console.error(err);
+          Swal.fire({
+            icon: "error",
+            text: err.response.data.error,
+            iconColor: "#ca2061",
+            width: 300,
+            buttonsStyling: false,
+            customClass: {
+              confirmButton: "button",
+            },
+          });
+        });
     }
   };
 
@@ -60,6 +74,19 @@ function MyPublishedOffers() {
         .then(() => {
           getOffers();
           setOfferInsertion(false);
+        })
+        .catch((err) => {
+          console.error(err);
+          Swal.fire({
+            icon: "error",
+            text: err.response.data.error,
+            iconColor: "#ca2061",
+            width: 300,
+            buttonsStyling: false,
+            customClass: {
+              confirmButton: "button",
+            },
+          });
         });
     }
   };

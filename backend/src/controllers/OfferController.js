@@ -9,7 +9,7 @@ const getAllOffers = (req, res) => {
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500).send({ error: "Une erreur est survenue." });
     });
 };
 
@@ -34,7 +34,7 @@ const getFilteredOffers = (req, res) => {
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500).send({ error: "Une erreur est survenue." });
     });
 };
 
@@ -45,14 +45,14 @@ const deleteOfferById = (req, res) => {
     .delete(id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
-        res.sendStatus(404);
+        res.status(404).send({ error: "La suppression a échouée." });
       } else {
         res.sendStatus(204);
       }
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500).send({ error: "Une erreur est survenue." });
     });
 };
 
@@ -65,7 +65,7 @@ const getCompanyOffers = (req, res) => {
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500).send({ error: "Une erreur est survenue." });
     });
 };
 
@@ -98,7 +98,7 @@ const addOffer = (req, res) => {
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500).send({ error: "Une erreur est survenue." });
     });
 };
 
@@ -115,7 +115,33 @@ const deleteOffersToDeleteCompany = (req, res, next) => {
     .then(() => next())
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500).send({ error: "Une erreur est survenue." });
+    });
+};
+
+const setOfferCategoryToNull = (req, res, next) => {
+  const categoryId = req.params.id;
+  models.offer
+    .setOfferCategoryToNullByCategoryId(categoryId)
+    .then(() => {
+      next();
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send({ error: "Une erreur est survenue." });
+    });
+};
+
+const setOfferContractTypeToNull = (req, res, next) => {
+  const contractId = req.params.id;
+  models.offer
+    .setOfferContractTypeToNullByCategoryId(contractId)
+    .then(() => {
+      next();
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send({ error: "Une erreur est survenue." });
     });
 };
 
@@ -126,4 +152,6 @@ module.exports = {
   getCompanyOffers,
   addOffer,
   deleteOffersToDeleteCompany,
+  setOfferCategoryToNull,
+  setOfferContractTypeToNull,
 };

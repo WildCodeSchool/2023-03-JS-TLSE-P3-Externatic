@@ -9,7 +9,7 @@ const getAllAdmins = (req, res) => {
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500).send({ error: "Une erreur est survenue." });
     });
 };
 
@@ -29,7 +29,7 @@ const postAdmin = (req, res) => {
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500).send({ error: "Une erreur est survenue." });
     });
 };
 
@@ -41,14 +41,14 @@ const getAdmin = (req, res) => {
     .find(id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
-        res.sendStatus(404);
+        res.status(404).send({ error: "L'admin n'a pas pu être trouvé." });
       } else {
         res.json(result).status(200);
       }
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500).send({ error: "Une erreur est survenue." });
     });
 };
 
@@ -58,7 +58,7 @@ const getAdminById = (req, res, next) => {
     .find(id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
-        res.sendStatus(404);
+        res.status(404).send({ error: "L'admin n'a pas pu être trouvé." });
       } else {
         [req.user] = result;
         next();
@@ -66,7 +66,7 @@ const getAdminById = (req, res, next) => {
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500).send({ error: "Une erreur est survenue." });
     });
 };
 
@@ -82,14 +82,14 @@ const deleteAdmin = (req, res) => {
     .delete(id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
-        res.sendStatus(404);
+        res.status(404).send({ error: "L'admin n'a pas pu être supprimé." });
       } else {
         res.sendStatus(204);
       }
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500).send({ error: "Une erreur est survenue." });
     });
 };
 
@@ -106,14 +106,14 @@ const modifyAdmin = (req, res) => {
     })
     .then(([result]) => {
       if (result.affectedRows === 0) {
-        res.sendStatus(404);
+        res.status(404).send({ error: "L'admin n'a pas pu être modifié." });
       } else {
         res.sendStatus(204);
       }
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500).send({ error: "Une erreur est survenue." });
     });
 };
 
@@ -126,14 +126,16 @@ const modifyPasswordAdmin = (req, res) => {
     .updatePassword(id, hashedPassword)
     .then(([result]) => {
       if (result.affectedRows === 0) {
-        res.sendStatus(404);
+        res
+          .status(404)
+          .send({ error: "Le mot de passe n'a pas pu être modifié." });
       } else {
         res.sendStatus(204);
       }
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500).send({ error: "Une erreur est survenue." });
     });
 };
 

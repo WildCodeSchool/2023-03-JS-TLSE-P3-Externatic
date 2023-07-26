@@ -10,7 +10,7 @@ const addFavorite = (req, res) => {
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500).send({ error: "Une erreur est survenue." });
     });
 };
 // ------------Récupérer une offre favori------------
@@ -24,7 +24,7 @@ const getFavorite = (req, res) => {
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500).send({ error: "Une erreur est survenue." });
     });
 };
 // ------------Récupérer tous les favoris------------
@@ -37,7 +37,7 @@ const getAllFavorites = (req, res) => {
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500).send({ error: "Une erreur est survenue." });
     });
 };
 // ------------Supprimer une offre des favoris------------
@@ -48,19 +48,49 @@ const deleteFavorite = (req, res) => {
     .removeFavorite(applicantId, offerId)
     .then(([result]) => {
       if (result.affectedRows === 0) {
-        res.sendStatus(404);
+        res.status(500).send({ error: "La suppression a échouée." });
       } else {
         res.sendStatus(204);
       }
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500).send({ error: "Une erreur est survenue." });
     });
 };
+
+const deleteFavoritesToDeleteApplicant = (req, res, next) => {
+  let applicantId;
+  if (req.params.id) {
+    applicantId = req.params.id;
+  } else {
+    applicantId = req.payload.sub;
+  }
+  models.applicant_offer_favorites
+    .deleteFavoriteByApplicantId(applicantId)
+    .then(() => next())
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send({ error: "Une erreur est survenue." });
+    });
+};
+
+const deleteFavToDeleteOffer = (req, res, next) => {
+  const offerId = req.params.id;
+  models.applicant_offer_favorites
+    .deleteFavByOfferId(offerId)
+    .then(() => next())
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send({ error: "Une erreur est survenue." });
+    });
+};
+
 module.exports = {
   addFavorite,
   getAllFavorites,
   deleteFavorite,
   getFavorite,
+  deleteFavoritesToDeleteApplicant,
+  deleteFavToDeleteOffer,
 };
