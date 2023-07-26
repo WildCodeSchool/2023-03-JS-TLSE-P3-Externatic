@@ -7,9 +7,13 @@ import deleteUser from "../../assets/icons/black_delete_user.svg";
 
 // Import context
 import TokenContext from "../../contexts/TokenContext";
+import MessagesErrorContext from "../../contexts/MessagesErrorContext";
+// Import des composants
+import Error401Unauthorized from "../../components/Error401Unauthorized";
 
 function UsersManagement() {
   const { userToken, userRole } = useContext(TokenContext);
+  const { messages } = useContext(MessagesErrorContext);
 
   const [allAdmins, setAllAdmins] = useState([]);
   const [allApplicants, setAllApplicants] = useState([]);
@@ -495,11 +499,7 @@ function UsersManagement() {
           </div>
         </div>
       ) : (
-        <div className="globalContainer">
-          <h3 className="errorTitle">
-            ⛔ Vous devez être connecté avec un compte administrateur
-          </h3>
-        </div>
+        <Error401Unauthorized message={messages.unauthorized} />
       )}
     </div>
   );

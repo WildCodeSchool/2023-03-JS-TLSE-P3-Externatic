@@ -28,6 +28,7 @@ const {
   getAdminById,
   modifyAdmin,
   modifyPasswordAdmin,
+  validateAdminInfosToModify,
 } = require("./controllers/AdminController");
 const {
   getAllApplicants,
@@ -38,6 +39,7 @@ const {
   getApplicantById,
   modifyPasswordApplicant,
   validateApplicantInfosForSubscription,
+  validateApplicantInfosToModify,
 } = require("./controllers/ApplicantController");
 const {
   getAllCompanies,
@@ -48,6 +50,7 @@ const {
   getCompanyById,
   modifyPasswordCompany,
   validateCompanyInfosForSubscription,
+  validateCompanyInfosToModify,
 } = require("./controllers/CompanyController");
 const {
   getAllOffers,
@@ -120,7 +123,12 @@ router.get("/users/:id", verifyToken, getUserById);
 // ------------APPLICANT ROUTES------------
 // ------------MyProfile------------
 router.get("/applicant", verifyApplicant, getApplicant);
-router.put("/applicants", verifyApplicant, modifyApplicant);
+router.put(
+  "/applicants",
+  verifyApplicant,
+  validateApplicantInfosToModify,
+  modifyApplicant
+);
 router.put(
   "/applicants/password",
   verifyApplicant,
@@ -146,7 +154,12 @@ router.get("/all-favorites", verifyApplicant, getAllFavorites);
 // ------------COMPANY ROUTES------------
 // ------------MyProfile------------
 router.get("/company", verifyCompany, getCompany);
-router.put("/companies", verifyCompany, modifyCompany);
+router.put(
+  "/companies",
+  verifyCompany,
+  validateCompanyInfosToModify,
+  modifyCompany
+);
 router.put(
   "/companies/password",
   verifyCompany,
@@ -170,7 +183,7 @@ router.post("/create-offer", verifyAdminOrCompany, addOffer);
 // ------------ADMIN ROUTES------------
 // ------------MyProfile------------
 router.get("/admin", verifyAdmin, getAdmin);
-router.put("/admins", verifyAdmin, modifyAdmin);
+router.put("/admins", verifyAdmin, validateAdminInfosToModify, modifyAdmin);
 router.put(
   "/admins/password",
   verifyAdmin,

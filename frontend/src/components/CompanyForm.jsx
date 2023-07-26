@@ -264,6 +264,7 @@ function CompanyForm() {
             name="text"
             className="textInput"
             value={siret}
+            maxLength={14}
             onChange={(e) => setSiret(e.target.value)}
           />
         </div>

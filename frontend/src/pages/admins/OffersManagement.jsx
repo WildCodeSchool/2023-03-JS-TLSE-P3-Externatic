@@ -4,12 +4,16 @@ import Swal from "sweetalert2";
 
 // Import context
 import TokenContext from "../../contexts/TokenContext";
+import MessagesErrorContext from "../../contexts/MessagesErrorContext";
 
 // import des composants
 import OfferCardManagement from "../../components/OfferCardManagement";
+import Error401Unauthorized from "../../components/Error401Unauthorized";
 
 function OffersManagement() {
   const { userRole } = useContext(TokenContext);
+  const { messages } = useContext(MessagesErrorContext);
+
   const [offersList, setOffersList] = useState([]);
 
   const getOffers = () => {
@@ -57,11 +61,7 @@ function OffersManagement() {
           </div>
         </div>
       ) : (
-        <div className="globalContainer">
-          <h3 className="errorTitle">
-            ⛔ Vous devez être connecté avec un compte administrateur
-          </h3>
-        </div>
+        <Error401Unauthorized message={messages.unauthorized} />
       )}
     </div>
   );

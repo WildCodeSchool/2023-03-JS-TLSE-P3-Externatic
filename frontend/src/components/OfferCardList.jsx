@@ -58,6 +58,16 @@ function OfferCardList({ offer, favoritesByApplicantId }) {
         }
       )
       .then(() => {
+        Swal.fire({
+          icon: "success",
+          text: "Ajouté aux favoris",
+          iconColor: "#eac1cc",
+          width: 300,
+          showConfirmButton: false,
+          toast: true,
+          position: "top-end",
+          timer: 2000,
+        });
         verifyIsFavorite();
       })
       .catch((err) => {
@@ -83,6 +93,16 @@ function OfferCardList({ offer, favoritesByApplicantId }) {
         },
       })
       .then(() => {
+        Swal.fire({
+          icon: "error",
+          text: "Supprimé des favoris",
+          iconColor: "#eac1cc",
+          width: 300,
+          showConfirmButton: false,
+          toast: true,
+          position: "top-end",
+          timer: 2000,
+        });
         verifyIsFavorite();
         favoritesByApplicantId();
       })
