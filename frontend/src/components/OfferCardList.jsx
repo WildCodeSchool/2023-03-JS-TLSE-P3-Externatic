@@ -94,7 +94,6 @@ function OfferCardList({ offer, favoritesByApplicantId }) {
       })
       .then(() => {
         verifyIsFavorite();
-        favoritesByApplicantId();
         Swal.fire({
           icon: "error",
           text: "Supprimé des favoris",
@@ -105,6 +104,7 @@ function OfferCardList({ offer, favoritesByApplicantId }) {
           position: "top-end",
           timer: 2000,
         });
+        favoritesByApplicantId();
       })
       .catch((err) => {
         console.error(err);
