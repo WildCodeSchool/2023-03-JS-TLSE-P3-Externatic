@@ -57,7 +57,8 @@
     border: solid 0.1rem var(--main-color);
     box-shadow: var(--shadow_initial);
     border-radius: 1rem;
-    width: 60rem;
+    width: 95%;
+    max-width: 60rem;
     height: 35rem;
     margin: auto;
     flex-direction: row;
