@@ -23,17 +23,13 @@ function OfferCardCarousel({ offersList }) {
   );
   return (
     <Carousel showThumbs={false}>
-      {randomOffers.length ? (
-        randomOffers.map((offer) => (
-          <div key={offer.id}>
-            <OfferCardLarge offer={offer} />
-          </div>
-        ))
-      ) : (
-        <div className="globalContainer">
-          <h3 className="errorTitle">Pas de résultat</h3>
-        </div>
-      )}
+      {randomOffers.length
+        ? randomOffers.map((offer) => (
+            <div key={offer.id}>
+              <OfferCardLarge offer={offer} />
+            </div>
+          ))
+        : null}
     </Carousel>
   );
 }
