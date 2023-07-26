@@ -73,7 +73,7 @@ CREATE TABLE
         `hashed_password` varchar(255) NOT NULL,
         `message` longtext,
         `city` varchar(80) DEFAULT NULL,
-        `phone` varchar(10) DEFAULT NULL,
+        `phone` varchar(25) DEFAULT NULL,
         PRIMARY KEY (`id`)
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -175,7 +175,7 @@ CREATE TABLE
         `email` varchar(100) NOT NULL,
         `hashed_password` varchar(255) NOT NULL,
         `city` varchar(80) DEFAULT NULL,
-        `phone` varchar(10) DEFAULT NULL,
+        `phone` varchar(25) DEFAULT NULL,
         `siret` varchar(14) NOT NULL,
         PRIMARY KEY (`id`)
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
@@ -280,11 +280,11 @@ CREATE TABLE
         `title` varchar(80) NOT NULL,
         `company_id` int NOT NULL,
         `city` varchar(80) NOT NULL,
-        `contract_type_id_offer` int NOT NULL,
+        `contract_type_id_offer` int,
         `job_responsibilities` longtext NOT NULL,
         `technical_environment` longtext NOT NULL,
         `benefits` longtext NOT NULL,
-        `category_id_offer` int NOT NULL,
+        `category_id_offer` int,
         PRIMARY KEY (`id`),
         KEY `company_id_idx` (`company_id`),
         KEY `id_contract_type_idx` (`contract_type_id_offer`),

@@ -40,10 +40,20 @@ const getUserByEmail = (req, res, next) => {
 
 const validateNewPassword = (req, res, next) => {
   const { newPassword, confirmNewPassword } = req.body;
-  if (newPassword === confirmNewPassword) {
-    next();
+  const passwordPattern =
+    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+
+  if (!passwordPattern.test(newPassword)) {
+    res.status(400).send({
+      error:
+        "Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule, 1 chiffre et un caractère spécial.",
+    });
+  } else if (newPassword !== confirmNewPassword) {
+    res
+      .status(400)
+      .send({ error: "Les mots de passe ne sont pas identiques." });
   } else {
-    res.status(400).send({ error: "Les mot de passe ne sont pas identiques." });
+    next();
   }
 };
 
@@ -68,6 +78,7 @@ const getUserById = (req, res) => {
     res.sendStatus(401);
   }
 };
+
 module.exports = {
   getUserByEmail,
   validateNewPassword,
