@@ -37,9 +37,9 @@ function UsersManagement() {
         Swal.fire({
           icon: "error",
           text: err.response.data.error,
-          iconColor: "#ca2061",
           width: 300,
           buttonsStyling: false,
+          iconColor: "#ca2061cc",
           customClass: {
             confirmButton: "button",
           },
@@ -70,9 +70,9 @@ function UsersManagement() {
           Swal.fire({
             icon: "success",
             text: "Le compte a bien été créé !",
-            iconColor: "#ca2061",
             width: 300,
             buttonsStyling: false,
+            iconColor: "#eac1cc",
             customClass: {
               confirmButton: "button",
             },
@@ -85,9 +85,9 @@ function UsersManagement() {
           Swal.fire({
             icon: "error",
             text: err.response.data.error,
-            iconColor: "#ca2061",
             width: 300,
             buttonsStyling: false,
+            iconColor: "#ca2061cc",
             customClass: {
               confirmButton: "button",
             },
@@ -123,6 +123,7 @@ function UsersManagement() {
                 icon: "success",
                 width: 300,
                 buttonsStyling: false,
+                iconColor: "#eac1cc",
                 customClass: {
                   confirmButton: "button",
                 },
@@ -133,9 +134,9 @@ function UsersManagement() {
               Swal.fire({
                 icon: "error",
                 text: err.response.data.error,
-                iconColor: "#ca2061",
                 width: 300,
                 buttonsStyling: false,
+                iconColor: "#ca2061cc",
                 customClass: {
                   confirmButton: "button",
                 },
@@ -148,9 +149,9 @@ function UsersManagement() {
         Swal.fire({
           icon: "error",
           text: err.response.data.error,
-          iconColor: "#ca2061",
           width: 300,
           buttonsStyling: false,
+          iconColor: "#ca2061cc",
           customClass: {
             confirmButton: "button",
           },
@@ -173,9 +174,9 @@ function UsersManagement() {
         Swal.fire({
           icon: "error",
           text: err.response.data.error,
-          iconColor: "#ca2061",
           width: 300,
           buttonsStyling: false,
+          iconColor: "#ca2061cc",
           customClass: {
             confirmButton: "button",
           },
@@ -209,6 +210,7 @@ function UsersManagement() {
               text: "Ce compte a bien été supprimé",
               icon: "success",
               buttonsStyling: false,
+              iconColor: "#eac1cc",
               customClass: {
                 confirmButton: "button",
               },
@@ -220,9 +222,9 @@ function UsersManagement() {
             Swal.fire({
               icon: "error",
               text: err.response.data.error,
-              iconColor: "#ca2061",
               width: 300,
               buttonsStyling: false,
+              iconColor: "#ca2061cc",
               customClass: {
                 confirmButton: "button",
               },
@@ -247,9 +249,9 @@ function UsersManagement() {
         Swal.fire({
           icon: "error",
           text: err.response.data.error,
-          iconColor: "#ca2061",
           width: 300,
           buttonsStyling: false,
+          iconColor: "#ca2061cc",
           customClass: {
             confirmButton: "button",
           },
@@ -283,6 +285,7 @@ function UsersManagement() {
                 text: "Ce compte a bien été supprimé",
                 icon: "success",
                 buttonsStyling: false,
+                iconColor: "#eac1cc",
                 customClass: {
                   confirmButton: "button",
                 },
@@ -294,9 +297,9 @@ function UsersManagement() {
               Swal.fire({
                 icon: "error",
                 text: err.response.data.error,
-                iconColor: "#ca2061",
                 width: 300,
                 buttonsStyling: false,
+                iconColor: "#ca2061cc",
                 customClass: {
                   confirmButton: "button",
                 },
@@ -309,9 +312,9 @@ function UsersManagement() {
         Swal.fire({
           icon: "error",
           text: err.response.data.error,
-          iconColor: "#ca2061",
           width: 300,
           buttonsStyling: false,
+          iconColor: "#ca2061cc",
           customClass: {
             confirmButton: "button",
           },
