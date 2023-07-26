@@ -21,11 +21,11 @@
   margin: auto;
 }
 .carousel .control-next.control-arrow:before {
-  border-left: 8px solid var(--main-color);
+  border-left: 8px solid var(--secondary-color);
   background-color: transparent;
 }
 .carousel .control-prev.control-arrow:before {
-  border-right: 8px solid var(--main-color);
+  border-right: 8px solid var(--secondary-color);
   background-color: transparent;
 }
 .carousel .control-next.control-arrow,
@@ -49,4 +49,10 @@
 .carousel-root {
   max-width: 25rem;
   margin: auto;
+}
+.carousel .control-dots .dot {
+  background: var(--secondary-color);
+}
+.carousel img {
+  pointer-events: initial;
 }

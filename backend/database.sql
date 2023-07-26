@@ -10,7 +10,66 @@ CREATE TABLE
         PRIMARY KEY (`id`)
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
+CREATE TABLE
+    `admin` (
+        `id` int NOT NULL AUTO_INCREMENT,
+        `firstname` varchar(80) NOT NULL,
+        `lastname` varchar(80) NOT NULL,
+        `email` varchar(100) NOT NULL,
+        `hashed_password` varchar(255) NOT NULL,
+        PRIMARY KEY (`id`)
+    ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
+
 -- INSERT INTO `admin`
+
+INSERT INTO
+    `admin` (
+        firstname,
+        lastname,
+        email,
+        hashed_password
+    )
+VALUES (
+        'Marceau',
+        'Robin',
+        'marceau.robin@example.com',
+        '$argon2id$v=19$m=65536,t=5,p=1$CgUS/Py/i1t9BcHZd0kEOw$tjp6uEg/Yc+QZ9cvMbGsvp9y4KczDfbfr5T7BIPyywQ'
+    ), (
+        'Laura',
+        'Colin',
+        'laura.colin@example.com',
+        '$argon2id$v=19$m=65536,t=5,p=1$ckU+lx71A0Y9bQB5uVIFZw$wmxXgetq5i8q8+KaMlVLQnumW7NZ93j9JFXvCN3FipE'
+    ), (
+        'Aurélien',
+        'Pierre',
+        'aurelien.pierre@example.com',
+        '$argon2id$v=19$m=65536,t=5,p=1$r759xA6/8t8BcIQVdR53Mg$I/y/dOdSfufvQJoe6+hDGayfCoinSDre+AHqo81DLc8'
+    ), (
+        'Maëlyne',
+        'Bernard',
+        'maelyne.bernard@example.com',
+        '$argon2id$v=19$m=65536,t=5,p=1$GFS4PXuXWrFYRKqZc6KK+Q$DTF+dfY1GGOF6ooHKdJPvSpGrkdwyRmjq4KhMIxt5no'
+    ), (
+        'Dylan',
+        'Le Gall',
+        'dylan.legall@example.com',
+        '$argon2id$v=19$m=65536,t=5,p=1$OUZ/WPGeTPmTcrH0Y7KQEA$TpHrW+pKSixzA8fe+xyyJKInhQYmoipRlNKRzUG0tDk'
+    ), (
+        'Elliot',
+        'Jean',
+        'elliot.jean@example.com',
+        '$argon2id$v=19$m=65536,t=5,p=1$qTomlZClmgIfCI0Q1YBvJA$O4+kl1OTQ0UY/Fmdnfw30b32ALL0TSjQr9yihiAnWIs'
+    ), (
+        'Léonard',
+        'Roussel',
+        'leonard.roussel@example.com',
+        '$argon2id$v=19$m=65536,t=5,p=1$3SX+4imxrNwHx8EwVv47CA$fteV3/HnXYgLv62bGFfLvA2ZRLDDk58DF51kkoHPXO0'
+    ), (
+        'Juliette',
+        'Lecomte',
+        'juliette.lecomte@example.com',
+        '$argon2id$v=19$m=65536,t=5,p=1$B223CTgVZsvFVy3f3h9V9g$ei184CYyOOtR50/uyU1K4Yuc3KDjaSdu+MWrAdQE4jU'
+    );
 
 INSERT INTO
     `admin` (
@@ -78,6 +137,74 @@ CREATE TABLE
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 -- INSERT INTO `applicant`
+
+INSERT INTO
+    `applicant` (
+        title_name,
+        firstname,
+        lastname,
+        email,
+        hashed_password,
+        city,
+        phone
+    )
+VALUES (
+        'Mr',
+        'Jonas',
+        'Brun',
+        'jonas.brun@example.com',
+        '$argon2id$v=19$m=65536,t=5,p=1$EUV33ASHcPDNfVQLURDANw$ZSSd/agh/TKaFupJSX6ZsRyWQBrLyEFKeW7VuYvmsdU',
+        'Paris',
+        '0694086528'
+    ), (
+        'Mr',
+        'Matéo',
+        'Gaillard',
+        'mateo.gaillard@example.com',
+        '$argon2id$v=19$m=65536,t=5,p=1$708qvAh/EH4ehKS+kaIW1g$ckIozZ5Jmo1oqXImeXhBciQl/26itycpHZq5dgIjd84',
+        'Saint-Étienne',
+        '0684184456'
+    ), (
+        'Mme',
+        'Enola',
+        'Roger',
+        'enola.roger@example.com',
+        '$argon2id$v=19$m=65536,t=5,p=1$Y9oqAvffblPJvTMIBYGfig$VMBQFiBfr/oL2Dwsy4odxwVPmC1RGHqz39wkngmde/g',
+        'Boulogne-Billancourt',
+        '0651214139'
+    ), (
+        'Mme',
+        'Valentina',
+        'Pierre',
+        'valentina.pierre@example.com',
+        '$argon2id$v=19$m=65536,t=5,p=1$rBAYhJiiJryqtmqfog5dNg$3S2kUwlVZM7hO9AOlFSAOiVIMODQtDR8Wh/dd3BSfYg',
+        'Rueil-Malmaison',
+        '0689394457'
+    ), (
+        'Mme',
+        'Nina',
+        'Louis',
+        'nina.louis@example.com',
+        '$argon2id$v=19$m=65536,t=5,p=1$rYXt/EDvaZscrbCSr9jWOA$pfRH5mUEQFFYtlxc2r3/TYarVHxbe4XIWaXEfvUfPhY',
+        'Rennes',
+        '0677457852'
+    ), (
+        'Mr',
+        'Aubin',
+        'Martinez',
+        'aubin.martinez@example.com',
+        '$argon2id$v=19$m=65536,t=5,p=1$Lknk7oaS20HukG94XM6CHQ$4tUClBRFD7cROOJkZGHOiWz5S1RqAcQx63n0Rd3iMVE',
+        'Le Havre',
+        '0670309100'
+    ), (
+        'Mr',
+        'Gabin',
+        'Noel',
+        'gabin.noel@example.com',
+        '$argon2id$v=19$m=65536,t=5,p=1$2UYwB1tIZEWIvgsAV5LKLg$DXQ5Dkqd4wDWCEAR+sf7rVM9sltflV7S1NQEDOBWLbs',
+        'Colombes',
+        '0623280077'
+    );
 
 INSERT INTO
     `applicant` (

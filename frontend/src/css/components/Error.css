@@ -1,0 +1,22 @@
+.containerError {
+  border: var(--border_card);
+  box-shadow: var(--shadow_initial);
+  border-radius: 0.6rem;
+  width: 95%;
+  margin: auto;
+  margin-block: 2rem;
+  max-width: 40rem;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+.containerError h2 {
+  max-width: 20rem;
+  color: var(--basic-grey);
+}
+.imageError {
+  width: 100%;
+  max-width: 20rem;
+}

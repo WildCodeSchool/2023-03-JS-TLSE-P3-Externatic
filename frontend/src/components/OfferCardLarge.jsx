@@ -2,6 +2,8 @@
 import { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
+import Swal from "sweetalert2";
+// Import context
 import TokenContext from "../contexts/TokenContext";
 // Import des composants
 import OfferModal from "./OfferModal";
@@ -55,6 +57,16 @@ function OfferCardLarge({ offer, favoritesByApplicantId }) {
         }
       )
       .then(() => {
+        Swal.fire({
+          icon: "success",
+          text: "Ajouté aux favoris",
+          iconColor: "#851342",
+          width: 300,
+          showConfirmButton: false,
+          toast: true,
+          position: "top-end",
+          timer: 2000,
+        });
         verifyIsFavorite();
       });
   };
@@ -67,6 +79,16 @@ function OfferCardLarge({ offer, favoritesByApplicantId }) {
         },
       })
       .then(() => {
+        Swal.fire({
+          icon: "error",
+          text: "Supprimé des favoris",
+          iconColor: "#851342",
+          width: 300,
+          showConfirmButton: false,
+          toast: true,
+          position: "top-end",
+          timer: 2000,
+        });
         verifyIsFavorite();
         favoritesByApplicantId();
       });

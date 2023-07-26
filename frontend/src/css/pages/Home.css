@@ -4,7 +4,7 @@
 }
 
 .userNotConnected {
-  line-height: 3rem;
+  padding: 0 0.5rem;
 }
 
 /* style de la description Externatic */
@@ -28,6 +28,8 @@
 }
 .textDescription {
   text-align: center;
+  line-height: 1.4rem;
+  font-size: large;
 }
 .textAndIcon {
   display: flex;
@@ -42,8 +44,9 @@
   margin-right: 0.8rem;
 }
 
+.icon.hand,
 .icon.rocket {
-  width: 2rem;
+  width: 2.5rem;
 }
 
 @media screen and (min-width: 768px) {
@@ -52,7 +55,10 @@
   }
 
   .userNotConnected {
-    line-height: 3.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 3rem;
   }
   /* style de la description Externatic */
   .descriptionHomePage {
@@ -63,11 +69,11 @@
 
   .containerDescription {
     flex-direction: row;
-    gap: 6rem;
+    gap: 4rem;
   }
 
   .aboutExternatic {
-    max-width: 25rem;
+    width: fit-content;
   }
 
   .textDescription {
