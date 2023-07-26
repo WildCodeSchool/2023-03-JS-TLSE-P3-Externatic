@@ -1,25 +1,67 @@
 // Import packages
-import { useContext } from "react";
-import PropTypes from "prop-types";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Swal from "sweetalert2";
 
-// Import context
-import ValidationFormContext from "../contexts/ValidationFormContext";
+function FormNewApplicant() {
+  const [titleName, setTitleName] = useState("");
+  const [formDataApplicantSubscription, setFormDataApplicantSubscription] =
+    useState({
+      firstname: "",
+      lastname: "",
+      email: "",
+      password: "",
+      confirmedPassword: "",
+    });
+  const navigate = useNavigate();
 
-function FormNewApplicant({ handleInput }) {
-  const {
-    errors,
-    resetInputOnClick,
-    formDataSubscription,
-    setFormDataSubscription,
-  } = useContext(ValidationFormContext);
-  const handleTitleNameMiss = () => {
-    setFormDataSubscription({ ...formDataSubscription, titleName: "Mme" });
+  const handleInputApplicant = (e) => {
+    setFormDataApplicantSubscription({
+      ...formDataApplicantSubscription,
+      [e.target.name]: e.target.value,
+    });
   };
-  const handleTitleNameMister = () => {
-    setFormDataSubscription({ ...formDataSubscription, titleName: "Mr" });
+
+  const handleSubmitApplicant = (e) => {
+    e.preventDefault();
+    axios
+      .post(`${import.meta.env.VITE_BACKEND_URL}/signup/applicant`, {
+        titleName,
+        ...formDataApplicantSubscription,
+      })
+      .then((response) => {
+        if (response.status === 201) {
+          Swal.fire({
+            icon: "success",
+            text: "Votre compte a bien été créé.",
+            width: 300,
+            buttonsStyling: false,
+            iconColor: "#eac1cc",
+            customClass: {
+              confirmButton: "button",
+            },
+          });
+          navigate("/connexion");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.error,
+          width: 300,
+          buttonsStyling: false,
+          iconColor: "#ca2061cc",
+          customClass: {
+            confirmButton: "button",
+          },
+        });
+      });
   };
+
   return (
-    <>
+    <form className="form subscription" onSubmit={handleSubmitApplicant}>
       <div className="containerTitleName">
         <div className="containerRadioInput">
           <input
@@ -27,24 +69,28 @@ function FormNewApplicant({ handleInput }) {
             id="radio1"
             className="radioInput"
             name="titleName"
-            onChange={handleTitleNameMiss}
-            onClick={resetInputOnClick}
+            value="Mme"
+            onChange={(e) => {
+              setTitleName(e.target.value);
+            }}
+            checked={titleName === "Mme"}
           />
           <label htmlFor="radio1" className="labelRadioInput miss">
             Madame
           </label>
         </div>
-        {errors.titleName && (
-          <span className="errorMessageTitleName">{errors.titleName}</span>
-        )}
+
         <div className="containerRadioInput">
           <input
             type="radio"
             id="radio2"
             className="radioInput"
             name="titleName"
-            onChange={handleTitleNameMister}
-            onClick={resetInputOnClick}
+            value="Mr"
+            onChange={(e) => {
+              setTitleName(e.target.value);
+            }}
+            checked={titleName === "Mr"}
           />
           <label htmlFor="radio2" className="labelRadioInput mister">
             Monsieur
@@ -85,15 +131,11 @@ function FormNewApplicant({ handleInput }) {
           className="textInput"
           type="text"
           placeholder="Prénom"
-          required=""
           name="firstname"
           autoComplete="off"
-          onChange={handleInput}
-          onClick={resetInputOnClick}
+          value={formDataApplicantSubscription.firstname}
+          onChange={handleInputApplicant}
         />
-        {errors.firstname && (
-          <span className="errorMessage">{errors.firstname}</span>
-        )}
       </div>
 
       {/* lastname */}
@@ -130,15 +172,11 @@ function FormNewApplicant({ handleInput }) {
           className="textInput"
           type="text"
           placeholder="Nom"
-          required=""
           name="lastname"
           autoComplete="off"
-          onChange={handleInput}
-          onClick={resetInputOnClick}
+          value={formDataApplicantSubscription.lastname}
+          onChange={handleInputApplicant}
         />
-        {errors.lastname && (
-          <span className="errorMessage">{errors.lastname}</span>
-        )}
       </div>
 
       {/* email */}
@@ -159,13 +197,11 @@ function FormNewApplicant({ handleInput }) {
           className="textInput"
           type="email"
           placeholder="Email"
-          required=""
           name="email"
           autoComplete="off"
-          onChange={handleInput}
-          onClick={resetInputOnClick}
+          value={formDataApplicantSubscription.email}
+          onChange={handleInputApplicant}
         />
-        {errors.email && <span className="errorMessage">{errors.email}</span>}
       </div>
       {/* password */}
       <div className="containerTextInput">
@@ -189,14 +225,10 @@ function FormNewApplicant({ handleInput }) {
           className="textInput"
           type="password"
           placeholder="Mot de passe"
-          required=""
           name="password"
-          onChange={handleInput}
-          onClick={resetInputOnClick}
+          value={formDataApplicantSubscription.password}
+          onChange={handleInputApplicant}
         />
-        {errors.password && (
-          <span className="errorMessage">{errors.password}</span>
-        )}
       </div>
       {/* password confirmation */}
       <div className="containerTextInput">
@@ -220,24 +252,16 @@ function FormNewApplicant({ handleInput }) {
           className="textInput"
           type="password"
           placeholder="Confirmation mot de passe"
-          required=""
           name="confirmedPassword"
-          onChange={handleInput}
-          onClick={resetInputOnClick}
+          value={formDataApplicantSubscription.confirmedPassword}
+          onChange={handleInputApplicant}
         />
-        {errors.confirmedpassword && (
-          <span className="errorMessage">{errors.confirmedpassword}</span>
-        )}
       </div>
 
       <button type="submit" className="button subscription">
         Je m'inscris
       </button>
-    </>
+    </form>
   );
 }
 export default FormNewApplicant;
-
-FormNewApplicant.propTypes = {
-  handleInput: PropTypes.func.isRequired,
-};

@@ -1,26 +1,24 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
+
+// Import context
+import FiltersContext from "../contexts/FiltersContext";
+import MessagesErrorContext from "../contexts/MessagesErrorContext";
 
 // import des composants
 import OfferCardList from "../components/OfferCardList";
-import OfferModal from "../components/OfferModal";
+import ErrorNoData from "../components/ErrorNoData";
 
 function Offers() {
   const [offersList, setOffersList] = useState([]);
-  const [categoriesList, setCategoriesList] = useState([]);
-  const [contractList, setContractList] = useState([]);
   const [keywordInput, setKeywordInput] = useState("");
   const [localizationInput, setLocalizationInput] = useState("");
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [isContractOpen, setIsContractOpen] = useState(false);
-  const [modalOfferIsOpen, setModalOfferIsOpen] = useState(false);
-  const [selectedOffer, setSelectedOffer] = useState([]);
-
-  const handleOpenModalOffer = (offerId) => {
-    const findOffer = offersList.find((offer) => offer.id === offerId);
-    setSelectedOffer(findOffer);
-    setModalOfferIsOpen(true);
-  };
+  const { categoriesList, contractList, getCategories, getContracts } =
+    useContext(FiltersContext);
+  const { messages } = useContext(MessagesErrorContext);
 
   const handleCheck = (el, list) => {
     if (list === "category") {
@@ -55,30 +53,47 @@ function Offers() {
         categories: categoriesList,
         contract: contractList,
       })
-      .then((results) => setOffersList(results.data));
+      .then((results) => setOffersList(results.data))
+
+      .catch((err) => {
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.error,
+          width: 300,
+          buttonsStyling: false,
+          iconColor: "#ca2061cc",
+          customClass: {
+            confirmButton: "button",
+          },
+        });
+      });
   };
 
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/offers`)
-      .then((results) => setOffersList(results.data));
+      .then((results) => setOffersList(results.data))
+      .catch((err) => {
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.error,
+          width: 300,
+          buttonsStyling: false,
+          iconColor: "#ca2061cc",
+          customClass: {
+            confirmButton: "button",
+          },
+        });
+      });
 
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/categories`)
-      .then((results) => setCategoriesList(results.data));
-
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/contracts-type`)
-      .then((results) => setContractList(results.data));
+    getCategories();
+    getContracts();
   }, []);
 
   return (
     <div className="offersPage">
-      <OfferModal
-        modalOfferIsOpen={modalOfferIsOpen}
-        setModalOfferIsOpen={setModalOfferIsOpen}
-        offer={selectedOffer}
-      />
       <form onSubmit={handleSubmit} className="form formOffersFilters">
         <div className="containerTextInput">
           <input
@@ -113,22 +128,24 @@ function Offers() {
             <hr className="divider" />
 
             <div className="selectOptionsContainer">
-              {categoriesList
-                ? categoriesList.map((el) => (
-                    <div value="" className="selectOption" key={el.id}>
-                      <input
-                        type="checkbox"
-                        className="optionCheckbox"
-                        id={el.category_name}
-                        name={el.category_name}
-                        onChange={() => handleCheck(el, "category")}
-                      />
-                      <label htmlFor={el.category_name} className="optionLabel">
-                        {el.category_name}
-                      </label>
-                    </div>
-                  ))
-                : "Chargement..."}
+              {categoriesList.length ? (
+                categoriesList.map((el) => (
+                  <div value="" className="selectOption" key={el.id}>
+                    <input
+                      type="checkbox"
+                      className="optionCheckbox"
+                      id={el.category_name}
+                      name={el.category_name}
+                      onChange={() => handleCheck(el, "category")}
+                    />
+                    <label htmlFor={el.category_name} className="optionLabel">
+                      {el.category_name}
+                    </label>
+                  </div>
+                ))
+              ) : (
+                <h3 className="errorTitle">Chargement...</h3>
+              )}
             </div>
           </div>
         </div>
@@ -145,25 +162,27 @@ function Offers() {
             <hr className="divider" />
 
             <div className="selectOptionsContainer">
-              {contractList
-                ? contractList.map((el) => (
-                    <div value="" className="selectOption" key={el.id}>
-                      <input
-                        type="checkbox"
-                        className="optionCheckbox"
-                        id={el.contract_type_name}
-                        name={el.contract_type_name}
-                        onChange={() => handleCheck(el, "contract")}
-                      />
-                      <label
-                        htmlFor={el.contract_type_name}
-                        className="optionLabel"
-                      >
-                        {el.contract_type_name}
-                      </label>
-                    </div>
-                  ))
-                : "Chargement..."}
+              {contractList.length ? (
+                contractList.map((el) => (
+                  <div value="" className="selectOption" key={el.id}>
+                    <input
+                      type="checkbox"
+                      className="optionCheckbox"
+                      id={el.contract_type_name}
+                      name={el.contract_type_name}
+                      onChange={() => handleCheck(el, "contract")}
+                    />
+                    <label
+                      htmlFor={el.contract_type_name}
+                      className="optionLabel"
+                    >
+                      {el.contract_type_name}
+                    </label>
+                  </div>
+                ))
+              ) : (
+                <h3 className="errorTitle">Chargement...</h3>
+              )}
             </div>
           </div>
         </div>
@@ -173,19 +192,9 @@ function Offers() {
       </form>
       <div className="offersListContainer">
         {offersList.length ? (
-          offersList.map((el) => (
-            <OfferCardList
-              key={el.id}
-              offer={el}
-              modalOfferIsOpen={modalOfferIsOpen}
-              setModalOfferIsOpen={setModalOfferIsOpen}
-              onCardClick={handleOpenModalOffer}
-            />
-          ))
+          offersList.map((el) => <OfferCardList key={el.id} offer={el} />)
         ) : (
-          <div className="globalContainer">
-            <h3 className="errorTitle">Pas de résultat</h3>
-          </div>
+          <ErrorNoData message={messages.result} />
         )}
       </div>
     </div>

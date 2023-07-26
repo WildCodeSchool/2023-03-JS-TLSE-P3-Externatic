@@ -1,17 +1,69 @@
 // Import packages
-import PropTypes from "prop-types";
-import { useContext } from "react";
-
-// Import du context
-import ValidationFormContext from "../contexts/ValidationFormContext";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 // Import du style
 import "../css/components/FormNewUser.css";
 
-function FormNewCompany({ handleInput }) {
-  const { errors, resetInputOnClick } = useContext(ValidationFormContext);
+function FormNewCompany() {
+  const [formDataCompanySubscription, setFormDataCompanySubscription] =
+    useState({
+      name: "",
+      siret: 0,
+      email: "",
+      password: "",
+      confirmedPassword: "",
+    });
+
+  const navigate = useNavigate();
+  const handleInputCompany = (e) => {
+    setFormDataCompanySubscription({
+      ...formDataCompanySubscription,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmitCompany = (e) => {
+    e.preventDefault();
+
+    axios
+      .post(
+        `${import.meta.env.VITE_BACKEND_URL}/signup/company`,
+        formDataCompanySubscription
+      )
+      .then((response) => {
+        if (response.status === 201) {
+          Swal.fire({
+            icon: "success",
+            text: "Votre compte a bien été créé.",
+            width: 300,
+            buttonsStyling: false,
+            iconColor: "#eac1cc",
+            customClass: {
+              confirmButton: "button",
+            },
+          });
+          navigate("/connexion");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.error,
+          width: 300,
+          buttonsStyling: false,
+          iconColor: "#ca2061cc",
+          customClass: {
+            confirmButton: "button",
+          },
+        });
+      });
+  };
   return (
-    <>
+    <form className="form subscription" onSubmit={handleSubmitCompany}>
       <div className="containerTextInput">
         <svg
           width="16"
@@ -29,13 +81,11 @@ function FormNewCompany({ handleInput }) {
           className="textInput"
           type="text"
           placeholder="Nom de l'entreprise"
-          required=""
           name="name"
           autoComplete="on"
-          onChange={handleInput}
-          onClick={resetInputOnClick}
+          value={formDataCompanySubscription.name}
+          onChange={handleInputCompany}
         />
-        {errors.name && <span className="errorMessage">{errors.name}</span>}
       </div>
 
       <div className="containerTextInput">
@@ -55,13 +105,12 @@ function FormNewCompany({ handleInput }) {
           className="textInput"
           type="text"
           placeholder="Numéro SIRET"
-          required=""
           name="siret"
           autoComplete="on"
-          onChange={handleInput}
-          onClick={resetInputOnClick}
+          maxLength={14}
+          value={formDataCompanySubscription.siret}
+          onChange={handleInputCompany}
         />
-        {errors.siret && <span className="errorMessage">{errors.siret}</span>}
       </div>
 
       {/* email */}
@@ -82,13 +131,11 @@ function FormNewCompany({ handleInput }) {
           className="textInput"
           type="email"
           placeholder="Email"
-          required=""
           name="email"
           autoComplete="on"
-          onChange={handleInput}
-          onClick={resetInputOnClick}
+          value={formDataCompanySubscription.email}
+          onChange={handleInputCompany}
         />
-        {errors.email && <span className="errorMessage">{errors.email}</span>}
       </div>
       {/* password */}
       <div className="containerTextInput">
@@ -112,14 +159,10 @@ function FormNewCompany({ handleInput }) {
           className="textInput"
           type="password"
           placeholder="Mot de passe"
-          required=""
           name="password"
-          onChange={handleInput}
-          onClick={resetInputOnClick}
+          value={formDataCompanySubscription.password}
+          onChange={handleInputCompany}
         />
-        {errors.password && (
-          <span className="errorMessage">{errors.password}</span>
-        )}
       </div>
       {/* password confirmation */}
       <div className="containerTextInput">
@@ -143,25 +186,17 @@ function FormNewCompany({ handleInput }) {
           className="textInput"
           type="password"
           placeholder="Confirmation mot de passe"
-          required=""
-          name="confirmedpassword"
-          onChange={handleInput}
-          onClick={resetInputOnClick}
+          name="confirmedPassword"
+          value={formDataCompanySubscription.confirmedPassword}
+          onChange={handleInputCompany}
         />
-        {errors.confirmedpassword && (
-          <span className="errorMessage">{errors.confirmedpassword}</span>
-        )}
       </div>
 
       <button type="submit" className="button subscription">
         Je m'inscris
       </button>
-    </>
+    </form>
   );
 }
 
 export default FormNewCompany;
-
-FormNewCompany.propTypes = {
-  handleInput: PropTypes.func.isRequired,
-};

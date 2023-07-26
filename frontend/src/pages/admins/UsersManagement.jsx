@@ -1,14 +1,19 @@
 import axios from "axios";
 import { useEffect, useState, useContext } from "react";
+import Swal from "sweetalert2";
 
 // Import images
 import deleteUser from "../../assets/icons/black_delete_user.svg";
 
 // Import context
 import TokenContext from "../../contexts/TokenContext";
+import MessagesErrorContext from "../../contexts/MessagesErrorContext";
+// Import des composants
+import Error401Unauthorized from "../../components/Error401Unauthorized";
 
 function UsersManagement() {
   const { userToken, userRole } = useContext(TokenContext);
+  const { messages } = useContext(MessagesErrorContext);
 
   const [allAdmins, setAllAdmins] = useState([]);
   const [allApplicants, setAllApplicants] = useState([]);
@@ -30,6 +35,19 @@ function UsersManagement() {
       })
       .then((results) => {
         setAllAdmins(results.data);
+      })
+      .catch((err) => {
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.error,
+          width: 300,
+          buttonsStyling: false,
+          iconColor: "#ca2061cc",
+          customClass: {
+            confirmButton: "button",
+          },
+        });
       });
   };
 
@@ -51,21 +69,97 @@ function UsersManagement() {
             },
           }
         )
+
         .then(() => {
+          Swal.fire({
+            icon: "success",
+            text: "Le compte a bien été créé !",
+            width: 300,
+            buttonsStyling: false,
+            iconColor: "#eac1cc",
+            customClass: {
+              confirmButton: "button",
+            },
+          });
           getAdmins();
           setAdminInsertion(false);
+        })
+        .catch((err) => {
+          console.error(err);
+          Swal.fire({
+            icon: "error",
+            text: err.response.data.error,
+            width: 300,
+            buttonsStyling: false,
+            iconColor: "#ca2061cc",
+            customClass: {
+              confirmButton: "button",
+            },
+          });
         });
     }
   };
   const deleteAdmin = (id) => {
-    axios
-      .delete(`${import.meta.env.VITE_BACKEND_URL}/admins/${id}`, {
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-        },
+    Swal.fire({
+      title: "Etes-vous sûr de vouloir supprimer ce compte?",
+      text: "Cette suppression est irréversible !",
+      icon: "warning",
+      iconColor: "#ca2061",
+      showCancelButton: true,
+      confirmButtonColor: "#ca2061",
+      cancelButtonColor: "black",
+      confirmButtonText: "Supprimer ce compte",
+      cancelButtonText: "Annuler",
+      width: 400,
+    })
+      .then((result) => {
+        if (result.isConfirmed) {
+          axios
+            .delete(`${import.meta.env.VITE_BACKEND_URL}/admins/${id}`, {
+              headers: {
+                Authorization: `Bearer ${userToken}`,
+              },
+            })
+            .then(() => {
+              getAdmins();
+              Swal.fire({
+                text: "Ce compte a bien été supprimé",
+                icon: "success",
+                width: 300,
+                buttonsStyling: false,
+                iconColor: "#eac1cc",
+                customClass: {
+                  confirmButton: "button",
+                },
+              });
+            })
+            .catch((err) => {
+              console.error(err);
+              Swal.fire({
+                icon: "error",
+                text: err.response.data.error,
+                width: 300,
+                buttonsStyling: false,
+                iconColor: "#ca2061cc",
+                customClass: {
+                  confirmButton: "button",
+                },
+              });
+            });
+        }
       })
-      .then(() => {
-        getAdmins();
+      .catch((err) => {
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.error,
+          width: 300,
+          buttonsStyling: false,
+          iconColor: "#ca2061cc",
+          customClass: {
+            confirmButton: "button",
+          },
+        });
       });
   };
 
@@ -78,19 +172,70 @@ function UsersManagement() {
       })
       .then((results) => {
         setAllApplicants(results.data);
+      })
+      .catch((err) => {
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.error,
+          width: 300,
+          buttonsStyling: false,
+          iconColor: "#ca2061cc",
+          customClass: {
+            confirmButton: "button",
+          },
+        });
       });
   };
 
   const deleteApplicant = (id) => {
-    axios
-      .delete(`${import.meta.env.VITE_BACKEND_URL}/applicants/${id}`, {
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-        },
-      })
-      .then(() => {
-        getApplicants();
-      });
+    Swal.fire({
+      title: "Etes-vous sûr de vouloir supprimer ce compte?",
+      text: "Cette suppression est irréversible !",
+      icon: "warning",
+      iconColor: "#ca2061",
+      showCancelButton: true,
+      confirmButtonColor: "#ca2061",
+      cancelButtonColor: "black",
+      confirmButtonText: "Supprimer ce compte",
+      cancelButtonText: "Annuler",
+      width: 400,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`${import.meta.env.VITE_BACKEND_URL}/applicants/${id}`, {
+            headers: {
+              Authorization: `Bearer ${userToken}`,
+            },
+          })
+          .then(() => {
+            getApplicants();
+            Swal.fire({
+              text: "Ce compte a bien été supprimé",
+              icon: "success",
+              buttonsStyling: false,
+              iconColor: "#eac1cc",
+              customClass: {
+                confirmButton: "button",
+              },
+              width: 300,
+            });
+          })
+          .catch((err) => {
+            console.error(err);
+            Swal.fire({
+              icon: "error",
+              text: err.response.data.error,
+              width: 300,
+              buttonsStyling: false,
+              iconColor: "#ca2061cc",
+              customClass: {
+                confirmButton: "button",
+              },
+            });
+          });
+      }
+    });
   };
 
   const getCompanies = () => {
@@ -102,17 +247,82 @@ function UsersManagement() {
       })
       .then((results) => {
         setAllCompanies(results.data);
+      })
+      .catch((err) => {
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.error,
+          width: 300,
+          buttonsStyling: false,
+          iconColor: "#ca2061cc",
+          customClass: {
+            confirmButton: "button",
+          },
+        });
       });
   };
   const deleteCompany = (id) => {
-    axios
-      .delete(`${import.meta.env.VITE_BACKEND_URL}/companies/${id}`, {
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-        },
+    Swal.fire({
+      title: "Etes-vous sûr de vouloir supprimer ce compte?",
+      text: "Cette suppression est irréversible !",
+      icon: "warning",
+      iconColor: "#ca2061",
+      showCancelButton: true,
+      confirmButtonColor: "#ca2061",
+      cancelButtonColor: "black",
+      confirmButtonText: "Supprimer ce compte",
+      cancelButtonText: "Annuler",
+      width: 400,
+    })
+      .then((result) => {
+        if (result.isConfirmed) {
+          axios
+            .delete(`${import.meta.env.VITE_BACKEND_URL}/companies/${id}`, {
+              headers: {
+                Authorization: `Bearer ${userToken}`,
+              },
+            })
+            .then(() => {
+              getCompanies();
+              Swal.fire({
+                text: "Ce compte a bien été supprimé",
+                icon: "success",
+                buttonsStyling: false,
+                iconColor: "#eac1cc",
+                customClass: {
+                  confirmButton: "button",
+                },
+                width: 300,
+              });
+            })
+            .catch((err) => {
+              console.error(err);
+              Swal.fire({
+                icon: "error",
+                text: err.response.data.error,
+                width: 300,
+                buttonsStyling: false,
+                iconColor: "#ca2061cc",
+                customClass: {
+                  confirmButton: "button",
+                },
+              });
+            });
+        }
       })
-      .then(() => {
-        getCompanies();
+      .catch((err) => {
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.error,
+          width: 300,
+          buttonsStyling: false,
+          iconColor: "#ca2061cc",
+          customClass: {
+            confirmButton: "button",
+          },
+        });
       });
   };
 
@@ -130,7 +340,7 @@ function UsersManagement() {
             <h2>Administrateurs</h2>
             {allAdmins
               ? allAdmins.map((admin) => (
-                  <div className="userManagementCardContainer">
+                  <div className="userManagementCardContainer" key={admin.id}>
                     <div className="userManagementCard">
                       <div className="userManagementCardRightPart">
                         <p>ID: {admin.id}</p>
@@ -226,7 +436,10 @@ function UsersManagement() {
             <h2>Candidats</h2>
             {allApplicants
               ? allApplicants.map((applicant) => (
-                  <div className="userManagementCardContainer">
+                  <div
+                    className="userManagementCardContainer"
+                    key={applicant.id}
+                  >
                     <div className="userManagementCard">
                       <div className="userManagementCardRightPart">
                         <p>ID: {applicant.id}</p>
@@ -257,7 +470,7 @@ function UsersManagement() {
             <h2>Entreprises</h2>
             {allCompanies
               ? allCompanies.map((company) => (
-                  <div className="userManagementCardContainer">
+                  <div className="userManagementCardContainer" key={company.id}>
                     <div className="userManagementCard">
                       <div className="userManagementCardRightPart">
                         <p>ID: {company.id}</p>
@@ -286,9 +499,7 @@ function UsersManagement() {
           </div>
         </div>
       ) : (
-        <div className="globalContainer">
-          <h3 className="errorTitle">⛔ Vous n'êtes pas administrateur</h3>
-        </div>
+        <Error401Unauthorized message={messages.unauthorized} />
       )}
     </div>
   );

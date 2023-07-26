@@ -1,15 +1,28 @@
 /* eslint-disable camelcase */
+import { useContext } from "react";
 import PropTypes from "prop-types";
 import Modal from "react-modal";
+// Import context
+import TokenContext from "../contexts/TokenContext";
 
 // import des icones
 import cross from "../assets/icons/cross.svg";
 import iconBlackCity from "../assets/icons/black_city_fill.svg";
 import iconBlackContract from "../assets/icons/contract_black.svg";
+import iconBlackHeartEmpty from "../assets/icons/black_heart_empty.svg";
+import iconBlackHeartFill from "../assets/icons/black_heart_fill.svg";
 import iconPinkRocket from "../assets/icons/rocket_pink.svg";
 import iconPinkTools from "../assets/icons/tools_pink.svg";
+import iconBlackProfil from "../assets/icons/person_black.svg";
 
-function OfferModal({ modalOfferIsOpen, setModalOfferIsOpen, offer }) {
+function OfferModal({
+  modalOfferIsOpen,
+  setModalOfferIsOpen,
+  offer,
+  isFavorite,
+  addFavorite,
+  deleteFavorite,
+}) {
   const {
     title,
     city,
@@ -17,7 +30,9 @@ function OfferModal({ modalOfferIsOpen, setModalOfferIsOpen, offer }) {
     technical_environment,
     benefits,
     contract_type_name,
+    company_name,
   } = offer;
+  const { userRole } = useContext(TokenContext);
   return (
     <Modal
       closeTimeoutMS={200}
@@ -33,10 +48,8 @@ function OfferModal({ modalOfferIsOpen, setModalOfferIsOpen, offer }) {
         content: {
           border: "1px solid #ccc",
           borderRadius: "4px",
-          height: "100%",
           margin: "auto",
-          inset: "1rem 0.4rem 0 0.4rem",
-          padding: "0.5rem",
+          inset: "0",
         },
       }}
     >
@@ -50,15 +63,41 @@ function OfferModal({ modalOfferIsOpen, setModalOfferIsOpen, offer }) {
         </button>
       </div>
       {offer && (
-        <>
-          <h2>{title}</h2>
-          <div className="offerTextAndIcon">
-            <img src={iconBlackCity} alt="icon city" />
-            <h3>{city}</h3>
-          </div>
-          <div className="offerTextAndIcon">
-            <img src={iconBlackContract} alt="icon contract" />
-            <h3>{contract_type_name}</h3>
+        <div className="modalContainer">
+          <div className="offerModalColor">
+            <div className="offerTitleAndIcon">
+              <h2 className="titleOfferCard">{title}</h2>
+              {isFavorite && userRole === "applicant" ? (
+                <button type="button" onClick={() => deleteFavorite()}>
+                  <img
+                    src={iconBlackHeartFill}
+                    alt="icon add favorite"
+                    className="heart"
+                  />
+                </button>
+              ) : null}
+              {!isFavorite && userRole === "applicant" ? (
+                <button type="button" onClick={() => addFavorite()}>
+                  <img
+                    src={iconBlackHeartEmpty}
+                    alt="icon add favorite"
+                    className="heart"
+                  />
+                </button>
+              ) : null}
+            </div>
+            <div className="offerTextAndIcon">
+              <img src={iconBlackProfil} alt="icon profil" />
+              <h3>{company_name}</h3>
+            </div>
+            <div className="offerTextAndIcon">
+              <img src={iconBlackCity} alt="icon city" />
+              <h3>{city}</h3>
+            </div>
+            <div className="offerTextAndIcon">
+              <img src={iconBlackContract} alt="icon contract" />
+              <h3>{contract_type_name}</h3>
+            </div>
           </div>
           <div className="offerTextAndIcon">
             <img src={iconPinkRocket} alt="icon contract" />
@@ -75,7 +114,7 @@ function OfferModal({ modalOfferIsOpen, setModalOfferIsOpen, offer }) {
             <h3 className="titleModal">Les avantages</h3>
           </div>
           <p>{benefits}</p>
-        </>
+        </div>
       )}
       <div className="buttonModal">
         <button
@@ -98,9 +137,13 @@ OfferModal.propTypes = {
     technical_environment: PropTypes.string,
     benefits: PropTypes.string,
     contract_type_name: PropTypes.string,
+    company_name: PropTypes.string,
   }).isRequired,
   modalOfferIsOpen: PropTypes.bool.isRequired,
-  setModalOfferIsOpen: PropTypes.bool.isRequired,
+  setModalOfferIsOpen: PropTypes.func.isRequired,
+  isFavorite: PropTypes.bool.isRequired,
+  addFavorite: PropTypes.func.isRequired,
+  deleteFavorite: PropTypes.func.isRequired,
 };
 
 export default OfferModal;

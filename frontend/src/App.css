@@ -63,7 +63,6 @@ html {
 body {
   width: 100vw;
   background-color: var(--background-grey);
-  padding-bottom: 3rem;
 }
 
 a {
@@ -81,10 +80,14 @@ a {
   border: var(--border_card);
   box-shadow: var(--shadow_initial);
   border-radius: 1rem;
-  gap: 2rem;
+  gap: 1rem;
   width: 95%;
   max-width: 60rem;
   background-color: white;
+}
+
+.offersFavoriesContainer {
+  min-height: calc(100vh - 7vh - 48px - 15rem);
 }
 
 /* Global form */
@@ -94,7 +97,7 @@ a {
   flex-direction: column;
   align-items: center;
   margin: auto;
-  padding: 2.5rem;
+  padding: 1rem;
   border: var(--border_card);
   box-shadow: var(--shadow_initial);
   border-radius: 1rem;
@@ -102,6 +105,14 @@ a {
   width: 95%;
   max-width: 60rem;
   background-color: white;
+}
+
+.formContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
 }
 
 /* Global buttons */
@@ -112,10 +123,15 @@ a {
   color: #fff;
   font-size: 1rem;
   font-weight: bold;
+  box-shadow: var(--shadow_initial);
 }
 
 .button * {
   color: #fff;
+}
+
+.reverseButton {
+  background-color: var(--secondary-color);
 }
 
 a:hover {
@@ -155,6 +171,13 @@ a:hover {
   &:focus {
     outline: none;
   }
+}
+
+.textAreaInput {
+  width: 100%;
+  min-width: 50%;
+  max-width: 100%;
+  min-height: 10rem;
 }
 
 /* Global radio input */
@@ -232,4 +255,18 @@ a:hover {
 .divider {
   width: 90%;
   border-top: 1px solid var(--light-grey);
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}
+
+.success {
+  color: green;
+  font-weight: bold;
+}
+
+.heart:hover {
+  cursor: pointer;
 }

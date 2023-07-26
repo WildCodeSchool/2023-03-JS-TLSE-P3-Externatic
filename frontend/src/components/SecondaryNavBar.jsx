@@ -20,7 +20,7 @@ function SecondaryNavBar() {
               return isActive ? "linkSelected" : "";
             }}
           >
-            Les offres
+            Gestion des offres
           </NavLink>
           <NavLink
             to="./users-management"
@@ -28,15 +28,15 @@ function SecondaryNavBar() {
               return isActive ? "linkSelected" : "";
             }}
           >
-            Les utilisateurs
+            Gestion des utilisateurs
           </NavLink>
           <NavLink
-            to="./reports-management"
+            to="./fields-management"
             className={({ isActive }) => {
               return isActive ? "linkSelected" : "";
             }}
           >
-            Signalements
+            Gestion des filtres
           </NavLink>
           <NavLink
             to="./my-profile"
@@ -56,15 +56,7 @@ function SecondaryNavBar() {
               return isActive ? "linkSelected" : "";
             }}
           >
-            Mes offres publiées
-          </NavLink>
-          <NavLink
-            to="./my-received-applications"
-            className={({ isActive }) => {
-              return isActive ? "linkSelected" : "";
-            }}
-          >
-            Candidatures reçues
+            Mes offres
           </NavLink>
           <NavLink
             to="./my-profile"
@@ -79,28 +71,12 @@ function SecondaryNavBar() {
       {userRole === "applicant" ? (
         <div className="applicantSecNav">
           <NavLink
-            to="./my-applications"
-            className={({ isActive }) => {
-              return isActive ? "linkSelected" : "";
-            }}
-          >
-            Mes candidatures
-          </NavLink>
-          <NavLink
             to="./my-favorite-offers"
             className={({ isActive }) => {
               return isActive ? "linkSelected" : "";
             }}
           >
             Mes offres favorites
-          </NavLink>
-          <NavLink
-            to="./my-searches"
-            className={({ isActive }) => {
-              return isActive ? "linkSelected" : "";
-            }}
-          >
-            Mes recherches
           </NavLink>
           <NavLink
             to="./my-profile"

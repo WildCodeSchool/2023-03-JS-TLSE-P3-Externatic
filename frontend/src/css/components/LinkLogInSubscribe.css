@@ -1,7 +1,13 @@
 .navBarConnexion {
   display: flex;
   justify-content: space-around;
-  margin: 2rem;
+  margin: 2rem 0;
+}
+
+.navBarConnexion ul {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
 }
 
 .navBarConnexion li {
@@ -12,12 +18,11 @@
 .loginLinkSelected a {
   color: var(--main-color);
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   text-decoration: underline 0.15rem;
   text-underline-offset: 0.5rem;
   padding: 1rem;
 }
-
 
 .loginLink a,
 .signinLink a {
@@ -31,18 +36,18 @@
   .loginLink a,
   .signinLink a {
     font-size: 1.4rem;
-    
   }
 
-  .navBarConnexion{
+  .navBarConnexion {
     margin: 4rem;
   }
 
-  .signinLinkSelected a{
+  .signinLinkSelected a {
     padding-right: 4rem;
+    font-size: 1.5rem;
   }
-  .loginLinkSelected a{
+  .loginLinkSelected a {
     padding-left: 4rem;
+    font-size: 1.5rem;
   }
-
 }

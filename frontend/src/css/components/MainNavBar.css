@@ -6,7 +6,7 @@
   background-color: #fff;
   position: sticky;
   top: 0;
-  height: 7vh;
+  height: 10vh;
   z-index: 10;
 }
 
@@ -93,5 +93,13 @@
 
   .crossSection {
     display: none;
+  }
+
+  button .greenSpanRole {
+    color: lightgreen;
+  }
+
+  button .redSpanRole {
+    color: red;
   }
 }

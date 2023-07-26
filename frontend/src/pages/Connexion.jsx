@@ -2,26 +2,22 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 // Import components
 import LinkLogInSubscribe from "../components/LinkLogInSubscribe";
 
 // Import context
 import TokenContext from "../contexts/TokenContext";
-import ValidationFormContext from "../contexts/ValidationFormContext";
 
 function Connexion() {
-  const { setUserCookie } = useContext(TokenContext);
-  const {
-    formDataLogIn,
-    setFormDataLogIn,
-    errors,
-    setErrors,
-    ValidationConnexion,
-    resetInputOnClick,
-  } = useContext(ValidationFormContext);
+  const { setUserCookie, setUserId } = useContext(TokenContext);
 
-  const [loginError, setLoginError] = useState(false);
+  const [formDataLogIn, setFormDataLogIn] = useState({
+    email: "",
+    password: "",
+  });
+
   const navigate = useNavigate();
 
   const handleInput = (e) => {
@@ -29,27 +25,27 @@ function Connexion() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    setErrors(ValidationConnexion(formDataLogIn));
-
-    if (
-      (formDataLogIn.email === "" && formDataLogIn.password === "") ||
-      (formDataLogIn.email !== "" && formDataLogIn.password === "") ||
-      (formDataLogIn.email === "" && formDataLogIn.password !== "")
-    ) {
-      setLoginError(false);
-      return;
-    }
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/login`, formDataLogIn)
       .then((response) => {
-        if (response.data.token) {
+        if (response.status === 200) {
           setUserCookie(response.data.token, response.data.user.role);
-          navigate("/dashboard/my-profile");
+          setUserId(response.data.user.id);
+          navigate("/");
         }
       })
       .catch((err) => {
         console.error(err);
-        setLoginError(true);
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.error,
+          width: 300,
+          buttonsStyling: false,
+          iconColor: "#ca2061cc",
+          customClass: {
+            confirmButton: "button",
+          },
+        });
       });
   };
 
@@ -75,15 +71,11 @@ function Connexion() {
               className="textInput"
               type="email"
               placeholder="Email"
-              // required
+              required
               name="email"
               autoComplete="off"
               onChange={handleInput}
-              onClick={resetInputOnClick}
             />
-            {errors.email && (
-              <span className="errorMessage">{errors.email}</span>
-            )}
           </div>
 
           <div className="containerTextInput">
@@ -107,20 +99,11 @@ function Connexion() {
               className="textInput"
               type="password"
               placeholder="Mot de passe"
-              // required
+              required
               name="password"
               onChange={handleInput}
-              onClick={resetInputOnClick}
             />
-            {errors.password && (
-              <span className="errorMessage">{errors.password}</span>
-            )}
           </div>
-          {loginError && (
-            <span className="errorLogin">
-              Nous n'avons pas trouvé votre compte
-            </span>
-          )}
           <button type="submit" className="button connection">
             Je me connecte
           </button>

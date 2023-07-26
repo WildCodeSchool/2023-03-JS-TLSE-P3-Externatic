@@ -18,15 +18,15 @@ const verifyEmailForSubscription = (req, res, next) => {
     .findUserByEmail(email)
     .then(([admins]) => {
       if (admins.length) {
-        res.sendStatus(403);
+        res.status(403).send({ error: "Cet email existe déjà." });
       } else {
         models.applicant.findUserByEmail(email).then(([applicants]) => {
           if (applicants.length) {
-            res.sendStatus(403);
+            res.status(403).send({ error: "Cet email existe déjà." });
           } else {
             models.company.findUserByEmail(email).then(([companies]) => {
               if (companies.length) {
-                res.sendStatus(403);
+                res.status(403).send({ error: "Cet email existe déjà." });
               } else {
                 next();
               }
@@ -37,7 +37,7 @@ const verifyEmailForSubscription = (req, res, next) => {
     })
     .catch((err) => {
       console.error(err);
-      res.status(500).send("Error retrieving data from database");
+      res.status(500).send({ error: "Une erreur est survenue." });
     });
 };
 
@@ -52,26 +52,49 @@ const hashPassword = (req, res, next) => {
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500).send({ error: "Une erreur est survenue." });
+    });
+};
+const hashNewPassword = (req, res, next) => {
+  argon2
+    .hash(req.body.newPassword, hashingOptions)
+    .then((hashedPassword) => {
+      req.body.hashedPassword = hashedPassword;
+      delete req.body.newPassword;
+      delete req.body.confirmNewPassword;
+      next();
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send({ error: "Une erreur est survenue." });
     });
 };
 
-const verifyPassword = (req, res) => {
+const verifyPassword = (req, res, next) => {
   argon2.verify(req.user.hashed_password, req.body.password).then((valid) => {
     if (valid) {
-      const payload = {
-        sub: req.user.id,
-        role: req.user.role,
-      };
-      const token = jwt.sign(payload, process.env.JWT_SECRET, {
-        expiresIn: "1h",
-      });
-      delete req.user.hashed_password;
-      res.send({ token, user: req.user }).status(200);
+      next();
     } else {
-      res.sendStatus(401);
+      res.status(401).send({ error: "Le mot de passe est incorrect." });
     }
   });
+};
+
+const login = (req, res) => {
+  try {
+    const payload = {
+      sub: req.user.id,
+      role: req.user.role,
+    };
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
+    delete req.user.hashed_password;
+    res.send({ token, user: req.user }).status(200);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ error: "Une erreur est survenue." });
+  }
 };
 
 const verifyToken = (req, res, next) => {
@@ -88,20 +111,68 @@ const verifyToken = (req, res, next) => {
     next();
   } catch (error) {
     console.error(error);
-    res.sendStatus(401);
+    res.status(401).send({ error: "Vous devez vous authentifier." });
   }
 };
 
 const verifyAdmin = (req, res, next) => {
   try {
     if (req.payload.role !== "admin") {
-      res.sendStatus(403);
+      res
+        .status(403)
+        .send({ error: "Cette action est réservée aux administrateurs." });
     } else {
       next();
     }
   } catch (error) {
     console.error(error);
-    res.sendStatus(401);
+    res.status(500).send({ error: "Une erreur est survenue." });
+  }
+};
+
+const verifyCompany = (req, res, next) => {
+  try {
+    if (req.payload.role !== "company") {
+      res
+        .status(403)
+        .send({ error: "Cette action est réservée aux entreprises." });
+    } else {
+      next();
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ error: "Une erreur est survenue." });
+  }
+};
+
+const verifyAdminOrCompany = (req, res, next) => {
+  try {
+    if (req.payload.role !== "company" && req.payload.role !== "admin") {
+      res.status(403).send({
+        error:
+          "Cette action est réservée aux administrateurs et aux entreprises.",
+      });
+    } else {
+      next();
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ error: "Une erreur est survenue." });
+  }
+};
+
+const verifyApplicant = (req, res, next) => {
+  try {
+    if (req.payload.role !== "applicant") {
+      res
+        .sendtatus(403)
+        .send({ error: "Cette action est réservée aux candidats." });
+    } else {
+      next();
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ error: "Une erreur est survenue." });
   }
 };
 
@@ -111,4 +182,9 @@ module.exports = {
   verifyPassword,
   verifyToken,
   verifyAdmin,
+  verifyCompany,
+  verifyAdminOrCompany,
+  login,
+  hashNewPassword,
+  verifyApplicant,
 };

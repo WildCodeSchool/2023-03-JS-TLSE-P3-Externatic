@@ -23,7 +23,9 @@ const getUserByEmail = (req, res, next) => {
                 req.user.role = "company";
                 next();
               } else {
-                res.sendStatus(401);
+                res
+                  .status(401)
+                  .send({ error: "Cet utilisateur n'existe pas." });
               }
             });
           }
@@ -32,10 +34,53 @@ const getUserByEmail = (req, res, next) => {
     })
     .catch((err) => {
       console.error(err);
-      res.status(500).send("Error retrieving data from database");
+      res.status(500).send({ error: "Une erreur est survenue." });
     });
+};
+
+const validateNewPassword = (req, res, next) => {
+  const { newPassword, confirmNewPassword } = req.body;
+  const passwordPattern =
+    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*()_+{}[\]:;"'<>,.?/\\|`~]).{8,}$/;
+
+  if (!passwordPattern.test(newPassword)) {
+    res.status(400).send({
+      error:
+        "Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule, 1 chiffre et un caractère spécial.",
+    });
+  } else if (newPassword !== confirmNewPassword) {
+    res
+      .status(400)
+      .send({ error: "Les mots de passe ne sont pas identiques." });
+  } else {
+    next();
+  }
+};
+
+// ------------Trouver un utilisateur par son id ------------
+const getUserById = (req, res) => {
+  const { id } = req.params;
+  const { role } = req.query;
+
+  if (role === "admin") {
+    models.admin.find(id).then(([admins]) => {
+      res.send(admins).status(200);
+    });
+  } else if (role === "applicant") {
+    models.applicant.find(id).then(([applicants]) => {
+      res.send(applicants).status(200);
+    });
+  } else if (role === "company") {
+    models.company.find(id).then(([companies]) => {
+      res.send(companies).status(200);
+    });
+  } else {
+    res.sendStatus(401);
+  }
 };
 
 module.exports = {
   getUserByEmail,
+  validateNewPassword,
+  getUserById,
 };
