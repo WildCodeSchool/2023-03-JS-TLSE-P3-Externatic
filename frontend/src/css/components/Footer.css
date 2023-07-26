@@ -1,6 +1,4 @@
 .footer {
-  /* position: sticky;
-  bottom: 0; */
   margin-top: 6rem;
   padding: 0.5rem 0;
   display: flex;
@@ -11,7 +9,6 @@
   width: 100%;
   gap: 1rem;
   height: fit-content;
-
 }
 .footer p {
   font-size: 1rem;

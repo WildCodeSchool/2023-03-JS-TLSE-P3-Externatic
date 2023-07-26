@@ -48,7 +48,7 @@ input[type="radio"].radioInput:checked + label.labelRadioInput {
   .containerTitleName.newApplicant {
     width: 100%;
   }
-  
+
   .button.subscription {
     margin-top: 1rem;
   }
