@@ -17,8 +17,6 @@
 
 .App {
   min-height: calc(100vh - 7vh - 48px - 15rem);
-
-
 }
 /* Font sizes */
 * {
@@ -118,6 +116,9 @@ a {
   flex-direction: column;
   align-items: center;
   gap: 2rem;
+}
+.containerTitleName.applicant {
+  width: 50%;
 }
 
 /* Global buttons */
