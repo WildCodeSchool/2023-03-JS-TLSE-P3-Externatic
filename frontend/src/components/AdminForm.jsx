@@ -279,7 +279,11 @@ function AdminForm() {
           Modifier mon mot de passe
         </button>
       </form>
-      <button type="button" onClick={() => deleteAccount()} className="button">
+      <button
+        type="button"
+        onClick={() => deleteAccount()}
+        className="button reverseButton"
+      >
         Supprimer mon compte
       </button>
     </div>
