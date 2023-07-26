@@ -56,7 +56,7 @@ function SecondaryNavBar() {
               return isActive ? "linkSelected" : "";
             }}
           >
-            Mes offres publiées
+            Mes offres
           </NavLink>
           <NavLink
             to="./my-profile"

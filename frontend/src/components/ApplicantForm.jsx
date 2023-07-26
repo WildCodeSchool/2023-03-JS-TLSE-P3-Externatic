@@ -12,6 +12,8 @@ import TokenContext from "../contexts/TokenContext";
 import identificationBlack from "../assets/icons/identification_black.svg";
 import mailBlack from "../assets/icons/mail_black.svg";
 import lockBlack from "../assets/icons/lock_black.svg";
+import mobile from "../assets/icons/mobile_black.svg";
+import cityImg from "../assets/icons/black_city_fill.svg";
 
 function ApplicantForm() {
   const { userToken, setUserCookie } = useContext(TokenContext);
@@ -279,7 +281,7 @@ function ApplicantForm() {
           />
         </div>
         <div className="containerTextInput">
-          <img className="iconForm" src={mailBlack} alt="person" />
+          <img className="iconForm" src={cityImg} alt="person" />
           <input
             type="text"
             placeholder="Ville"
@@ -290,7 +292,7 @@ function ApplicantForm() {
           />
         </div>
         <div className="containerTextInput">
-          <img className="iconForm" src={mailBlack} alt="person" />
+          <img className="iconForm" src={mobile} alt="person" />
           <input
             type="text"
             placeholder="Tél"
@@ -346,7 +348,11 @@ function ApplicantForm() {
           Modifier mon mot de passe
         </button>
       </form>
-      <button type="button" onClick={() => deleteAccount()} className="button">
+      <button
+        type="button"
+        onClick={() => deleteAccount()}
+        className="button reverseButton"
+      >
         Supprimer mon compte
       </button>
     </div>
