@@ -5,14 +5,9 @@ import Swal from "sweetalert2";
 
 // Import des composants
 import OfferCardCarousel from "../components/OfferCardCarousel";
-import Error404 from "../components/Error404";
-import Error401Unauthorized from "../components/Error401Unauthorized";
-import ErrorNoData from "../components/ErrorNoData";
-import IsLoading from "../components/IsLoading";
 
 // Import du context
 import TokenContext from "../contexts/TokenContext";
-import MessagesErrorContext from "../contexts/MessagesErrorContext";
 
 // Import des assets
 import externaticHello from "../assets/icons/externatic-hello.svg";
@@ -24,7 +19,6 @@ function Home() {
   const [offersList, setOffersList] = useState([]);
   const [dataUser, setDataUser] = useState();
   const { userToken, userId, userRole } = useContext(TokenContext);
-  const { messages } = useContext(MessagesErrorContext);
 
   useEffect(() => {
     axios
@@ -142,10 +136,6 @@ function Home() {
           </div>
         </div>
       </section>
-      <Error404 message={messages.notFound} />
-      <Error401Unauthorized message={messages.unauthorized} />
-      <ErrorNoData message={messages.result} />
-      <IsLoading />
     </>
   );
 }
