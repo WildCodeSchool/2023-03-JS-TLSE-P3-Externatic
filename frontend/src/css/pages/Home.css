@@ -76,7 +76,7 @@
 
   /* style de la description Externatic */
   .descriptionHomePage {
-    max-width: 65rem;
+    max-width: 80rem;
     margin: 4rem auto;
     gap: 2rem;
   }
@@ -90,6 +90,7 @@
     justify-content: center;
     width: 100%;
     margin: auto;
+    gap: 2rem;
   }
 
   .aboutExternatic {
