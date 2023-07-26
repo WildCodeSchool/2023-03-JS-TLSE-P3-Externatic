@@ -41,7 +41,7 @@ const getUserByEmail = (req, res, next) => {
 const validateNewPassword = (req, res, next) => {
   const { newPassword, confirmNewPassword } = req.body;
   const passwordPattern =
-    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*()_+{}[\]:;"'<>,.?/\\|`~]).{8,}$/;
 
   if (!passwordPattern.test(newPassword)) {
     res.status(400).send({

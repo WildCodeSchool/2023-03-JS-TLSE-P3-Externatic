@@ -149,7 +149,7 @@ const validateCompanyInfosForSubscription = (req, res, next) => {
 
   // 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial, longueur 8
   const passwordPattern =
-    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*()_+{}[\]:;"'<>,.?/\\|`~]).{8,}$/;
   if (!name) {
     res
       .status(400)
@@ -181,12 +181,10 @@ const validateCompanyInfosForSubscription = (req, res, next) => {
 };
 
 const validateCompanyInfosToModify = (req, res, next) => {
-  const { companyName, email, city, phone, siret } = req.body;
+  const { companyName, email, siret } = req.body;
   const emailPattern =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,3}$/;
   const siretPattern = /^\d{14,14}$/;
-  const namePattern = /^([^0-9]*)$/;
-  const phonePattern = /^(\+\d{1,3}\s?)?(\(\d{1,4}\)\s?)?[\d\s-]{5,}$/;
 
   if (!companyName) {
     res
@@ -204,14 +202,6 @@ const validateCompanyInfosToModify = (req, res, next) => {
     res.status(400).send({ error: "Vous devez renseigner un email." });
   } else if (!emailPattern.test(email)) {
     res.status(400).send({ error: "L'adresse email n'est pas valide." });
-  } else if (!namePattern.test(city)) {
-    res
-      .status(400)
-      .send({ error: "La ville ne doit contenir que des lettres." });
-  } else if (!phonePattern.test(phone)) {
-    res.status(400).send({
-      error: "Le numéro de téléphone n'est pas valide.",
-    });
   } else {
     next();
   }
