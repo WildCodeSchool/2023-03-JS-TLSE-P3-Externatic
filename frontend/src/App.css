@@ -266,3 +266,7 @@ a:hover {
   color: green;
   font-weight: bold;
 }
+
+.heart:hover {
+  cursor: pointer;
+}

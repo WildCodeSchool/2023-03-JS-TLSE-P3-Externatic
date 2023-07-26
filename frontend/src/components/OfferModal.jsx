@@ -63,39 +63,41 @@ function OfferModal({
         </button>
       </div>
       {offer && (
-        <>
-          <div className="offerTitleAndIcon">
-            <h3 className="titleOfferCard">{title}</h3>
-            {isFavorite && userRole === "applicant" ? (
-              <button type="button" onClick={() => deleteFavorite()}>
-                <img
-                  src={iconBlackHeartFill}
-                  alt="icon add favorite"
-                  className="heart"
-                />
-              </button>
-            ) : null}
-            {!isFavorite && userRole === "applicant" ? (
-              <button type="button" onClick={() => addFavorite()}>
-                <img
-                  src={iconBlackHeartEmpty}
-                  alt="icon add favorite"
-                  className="heart"
-                />
-              </button>
-            ) : null}
-          </div>
-          <div className="offerTextAndIcon">
-            <img src={iconBlackProfil} alt="icon profil" />
-            <h3>{company_name}</h3>
-          </div>
-          <div className="offerTextAndIcon">
-            <img src={iconBlackCity} alt="icon city" />
-            <h3>{city}</h3>
-          </div>
-          <div className="offerTextAndIcon">
-            <img src={iconBlackContract} alt="icon contract" />
-            <h3>{contract_type_name}</h3>
+        <div className="modalContainer">
+          <div className="offerModalColor">
+            <div className="offerTitleAndIcon">
+              <h2 className="titleOfferCard">{title}</h2>
+              {isFavorite && userRole === "applicant" ? (
+                <button type="button" onClick={() => deleteFavorite()}>
+                  <img
+                    src={iconBlackHeartFill}
+                    alt="icon add favorite"
+                    className="heart"
+                  />
+                </button>
+              ) : null}
+              {!isFavorite && userRole === "applicant" ? (
+                <button type="button" onClick={() => addFavorite()}>
+                  <img
+                    src={iconBlackHeartEmpty}
+                    alt="icon add favorite"
+                    className="heart"
+                  />
+                </button>
+              ) : null}
+            </div>
+            <div className="offerTextAndIcon">
+              <img src={iconBlackProfil} alt="icon profil" />
+              <h3>{company_name}</h3>
+            </div>
+            <div className="offerTextAndIcon">
+              <img src={iconBlackCity} alt="icon city" />
+              <h3>{city}</h3>
+            </div>
+            <div className="offerTextAndIcon">
+              <img src={iconBlackContract} alt="icon contract" />
+              <h3>{contract_type_name}</h3>
+            </div>
           </div>
           <div className="offerTextAndIcon">
             <img src={iconPinkRocket} alt="icon contract" />
@@ -112,7 +114,7 @@ function OfferModal({
             <h3 className="titleModal">Les avantages</h3>
           </div>
           <p>{benefits}</p>
-        </>
+        </div>
       )}
       <div className="buttonModal">
         <button
