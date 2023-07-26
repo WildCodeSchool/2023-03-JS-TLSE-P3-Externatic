@@ -9,7 +9,7 @@ const getAllApplicants = (req, res) => {
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500).send({ error: "Une erreur est survenue." });
     });
 };
 // ------------Création du candidat------------
@@ -32,7 +32,7 @@ const postApplicant = (req, res) => {
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500).send({ error: "Une erreur est survenue." });
     });
 };
 
@@ -48,14 +48,14 @@ const deleteApplicant = (req, res) => {
     .delete(id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
-        res.sendStatus(404);
+        res.status(500).send({ error: "La suppression a échouée." });
       } else {
         res.sendStatus(204);
       }
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500).send({ error: "Une erreur est survenue." });
     });
 };
 
@@ -67,14 +67,14 @@ const getApplicant = (req, res) => {
     .find(id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
-        res.sendStatus(404);
+        res.status(404).send({ error: "Candidat non trouvé." });
       } else {
         res.json(result).status(200);
       }
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500).send({ error: "Une erreur est survenue." });
     });
 };
 
@@ -84,7 +84,7 @@ const getApplicantById = (req, res, next) => {
     .find(id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
-        res.sendStatus(404);
+        res.status(404).send({ error: "L'utilisateur n'a pas été trouvé." });
       } else {
         [req.user] = result;
         next();
@@ -92,7 +92,7 @@ const getApplicantById = (req, res, next) => {
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500).send({ error: "Une erreur est survenue." });
     });
 };
 
@@ -113,14 +113,16 @@ const modifyApplicant = (req, res) => {
     })
     .then(([result]) => {
       if (result.affectedRows === 0) {
-        res.sendStatus(404);
+        res
+          .status(404)
+          .send({ error: "Aucune modification n'a été effectuée." });
       } else {
         res.sendStatus(204);
       }
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500).send({ error: "Une erreur est survenue." });
     });
 };
 
@@ -133,15 +135,56 @@ const modifyPasswordApplicant = (req, res) => {
     .updatePassword(id, hashedPassword)
     .then(([result]) => {
       if (result.affectedRows === 0) {
-        res.sendStatus(404);
+        res
+          .status(500)
+          .send({ error: "Le mot de passe n'a pas pu être modifié." });
       } else {
         res.sendStatus(204);
       }
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500).send({ error: "Une erreur est survenue." });
     });
+};
+
+const validateApplicantInfosForSubscription = (req, res, next) => {
+  const { titleName, firstname, lastname, email, password, confirmedPassword } =
+    req.body;
+  const namePattern = /^([^0-9]*)$/;
+  const emailPattern =
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,3}$/;
+  // 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial, longueur 8
+  const passwordPattern =
+    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+  if (titleName !== "Mr" && titleName !== "Mme") {
+    res.status(400).send({ error: "Vous devez renseigner votre civilité." });
+  } else if (!firstname) {
+    res.status(400).send({ error: "Vous devez renseigner votre prénom." });
+  } else if (!namePattern.test(firstname)) {
+    res
+      .status(400)
+      .send({ error: "Le prénom ne doit contenir que des lettres." });
+  } else if (!lastname) {
+    res.status(400).send({ error: "Vous devez renseigner votre nom." });
+  } else if (!namePattern.test(lastname)) {
+    res.status(400).send({ error: "Le nom ne doit contenir que des lettres." });
+  } else if (!email) {
+    res.status(400).send({ error: "Vous devez renseigner un email." });
+  } else if (!emailPattern.test(email)) {
+    res.status(400).send({ error: "L'adresse email n'est pas valide." });
+  } else if (!passwordPattern.test(password)) {
+    res.status(400).send({
+      error:
+        "Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule, 1 chiffre et un caractère spécial.",
+    });
+  } else if (password !== confirmedPassword) {
+    res
+      .status(400)
+      .send({ error: "Les mots de passe ne sont pas identiques." });
+  } else {
+    next();
+  }
 };
 
 module.exports = {
@@ -152,4 +195,5 @@ module.exports = {
   modifyApplicant,
   getApplicantById,
   modifyPasswordApplicant,
+  validateApplicantInfosForSubscription,
 };

@@ -37,6 +37,7 @@ const {
   modifyApplicant,
   getApplicantById,
   modifyPasswordApplicant,
+  validateApplicantInfosForSubscription,
 } = require("./controllers/ApplicantController");
 const {
   getAllCompanies,
@@ -46,6 +47,7 @@ const {
   modifyCompany,
   getCompanyById,
   modifyPasswordCompany,
+  validateCompanyInfosForSubscription,
 } = require("./controllers/CompanyController");
 const {
   getAllOffers,
@@ -54,6 +56,8 @@ const {
   addOffer,
   getFilteredOffers,
   deleteOffersToDeleteCompany,
+  setOfferCategoryToNull,
+  setOfferContractTypeToNull,
 } = require("./controllers/OfferController");
 const {
   getAllCategories,
@@ -70,6 +74,8 @@ const {
   getAllFavorites,
   getFavorite,
   deleteFavorite,
+  deleteFavoritesToDeleteApplicant,
+  deleteFavToDeleteOffer,
 } = require("./controllers/FavoriteController");
 
 router.use(express.json());
@@ -79,6 +85,7 @@ router.use(express.json());
 router.post(
   "/signup/applicant",
   verifyEmailForSubscription,
+  validateApplicantInfosForSubscription,
   hashPassword,
   postApplicant
 );
@@ -86,6 +93,7 @@ router.post(
 router.post(
   "/signup/company",
   verifyEmailForSubscription,
+  validateCompanyInfosForSubscription,
   hashPassword,
   postCompany
 );
@@ -122,7 +130,12 @@ router.put(
   hashNewPassword,
   modifyPasswordApplicant
 );
-router.delete("/applicant", verifyApplicant, deleteApplicant);
+router.delete(
+  "/applicant",
+  verifyApplicant,
+  deleteFavoritesToDeleteApplicant,
+  deleteApplicant
+);
 
 // ------------Applicants favorites------------
 router.get("/favorites/:id", verifyApplicant, getFavorite);
@@ -173,7 +186,12 @@ router.delete("/admin", verifyAdmin, deleteAdmin);
 router.get("/admins", verifyAdmin, getAllAdmins);
 router.delete("/admins/:id", verifyAdmin, deleteAdmin);
 router.get("/applicants", verifyAdmin, getAllApplicants);
-router.delete("/applicants/:id", verifyAdmin, deleteApplicant);
+router.delete(
+  "/applicants/:id",
+  verifyAdmin,
+  deleteFavoritesToDeleteApplicant,
+  deleteApplicant
+);
 router.get("/companies", verifyAdmin, getAllCompanies);
 router.delete(
   "/companies/:id",
@@ -192,12 +210,27 @@ router.post(
 );
 
 // ------------Fields management------------
-router.delete("/categories/:id", verifyAdmin, deleteCategory);
+router.delete(
+  "/categories/:id",
+  verifyAdmin,
+  setOfferCategoryToNull,
+  deleteCategory
+);
 router.post("/categories", verifyAdmin, addCategory);
-router.delete("/contracts-type/:id", verifyAdmin, deleteContract);
+router.delete(
+  "/contracts-type/:id",
+  verifyAdmin,
+  setOfferContractTypeToNull,
+  deleteContract
+);
 router.post("/contracts-type", verifyAdmin, addContract);
 
 // ------------Offers management------------
-router.delete("/offers/:id", verifyAdminOrCompany, deleteOfferById);
+router.delete(
+  "/offers/:id",
+  verifyAdminOrCompany,
+  deleteFavToDeleteOffer,
+  deleteOfferById
+);
 
 module.exports = router;
