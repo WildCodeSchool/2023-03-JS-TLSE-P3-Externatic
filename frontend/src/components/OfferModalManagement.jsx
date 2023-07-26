@@ -41,7 +41,6 @@ function OfferModalManagement({
           borderRadius: "4px",
           margin: "auto",
           inset: "0",
-          padding: "0.5rem",
         },
       }}
     >
@@ -55,19 +54,21 @@ function OfferModalManagement({
         </button>
       </div>
       {offer && (
-        <>
-          <h3>{title}</h3>
-          <div className="offerTextAndIcon">
-            <img src={iconBlackProfil} alt="icon profil" />
-            <h3>{company_name}</h3>
-          </div>
-          <div className="offerTextAndIcon">
-            <img src={iconBlackCity} alt="icon city" />
-            <h3>{city}</h3>
-          </div>
-          <div className="offerTextAndIcon">
-            <img src={iconBlackContract} alt="icon contract" />
-            <h3>{contract_type_name}</h3>
+        <div className="modalContainer">
+          <div className="offerModalColor">
+            <h2 className="titleOfferCard">{title}</h2>
+            <div className="offerTextAndIcon">
+              <img src={iconBlackProfil} alt="icon profil" />
+              <h3>{company_name}</h3>
+            </div>
+            <div className="offerTextAndIcon">
+              <img src={iconBlackCity} alt="icon city" />
+              <h3>{city}</h3>
+            </div>
+            <div className="offerTextAndIcon">
+              <img src={iconBlackContract} alt="icon contract" />
+              <h3>{contract_type_name}</h3>
+            </div>
           </div>
           <div className="offerTextAndIcon">
             <img src={iconPinkRocket} alt="icon contract" />
@@ -84,7 +85,7 @@ function OfferModalManagement({
             <h3 className="titleModal">Les avantages</h3>
           </div>
           <p>{benefits}</p>
-        </>
+        </div>
       )}
       <div className="buttonModal">
         <button

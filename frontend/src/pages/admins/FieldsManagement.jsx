@@ -3,6 +3,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 // Import des composants
 import Error401Unauthorized from "../../components/Error401Unauthorized";
+import IsLoading from "../../components/IsLoading";
 
 // Import context
 import TokenContext from "../../contexts/TokenContext";
@@ -246,9 +247,7 @@ function FieldsManagement() {
                     </div>
                   ))
                 ) : (
-                  <div className="globalContainer">
-                    <h3 className="errorTitle">Chargement...</h3>
-                  </div>
+                  <IsLoading />
                 )}
                 {isNewCategoryOpen ? (
                   <div className="fieldManagementCardContainer">
@@ -330,9 +329,7 @@ function FieldsManagement() {
                     </div>
                   ))
                 ) : (
-                  <div className="globalContainer">
-                    <h3 className="errorTitle">Chargement...</h3>
-                  </div>
+                  <IsLoading />
                 )}
                 {isNewContractOpen ? (
                   <div className="fieldManagementCardContainer">

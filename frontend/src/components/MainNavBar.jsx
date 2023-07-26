@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
+import Swal from "sweetalert2";
 
 // Import des contexts
 import MenuContext from "../contexts/MenuContext";
@@ -76,6 +77,16 @@ function MainNavBar() {
             onClick={() => {
               setIsMenuShow(false);
               setUserCookie();
+              Swal.fire({
+                icon: "error",
+                text: "Vous êtes déconnecté !",
+                iconColor: "#851342",
+                width: 300,
+                showConfirmButton: false,
+                toast: true,
+                position: "bottom-end",
+                timer: 2000,
+              });
             }}
           >
             <Link to="/">

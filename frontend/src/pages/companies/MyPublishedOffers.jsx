@@ -5,14 +5,17 @@ import Swal from "sweetalert2";
 // Import context
 import TokenContext from "../../contexts/TokenContext";
 import FiltersContext from "../../contexts/FiltersContext";
+import MessagesErrorContext from "../../contexts/MessagesErrorContext";
 
 // import des composants
 import OfferCardManagement from "../../components/OfferCardManagement";
+import ErrorNoData from "../../components/ErrorNoData";
 
 function MyPublishedOffers() {
   const { userToken, userRole } = useContext(TokenContext);
   const { categoriesList, contractList, getCategories, getContracts } =
     useContext(FiltersContext);
+  const { messages } = useContext(MessagesErrorContext);
   const [offersList, setOffersList] = useState([]);
   const [offerInsertion, setOfferInsertion] = useState(false);
   const [offerInsertionObject] = useState({
@@ -112,9 +115,7 @@ function MyPublishedOffers() {
                 />
               ))
             ) : (
-              <div className="globalContainer">
-                <h3 className="errorTitle">Pas de résultat</h3>
-              </div>
+              <ErrorNoData message={messages.offers} />
             )}
             <button
               type="button"
@@ -248,9 +249,7 @@ function MyPublishedOffers() {
         </div>
       ) : (
         <div className="globalContainer">
-          <h3 className="errorTitle">
-            ⛔ Vous devez être connecté avec un compte entreprise
-          </h3>
+          <h3 className="errorTitle">Pas de résultat</h3>
         </div>
       )}
     </div>
