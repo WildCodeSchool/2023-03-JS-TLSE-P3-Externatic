@@ -11,11 +11,15 @@ h3 {
   gap: 1rem;
 }
 #offerModalContent::-webkit-scrollbar {
-  width: 0.2rem;
+  width: 0.9rem;
+}
+::-webkit-scrollbar-track-piece {
+  margin-top: 4rem;
 }
 #offerModalContent::-webkit-scrollbar-thumb {
   background-color: var(--main-color);
   border-radius: 1rem;
+  border: 0.4rem solid white;
 }
 .titleModal {
   color: var(--main-color);
@@ -49,7 +53,7 @@ h3 {
     height: 80vh;
   }
   .ReactModal__Content--after-open {
-    padding: 2rem;
+    padding: 0px;
   }
   .buttonModal > .button {
     display: none;

@@ -31,7 +31,9 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: start;
 }
+
 .offerTitleAndIcon {
   justify-content: space-between;
 }
@@ -60,25 +62,6 @@
 /* Style card list */
 .offerCardList {
   width: 95%;
-}
-/* Style card large */
-.offerCardLarge {
-  width: 70%;
-  max-width: 300px;
-}
-.offerTextAndIconCardLarge {
-  margin: auto;
-}
-.heartCardLarge {
-  display: flex;
-  justify-content: end;
-}
-.offerCardLarge > .offerCardColor {
-  gap: 1.2rem;
-}
-.jobCardImage {
-  width: 50%;
-  margin: auto;
 }
 
 .trash {

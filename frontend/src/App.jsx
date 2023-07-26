@@ -1,3 +1,6 @@
+// Reset CSS
+import "./reset.css";
+
 // Import des packages
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
@@ -12,7 +15,6 @@ import Dashboard from "./pages/Dashboard";
 import MainNavBar from "./components/MainNavBar";
 
 // Import du style
-import "./reset.css";
 import "./App.css";
 import "./css/pages/Offers.css";
 import "./css/pages/Connexion.css";
@@ -24,6 +26,7 @@ import "./css/pages/Subscribe.css";
 import "./css/pages/FieldsManagement.css";
 import "./css/pages/MyPublishedOffers.css";
 import "./css/components/MainNavBar.css";
+import "./css/components/OfferCardCarousel.css";
 import "./css/pages/Home.css";
 
 // Import des contexts

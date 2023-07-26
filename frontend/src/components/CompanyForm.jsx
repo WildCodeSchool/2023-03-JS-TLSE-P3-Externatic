@@ -9,9 +9,12 @@ import axios from "axios";
 import TokenContext from "../contexts/TokenContext";
 
 // Import des images
-import identificationBlack from "../assets/icons/identification_black.svg";
 import mailBlack from "../assets/icons/mail_black.svg";
 import lockBlack from "../assets/icons/lock_black.svg";
+import mobile from "../assets/icons/mobile_black.svg";
+import cityImg from "../assets/icons/black_city_fill.svg";
+import siretImg from "../assets/icons/siret.svg";
+import companyImg from "../assets/icons/company_building_black.svg";
 
 function CompanyForm() {
   const { userToken, setUserCookie } = useContext(TokenContext);
@@ -50,17 +53,25 @@ function CompanyForm() {
             text: "Les modifications ont bien été prises en compte",
             iconColor: "#ca2061",
             width: 300,
-            confirmButtonColor: "black",
-          });
-        } else {
-          Swal.fire({
-            icon: "success",
-            text: "Une erreur a été rencontrée",
-            iconColor: "#ca2061",
-            width: 300,
-            confirmButtonColor: "black",
+            buttonsStyling: false,
+            customClass: {
+              confirmButton: "button",
+            },
           });
         }
+      })
+      .catch((err) => {
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.error,
+          iconColor: "#ca2061",
+          width: 300,
+          buttonsStyling: false,
+          customClass: {
+            confirmButton: "button",
+          },
+        });
       });
   };
 
@@ -87,28 +98,25 @@ function CompanyForm() {
             text: "Le mot de passe a bien été modifié",
             iconColor: "#ca2061",
             width: 300,
-            confirmButtonColor: "black",
+            buttonsStyling: false,
+            customClass: {
+              confirmButton: "button",
+            },
           });
         }
       })
       .catch((err) => {
-        if (err.response.status === 401) {
-          Swal.fire({
-            icon: "error",
-            text: "Le mot de passe est incorrect",
-            iconColor: "#ca2061",
-            width: 300,
-            confirmButtonColor: "black",
-          });
-        } else if (err.response.status === 400) {
-          Swal.fire({
-            icon: "error",
-            text: "Les deux mots de passe doivent être identiques",
-            iconColor: "#ca2061",
-            width: 300,
-            confirmButtonColor: "black",
-          });
-        }
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.error,
+          iconColor: "#ca2061",
+          width: 300,
+          buttonsStyling: false,
+          customClass: {
+            confirmButton: "button",
+          },
+        });
       });
   };
 
@@ -125,6 +133,19 @@ function CompanyForm() {
         setCity(results.data[0].city);
         setPhone(results.data[0].phone);
         setSiret(results.data[0].siret);
+      })
+      .catch((err) => {
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.error,
+          iconColor: "#ca2061",
+          width: 300,
+          buttonsStyling: false,
+          customClass: {
+            confirmButton: "button",
+          },
+        });
       });
   };
 
@@ -156,65 +177,20 @@ function CompanyForm() {
                 },
               });
               navigate("/");
-            } else {
-              Swal.fire({
-                icon: "error",
-                text: "An error has occurred",
-                iconColor: "red",
-                width: 300,
-                buttonsStyling: false,
-                customClass: {
-                  confirmButton: "button",
-                },
-              });
             }
           })
           .catch((err) => {
-            if (err.response.status === 404) {
-              Swal.fire({
-                icon: "error",
-                text: "Delete failed",
-                iconColor: "red",
-                width: 300,
-                buttonsStyling: false,
-                customClass: {
-                  confirmButton: "button",
-                },
-              });
-            } else if (err.response.status === 401) {
-              Swal.fire({
-                icon: "error",
-                text: "You must be logged in",
-                iconColor: "red",
-                width: 300,
-                buttonsStyling: false,
-                customClass: {
-                  confirmButton: "button",
-                },
-              });
-            } else if (err.response.status === 500) {
-              Swal.fire({
-                icon: "error",
-                text: "An error has occurred (status 500)",
-                iconColor: "red",
-                width: 300,
-                buttonsStyling: false,
-                customClass: {
-                  confirmButton: "button",
-                },
-              });
-            } else {
-              Swal.fire({
-                icon: "error",
-                text: "An error has occurred",
-                iconColor: "red",
-                width: 300,
-                buttonsStyling: false,
-                customClass: {
-                  confirmButton: "button",
-                },
-              });
-            }
+            console.error(err);
+            Swal.fire({
+              icon: "error",
+              text: err.response.data.error,
+              iconColor: "#ca2061",
+              width: 300,
+              buttonsStyling: false,
+              customClass: {
+                confirmButton: "button",
+              },
+            });
           });
       }
     });
@@ -229,7 +205,7 @@ function CompanyForm() {
       <form onSubmit={handleSubmit} className="form">
         <h2>Modifier mon profil</h2>
         <div className="containerTextInput">
-          <img className="iconForm" src={identificationBlack} alt="person" />
+          <img className="iconForm" src={companyImg} alt="person" />
           <input
             type="text"
             placeholder="Nom"
@@ -253,7 +229,7 @@ function CompanyForm() {
           />
         </div>
         <div className="containerTextInput">
-          <img className="iconForm" src={mailBlack} alt="person" />
+          <img className="iconForm" src={cityImg} alt="person" />
           <input
             type="text"
             placeholder="Ville"
@@ -264,7 +240,7 @@ function CompanyForm() {
           />
         </div>
         <div className="containerTextInput">
-          <img className="iconForm" src={mailBlack} alt="person" />
+          <img className="iconForm" src={mobile} alt="person" />
           <input
             type="text"
             placeholder="Tél"
@@ -275,7 +251,7 @@ function CompanyForm() {
           />
         </div>
         <div className="containerTextInput">
-          <img className="iconForm" src={mailBlack} alt="person" />
+          <img className="iconForm" src={siretImg} alt="person" />
           <input
             type="text"
             placeholder="Siret"
@@ -332,7 +308,11 @@ function CompanyForm() {
           Modifier mon mot de passe
         </button>
       </form>
-      <button type="button" onClick={() => deleteAccount()} className="button">
+      <button
+        type="button"
+        onClick={() => deleteAccount()}
+        className="button reverseButton"
+      >
         Supprimer mon compte
       </button>
     </div>
