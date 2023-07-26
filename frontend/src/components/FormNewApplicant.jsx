@@ -62,7 +62,7 @@ function FormNewApplicant() {
 
   return (
     <form className="form subscription" onSubmit={handleSubmitApplicant}>
-      <div className="containerTitleName">
+      <div className="containerTitleName newApplicant">
         <div className="containerRadioInput">
           <input
             type="radio"
