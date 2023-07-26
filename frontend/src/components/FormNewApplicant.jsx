@@ -35,9 +35,9 @@ function FormNewApplicant() {
           Swal.fire({
             icon: "success",
             text: "Votre compte a bien été créé.",
-            iconColor: "#ca2061",
             width: 300,
             buttonsStyling: false,
+            iconColor: "#eac1cc",
             customClass: {
               confirmButton: "button",
             },
@@ -50,9 +50,9 @@ function FormNewApplicant() {
         Swal.fire({
           icon: "error",
           text: err.response.data.error,
-          iconColor: "#ca2061",
           width: 300,
           buttonsStyling: false,
+          iconColor: "#ca2061cc",
           customClass: {
             confirmButton: "button",
           },

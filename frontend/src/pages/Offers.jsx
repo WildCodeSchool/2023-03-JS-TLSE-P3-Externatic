@@ -60,9 +60,9 @@ function Offers() {
         Swal.fire({
           icon: "error",
           text: err.response.data.error,
-          iconColor: "#ca2061",
           width: 300,
           buttonsStyling: false,
+          iconColor: "#ca2061cc",
           customClass: {
             confirmButton: "button",
           },
@@ -79,9 +79,9 @@ function Offers() {
         Swal.fire({
           icon: "error",
           text: err.response.data.error,
-          iconColor: "#ca2061",
           width: 300,
           buttonsStyling: false,
+          iconColor: "#ca2061cc",
           customClass: {
             confirmButton: "button",
           },

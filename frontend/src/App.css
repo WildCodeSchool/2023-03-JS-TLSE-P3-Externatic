@@ -115,6 +115,7 @@ a {
   gap: 2rem;
 }
 
+
 /* Global buttons */
 .button {
   background-color: black;
@@ -270,3 +271,4 @@ a:hover {
 .heart:hover {
   cursor: pointer;
 }
+
