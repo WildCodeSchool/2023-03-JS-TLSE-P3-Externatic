@@ -12,7 +12,7 @@ class OfferManager extends AbstractManager {
   }
 
   findByFilters(keyword, localization, categories, contract) {
-    let finalQuery = `SELECT * FROM ${this.table} JOIN category ON offer.category_id_offer = category.id JOIN contract_type ON offer.contract_type_id_offer = contract_type.id`;
+    let finalQuery = `SELECT *, company.name AS company_name FROM ${this.table} JOIN company ON offer.company_id = company.id JOIN category ON offer.category_id_offer = category.id JOIN contract_type ON offer.contract_type_id_offer = contract_type.id`;
 
     if (keyword || localization || categories.length || contract.length) {
       finalQuery += ` WHERE`;

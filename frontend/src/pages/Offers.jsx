@@ -54,6 +54,7 @@ function Offers() {
         contract: contractList,
       })
       .then((results) => setOffersList(results.data))
+
       .catch((err) => {
         console.error(err);
         Swal.fire({
