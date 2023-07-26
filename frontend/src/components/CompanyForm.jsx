@@ -51,9 +51,9 @@ function CompanyForm() {
           Swal.fire({
             icon: "success",
             text: "Les modifications ont bien été prises en compte",
-            iconColor: "#ca2061",
             width: 300,
             buttonsStyling: false,
+            iconColor: "#eac1cc",
             customClass: {
               confirmButton: "button",
             },
@@ -65,9 +65,9 @@ function CompanyForm() {
         Swal.fire({
           icon: "error",
           text: err.response.data.error,
-          iconColor: "#ca2061",
           width: 300,
           buttonsStyling: false,
+          iconColor: "#ca2061cc",
           customClass: {
             confirmButton: "button",
           },
@@ -96,9 +96,9 @@ function CompanyForm() {
           Swal.fire({
             icon: "success",
             text: "Le mot de passe a bien été modifié",
-            iconColor: "#ca2061",
             width: 300,
             buttonsStyling: false,
+            iconColor: "#eac1cc",
             customClass: {
               confirmButton: "button",
             },
@@ -110,9 +110,9 @@ function CompanyForm() {
         Swal.fire({
           icon: "error",
           text: err.response.data.error,
-          iconColor: "#ca2061",
           width: 300,
           buttonsStyling: false,
+          iconColor: "#ca2061cc",
           customClass: {
             confirmButton: "button",
           },
@@ -139,9 +139,9 @@ function CompanyForm() {
         Swal.fire({
           icon: "error",
           text: err.response.data.error,
-          iconColor: "#ca2061",
           width: 300,
           buttonsStyling: false,
+          iconColor: "#ca2061cc",
           customClass: {
             confirmButton: "button",
           },
@@ -151,10 +151,16 @@ function CompanyForm() {
 
   const deleteAccount = () => {
     Swal.fire({
-      title: "Êtes-vous sûr de vouloir supprimer votre compte?",
-      showDenyButton: true,
-      confirmButtonText: "Delete",
-      denyButtonText: `Cancel`,
+      title: "Etes-vous sûr de vouloir supprimer votre compte?",
+      text: "Cette suppression est irréversible !",
+      icon: "warning",
+      iconColor: "#ca2061",
+      showCancelButton: true,
+      confirmButtonColor: "#ca2061",
+      cancelButtonColor: "black",
+      confirmButtonText: "Supprimer ce compte",
+      cancelButtonText: "Annuler",
+      width: 400,
     }).then((result) => {
       if (result.isConfirmed) {
         axios
@@ -169,9 +175,9 @@ function CompanyForm() {
               Swal.fire({
                 icon: "success",
                 text: "Votre compte a bien été supprimé",
-                iconColor: "green",
                 width: 300,
                 buttonsStyling: false,
+                iconColor: "#eac1cc",
                 customClass: {
                   confirmButton: "button",
                 },
@@ -184,9 +190,9 @@ function CompanyForm() {
             Swal.fire({
               icon: "error",
               text: err.response.data.error,
-              iconColor: "#ca2061",
               width: 300,
               buttonsStyling: false,
+              iconColor: "#ca2061cc",
               customClass: {
                 confirmButton: "button",
               },
@@ -258,6 +264,7 @@ function CompanyForm() {
             name="text"
             className="textInput"
             value={siret}
+            maxLength={14}
             onChange={(e) => setSiret(e.target.value)}
           />
         </div>

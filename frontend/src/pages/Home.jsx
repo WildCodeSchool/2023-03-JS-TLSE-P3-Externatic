@@ -29,9 +29,9 @@ function Home() {
         Swal.fire({
           icon: "error",
           text: err.response.data.error,
-          iconColor: "#ca2061",
           width: 300,
           buttonsStyling: false,
+          iconColor: "#ca2061cc",
           customClass: {
             confirmButton: "button",
           },
@@ -63,23 +63,23 @@ function Home() {
   return (
     <>
       <div className="containerHome">
+        {userToken ? (
+          <h1 className="userConnected">
+            Bienvenue{" "}
+            {userRole === "company" ? dataUser?.name : dataUser?.firstname} !{" "}
+          </h1>
+        ) : null}
         <img
           className="imageContainer"
           src={imageHeader}
           alt="illustration recruteur candidat"
         />
-      </div>
-      {userToken ? (
-        <h1 className="userConnected">
-          Bienvenue{" "}
-          {userRole === "company" ? dataUser?.name : dataUser?.firstname} !{" "}
-        </h1>
-      ) : (
         <h1 className="userNotConnected">
-          Bienvenue sur Externatic <br />
-          Votre cabinet de recrutement informatique{" "}
+          Externatic
+          <br />
+          Plus qu'un cabinet de recrutement informatique
         </h1>
-      )}
+      </div>
       <div className="offersListCardLargeContainer">
         {offersList.length ? (
           <OfferCardCarousel offersList={offersList} />
