@@ -139,6 +139,31 @@ const modifyPasswordAdmin = (req, res) => {
     });
 };
 
+const validateAdminInfosToModify = (req, res, next) => {
+  const { firstname, lastname, email } = req.body;
+  const namePattern = /^([^0-9]*)$/;
+  const emailPattern =
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,3}$/;
+
+  if (!firstname) {
+    res.status(400).send({ error: "Vous devez renseigner votre prénom." });
+  } else if (!namePattern.test(firstname)) {
+    res
+      .status(400)
+      .send({ error: "Le prénom ne doit contenir que des lettres." });
+  } else if (!lastname) {
+    res.status(400).send({ error: "Vous devez renseigner votre nom." });
+  } else if (!namePattern.test(lastname)) {
+    res.status(400).send({ error: "Le nom ne doit contenir que des lettres." });
+  } else if (!email) {
+    res.status(400).send({ error: "Vous devez renseigner un email." });
+  } else if (!emailPattern.test(email)) {
+    res.status(400).send({ error: "L'adresse email n'est pas valide." });
+  } else {
+    next();
+  }
+};
+
 module.exports = {
   getAllAdmins,
   postAdmin,
@@ -147,4 +172,5 @@ module.exports = {
   modifyAdmin,
   modifyPasswordAdmin,
   getAdminById,
+  validateAdminInfosToModify,
 };
