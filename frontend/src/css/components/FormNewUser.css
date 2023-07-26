@@ -45,6 +45,10 @@ input[type="radio"].radioInput:checked + label.labelRadioInput {
   margin-top: 1.5rem;
 }
 @media screen and (min-width: 768px) {
+  .containerTitleName.newApplicant {
+    width: 100%;
+  }
+
   .button.subscription {
     margin-top: 1rem;
   }
