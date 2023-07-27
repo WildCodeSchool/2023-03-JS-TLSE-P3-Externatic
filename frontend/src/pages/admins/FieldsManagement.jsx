@@ -12,6 +12,7 @@ import MessagesErrorContext from "../../contexts/MessagesErrorContext";
 
 // Import images
 import trash from "../../assets/icons/black_trash.svg";
+import blackIconsPlus from "../../assets/icons/black_icons_plus.svg";
 
 function FieldsManagement() {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
@@ -263,8 +264,8 @@ function FieldsManagement() {
                           setNewCategoryContent(e.target.value);
                         }}
                       />
-                      <button type="submit" className="button">
-                        Ajouter la catégorie
+                      <button type="submit" className="plusButton">
+                        <img src={blackIconsPlus} alt="ajouter" />
                       </button>
                     </form>
                     <hr />
@@ -345,8 +346,8 @@ function FieldsManagement() {
                           setNewConctractContent(e.target.value);
                         }}
                       />
-                      <button type="submit" className="button">
-                        Ajouter le type de contrat
+                      <button type="submit" className="plusButton">
+                        <img src={blackIconsPlus} alt="ajouter" />
                       </button>
                     </form>
                     <hr />
