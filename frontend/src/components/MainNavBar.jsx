@@ -35,17 +35,28 @@ function MainNavBar() {
             <img src={cross} alt="Croix de fermeture du menu" />
           </button>
         </div>
-        <button
-          type="button"
-          className="button"
-          onClick={() => setIsMenuShow(false)}
-        >
-          {userToken ? (
-            <Link to="/dashboard/my-profile">Mon compte</Link>
-          ) : (
-            <Link to="/connexion">Se connecter</Link>
-          )}
-        </button>
+
+        {userToken ? (
+          <Link to="/dashboard/my-profile">
+            <button
+              type="button"
+              className="button"
+              onClick={() => setIsMenuShow(false)}
+            >
+              Mon compte
+            </button>
+          </Link>
+        ) : (
+          <Link to="/connexion">
+            <button
+              type="button"
+              className="button"
+              onClick={() => setIsMenuShow(false)}
+            >
+              Se connecter
+            </button>
+          </Link>
+        )}
 
         {!userToken ? (
           <button
