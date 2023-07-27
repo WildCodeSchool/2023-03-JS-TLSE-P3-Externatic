@@ -25,7 +25,7 @@ function FormNewCompany() {
   const [formDataCompanySubscription, setFormDataCompanySubscription] =
     useState({
       name: "",
-      siret: "",
+      siret: null,
       email: "",
       password: "",
       confirmedPassword: "",
