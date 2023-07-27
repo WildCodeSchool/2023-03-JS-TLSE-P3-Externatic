@@ -9,6 +9,7 @@ import iconBlackContract from "../assets/icons/contract_black.svg";
 import iconPinkRocket from "../assets/icons/rocket_pink.svg";
 import iconPinkTools from "../assets/icons/tools_pink.svg";
 import iconBlackProfil from "../assets/icons/person_black.svg";
+import iconPinkStar from "../assets/icons/pink_star.svg";
 
 function OfferModalManagement({
   modalOfferIsOpen,
@@ -81,7 +82,7 @@ function OfferModalManagement({
           </div>
           <p>{technical_environment}</p>
           <div className="offerTextAndIcon">
-            <img src={iconPinkRocket} alt="icon contract" />
+            <img src={iconPinkStar} alt="icon contract" />
             <h3 className="titleModal">Les avantages</h3>
           </div>
           <p>{benefits}</p>

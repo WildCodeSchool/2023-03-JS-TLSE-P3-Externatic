@@ -19,6 +19,7 @@ import Footer from "./components/Footer";
 // Import du style
 import "./App.css";
 import "./css/pages/Offers.css";
+import "./css/components/TogglePasswordVisibility.css";
 import "./css/pages/Connexion.css";
 import "./css/pages/MyProfile.css";
 import "./css/components/OfferModal.css";
@@ -35,6 +36,7 @@ import "./css/components/Error.css";
 // Import des contexts
 import { MenuContextProvider } from "./contexts/MenuContext";
 import { TokenContextProvider } from "./contexts/TokenContext";
+import { PasswordVisibilityContextProvider } from "./contexts/PasswordVisibilityContext";
 import { FiltersContextProvider } from "./contexts/FiltersContext";
 import { ModificationProfileContextProvider } from "./contexts/ModificationProfileContext";
 import { MessagesErrorContextProvider } from "./contexts/MessagesErrorContext";
@@ -45,24 +47,26 @@ function App() {
       <MessagesErrorContextProvider>
         <FiltersContextProvider>
           <MenuContextProvider>
-            <TokenContextProvider>
-              <ModificationProfileContextProvider>
-                <Router>
-                  <MainNavBar />
-                  <main>
-                    <Routes>
-                      <Route path="" element={<Home />} />
-                      <Route path="connexion" element={<Connexion />} />
-                      <Route path="subscribe" element={<Subscribe />} />
-                      <Route path="offers" element={<Offers />} />
-                      <Route path="dashboard/*" element={<Dashboard />} />
-                      <Route path="*" element={<NotFound />} />
-                    </Routes>
-                  </main>
-                  <Footer />
-                </Router>
-              </ModificationProfileContextProvider>
-            </TokenContextProvider>
+            <PasswordVisibilityContextProvider>
+              <TokenContextProvider>
+                <ModificationProfileContextProvider>
+                  <Router>
+                    <MainNavBar />
+                    <main>
+                      <Routes>
+                        <Route path="" element={<Home />} />
+                        <Route path="connexion" element={<Connexion />} />
+                        <Route path="subscribe" element={<Subscribe />} />
+                        <Route path="offers" element={<Offers />} />
+                        <Route path="dashboard/*" element={<Dashboard />} />
+                        <Route path="*" element={<NotFound />} />
+                      </Routes>
+                    </main>
+                    <Footer />
+                  </Router>
+                </ModificationProfileContextProvider>
+              </TokenContextProvider>
+            </PasswordVisibilityContextProvider>
           </MenuContextProvider>
         </FiltersContextProvider>
       </MessagesErrorContextProvider>

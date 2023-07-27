@@ -1,10 +1,13 @@
 // Import packages
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 // Import components
 import LinkLogInSubscribe from "../components/LinkLogInSubscribe";
 import FormNewApplicant from "../components/FormNewApplicant";
 import FormNewCompany from "../components/FormNewCompany";
+
+// Import du context
+import PasswordVisibilityContext from "../contexts/PasswordVisibilityContext";
 
 // Import images
 import cardApplicant from "../assets/images/card_applicant.png";
@@ -14,16 +17,23 @@ function Subscribe() {
   const [showForm, setShowForm] = useState(false);
   const [isApplicantCardFocused, setIsApplicantCardFocused] = useState(false);
   const [isCompanyCardFocused, setIsCompanyCardFocused] = useState(false);
+  const { setShowPassword, setShowConfirmedPassword } = useContext(
+    PasswordVisibilityContext
+  );
 
   const handleApplicantCardClick = () => {
     setShowForm(true);
     setIsApplicantCardFocused(true);
     setIsCompanyCardFocused(false);
+    setShowPassword(false);
+    setShowConfirmedPassword(false);
   };
   const handleCompanyCardClick = () => {
     setShowForm(true);
     setIsApplicantCardFocused(false);
     setIsCompanyCardFocused(true);
+    setShowPassword(false);
+    setShowConfirmedPassword(false);
   };
 
   return (

@@ -63,7 +63,7 @@ class OfferManager extends AbstractManager {
 
   findCompanyOffers(id) {
     return this.database.query(
-      `SELECT *, offer.id FROM ${this.table} JOIN contract_type ON offer.contract_type_id_offer = contract_type.id WHERE company_id = ?`,
+      `SELECT *, offer.id, company.name AS company_name FROM ${this.table} JOIN company ON offer.company_id = company.id JOIN contract_type ON offer.contract_type_id_offer = contract_type.id WHERE company_id = ?`,
       [id]
     );
   }
