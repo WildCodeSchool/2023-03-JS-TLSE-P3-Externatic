@@ -1,6 +1,6 @@
 // Import packages
 import { useNavigate } from "react-router-dom";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -14,7 +14,9 @@ import PasswordVisibilityContext from "../contexts/PasswordVisibilityContext";
 
 function Connexion() {
   const { setUserCookie, setUserId } = useContext(TokenContext);
-  const { showPassword } = useContext(PasswordVisibilityContext);
+  const { showPassword, setShowPassword } = useContext(
+    PasswordVisibilityContext
+  );
   const [formDataLogIn, setFormDataLogIn] = useState({
     email: "",
     password: "",
@@ -50,7 +52,9 @@ function Connexion() {
         });
       });
   };
-
+  useEffect(() => {
+    setShowPassword(false);
+  }, []);
   return (
     <div>
       <LinkLogInSubscribe />

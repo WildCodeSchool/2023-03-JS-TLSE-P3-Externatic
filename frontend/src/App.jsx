@@ -10,6 +10,7 @@ import Connexion from "./pages/Connexion";
 import Subscribe from "./pages/Subscribe";
 import Offers from "./pages/Offers";
 import Dashboard from "./pages/Dashboard";
+import NotFound from "./pages/NotFound";
 
 // Import des composants
 import MainNavBar from "./components/MainNavBar";
@@ -51,13 +52,16 @@ function App() {
                 <ModificationProfileContextProvider>
                   <Router>
                     <MainNavBar />
-                    <Routes>
-                      <Route path="" element={<Home />} />
-                      <Route path="connexion" element={<Connexion />} />
-                      <Route path="subscribe" element={<Subscribe />} />
-                      <Route path="offers" element={<Offers />} />
-                      <Route path="dashboard/*" element={<Dashboard />} />
-                    </Routes>
+                    <main>
+                      <Routes>
+                        <Route path="" element={<Home />} />
+                        <Route path="connexion" element={<Connexion />} />
+                        <Route path="subscribe" element={<Subscribe />} />
+                        <Route path="offers" element={<Offers />} />
+                        <Route path="dashboard/*" element={<Dashboard />} />
+                        <Route path="*" element={<NotFound />} />
+                      </Routes>
+                    </main>
                     <Footer />
                   </Router>
                 </ModificationProfileContextProvider>
