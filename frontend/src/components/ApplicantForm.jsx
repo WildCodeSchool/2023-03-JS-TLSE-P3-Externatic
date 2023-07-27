@@ -7,6 +7,12 @@ import axios from "axios";
 
 // Import context
 import TokenContext from "../contexts/TokenContext";
+import PasswordVisibilityContext from "../contexts/PasswordVisibilityContext";
+
+// Import des components
+import TogglePasswordVisibility from "./TogglePasswordVisibility";
+import ToggleConfirmedPasswordVisibility from "./ToggleConfirmedPasswordVisibility";
+import ToggleNewPasswordVisibility from "./ToggleNewPasswordVisibility";
 
 // Import des images
 import identificationBlack from "../assets/icons/identification_black.svg";
@@ -17,6 +23,15 @@ import cityImg from "../assets/icons/black_city_fill.svg";
 
 function ApplicantForm() {
   const { userToken, setUserCookie } = useContext(TokenContext);
+  const {
+    showPassword,
+    setShowPassword,
+    showConfirmedPassword,
+    setShowConfirmedPassword,
+    showNewPassword,
+    setNewShowPassword,
+  } = useContext(PasswordVisibilityContext);
+
   const [titleName, setTitleName] = useState("");
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
@@ -206,6 +221,9 @@ function ApplicantForm() {
 
   useEffect(() => {
     getUserInfos();
+    setShowPassword(false);
+    setShowConfirmedPassword(false);
+    setNewShowPassword(false);
   }, []);
 
   return (
@@ -311,7 +329,7 @@ function ApplicantForm() {
         <div className="containerTextInput">
           <img className="iconForm" src={lockBlack} alt="lock" />
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             placeholder="Ancien mot de passe"
             name="ancienMdp"
             className="textInput"
@@ -319,11 +337,12 @@ function ApplicantForm() {
             onChange={(e) => setOldPassword(e.target.value)}
             required
           />
+          <TogglePasswordVisibility />
         </div>
         <div className="containerTextInput">
           <img className="iconForm" src={lockBlack} alt="lock" />
           <input
-            type="password"
+            type={showNewPassword ? "text" : "password"}
             placeholder="Nouveau mot de passe"
             name="nouveauMdp"
             className="textInput"
@@ -331,11 +350,12 @@ function ApplicantForm() {
             onChange={(e) => setNewPassword(e.target.value)}
             required
           />
+          <ToggleNewPasswordVisibility />
         </div>
         <div className="containerTextInput">
           <img className="iconForm" src={lockBlack} alt="lock" />
           <input
-            type="password"
+            type={showConfirmedPassword ? "text" : "password"}
             placeholder="Confirmer mot de passe"
             name="newMdp"
             className="textInput"
@@ -343,6 +363,7 @@ function ApplicantForm() {
             onChange={(e) => setConfirmNewPassword(e.target.value)}
             required
           />
+          <ToggleConfirmedPasswordVisibility />
         </div>
         <button type="submit" className="button">
           Modifier mon mot de passe
