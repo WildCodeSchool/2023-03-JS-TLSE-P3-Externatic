@@ -78,6 +78,7 @@ const deleteAdmin = (req, res) => {
   } else {
     id = req.payload.sub;
   }
+
   models.admin
     .delete(id)
     .then(([result]) => {

@@ -1,17 +1,31 @@
 // Import packages
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
+
+// Import components
+import TogglePasswordVisibility from "./TogglePasswordVisibility";
+import ToggleConfirmedPasswordVisibility from "./ToggleConfirmedPasswordVisibility";
+
+// Import du context
+import PasswordVisibilityContext from "../contexts/PasswordVisibilityContext";
 
 // Import du style
 import "../css/components/FormNewUser.css";
 
 function FormNewCompany() {
+  const {
+    showPassword,
+    setShowPassword,
+    showConfirmedPassword,
+    setShowConfirmedPassword,
+  } = useContext(PasswordVisibilityContext);
+
   const [formDataCompanySubscription, setFormDataCompanySubscription] =
     useState({
       name: "",
-      siret: 0,
+      siret: "",
       email: "",
       password: "",
       confirmedPassword: "",
@@ -46,6 +60,8 @@ function FormNewCompany() {
             },
           });
           navigate("/connexion");
+          setShowPassword(false);
+          setShowConfirmedPassword(false);
         }
       })
       .catch((err) => {
@@ -157,12 +173,13 @@ function FormNewCompany() {
         </svg>
         <input
           className="textInput"
-          type="password"
+          type={showPassword ? "text" : "password"}
           placeholder="Mot de passe"
           name="password"
           value={formDataCompanySubscription.password}
           onChange={handleInputCompany}
         />
+        <TogglePasswordVisibility />
       </div>
       {/* password confirmation */}
       <div className="containerTextInput">
@@ -184,12 +201,13 @@ function FormNewCompany() {
         </svg>
         <input
           className="textInput"
-          type="password"
+          type={showConfirmedPassword ? "text" : "password"}
           placeholder="Confirmation mot de passe"
           name="confirmedPassword"
           value={formDataCompanySubscription.confirmedPassword}
           onChange={handleInputCompany}
         />
+        <ToggleConfirmedPasswordVisibility />
       </div>
 
       <button type="submit" className="button subscription">

@@ -6,13 +6,15 @@ import Swal from "sweetalert2";
 
 // Import components
 import LinkLogInSubscribe from "../components/LinkLogInSubscribe";
+import TogglePasswordVisibility from "../components/TogglePasswordVisibility";
 
 // Import context
 import TokenContext from "../contexts/TokenContext";
+import PasswordVisibilityContext from "../contexts/PasswordVisibilityContext";
 
 function Connexion() {
   const { setUserCookie, setUserId } = useContext(TokenContext);
-
+  const { showPassword } = useContext(PasswordVisibilityContext);
   const [formDataLogIn, setFormDataLogIn] = useState({
     email: "",
     password: "",
@@ -97,12 +99,13 @@ function Connexion() {
             </svg>
             <input
               className="textInput"
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Mot de passe"
               required
               name="password"
               onChange={handleInput}
             />
+            <TogglePasswordVisibility />
           </div>
           <button type="submit" className="button connection">
             Je me connecte

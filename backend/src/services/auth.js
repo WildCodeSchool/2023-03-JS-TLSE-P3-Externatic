@@ -165,7 +165,7 @@ const verifyApplicant = (req, res, next) => {
   try {
     if (req.payload.role !== "applicant") {
       res
-        .sendtatus(403)
+        .sendStatus(403)
         .send({ error: "Cette action est réservée aux candidats." });
     } else {
       next();
