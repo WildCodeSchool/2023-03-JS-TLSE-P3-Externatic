@@ -1,10 +1,24 @@
 // Import packages
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 
+// Import components
+import TogglePasswordVisibility from "./TogglePasswordVisibility";
+import ToggleConfirmedPasswordVisibility from "./ToggleConfirmedPasswordVisibility";
+
+// Import du context
+import PasswordVisibilityContext from "../contexts/PasswordVisibilityContext";
+
 function FormNewApplicant() {
+  const {
+    showPassword,
+    setShowPassword,
+    showConfirmedPassword,
+    setShowConfirmedPassword,
+  } = useContext(PasswordVisibilityContext);
+
   const [titleName, setTitleName] = useState("");
   const [formDataApplicantSubscription, setFormDataApplicantSubscription] =
     useState({
@@ -42,6 +56,8 @@ function FormNewApplicant() {
               confirmButton: "button",
             },
           });
+          setShowPassword(false);
+          setShowConfirmedPassword(false);
           navigate("/connexion");
         }
       })
@@ -223,12 +239,13 @@ function FormNewApplicant() {
         </svg>
         <input
           className="textInput"
-          type="password"
+          type={showPassword ? "text" : "password"}
           placeholder="Mot de passe"
           name="password"
           value={formDataApplicantSubscription.password}
           onChange={handleInputApplicant}
         />
+        <TogglePasswordVisibility />
       </div>
       {/* password confirmation */}
       <div className="containerTextInput">
@@ -250,12 +267,13 @@ function FormNewApplicant() {
         </svg>
         <input
           className="textInput"
-          type="password"
+          type={showConfirmedPassword ? "text" : "password"}
           placeholder="Confirmation mot de passe"
           name="confirmedPassword"
           value={formDataApplicantSubscription.confirmedPassword}
           onChange={handleInputApplicant}
         />
+        <ToggleConfirmedPasswordVisibility />
       </div>
 
       <button type="submit" className="button subscription">

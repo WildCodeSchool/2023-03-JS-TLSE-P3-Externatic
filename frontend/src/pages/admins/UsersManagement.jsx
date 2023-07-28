@@ -472,12 +472,13 @@ function UsersManagement() {
               ? allCompanies.map((company) => (
                   <div className="userManagementCardContainer" key={company.id}>
                     <div className="userManagementCard">
-                      <div className="userManagementCardRightPart">
+                      <div className="userManagementCardLeftPart">
                         <p>ID: {company.id}</p>
-                        <p>
-                          {company.name} | SIRET: {company.siret}
-                        </p>
+
+                        <p>{company.name} </p>
+                        <p>SIRET: {company.siret}</p>
                       </div>
+
                       <div className="userManagementCardRightPart">
                         <p>Entreprise</p>
                         <button
@@ -492,6 +493,7 @@ function UsersManagement() {
                         </button>
                       </div>
                     </div>
+
                     <hr />
                   </div>
                 ))

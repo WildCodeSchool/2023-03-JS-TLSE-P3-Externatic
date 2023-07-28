@@ -24,6 +24,13 @@
   justify-content: space-between;
   align-items: center;
 }
+.userManagementCardLeftPart {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+}
 
 .userManagement p {
   font-size: 1.2rem;
