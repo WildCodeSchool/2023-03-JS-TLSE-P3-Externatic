@@ -21,39 +21,40 @@ function OfferCardManagement({ offer, getOffers }) {
   const [modalOfferIsOpen, setModalOfferIsOpen] = useState(false);
 
   const deleteOffer = (offerId) => {
-    axios
-      .delete(`${import.meta.env.VITE_BACKEND_URL}/offers/${offerId}`, {
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-        },
-      })
-      .then(() => {
-        Swal.fire({
-          title: "Etes-vous sûr de vouloir supprimer cette offre?",
-          text: "Cette suppression est irréversible !",
-          icon: "warning",
-          iconColor: "#ca2061",
-          showCancelButton: true,
-          confirmButtonColor: "#ca2061",
-          cancelButtonColor: "black",
-          confirmButtonText: "Supprimer cette offre",
-          cancelButtonText: "Annuler",
-          width: 400,
-        }).then((result) => {
-          if (result.isConfirmed) {
-            Swal.fire({
-              icon: "success",
-              text: "Suppression effectuée.",
-              width: 300,
-              buttonsStyling: false,
-              iconColor: "#eac1cc",
-              customClass: {
-                confirmButton: "button",
+    Swal.fire({
+      title: "Etes-vous sûr de vouloir supprimer cette offre?",
+      text: "Cette suppression est irréversible !",
+      icon: "warning",
+      iconColor: "#ca2061",
+      showCancelButton: true,
+      confirmButtonColor: "#ca2061",
+      cancelButtonColor: "black",
+      confirmButtonText: "Supprimer cette offre",
+      cancelButtonText: "Annuler",
+      width: 400,
+    })
+      .then((result) => {
+        if (result.isConfirmed) {
+          axios
+            .delete(`${import.meta.env.VITE_BACKEND_URL}/offers/${offerId}`, {
+              headers: {
+                Authorization: `Bearer ${userToken}`,
               },
+            })
+            .then(() => {
+              Swal.fire({
+                icon: "success",
+                text: "Suppression effectuée.",
+                width: 300,
+                buttonsStyling: false,
+                iconColor: "#eac1cc",
+                customClass: {
+                  confirmButton: "button",
+                },
+              });
+              getOffers();
             });
-            getOffers();
-          }
-        });
+        }
       })
       .catch((err) => {
         console.error(err);
